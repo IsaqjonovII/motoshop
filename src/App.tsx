@@ -1,8 +1,12 @@
+import Navbar from "components/Navbar"
 
 function App() {
   return (
-    <div>
-      <h1>Project is started</h1>
+    <div className="app">
+
+      <div className="container__nav">
+        <Navbar />
+      </div>
     </div>
   )
 }
