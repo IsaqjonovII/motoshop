@@ -1,8 +1,8 @@
 
-const Navbar = () => {
+const Input = () => {
   return (
-    <div>Navbar</div>
+    <div></div>
   )
 }
 
-export default Navbar
+export default Input
