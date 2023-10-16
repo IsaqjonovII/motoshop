@@ -34,11 +34,11 @@ export default styled.header`
             margin: 0 ${pxToRem(5)};
             padding: ${pxToRem(8)};
             border-radius: ${pxToRem(4)};
-            transition: 200ms ease-in-out;
+            transition: 100ms ease-in-out;
             border-bottom: ${pxToRem(1)} solid transparent;
             &:hover {
               color: ${teal};
-                background-color: ${borderGray}40;
+                background-color: ${borderGray}70;
                 border-color: ${teal}30;
             }
         }
