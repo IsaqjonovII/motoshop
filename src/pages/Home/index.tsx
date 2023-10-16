@@ -1,10 +1,8 @@
-import React from 'react'
+import StyledHome from "./style";
 
-type Props = {}
-
-const Home = (props: Props) => {
+const Home = () => {
   return (
-    <div>Home</div>
+    <StyledHome>Home</StyledHome>
   )
 }
 
