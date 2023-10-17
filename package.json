@@ -13,15 +13,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@chakra-ui/react": "^2.8.1",
-    "@emotion/react": "^11.11.1",
-    "@emotion/styled": "^11.11.0",
+    
     "@reduxjs/toolkit": "^1.9.7",
-    "framer-motion": "^10.16.4",
-    "hamburger-react": "^2.5.0",
     "i18next": "^23.5.1",
     "react": "^18.2.0",
-    "react-burger-menu": "^3.0.9",
     "react-dom": "^18.2.0",
     "react-i18next": "^13.2.2",
     "react-icons": "^4.11.0",
