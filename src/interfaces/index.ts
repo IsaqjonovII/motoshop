@@ -7,3 +7,7 @@ export interface INavRoutes {
     key: string;
     path: string;
 }
+export interface ISidebar {
+    isSidebarOpen: boolean;
+    setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
