@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
-import { FiUser } from "react-icons/fi";
+import { GrClose } from "react-icons/gr";
+import { FiUser, FiMenu } from "react-icons/fi";
 import { navRoutes } from "routes";
 import StyledNav from "./style";
+import { ISidebar } from "interfaces";
 
-const Navbar = () => {
+const Navbar = ({ isSidebarOpen, setIsSidebarOpen }: ISidebar) => {
   return (
     <StyledNav>
       <div className="nav__container">
@@ -24,6 +26,17 @@ const Navbar = () => {
             <FiUser />
             <span>Profil</span>
           </div>
+          {isSidebarOpen ? (
+            <GrClose
+              className="bars__icon"
+              onClick={() => setIsSidebarOpen(false)}
+            />
+          ) : (
+            <FiMenu
+              className="bars__icon"
+              onClick={() => setIsSidebarOpen(true)}
+            />
+          )}
         </div>
       </div>
     </StyledNav>
