@@ -7,7 +7,12 @@ const { white, borderGray, teal, darkGray } = colors;
 
 export default styled.header`
   background-color: ${white};
+<<<<<<< HEAD
   box-shadow: 0 ${pxToRem(2)} ${pxToRem(4)} ${darkGray}50;
+=======
+  box-shadow: 0 ${pxToRem(2)} ${pxToRem(4)} ${borderGray};
+  user-select: none;
+>>>>>>> 76c6b162a6ca45df46eb86d1c4e69f9bc4488394
   .nav__container {
     ${layout("flex")}
     max-width: ${pxToRem(1555)};
@@ -75,6 +80,15 @@ export default styled.header`
         background-color: ${teal};
         color: ${white};
       }
+    }
+  }
+  .bars__icon {
+    margin-left: ${pxToRem(15)};
+    font-size: ${pxToRem(24)};
+  }
+  @media screen and (min-width: ${pxToRem(1024)}) {
+    .bars__icon {
+      display: none;
     }
   }
   @media screen and (max-width: ${pxToRem(1200)}) {
