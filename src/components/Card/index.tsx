@@ -1,8 +1,8 @@
 
-const Navbar = () => {
+const Card = () => {
   return (
-    <div>Navbar</div>
+    <div></div>
   )
 }
 
-export default Navbar
+export default Card
