@@ -1,5 +1,6 @@
 import { colors } from "constants/styles";
 import { createGlobalStyle } from "styled-components";
+import { layout } from "./mixin";
 
 const { bgGray } = colors;
 
@@ -32,6 +33,9 @@ export const GlobalStyle = createGlobalStyle`
         top: 0;
         left: 0;
         z-index: 9999;
+    }
+    .flex {
+        ${layout("flex")}
     }
     @font-face {
         font-family: 'lato Normal';
