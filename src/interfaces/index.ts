@@ -1,13 +1,13 @@
 export interface IAppRoutes {
-    key: string;
-    path: string;
-    Component: React.ReactNode | JSX.Element;
+  key: string;
+  path: string;
+  Component: React.ReactNode | JSX.Element | any;
 }
 export interface INavRoutes {
-    key: string;
-    path: string;
+  key: string;
+  path: string;
 }
 export interface ISidebar {
-    isSidebarOpen: boolean;
-    setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isSidebarOpen: boolean;
+  setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
