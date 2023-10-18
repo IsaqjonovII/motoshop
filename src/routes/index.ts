@@ -1,6 +1,6 @@
 import { lazy } from "react";
-import { IAppRoutes, INavRoutes } from "interfaces";
 const Home = lazy(() => import("pages/Home"));
+import { IAppRoutes, INavRoutes } from "interfaces";
 
 export const appRoutes: IAppRoutes[] = [
   {
