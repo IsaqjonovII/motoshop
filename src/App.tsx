@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState } from "react"
+import { Route, Routes } from "react-router-dom";
+import { appRoutes } from "routes";
 import Navbar from "components/Navbar";
 import Sidebar from "components/Sidebar";
 
@@ -18,6 +20,12 @@ function App() {
           />
         ) : null}
       </div>
+
+      <Routes>
+        {appRoutes.map(({ key, path, Component }) => (
+          <Route key={key} path={path} element={<Component />} />
+        ))}
+      </Routes>
     </div>
   );
 }
