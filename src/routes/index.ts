@@ -32,7 +32,7 @@ export const navRoutes: INavRoutes[] = [
     path: "/spareparts",
   },
   {
-    key: "velosipedlar",
-    path: "/bicycles",
+    key: "Shlemlar",
+    path: "/helmets",
   },
 ];

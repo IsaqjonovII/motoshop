@@ -11,3 +11,13 @@ export interface ISidebar {
   isSidebarOpen: boolean;
   setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
+export interface IProduct {
+  id: number | string;
+  name: string;
+  price: number | string;
+  types: string[];
+  postedAt: string;
+  isActive: boolean;
+  img: string;
+  address: string;
+}
