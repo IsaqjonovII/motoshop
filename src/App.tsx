@@ -9,6 +9,7 @@ function App() {
   const { pathname } = useLocation();
   useEffect(() => {
     setisSidebarOpen(false);
+    window.scrollTo(0, 0)
   }, [pathname]);
 
   return (
