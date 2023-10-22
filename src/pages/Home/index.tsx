@@ -1,7 +1,8 @@
+import MotoCard from "components/Card";
 import StyledHome from "./style";
 import LazyImage from "components/LazyImage";
-import { productsData } from "data";
-import { Link } from "react-router-dom";
+import { helmetsData, productsData } from "data";
+import HelmetCard from "components/Card/HelmetCard";
 
 const Home = () => {
   return (
@@ -11,25 +12,21 @@ const Home = () => {
         src="https://ik.imagekit.io/iii299/motoshop/bg.jpg?updatedAt=1697609532380"
         alt="Yamaha R1m yzf-r1m"
       />{" "}
-      <section id="sportbikes">
-        <div className="cards__wrp">
-          {productsData.map(({ id, price, name, img, address, types }) => (
-            <Link to={`/${types[0]}/${name}`} key={id}>
-              <div className="card">
-                <LazyImage src={img} alt="YZF R1M" />
-                <div className="card__head flex">
-                  <h1 className="card__title">{name}</h1>
-                  <b>{price} so'm</b>
-                </div>
-
-                <div className="product__address">{address}</div>
-              </div>
-            </Link>
+      <section id="sportbikes" className="section">
+        <h1 className="section__title">SportBayklar</h1>
+        <div className="grid__wrp">
+          {productsData.slice(0, 3).map((data) => (
+            <MotoCard key={data.id} {...data} />
           ))}
         </div>
       </section>
-      <section id="helmets">
-            
+      <section id="helmets" className="section">
+        <h1 className="section__title">Shlemlar</h1>
+        <div className="grid__wrp">
+          {helmetsData.slice(0, 3).map((data) => (
+            <HelmetCard key={data.id} {...data} />
+          ))}
+        </div>
       </section>
     </StyledHome>
   );

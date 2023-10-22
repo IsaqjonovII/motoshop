@@ -3,11 +3,11 @@ import { IProduct } from "interfaces";
 import CardStyle from "./style";
 import LazyImage from "components/LazyImage";
 
-const MotoCard = ({ id, price, name, img, address, types }: IProduct) => {
+const HelmetCard = ({ id, price, name, img, address, types }: IProduct) => {
   return (
     <CardStyle>
       <Link to={`/${types[0]}/${name}`} key={id}>
-        <div className="img__wrp">
+        <div className="helmet__img" >
           <LazyImage className="card__img" src={img} alt="YZF R1M" />
         </div>
         <div className="card__head flex">
@@ -21,4 +21,4 @@ const MotoCard = ({ id, price, name, img, address, types }: IProduct) => {
   );
 };
 
-export default MotoCard;
+export default HelmetCard;
