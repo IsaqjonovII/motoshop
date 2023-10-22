@@ -15,6 +15,7 @@ export default styled.main`
   .cards__wrp {
     max-width: ${pxToRem(1550)};
     margin: ${pxToRem(50)} auto;
+    padding: 0 ${pxToRem(50)};
     ${layout("grid", { cols: 4, rows: "auto" })}
     grid-gap: ${pxToRem(30)};
     .card {
