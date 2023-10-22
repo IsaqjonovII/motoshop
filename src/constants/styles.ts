@@ -6,5 +6,6 @@ export enum colors {
     borderGray = "#eeeeee",
     skyBlue = "#CCF0F0",
     teal = "#00A99D",
-    bgGray = "#F2F3F5"
+    bgGray = "#F2F3F5",
+    black = "#0E1217"
 }
