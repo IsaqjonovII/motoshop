@@ -10,22 +10,27 @@ const Home = () => {
         className="banner__img"
         src="https://ik.imagekit.io/iii299/motoshop/bg.jpg?updatedAt=1697609532380"
         alt="Yamaha R1m yzf-r1m"
-      />
-      <div className="cards__wrp">
-        {productsData.map(({ id, price, name, img, address, types }) => (
-          <Link to={`/${types[0]}/${name}`}>
-          <div className="card" key={id}>
-            <LazyImage src={img} alt="YZF R1M" />
-            <div className="card__head flex">
-              <h1 className="card__title">{name}</h1>
-              <b>{price} so'm</b>
-            </div>
+      />{" "}
+      <section id="sportbikes">
+        <div className="cards__wrp">
+          {productsData.map(({ id, price, name, img, address, types }) => (
+            <Link to={`/${types[0]}/${name}`} key={id}>
+              <div className="card">
+                <LazyImage src={img} alt="YZF R1M" />
+                <div className="card__head flex">
+                  <h1 className="card__title">{name}</h1>
+                  <b>{price} so'm</b>
+                </div>
 
-            <div className="product__address">{address}</div>
-          </div>
-          </Link>
-        ))}
-      </div>
+                <div className="product__address">{address}</div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+      <section id="helmets">
+            
+      </section>
     </StyledHome>
   );
 };

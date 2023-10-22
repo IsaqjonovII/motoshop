@@ -16,7 +16,7 @@ export default styled.main`
     max-width: ${pxToRem(1550)};
     margin: ${pxToRem(50)} auto;
     padding: 0 ${pxToRem(50)};
-    ${layout("grid", { cols: 4, rows: "auto" })}
+    ${layout("grid", { cols: 3, rows: "auto" })}
     grid-gap: ${pxToRem(30)};
     .card {
       box-shadow: rgba(0, 0, 0, 0.05) 0 ${pxToRem(6)} ${pxToRem(24)} 0,
@@ -31,7 +31,7 @@ export default styled.main`
       }
       .card__head {
         margin: ${pxToRem(10)} 0 0 0;
-        h1 {
+        .card__title{
           font-size: ${pxToRem(23)};
         color: ${black};
           font-weight: 600;
@@ -42,6 +42,35 @@ export default styled.main`
         font-size: ${pxToRem(16)};
         color: ${black};
       }
+    }
+  }
+  @media only screen and (max-width: ${pxToRem(1200)}) {
+      .cards__wrp {
+        .card {
+
+          .card__head{
+            .card__title {
+              font-size: ${pxToRem(19)};
+            }
+          }
+          .product__address {
+            font-size: ${pxToRem(14)};
+          }
+        } 
+      }
+  }
+  @media only screen and (max-width: ${pxToRem(1024)}) {
+    .cards__wrp {
+      padding:  0 ${pxToRem(30)};
+    ${layout("grid", { cols: 2, rows: "auto" })}
+    grid-gap: ${pxToRem(15)};
+    }
+  }
+  @media only screen and (max-width: ${pxToRem(768)}) {
+    .cards__wrp {
+      padding:  0 ${pxToRem(20)};
+    ${layout("grid", { cols: 1, rows: "auto" })}
+    grid-gap: ${pxToRem(20)};
     }
   }
 `;
