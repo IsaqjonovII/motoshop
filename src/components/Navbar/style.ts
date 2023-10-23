@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { layout } from "styles/mixin";
 import { pxToRem } from "utils";
 
-const { white, borderGray, teal, darkGray } = colors;
+const { white, borderGray, teal, darkGray, gray } = colors;
 
 export default styled.header`
   background-color: ${white};
@@ -34,6 +34,7 @@ export default styled.header`
             font-size: ${pxToRem(18)};
             margin: 0 ${pxToRem(5)};
             padding: ${pxToRem(8)};
+            color: ${gray}c9;
             border-radius: ${pxToRem(4)};
             transition: 100ms ease-in-out;
             border-bottom: ${pxToRem(1)} solid transparent;

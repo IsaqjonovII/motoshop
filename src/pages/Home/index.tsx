@@ -9,7 +9,7 @@ const Home = () => {
     <StyledHome>
       <LazyImage
         className="banner__img"
-        src="https://ik.imagekit.io/iii299/motoshop/bg.jpg?updatedAt=1697609532380"
+        src="https://www.one3motoshop.com/site/uploads/slideshow/5ebd43b6bcaaa-1920-2.jpg"
         alt="Yamaha R1m yzf-r1m"
       />{" "}
       <section id="sportbikes" className="section">

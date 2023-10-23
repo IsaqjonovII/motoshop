@@ -16,14 +16,15 @@ export default styled.main`
   .section {
     margin: ${pxToRem(30)} 0;
     padding: 0 ${pxToRem(50)};
+    max-width: ${pxToRem(1550)};
+    margin: ${pxToRem(50)} auto;
   }
   .section__title {
     font-size: ${pxToRem(40)};
     color: ${gray};
+    margin-bottom: ${pxToRem(30)};
   }
   .grid__wrp {
-    max-width: ${pxToRem(1550)};
-    margin: ${pxToRem(50)} auto;
     ${layout("grid", { cols: 3, rows: "auto" })}
     grid-gap: ${pxToRem(30)};
    
