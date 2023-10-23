@@ -17,7 +17,9 @@ export const layout = (layoutStyle: string, gridLayout?: TGridLayout) => css`
     : `grid-template-columns: repeat(${gridLayout?.cols}, ${
         gridLayout?.colsW ?? "1fr"
       });
-       grid-template-rows: repeat(${gridLayout?.rows}, ${
-        gridLayout?.rowsH ?? "1fr"
-      });`}
+       grid-template-rows: ${
+         gridLayout?.rows !== "auto"
+           ? `repeat(${gridLayout?.rows}, ${gridLayout?.rowsH ?? "1fr"})`
+           : "auto"
+       };`}
 `;
