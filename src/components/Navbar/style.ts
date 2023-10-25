@@ -8,6 +8,7 @@ const { white, borderGray, teal, darkGray, gray } = colors;
 export default styled.header`
   background-color: ${white};
   box-shadow: 0 ${pxToRem(2)} ${pxToRem(4)} ${darkGray}30;
+  border-bottom: ${pxToRem(1)} solid ${gray}60;
   user-select: none;
   .nav__container {
     ${layout("flex")}
