@@ -14,9 +14,6 @@ export default styled.main`
     user-select: none;
   }
   .section {
-    margin: ${pxToRem(30)} 0;
-    padding: 0 ${pxToRem(50)};
-    max-width: ${pxToRem(1550)};
     margin: ${pxToRem(50)} auto;
   }
   .section__title {
