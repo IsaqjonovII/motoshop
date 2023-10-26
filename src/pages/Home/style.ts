@@ -31,20 +31,14 @@ export default styled.main`
       ${layout("grid", { cols: 2, rows: "auto" })}
       grid-gap: ${pxToRem(15)};
     }
-    .section {
-      padding:  0 ${pxToRem(30)};
-    }
     .section__title {
       font-size: ${pxToRem(34)};
     }
   }
   @media only screen and (max-width: ${pxToRem(768)}) {
-    .section {
-      padding:  0 ${pxToRem(20)};
-    }
     .grid__wrp {
-    ${layout("grid", { cols: 1, rows: "auto" })}
-    grid-gap: ${pxToRem(20)};
+      ${layout("grid", { cols: 1, rows: "auto" })}
+      grid-gap: ${pxToRem(20)};
     }
     .section__title {
       font-size: ${pxToRem(28)};

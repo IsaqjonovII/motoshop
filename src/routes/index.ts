@@ -3,11 +3,10 @@ import { routes } from "constants/routes";
 import { IAppRoutes, INavRoutes } from "interfaces";
 const Home = lazy(() => import("pages/Home"));
 
-
 const {
   HOME,
-  // LOGIN,
-  // REGISTER,
+  LOGIN,
+  REGISTER,
   // ELECTRO_MOTO,
   // EMOTO_INFO,
   // MOTOCYCLES,
@@ -28,8 +27,8 @@ const {
   // POST_PRODUCT,
 } = routes;
 
-// const Login = lazy(() => import("pages/Login"));
-// const Register = lazy(() => import("pages/Register"));
+const Login = lazy(() => import("pages/Auth/Login"));
+const Register = lazy(() => import("pages/Auth/Register"));
 // const ElectroMoto = lazy(() => import("pages/ElectroMoto"));
 // const EmotoInfo = lazy(() => import("pages/EmotoInfo"));
 // const Motocycles = lazy(() => import("pages/Motocycles"));
@@ -50,7 +49,11 @@ const {
 // const PostProduct = lazy(() => import("pages/PostProduct"));
 
 // Define the routes using object destructuring
-export const appRoutes: IAppRoutes[] = [
+export const publicRoutes: IAppRoutes[] = [
+  { key: "login", path: LOGIN, Component: Login },
+  { key: "register", path: REGISTER, Component: Register },
+];
+export const privateRoutes: IAppRoutes[] = [
   { key: "home", path: HOME, Component: Home },
   // { key: "login", path: LOGIN, Component: Login },
   // { key: "register", path: REGISTER, Component: Register },

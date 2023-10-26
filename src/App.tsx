@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
-import { appRoutes } from "routes";
+import { privateRoutes } from "routes";
 import Navbar from "components/Navbar";
 import Sidebar from "components/Sidebar";
 import Container from "components/Container";
@@ -27,10 +27,9 @@ function App() {
           />
         ) : null}
       </div>
-
       <Container>
         <Routes>
-          {appRoutes.map(({ key, path, Component }) => (
+          {privateRoutes.map(({ key, path, Component }) => (
             <Route key={key} path={path} element={<Component />} />
           ))}
         </Routes>

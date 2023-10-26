@@ -4,8 +4,13 @@ import { FiUser, FiMenu } from "react-icons/fi";
 import { navRoutes } from "routes";
 import StyledNav from "./style";
 import { ISidebar } from "interfaces";
+import { useAppSelector } from "hooks";
 
 const Navbar = ({ isSidebarOpen, setIsSidebarOpen }: ISidebar) => {
+  const user = useAppSelector(({ auth }) => auth.user);
+
+  console.log(user);
+
   return (
     <StyledNav>
       <div className="nav__container">
@@ -22,10 +27,15 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }: ISidebar) => {
           </nav>
         </div>
         <div className="nav__right">
-          <div className="user__wrp">
-            <FiUser />
-            <span>Profil</span>
-          </div>
+          {user ? (
+            <div className="user__wrp">
+              <FiUser />
+              <span>Profil</span>
+            </div>
+          ) : (
+            <Link className="login__link" to="/login">Kirish</Link>
+          )}
+
           {isSidebarOpen ? (
             <GrClose
               className="bars__icon"
