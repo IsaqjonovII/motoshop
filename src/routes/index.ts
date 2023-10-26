@@ -49,12 +49,10 @@ const Register = lazy(() => import("pages/Auth/Register"));
 // const PostProduct = lazy(() => import("pages/PostProduct"));
 
 // Define the routes using object destructuring
-export const publicRoutes: IAppRoutes[] = [
-  { key: "login", path: LOGIN, Component: Login },
-  { key: "register", path: REGISTER, Component: Register },
-];
 export const privateRoutes: IAppRoutes[] = [
   { key: "home", path: HOME, Component: Home },
+  { key: "login", path: LOGIN, Component: Login },
+  { key: "register", path: REGISTER, Component: Register },
   // { key: "login", path: LOGIN, Component: Login },
   // { key: "register", path: REGISTER, Component: Register },
   // { key: "electroMoto", path: ELECTRO_MOTO, Component: ElectroMoto },
