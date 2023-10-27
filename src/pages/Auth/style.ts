@@ -9,6 +9,7 @@ export default styled.div`
     }
     .inp__label {
         display: block;
+        font-size: ${pxToRem(18)};
         margin: ${pxToRem(20)} 0 ${pxToRem(5)} 0;
     }
     .inp {

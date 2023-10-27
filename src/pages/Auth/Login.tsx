@@ -1,38 +1,39 @@
-import { Input } from "antd";
+import { Input, Button, Form } from "antd";
+import {
+  EyeInvisibleOutlined,
+  EyeTwoTone,
+  LoginOutlined,
+} from "@ant-design/icons";
 import StyledAuth from "./style";
 
 const Login = () => {
   return (
     <StyledAuth>
       <h1 className="auth__title">Login</h1>
-      <form>
-        <div>
-          <label className="inp__label" htmlFor="name">
-            Ismingizni kiriting
-          </label>
-          <Input className="inp" type="text" id="name" name="name" />
-        </div>
+      <Form layout="vertical">
+        <Form.Item label="Ismingizni kiriting" rules={[{ required: true }]}>
+          <Input className="inp" id="name" name="name" />
+        </Form.Item>
 
-        <div>
-          <label className="inp__label" htmlFor="email">
-            Email
-          </label>
+        <Form.Item label="Email" rules={[{ required: true }]}>
           <Input className="inp" type="email" id="email" name="email" />
-        </div>
+        </Form.Item>
 
-        <div>
-          <label className="inp__label" htmlFor="password">
-            Parol kiriting
-          </label>
-          <Input
+        <Form.Item label="Parol kiriting" rules={[{ required: true }]}>
+          <Input.Password
             className="inp"
             type="password"
-            // iconRender={(visible) => (visible ? <EyeTwoTone /> : <Eye />)}
+            iconRender={(visible) =>
+              visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+            }
             id="password"
             name="password"
           />
-        </div>
-      </form>
+        </Form.Item>
+        <Button type="primary" icon={<LoginOutlined />}>
+          Hisobga kirish
+        </Button>
+      </Form>
     </StyledAuth>
   );
 };

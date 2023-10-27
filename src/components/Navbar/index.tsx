@@ -8,9 +8,6 @@ import { useAppSelector } from "hooks";
 
 const Navbar = ({ isSidebarOpen, setIsSidebarOpen }: ISidebar) => {
   const user = useAppSelector(({ auth }) => auth.user);
-
-  console.log(user);
-
   return (
     <StyledNav>
       <div className="nav__container">
