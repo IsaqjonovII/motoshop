@@ -1,39 +1,40 @@
-import { Input, Button, Form } from "antd";
-import {
-  EyeInvisibleOutlined,
-  EyeTwoTone,
-  LoginOutlined,
-} from "@ant-design/icons";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Input } from "components/Input";
 import StyledAuth from "./style";
 
 const Login = () => {
+  const loginUser = (e: SubmitEvent) => {
+    console.log(e.target);
+  };
+
   return (
     <StyledAuth>
       <h1 className="auth__title">Login</h1>
-      <Form layout="vertical">
-        <Form.Item label="Ismingizni kiriting" rules={[{ required: true }]}>
-          <Input className="inp" id="name" name="name" />
-        </Form.Item>
-
-        <Form.Item label="Email" rules={[{ required: true }]}>
-          <Input className="inp" type="email" id="email" name="email" />
-        </Form.Item>
-
-        <Form.Item label="Parol kiriting" rules={[{ required: true }]}>
-          <Input.Password
-            className="inp"
-            type="password"
-            iconRender={(visible) =>
-              visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
-            }
-            id="password"
-            name="password"
-          />
-        </Form.Item>
-        <Button type="primary" icon={<LoginOutlined />}>
-          Hisobga kirish
-        </Button>
-      </Form>
+      <form onSubmit={(e: any) => loginUser(e)} autoComplete="off">
+        <Input className="inp" id="name" name="name" label="Ismingiz" />
+        <Input
+          type="number"
+          className="inp"
+          id="phone"
+          name="phone"
+          label="Telefon raqam"
+        />
+        <Input
+          className="inp"
+          type="email"
+          id="email"
+          name="email"
+          label="Email"
+        />
+        <Input
+          className="inp"
+          label="Parol"
+          type="password"
+          id="password"
+          name="password"
+        />
+        <button>Hisobga kirish</button>
+      </form>
     </StyledAuth>
   );
 };
