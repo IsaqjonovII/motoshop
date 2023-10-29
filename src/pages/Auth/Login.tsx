@@ -12,11 +12,11 @@ const Login = () => {
       <h1 className="auth__title">Login</h1>
       <Form layout="vertical">
         <Form.Item label="Ismingizni kiriting" rules={[{ required: true }]}>
-          <Input className="inp" id="name" name="name" />
+          <Input className="inp" name="name" />
         </Form.Item>
 
         <Form.Item label="Email" rules={[{ required: true }]}>
-          <Input className="inp" type="email" id="email" name="email" />
+          <Input className="inp" type="email" name="email" />
         </Form.Item>
 
         <Form.Item label="Parol kiriting" rules={[{ required: true }]}>
@@ -26,7 +26,6 @@ const Login = () => {
             iconRender={(visible) =>
               visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
             }
-            id="password"
             name="password"
           />
         </Form.Item>
