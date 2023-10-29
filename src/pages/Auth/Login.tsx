@@ -1,30 +1,40 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { Input } from "components/Input";
+import { LoginOutlined } from "@ant-design/icons";
+import { ChangeEvent, FormEvent, useState } from "react";
 import StyledAuth from "./style";
+import { Input } from "components/Input";
+import { Button } from "components/Button";
 
 const Login = () => {
-  const loginUser = (e: SubmitEvent) => {
-    console.log(e.target);
+  const [authForm, setAuthForm] = useState({
+    phone: "",
+    password: "",
+  });
+
+  const handleChanges = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setAuthForm({
+      ...authForm,
+      [name]: value,
+    });
+  };
+
+  const loginUser = (e: FormEvent) => {
+    e.preventDefault();
+
   };
 
   return (
     <StyledAuth>
       <h1 className="auth__title">Login</h1>
-      <form onSubmit={(e: any) => loginUser(e)} autoComplete="off">
-        <Input className="inp" id="name" name="name" label="Ismingiz" />
+      <form onSubmit={loginUser} autoComplete="off">
         <Input
           type="number"
           className="inp"
           id="phone"
           name="phone"
           label="Telefon raqam"
-        />
-        <Input
-          className="inp"
-          type="email"
-          id="email"
-          name="email"
-          label="Email"
+          value={authForm.phone}
+          onChange={handleChanges}
         />
         <Input
           className="inp"
@@ -32,8 +42,13 @@ const Login = () => {
           type="password"
           id="password"
           name="password"
+          value={authForm.password}
+          onChange={handleChanges}
         />
-        <button>Hisobga kirish</button>
+        <Button type="submit" className="auth__btn">
+          {" "}
+          <LoginOutlined /> Hisobga kirish
+        </Button>
       </form>
     </StyledAuth>
   );

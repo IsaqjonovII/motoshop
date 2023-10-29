@@ -1,3 +1,5 @@
+import { ChangeEventHandler } from "react";
+
 export interface IInput {
   id: string;
   type?: string;
@@ -8,4 +10,11 @@ export interface IInput {
   name: string;
   label?: string;
   placeholder?: string;
+  value: string;
+  onChange: ChangeEventHandler<HTMLInputElement>;
+}
+export interface IButton {
+  className?: string;
+  type?: "button" | "reset" | "submit";
+  children: (string | JSX.Element)[] | string | JSX.Element;
 }

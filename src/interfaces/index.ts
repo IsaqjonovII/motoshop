@@ -1,8 +1,10 @@
+import { LazyExoticComponent } from "react";
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface IAppRoutes {
   key: string;
   path: string;
-  Component: React.ReactNode | JSX.Element | any;
+  Component: LazyExoticComponent<() => JSX.Element>;
 }
 export interface INavRoutes {
   key: string;

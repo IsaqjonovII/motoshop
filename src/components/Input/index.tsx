@@ -8,6 +8,8 @@ export const Input = ({
   className,
   label,
   placeholder,
+  value,
+  onChange,
 }: IInput) => {
   return (
     <StyledInput>
@@ -23,7 +25,9 @@ export const Input = ({
             placeholder={placeholder}
             type="password"
             required
+            value={value}
             minLength={8}
+            onChange={onChange}
           />
         </div>
       ) : (
@@ -31,6 +35,8 @@ export const Input = ({
           className={className}
           name={name}
           id={id}
+          value={value}
+          onChange={onChange}
           placeholder={placeholder}
           type={type ?? "text"}
           required

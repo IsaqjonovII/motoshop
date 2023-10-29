@@ -1,4 +1,6 @@
+import { colors } from "constants/styles";
 import { css } from "styled-components";
+import { pxToRem } from "utils";
 
 type TGridLayout = {
   cols: number | string;
@@ -6,6 +8,7 @@ type TGridLayout = {
   rows: number | string;
   rowsH?: number | string;
 };
+const { red, teal, white } = colors;
 
 export const layout = (layoutStyle: string, gridLayout?: TGridLayout) => css`
   display: ${layoutStyle === "flex" ? "flex" : "grid"};
@@ -22,4 +25,22 @@ export const layout = (layoutStyle: string, gridLayout?: TGridLayout) => css`
            ? `repeat(${gridLayout?.rows}, ${gridLayout?.rowsH ?? "1fr"})`
            : "auto"
        };`}
+`;
+export const btn = (btnType?: string) => css`
+  padding: ${pxToRem(10)} ${pxToRem(20)};
+  font-size: ${pxToRem(18)};
+  cursor: pointer;
+  transition: 200ms;
+  border-radius: ${pxToRem(6)};
+  ${btnType?.includes("normal")
+    ? `
+      background: ${teal}; 
+      color: ${white};
+      border: ${pxToRem(2)} solid transparent;
+    `
+    : btnType?.includes("danger")
+    ? `background-color: ${red}; color: ${red};`
+    : ` color: ${teal}; background: transparent; border: ${pxToRem(
+        2
+      )} solid ${teal};`}
 `;
