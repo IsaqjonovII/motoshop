@@ -5,14 +5,16 @@ import { navRoutes } from "routes";
 import StyledNav from "./style";
 import { ISidebar } from "interfaces";
 import { useAppSelector } from "hooks";
+import { routes } from "constants/routes";
 
+const { HOME, AUTH } = routes;
 const Navbar = ({ isSidebarOpen, setIsSidebarOpen }: ISidebar) => {
   const user = useAppSelector(({ auth }) => auth.user);
   return (
     <StyledNav>
       <div className="nav__container">
         <div className="nav__left">
-          <Link to="/">
+          <Link to={HOME}>
             <div className="nav__logo">MotoShop</div>
           </Link>
           <nav className="nav__menu">
@@ -30,7 +32,9 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }: ISidebar) => {
               <span>Profil</span>
             </div>
           ) : (
-            <Link className="login__link" to="/login">Kirish</Link>
+            <Link className="login__link" to={AUTH}>
+              Kirish
+            </Link>
           )}
 
           {isSidebarOpen ? (

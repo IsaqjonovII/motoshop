@@ -5,8 +5,7 @@ const Home = lazy(() => import("pages/Home"));
 
 const {
   HOME,
-  LOGIN,
-  REGISTER,
+  AUTH,
   // ELECTRO_MOTO,
   // EMOTO_INFO,
   // MOTOCYCLES,
@@ -27,8 +26,7 @@ const {
   // POST_PRODUCT,
 } = routes;
 
-const Login = lazy(() => import("pages/Auth/Login"));
-const Register = lazy(() => import("pages/Auth/Register"));
+const Auth = lazy(() => import("pages/Auth"));
 // const ElectroMoto = lazy(() => import("pages/ElectroMoto"));
 // const EmotoInfo = lazy(() => import("pages/EmotoInfo"));
 // const Motocycles = lazy(() => import("pages/Motocycles"));
@@ -36,8 +34,8 @@ const Register = lazy(() => import("pages/Auth/Register"));
 // const SportbikeInfo = lazy(() => import("pages/SportbikeInfo"));
 // const Scooter = lazy(() => import("pages/Scooter"));
 // const ScooterInfo = lazy(() => import("pages/ScooterInfo"));
-// const Motostuff = lazy(() => import("pages/Motostuff"));
-// const MotostuffInfo = lazy(() => import("pages/MotostuffInfo"));
+// const Motostuff = lazy(() => import("pages/M otostuff"));
+// const MotostuffInfo = lazy(() => i  mport("pages/MotostuffInfo"));
 // const Accessories = lazy(() => import("pages/Accessories"));
 // const AccessoriesInfo = lazy(() => import("pages/AccessoriesInfo"));
 // const Helmets = lazy(() => import("pages/Helmets"));
@@ -51,8 +49,7 @@ const Register = lazy(() => import("pages/Auth/Register"));
 // Define the routes using object destructuring
 export const privateRoutes: IAppRoutes[] = [
   { key: "home", path: HOME, Component: Home },
-  { key: "login", path: LOGIN, Component: Login },
-  { key: "register", path: REGISTER, Component: Register },
+  { key: "auth", path: AUTH, Component: Auth },
   // { key: "login", path: LOGIN, Component: Login },
   // { key: "register", path: REGISTER, Component: Register },
   // { key: "electroMoto", path: ELECTRO_MOTO, Component: ElectroMoto },

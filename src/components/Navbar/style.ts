@@ -98,7 +98,7 @@ export default styled.header`
       border: ${pxToRem(2)} solid ${teal};
     }
   }
-  @media screen and (min-width: ${pxToRem(1024)}) {
+  @media screen and (min-width: ${pxToRem(1025)}) {
     .bars__icon {
       display: none;
     }

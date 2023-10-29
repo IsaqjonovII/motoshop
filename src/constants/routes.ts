@@ -1,7 +1,6 @@
 export enum routes {
   HOME = "/",
-  LOGIN = "/login",
-  REGISTER = "/register",
+  AUTH = "/auth",
   ELECTRO_MOTO = "/moto-electro/products",
   EMOTO_INFO = "moto-electro/products/:id",
   MOTOCYCLES = "/moto-all/products",

@@ -1,38 +1,55 @@
-import { Input, Button, Form } from "antd";
-import {
-  EyeInvisibleOutlined,
-  EyeTwoTone,
-  LoginOutlined,
-} from "@ant-design/icons";
+import { LoginOutlined } from "@ant-design/icons";
+import { ChangeEvent, FormEvent, useState } from "react";
 import StyledAuth from "./style";
+import { Input } from "components/Input";
+import { Button } from "components/Button";
 
 const Login = () => {
+  const [authForm, setAuthForm] = useState({
+    phone: "",
+    password: "",
+  });
+
+  const handleChanges = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setAuthForm({
+      ...authForm,
+      [name]: value,
+    });
+  };
+
+  const loginUser = (e: FormEvent) => {
+    e.preventDefault();
+
+  };
+
   return (
     <StyledAuth>
       <h1 className="auth__title">Login</h1>
-      <Form layout="vertical">
-        <Form.Item label="Ismingizni kiriting" rules={[{ required: true }]}>
-          <Input className="inp" name="name" />
-        </Form.Item>
-
-        <Form.Item label="Email" rules={[{ required: true }]}>
-          <Input className="inp" type="email" name="email" />
-        </Form.Item>
-
-        <Form.Item label="Parol kiriting" rules={[{ required: true }]}>
-          <Input.Password
-            className="inp"
-            type="password"
-            iconRender={(visible) =>
-              visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
-            }
-            name="password"
-          />
-        </Form.Item>
-        <Button type="primary" icon={<LoginOutlined />}>
-          Hisobga kirish
+      <form onSubmit={loginUser} autoComplete="off">
+        <Input
+          type="number"
+          className="inp"
+          id="phone"
+          name="phone"
+          label="Telefon raqam"
+          value={authForm.phone}
+          onChange={handleChanges}
+        />
+        <Input
+          className="inp"
+          label="Parol"
+          type="password"
+          id="password"
+          name="password"
+          value={authForm.password}
+          onChange={handleChanges}
+        />
+        <Button type="submit" className="auth__btn">
+          {" "}
+          <LoginOutlined /> Hisobga kirish
         </Button>
-      </Form>
+      </form>
     </StyledAuth>
   );
 };
