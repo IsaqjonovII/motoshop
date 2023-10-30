@@ -25,10 +25,23 @@ export interface IProduct {
   address: string;
 }
 export interface IUser {
+  _id: string;
+  phone: string | number;
   name: string;
-  email: string;
-  password?: string;
-  postedAd?: string[];
+  email?: string;
+  password: string;
+  postedAds?: string[];
+  viewedAds?: string[];
   address?: string;
   likedAds?: string[];
+  feedback?: string[];
+  chatHistory?: string[];
+  savedSearches: string[];
+}
+export interface IBackendResponse {
+  data: {
+    msg: string;
+  },
+  user?: IUser;
+  msg?: string;
 }

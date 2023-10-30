@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import { appAPI } from "services";
+import { appAPI } from "services/user";
 import rootReducers from "./reducers";
 
 const persistedReducer = persistReducer(

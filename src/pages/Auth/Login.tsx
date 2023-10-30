@@ -1,9 +1,9 @@
 import { Loading3QuartersOutlined, LoginOutlined } from "@ant-design/icons";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import StyledAuth from "./style";
 import { Input } from "components/Input";
 import { Button } from "components/Button";
-import { useLoginMutation } from "services";
+import { useLoginMutation } from "services/user";
 
 const Login = () => {
   const [login, { data, isLoading, error }] = useLoginMutation();
@@ -22,12 +22,16 @@ const Login = () => {
 
   const loginUser = async (e: FormEvent) => {
     e.preventDefault();
-    try {
-      await login(authForm);
-    } catch (error) {
-      console.log(error);
-    }
+    await login(authForm);
   };
+
+  useEffect(() => {
+    if (data) console.log(data);
+  }, [data]);
+
+  useEffect(() => {
+    if (error) console.log(error);
+  }, [error]);
 
   return (
     <StyledAuth>
