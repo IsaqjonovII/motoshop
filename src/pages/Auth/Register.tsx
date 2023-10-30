@@ -4,8 +4,9 @@ import StyledAuth from "./style";
 import { Input } from "components/Input";
 import { Button } from "components/Button";
 
-const Login = () => {
+const Register = () => {
   const [authForm, setAuthForm] = useState({
+    name: "",
     phone: "",
     password: "",
   });
@@ -20,13 +21,20 @@ const Login = () => {
 
   const loginUser = (e: FormEvent) => {
     e.preventDefault();
-
   };
 
   return (
     <StyledAuth>
       <h1 className="auth__title">Login</h1>
       <form onSubmit={loginUser} autoComplete="off">
+        <Input
+          className="inp"
+          id="name"
+          name="name"
+          label="Ismingiz"
+          value={authForm.name}
+          onChange={handleChanges}
+        />
         <Input
           type="number"
           className="inp"
@@ -54,4 +62,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

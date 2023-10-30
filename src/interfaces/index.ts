@@ -1,7 +1,10 @@
+import { LazyExoticComponent } from "react";
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface IAppRoutes {
   key: string;
   path: string;
-  Component: React.ReactNode | JSX.Element | any;
+  Component: LazyExoticComponent<() => JSX.Element>;
 }
 export interface INavRoutes {
   key: string;
@@ -14,10 +17,18 @@ export interface ISidebar {
 export interface IProduct {
   id: number | string;
   name: string;
-  price: number | string;
+  price: number;
   types: string[];
   postedAt: string;
   isActive: boolean;
   img: string;
   address: string;
+}
+export interface IUser {
+  name: string;
+  email: string;
+  password?: string;
+  postedAd?: string[];
+  address?: string;
+  likedAds?: string[];
 }

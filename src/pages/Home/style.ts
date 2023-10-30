@@ -14,16 +14,14 @@ export default styled.main`
     user-select: none;
   }
   .section {
-    margin: ${pxToRem(30)} 0;
-    padding: 0 ${pxToRem(50)};
+    margin: ${pxToRem(50)} auto;
   }
   .section__title {
     font-size: ${pxToRem(40)};
     color: ${gray};
+    margin-bottom: ${pxToRem(30)};
   }
   .grid__wrp {
-    max-width: ${pxToRem(1550)};
-    margin: ${pxToRem(50)} auto;
     ${layout("grid", { cols: 3, rows: "auto" })}
     grid-gap: ${pxToRem(30)};
    
@@ -33,20 +31,14 @@ export default styled.main`
       ${layout("grid", { cols: 2, rows: "auto" })}
       grid-gap: ${pxToRem(15)};
     }
-    .section {
-      padding:  0 ${pxToRem(30)};
-    }
     .section__title {
       font-size: ${pxToRem(34)};
     }
   }
   @media only screen and (max-width: ${pxToRem(768)}) {
-    .section {
-      padding:  0 ${pxToRem(20)};
-    }
     .grid__wrp {
-    ${layout("grid", { cols: 1, rows: "auto" })}
-    grid-gap: ${pxToRem(20)};
+      ${layout("grid", { cols: 1, rows: "auto" })}
+      grid-gap: ${pxToRem(20)};
     }
     .section__title {
       font-size: ${pxToRem(28)};

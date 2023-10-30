@@ -2,14 +2,17 @@ import { colors } from "constants/styles";
 import styled from "styled-components";
 import { pxToRem } from "utils";
 
-const { black, gray, white } = colors;
+const { black, gray, white, teal, borderGray } = colors;
 
 export default styled.div`
   box-shadow: rgba(0, 0, 0, 0.05) 0 ${pxToRem(6)} ${pxToRem(24)} 0,
-    rgba(0, 0, 0, 0.08) 0 0 0 ${pxToRem(1)};
+    ${borderGray} 0 0 0 ${pxToRem(1)};
+  border: ${pxToRem(1)} solid ${borderGray};
   padding: ${pxToRem(15)};
   border-radius: ${pxToRem(10)};
   cursor: pointer;
+  transition: 200ms ease-in-out;
+
   .img__wrp {
     width: 100%;
     .card__img {
@@ -35,6 +38,7 @@ export default styled.div`
       font-size: ${pxToRem(23)};
       color: ${black};
       font-weight: 600;
+      transition: 200ms ease-in-out;
     }
   }
   .product__address {
@@ -43,6 +47,12 @@ export default styled.div`
     color: ${gray}80;
   }
 
+  &:hover {
+    border-color: ${teal};
+    .card__title {
+      color: ${teal};
+    }
+  }
   @media only screen and (max-width: ${pxToRem(1200)}) {
     .card__head {
       .card__title {

@@ -3,11 +3,12 @@ import styled from "styled-components";
 import { layout } from "styles/mixin";
 import { pxToRem } from "utils";
 
-const { white, borderGray, teal, darkGray } = colors;
+const { white, borderGray, teal, darkGray, gray } = colors;
 
 export default styled.header`
   background-color: ${white};
   box-shadow: 0 ${pxToRem(2)} ${pxToRem(4)} ${darkGray}30;
+  border-bottom: ${pxToRem(1)} solid ${gray}60;
   user-select: none;
   .nav__container {
     ${layout("flex")}
@@ -34,6 +35,7 @@ export default styled.header`
             font-size: ${pxToRem(18)};
             margin: 0 ${pxToRem(5)};
             padding: ${pxToRem(8)};
+            color: ${gray}c9;
             border-radius: ${pxToRem(4)};
             transition: 100ms ease-in-out;
             border-bottom: ${pxToRem(1)} solid transparent;
@@ -83,7 +85,21 @@ export default styled.header`
     font-size: ${pxToRem(24)};
     cursor: pointer;
   }
-  @media screen and (min-width: ${pxToRem(1024)}) {
+  .login__link {
+    padding: ${pxToRem(10)} ${pxToRem(20)};
+    background-color: ${teal};
+    color: ${white};
+    font-size: ${pxToRem(18)};
+    border-radius: ${pxToRem(6)};
+    border: ${pxToRem(2)} solid transparent;
+    transition: 200ms ease-in-out;
+    &:hover {
+      color: ${teal};
+      background-color: transparent;
+      border: ${pxToRem(2)} solid ${teal};
+    }
+  }
+  @media screen and (min-width: ${pxToRem(1025)}) {
     .bars__icon {
       display: none;
     }
@@ -105,6 +121,10 @@ export default styled.header`
       span {          
         font-size: ${pxToRem(16)};
       }
+    }
+    .login__link {
+      padding: ${pxToRem(6)} ${pxToRem(14)};
+      font-size: ${pxToRem(16)};
     }
   }
    
