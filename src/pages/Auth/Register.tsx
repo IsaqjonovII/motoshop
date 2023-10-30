@@ -3,6 +3,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import StyledAuth from "./style";
 import { Input } from "components/Input";
 import { Button } from "components/Button";
+import { baseUrl } from "constants";
 
 const Register = () => {
   const [authForm, setAuthForm] = useState({
@@ -19,14 +20,34 @@ const Register = () => {
     });
   };
 
-  const loginUser = (e: FormEvent) => {
+  const registerUser = async (e: FormEvent) => {
     e.preventDefault();
-  };
+    console.log(authForm);
 
+    try {
+      const response = await fetch(`${baseUrl}auth/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify(authForm),
+      });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const result = await response.json();
+      console.log(result);
+    } catch (error) {
+      console.log((error as Error).message);
+    } finally {
+      console.log("Fetching is completed");
+    }
+  };
   return (
     <StyledAuth>
-      <h1 className="auth__title">Login</h1>
-      <form onSubmit={loginUser} autoComplete="off">
+      <h1 className="auth__title">Ro'yhatdan o'tish</h1>
+      <form onSubmit={registerUser} autoComplete="off">
         <Input
           className="inp"
           id="name"
@@ -55,7 +76,7 @@ const Register = () => {
         />
         <Button type="submit" className="auth__btn">
           {" "}
-          <LoginOutlined /> Hisobga kirish
+          <LoginOutlined /> Hisob yaratish
         </Button>
       </form>
     </StyledAuth>

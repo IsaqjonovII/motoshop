@@ -1,10 +1,12 @@
-import { LoginOutlined } from "@ant-design/icons";
+import { Loading3QuartersOutlined, LoginOutlined } from "@ant-design/icons";
 import { ChangeEvent, FormEvent, useState } from "react";
 import StyledAuth from "./style";
 import { Input } from "components/Input";
 import { Button } from "components/Button";
+import { useLoginMutation } from "services";
 
 const Login = () => {
+  const [login, { data, isLoading, error }] = useLoginMutation();
   const [authForm, setAuthForm] = useState({
     phone: "",
     password: "",
@@ -18,14 +20,18 @@ const Login = () => {
     });
   };
 
-  const loginUser = (e: FormEvent) => {
+  const loginUser = async (e: FormEvent) => {
     e.preventDefault();
-
+    try {
+      await login(authForm);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <StyledAuth>
-      <h1 className="auth__title">Login</h1>
+      <h1 className="auth__title">Kirish</h1>
       <form onSubmit={loginUser} autoComplete="off">
         <Input
           type="number"
@@ -47,7 +53,12 @@ const Login = () => {
         />
         <Button type="submit" className="auth__btn">
           {" "}
-          <LoginOutlined /> Hisobga kirish
+          {isLoading ? (
+            <Loading3QuartersOutlined spin />
+          ) : (
+            <LoginOutlined />
+          )}{" "}
+          Hisobga kirish
         </Button>
       </form>
     </StyledAuth>
