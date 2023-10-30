@@ -85,7 +85,21 @@ export default styled.header`
     font-size: ${pxToRem(24)};
     cursor: pointer;
   }
-  @media screen and (min-width: ${pxToRem(1024)}) {
+  .login__link {
+    padding: ${pxToRem(10)} ${pxToRem(20)};
+    background-color: ${teal};
+    color: ${white};
+    font-size: ${pxToRem(18)};
+    border-radius: ${pxToRem(6)};
+    border: ${pxToRem(2)} solid transparent;
+    transition: 200ms ease-in-out;
+    &:hover {
+      color: ${teal};
+      background-color: transparent;
+      border: ${pxToRem(2)} solid ${teal};
+    }
+  }
+  @media screen and (min-width: ${pxToRem(1025)}) {
     .bars__icon {
       display: none;
     }
@@ -107,6 +121,10 @@ export default styled.header`
       span {          
         font-size: ${pxToRem(16)};
       }
+    }
+    .login__link {
+      padding: ${pxToRem(6)} ${pxToRem(14)};
+      font-size: ${pxToRem(16)};
     }
   }
    

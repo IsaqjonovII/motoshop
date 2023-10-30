@@ -11,7 +11,7 @@ const Home = () => {
         className="banner__img"
         src="https://www.one3motoshop.com/site/uploads/slideshow/5ebd43b6bcaaa-1920-2.jpg"
         alt="Yamaha R1m yzf-r1m"
-      />{" "}
+      />
       <section id="sportbikes" className="section">
         <h1 className="section__title">SportBayklar</h1>
         <div className="grid__wrp">
