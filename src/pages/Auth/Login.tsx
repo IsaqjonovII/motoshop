@@ -22,7 +22,8 @@ const Login = () => {
 
   const loginUser = async (e: FormEvent) => {
     e.preventDefault();
-    await login(authForm);
+    const { phone, password } = authForm;
+    await login({ phone: "998" + phone, password });
   };
 
   useEffect(() => {
@@ -38,7 +39,7 @@ const Login = () => {
       <h1 className="auth__title">Kirish</h1>
       <form onSubmit={loginUser} autoComplete="off">
         <Input
-          type="number"
+          type="phone"
           className="inp"
           id="phone"
           name="phone"

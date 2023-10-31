@@ -28,7 +28,16 @@ const StyledInput = styled.div`
     font-size: ${pxToRem(19)};
     margin: ${pxToRem(8)} 0;
   }
-  .inp__password {
+  .phone__code {
+    font-size: ${pxToRem(18)};
+  }
+  .inp__password input, .inp__phone input{
+      all: unset;
+      flex: 1;
+      height: 100%;
+      font-size: ${pxToRem(17)};
+  }
+  .inp__password, .inp__phone {
     ${layout("flex")}
     max-width: ${pxToRem(550)};
     height: ${pxToRem(45)};
@@ -37,13 +46,8 @@ const StyledInput = styled.div`
     background-color: ${white};
     padding: 0 ${pxToRem(10)};
     border-radius: ${pxToRem(6)};
-    input {
-      all: unset;
-      flex: 1;
-      height: 100%;
-      font-size: ${pxToRem(17)};
-    }
-    &:focus, &:hover{
+    &:focus,
+    &:hover {
       border-color: ${teal};
       outline: ${pxToRem(2)} solid ${teal}70;
     }

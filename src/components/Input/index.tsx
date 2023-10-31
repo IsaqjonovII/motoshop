@@ -38,6 +38,23 @@ export const Input = ({
             <EyeInvisibleOutlined onClick={() => setIsPassword(!isPassword)} />
           )}
         </div>
+      ) : type === "phone" ? (
+        <div className="inp__phone">
+          <div className="phone__code">+998</div>
+          <input
+            className={className}
+            name={name}
+            type="tel"
+            id={id}
+            min={0}
+            value={value}
+            minLength={9}
+            maxLength={9}
+            onChange={onChange}
+            placeholder={placeholder}
+            required
+          />
+        </div>
       ) : (
         <input
           className={className}
