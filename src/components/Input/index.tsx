@@ -1,5 +1,7 @@
 import { IInput } from "interfaces/components";
 import { StyledInput } from "./style";
+import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
+import { useState } from "react";
 
 export const Input = ({
   id,
@@ -11,6 +13,7 @@ export const Input = ({
   value,
   onChange,
 }: IInput) => {
+  const [isPassword, setIsPassword] = useState(false);
   return (
     <StyledInput>
       <label className="inp__label" htmlFor={id}>
@@ -23,12 +26,17 @@ export const Input = ({
             name={name}
             id={id}
             placeholder={placeholder}
-            type="password"
+            type={isPassword ? "text" : "password"}
             required
             value={value}
             minLength={8}
             onChange={onChange}
           />
+          {isPassword ? (
+            <EyeOutlined onClick={() => setIsPassword(!isPassword)} />
+          ) : (
+            <EyeInvisibleOutlined onClick={() => setIsPassword(!isPassword)} />
+          )}
         </div>
       ) : (
         <input

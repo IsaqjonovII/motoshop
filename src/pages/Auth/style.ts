@@ -59,9 +59,7 @@ export default styled.div`
     .auth__title {
       font-size: ${pxToRem(35)};
     }
-    .inp {
-      font-size: ${pxToRem(18)};
-    }
+   
     .auth__btn {
       display: block;
       max-width: ${pxToRem(230)};
