@@ -16,10 +16,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <GlobalStyle />
     <ToastContainer
-      position="top-right"
-      autoClose={5000}
+      position="top-center"
+      autoClose={1000}
       hideProgressBar={false}
-      newestOnTop={false}
+      newestOnTop={true}
       closeOnClick
       rtl={false}
       pauseOnFocusLoss

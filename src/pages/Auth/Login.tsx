@@ -4,8 +4,15 @@ import StyledAuth from "./style";
 import { Input } from "components/Input";
 import { Button } from "components/Button";
 import { useLoginMutation } from "services/user";
+import { toast } from "react-toastify";
+import { IBackendResponse } from "interfaces";
+import { routes } from "constants/routes";
+import { useNavigate } from "react-router-dom";
+import { logIn } from "store/reducers/AuthSlice";
 
+const { HOME } = routes;
 const Login = () => {
+  const navigate = useNavigate();
   const [login, { data, isLoading, error }] = useLoginMutation();
   const [authForm, setAuthForm] = useState({
     phone: "",
@@ -27,11 +34,19 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (data) console.log(data);
+    if (data) {
+      console.log(data);
+      logIn(data);
+      toast.success(data.msg);
+      navigate(HOME);
+    }
   }, [data]);
 
   useEffect(() => {
-    if (error) console.log(error);
+    if (error) {
+      const err = error as IBackendResponse;
+      toast.error(err.data.msg);
+    }
   }, [error]);
 
   return (

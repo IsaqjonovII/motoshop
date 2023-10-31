@@ -50,6 +50,7 @@ export const Input = ({
             value={value}
             minLength={9}
             maxLength={9}
+            pattern="[0-9]{9}"
             onChange={onChange}
             placeholder={placeholder}
             required
