@@ -40,14 +40,12 @@ const Login = () => {
       toast.success(data.msg);
       navigate(HOME);
     }
-  }, [data]);
-
-  useEffect(() => {
-    if (error) {
+     if (error) {
       const err = error as IBackendResponse;
       toast.error(err.data.msg);
     }
-  }, [error]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data, error]);
 
   return (
     <StyledAuth>

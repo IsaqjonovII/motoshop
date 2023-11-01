@@ -2,10 +2,14 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { baseUrl } from "constants";
 import { IBackendResponse } from "interfaces";
 
-type TAuthForm = {
+interface ILoginForm {
   phone: string | number;
   password: string;
-};
+}
+
+interface IRegisterForm extends ILoginForm {
+  name: string;
+}
 
 export const appAPI = createApi({
   reducerPath: "appapi",
@@ -14,7 +18,7 @@ export const appAPI = createApi({
   }),
   tagTypes: ["User"],
   endpoints: (builder) => ({
-    register: builder.mutation<IBackendResponse, TAuthForm>({
+    register: builder.mutation<IBackendResponse, IRegisterForm>({
       query: (formData) => ({
         url: "auth/register",
         method: "POST",
@@ -22,7 +26,7 @@ export const appAPI = createApi({
       }),
       invalidatesTags: ["User"],
     }),
-    login: builder.mutation<IBackendResponse, TAuthForm>({
+    login: builder.mutation<IBackendResponse, ILoginForm>({
       query: (formData) => ({
         url: "auth/login",
         method: "POST",

@@ -41,7 +41,11 @@ export interface IUser {
 export interface IBackendResponse {
   data: {
     msg: string;
-  },
+  };
   user?: IUser;
   msg?: string;
+  error?: {
+    status?: string;
+    error?: string;
+  };
 }

@@ -1,11 +1,14 @@
-import { LoginOutlined } from "@ant-design/icons";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { Loading3QuartersOutlined, UserAddOutlined } from "@ant-design/icons";
+import { toast } from "react-toastify";
 import StyledAuth from "./style";
 import { Input } from "components/Input";
 import { Button } from "components/Button";
-import { baseUrl } from "constants";
+import { useRegisterMutation } from "services/user";
+import { IBackendResponse } from "interfaces";
 
 const Register = () => {
+  const [register, { data, isLoading, error }] = useRegisterMutation();
   const [authForm, setAuthForm] = useState({
     name: "",
     phone: "",
@@ -19,30 +22,21 @@ const Register = () => {
       [name]: value,
     });
   };
+  useEffect(() => {
+    if (error) {
+      const err = error as IBackendResponse;
+      console.log(err);
+      toast.error(err.msg);
+    }
+    if (data) {
+      console.log(data);
+    }
+  }, [error, data]);
 
   const registerUser = async (e: FormEvent) => {
     e.preventDefault();
-    console.log(authForm);
-
-    try {
-      const response = await fetch(`${baseUrl}auth/register`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-        },
-        body: JSON.stringify(authForm),
-      });
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      const result = await response.json();
-      console.log(result);
-    } catch (error) {
-      console.log((error as Error).message);
-    } finally {
-      console.log("Fetching is completed");
-    }
+    const { name, phone, password } = authForm;
+    await register({ phone: "998" + phone, password, name });
   };
   return (
     <StyledAuth>
@@ -57,7 +51,7 @@ const Register = () => {
           onChange={handleChanges}
         />
         <Input
-          type="number"
+          type="phone"
           className="inp"
           id="phone"
           name="phone"
@@ -76,7 +70,8 @@ const Register = () => {
         />
         <Button type="submit" className="auth__btn">
           {" "}
-          <LoginOutlined /> Hisob yaratish
+          {isLoading ? <Loading3QuartersOutlined spin /> : <UserAddOutlined />}
+          Hisob yaratish
         </Button>
       </form>
     </StyledAuth>
