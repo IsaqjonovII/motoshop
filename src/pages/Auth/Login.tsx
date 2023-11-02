@@ -1,10 +1,19 @@
-import { LoginOutlined } from "@ant-design/icons";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { Loading3QuartersOutlined, LoginOutlined } from "@ant-design/icons";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import StyledAuth from "./style";
 import { Input } from "components/Input";
 import { Button } from "components/Button";
+import { useLoginMutation } from "services/user";
+import { toast } from "react-toastify";
+import { IBackendResponse } from "interfaces";
+import { routes } from "constants/routes";
+import { useNavigate } from "react-router-dom";
+import { logIn } from "store/reducers/AuthSlice";
 
+const { HOME } = routes;
 const Login = () => {
+  const navigate = useNavigate();
+  const [login, { data, isLoading, error }] = useLoginMutation();
   const [authForm, setAuthForm] = useState({
     phone: "",
     password: "",
@@ -18,17 +27,32 @@ const Login = () => {
     });
   };
 
-  const loginUser = (e: FormEvent) => {
+  const loginUser = async (e: FormEvent) => {
     e.preventDefault();
-
+    const { phone, password } = authForm;
+    await login({ phone: "998" + phone, password });
   };
+
+  useEffect(() => {
+    if (data) {
+      console.log(data);
+      logIn(data);
+      toast.success(data.msg);
+      navigate(HOME);
+    }
+     if (error) {
+      const err = error as IBackendResponse;
+      toast.error(err.data.msg);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data, error]);
 
   return (
     <StyledAuth>
-      <h1 className="auth__title">Login</h1>
+      <h1 className="auth__title">Kirish</h1>
       <form onSubmit={loginUser} autoComplete="off">
         <Input
-          type="number"
+          type="phone"
           className="inp"
           id="phone"
           name="phone"
@@ -47,7 +71,12 @@ const Login = () => {
         />
         <Button type="submit" className="auth__btn">
           {" "}
-          <LoginOutlined /> Hisobga kirish
+          {isLoading ? (
+            <Loading3QuartersOutlined spin />
+          ) : (
+            <LoginOutlined />
+          )}{" "}
+          Hisobga kirish
         </Button>
       </form>
     </StyledAuth>
