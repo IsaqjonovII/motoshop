@@ -18,13 +18,8 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <ToastContainer
       position="top-center"
       autoClose={1000}
-      hideProgressBar={false}
       newestOnTop={true}
       closeOnClick
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
       theme="light"
     />
     <Provider store={store}>
