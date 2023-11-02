@@ -44,8 +44,8 @@ export interface IBackendResponse {
   };
   user?: IUser;
   msg?: string;
-  error?: {
-    status?: string;
-    error?: string;
-  };
+}
+export interface IBackendErr extends IBackendResponse {
+  status: string;
+  error?: string;
 }
