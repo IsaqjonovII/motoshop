@@ -1,10 +1,14 @@
-import { LoginOutlined } from "@ant-design/icons";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { Loading3QuartersOutlined, UserAddOutlined } from "@ant-design/icons";
+import { toast } from "react-toastify";
 import StyledAuth from "./style";
 import { Input } from "components/Input";
 import { Button } from "components/Button";
+import { useRegisterMutation } from "services/user";
+import { IBackendErr } from "interfaces";
 
 const Register = () => {
+  const [register, { data, isLoading, error }] = useRegisterMutation();
   const [authForm, setAuthForm] = useState({
     name: "",
     phone: "",
@@ -18,15 +22,28 @@ const Register = () => {
       [name]: value,
     });
   };
+  useEffect(() => {
+    if (error) {
+      const err = error as IBackendErr;
+      console.log(err);
+      if (err.status.includes("FETCH_ERROR"))
+        toast.error("Serverda xatolik. Iltimos birozdan so'ng urinib ko'ring");
+      toast.error(err.msg);
+    }
+    if (data) {
+      console.log(data);
+    }
+  }, [error, data]);
 
-  const loginUser = (e: FormEvent) => {
+  const registerUser = async (e: FormEvent) => {
     e.preventDefault();
+    const { name, phone, password } = authForm;
+    await register({ phone: "998" + phone, password, name });
   };
-
   return (
     <StyledAuth>
-      <h1 className="auth__title">Login</h1>
-      <form onSubmit={loginUser} autoComplete="off">
+      <h1 className="auth__title">Ro'yhatdan o'tish</h1>
+      <form onSubmit={registerUser} autoComplete="off">
         <Input
           className="inp"
           id="name"
@@ -36,7 +53,7 @@ const Register = () => {
           onChange={handleChanges}
         />
         <Input
-          type="number"
+          type="phone"
           className="inp"
           id="phone"
           name="phone"
@@ -55,7 +72,8 @@ const Register = () => {
         />
         <Button type="submit" className="auth__btn">
           {" "}
-          <LoginOutlined /> Hisobga kirish
+          {isLoading ? <Loading3QuartersOutlined spin /> : <UserAddOutlined />}
+          Hisob yaratish
         </Button>
       </form>
     </StyledAuth>
