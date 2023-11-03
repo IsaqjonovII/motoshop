@@ -3,7 +3,7 @@ import { IUser } from "interfaces";
 
 export interface IAuthState {
   user: IUser | null;
-  token: string;
+  token?: string;
 }
 
 const initialState: IAuthState = {
@@ -15,8 +15,8 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     logIn(state, action) {
-      (state.user = action.payload?.user),
-        (state.token = action.payload?.token);
+      state.user = action.payload?.user;
+      state.token = action.payload?.token;
     },
     logOut(state) {
       (state.token = ""), (state.user = null);
