@@ -1,12 +1,11 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { GrClose } from "react-icons/gr";
-import { FiUser, FiMenu } from "react-icons/fi";
+import { CloseOutlined, MenuOutlined, UserOutlined } from "@ant-design/icons";
 import { navRoutes } from "routes";
 import StyledNav from "./style";
 import { ISidebar } from "interfaces";
 import { useAppSelector } from "hooks";
 import { routes } from "constants/routes";
-import { useEffect } from "react";
 
 const { HOME, AUTH } = routes;
 const Navbar = ({ isSidebarOpen, setIsSidebarOpen }: ISidebar) => {
@@ -33,7 +32,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }: ISidebar) => {
         <div className="nav__right">
           {user ? (
             <div className="user__wrp">
-              <FiUser />
+              <UserOutlined />
               <span>Profil</span>
             </div>
           ) : (
@@ -43,12 +42,12 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }: ISidebar) => {
           )}
 
           {isSidebarOpen ? (
-            <GrClose
+            <CloseOutlined
               className="bars__icon"
               onClick={() => setIsSidebarOpen(false)}
             />
           ) : (
-            <FiMenu
+            <MenuOutlined
               className="bars__icon"
               onClick={() => setIsSidebarOpen(true)}
             />

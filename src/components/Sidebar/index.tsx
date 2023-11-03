@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
+import { RightOutlined } from "@ant-design/icons";
 import { navRoutes } from "routes";
-import { HiOutlineChevronRight } from "react-icons/hi2";
 import StyledSidebar from "./style";
 import { ISidebar } from "interfaces";
 
@@ -13,7 +13,7 @@ const Sidebar = ({ isSidebarOpen }: ISidebar) => {
         {navRoutes.map(({ key, path }) => (
           <div key={key} className="sidebar__link">
             <Link to={path}>{key}</Link>
-            <HiOutlineChevronRight />
+            <RightOutlined />
           </div>
         ))}
       </div>
