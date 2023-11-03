@@ -9,11 +9,13 @@ import { routes } from "constants/routes";
 import { Button } from "components/Button";
 import { logIn } from "store/reducers/AuthSlice";
 import { useRegisterMutation } from "services/user";
+import { useAppDispatch } from "hooks";
 
 const { HOME } = routes;
 
 const Register = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const [register, { data, isLoading, error }] = useRegisterMutation();
   const [authForm, setAuthForm] = useState({
     name: "",
@@ -36,7 +38,7 @@ const Register = () => {
       toast.error(err.msg);
     }
     if (data) {
-      logIn(data);
+      dispatch(logIn(data));
       navigate(HOME);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

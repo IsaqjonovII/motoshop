@@ -9,10 +9,12 @@ import { useLoginMutation } from "services/user";
 import { IBackendErr } from "interfaces";
 import { routes } from "constants/routes";
 import { logIn } from "store/reducers/AuthSlice";
+import { useAppDispatch } from "hooks";
 
 const { HOME } = routes;
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const [login, { data, isLoading, error }] = useLoginMutation();
   const [authForm, setAuthForm] = useState({
     phone: "",
@@ -35,7 +37,7 @@ const Login = () => {
 
   useEffect(() => {
     if (data) {
-      logIn(data.user);
+      dispatch(logIn(data.user));
       toast.success(data.msg);
       navigate(HOME);
     }
