@@ -1,18 +1,20 @@
 import { Loading3QuartersOutlined, LoginOutlined } from "@ant-design/icons";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 import StyledAuth from "./style";
 import { Input } from "components/Input";
 import { Button } from "components/Button";
 import { useLoginMutation } from "services/user";
-import { toast } from "react-toastify";
-import { IBackendResponse } from "interfaces";
+import { IBackendErr } from "interfaces";
 import { routes } from "constants/routes";
-import { useNavigate } from "react-router-dom";
 import { logIn } from "store/reducers/AuthSlice";
+import { useAppDispatch } from "hooks";
 
 const { HOME } = routes;
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const [login, { data, isLoading, error }] = useLoginMutation();
   const [authForm, setAuthForm] = useState({
     phone: "",
@@ -35,16 +37,19 @@ const Login = () => {
 
   useEffect(() => {
     if (data) {
-      console.log(data);
-      logIn(data);
+      dispatch(logIn(data.user));
       toast.success(data.msg);
       navigate(HOME);
     }
-     if (error) {
-      const err = error as IBackendResponse;
-      toast.error(err.data.msg);
+    if (error) {
+      const err = error as IBackendErr;
+      if (err?.status === "FETCH_ERROR") {
+        toast.error("Serverda xatolik. Iltimos birozdan so'ng urinib ko'ring");
+      } else {
+        toast.error(err.data.msg);
+      }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, error]);
 
   return (

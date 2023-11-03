@@ -1,13 +1,21 @@
+import { useNavigate } from "react-router-dom";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { Loading3QuartersOutlined, UserAddOutlined } from "@ant-design/icons";
 import { toast } from "react-toastify";
 import StyledAuth from "./style";
-import { Input } from "components/Input";
-import { Button } from "components/Button";
-import { useRegisterMutation } from "services/user";
 import { IBackendErr } from "interfaces";
+import { Input } from "components/Input";
+import { routes } from "constants/routes";
+import { Button } from "components/Button";
+import { logIn } from "store/reducers/AuthSlice";
+import { useRegisterMutation } from "services/user";
+import { useAppDispatch } from "hooks";
+
+const { HOME } = routes;
 
 const Register = () => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const [register, { data, isLoading, error }] = useRegisterMutation();
   const [authForm, setAuthForm] = useState({
     name: "",
@@ -25,14 +33,15 @@ const Register = () => {
   useEffect(() => {
     if (error) {
       const err = error as IBackendErr;
-      console.log(err);
-      if (err.status.includes("FETCH_ERROR"))
+      if (err.status === "FETCH_ERROR")
         toast.error("Serverda xatolik. Iltimos birozdan so'ng urinib ko'ring");
       toast.error(err.msg);
     }
     if (data) {
-      console.log(data);
+      dispatch(logIn(data));
+      navigate(HOME);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [error, data]);
 
   const registerUser = async (e: FormEvent) => {

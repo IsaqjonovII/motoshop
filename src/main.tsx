@@ -1,13 +1,14 @@
 import React, { Suspense } from "react";
-import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
+import ReactDOM from "react-dom/client";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter } from "react-router-dom";
-import 'react-toastify/dist/ReactToastify.css';
+import { PersistGate } from "redux-persist/integration/react";
 import App from "./App.tsx";
-import { store } from "store";
+import { store, persistor } from "store";
 import Loader from "components/Loader";
 import { GlobalStyle } from "styles/index.ts";
-import { ToastContainer } from "react-toastify";
 
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("/service-worker.js");
@@ -18,21 +19,18 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <ToastContainer
       position="top-center"
       autoClose={1000}
-      hideProgressBar={false}
       newestOnTop={true}
       closeOnClick
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
       theme="light"
     />
     <Provider store={store}>
-      <Suspense fallback={<Loader />}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </Suspense>
+      <PersistGate loading={null} persistor={persistor}>
+        <Suspense fallback={<Loader />}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </Suspense>
+      </PersistGate>
     </Provider>
   </React.StrictMode>
 );

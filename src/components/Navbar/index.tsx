@@ -6,10 +6,15 @@ import StyledNav from "./style";
 import { ISidebar } from "interfaces";
 import { useAppSelector } from "hooks";
 import { routes } from "constants/routes";
+import { useEffect } from "react";
 
 const { HOME, AUTH } = routes;
 const Navbar = ({ isSidebarOpen, setIsSidebarOpen }: ISidebar) => {
   const user = useAppSelector(({ auth }) => auth.user);
+  useEffect(() => {
+    if (user) console.log(user);
+  }, [user]);
+
   return (
     <StyledNav>
       <div className="nav__container">
