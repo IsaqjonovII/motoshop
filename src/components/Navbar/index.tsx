@@ -29,10 +29,10 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }: ISidebar) => {
         <div className="nav__right">
           {user ? (
             <Link to={PROFILE}>
-            <div className="user__wrp">
-              <FiUser />
-              <span>Profil</span>
-            </div>
+              <div className="user__wrp">
+                <FiUser />
+                <span>{user.name}</span>
+              </div>
             </Link>
           ) : (
             <Link className="login__link" to={AUTH}>

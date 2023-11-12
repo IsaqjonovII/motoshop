@@ -1,6 +1,7 @@
 import { Avatar } from "antd";
 import StyledProfile from "./style";
 import { useAppSelector } from "hooks";
+import { logoutIcon, setttingsIcon } from "assets";
 
 const UserProfile = () => {
   const user = useAppSelector(({ auth }) => auth.user);
@@ -16,6 +17,28 @@ const UserProfile = () => {
           <div>
             <div className="user__name">{user?.name}</div>
             <div className="info__detail">+{user?.phone}</div>
+          </div>
+        </div>
+
+        <hr />
+        <div className="user__ads">
+          <button className="ad__btn">E'lon berish</button>
+        </div>
+
+        <hr />
+
+        <div className="user__actions">
+          <div className="action__wrp flex">
+            <img className="action__icon" src={logoutIcon} alt="logout icon" />
+            <span>Chiqish</span>
+          </div>
+          <div className="action__wrp flex">
+            <img
+              className="action__icon"
+              src={setttingsIcon}
+              alt="logout icon"
+            />
+            <span>Sozlamalar</span>
           </div>
         </div>
       </div>
