@@ -80,4 +80,7 @@ export default styled.div`
       background-color: ${teal}dd;
     }
   }
+  .profile__content {
+    padding: ${pxToRem(20)};
+  }
 `;

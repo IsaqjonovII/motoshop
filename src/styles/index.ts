@@ -3,7 +3,7 @@ import { createGlobalStyle } from "styled-components";
 import { layout } from "./mixin";
 import { pxToRem } from "utils";
 
-const { bgGray, gray } = colors;
+const { bgGray, gray, teal } = colors;
 
 export const GlobalStyle = createGlobalStyle`
 * {
@@ -43,6 +43,18 @@ export const GlobalStyle = createGlobalStyle`
         border-top: 1px solid ${gray}30;
         margin: ${pxToRem(15)} 0;
     }
+    .ant-tabs-tab {
+    font-size: ${pxToRem(18)} !important;
+    &:hover, & :active {
+      color: ${teal} !important;
+    }
+  }
+  .ant-tabs-ink-bar {
+    background: ${teal} !important;
+  }
+  .ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: ${teal} !important;
+  }
     @font-face {
         font-family: 'lato Normal';
         src: url(/fonts/Lato-Regular.ttf) format('truetype');
