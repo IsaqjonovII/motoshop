@@ -3,12 +3,12 @@ import styled from "styled-components";
 import { layout } from "styles/mixin";
 import { pxToRem } from "utils";
 
-const { white, borderGray, teal, darkGray, gray } = colors;
+const { white, borderGray, teal, gray } = colors;
 
 export default styled.header`
   background-color: ${white};
-  box-shadow: 0 ${pxToRem(2)} ${pxToRem(4)} ${darkGray}30;
-  border-bottom: ${pxToRem(1)} solid ${gray}60;
+  box-shadow: 0 ${pxToRem(2)} ${pxToRem(2)} ${gray}10;
+  border-bottom: ${pxToRem(1)} solid ${gray}30;
   user-select: none;
   .nav__container {
     ${layout("flex")}

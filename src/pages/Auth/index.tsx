@@ -15,7 +15,7 @@ const items: TabsProps["items"] = [
     children: <Login />,
   },
   {
-    key: "2",
+    key: "register",
     label: "Ro'yhatdan o'tish",
     children: <Register />,
   },
@@ -28,7 +28,7 @@ const Auth = () => (
       <ArrowLeftOutlined /> Ortga qaytish
     </Link>
     <Tabs
-      defaultActiveKey="1"
+      defaultActiveKey="login"
       tabBarStyle={{
         borderColor: "teal",
       }}
