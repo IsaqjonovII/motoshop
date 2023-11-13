@@ -19,7 +19,7 @@ const {
   // ACCESSORIES_INFO,
   // HELMETS,
   // HELMET_INFO,
-  // PROFILE,
+  PROFILE,
   // EDIT_PROFILE,
   // MESSSAGES,
   // LIKED_PRODUCTS,
@@ -27,6 +27,7 @@ const {
 } = routes;
 
 const Auth = lazy(() => import("pages/Auth"));
+const Profile = lazy(() => import("pages/User"));
 // const ElectroMoto = lazy(() => import("pages/ElectroMoto"));
 // const EmotoInfo = lazy(() => import("pages/EmotoInfo"));
 // const Motocycles = lazy(() => import("pages/Motocycles"));
@@ -40,7 +41,6 @@ const Auth = lazy(() => import("pages/Auth"));
 // const AccessoriesInfo = lazy(() => import("pages/AccessoriesInfo"));
 // const Helmets = lazy(() => import("pages/Helmets"));
 // const HelmetInfo = lazy(() => import("pages/HelmetInfo"));
-// const Profile = lazy(() => import("pages/Profile"));
 // const EditProfile = lazy(() => import("pages/EditProfile"));
 // const Messages = lazy(() => import("pages/Messages"));
 // const LikedProducts = lazy(() => import("pages/LikedProducts"));
@@ -50,6 +50,7 @@ const Auth = lazy(() => import("pages/Auth"));
 export const privateRoutes: IAppRoutes[] = [
   { key: "home", path: HOME, Component: Home },
   { key: "auth", path: AUTH, Component: Auth },
+  { key: "profile", path: PROFILE, Component: Profile },
   // { key: "login", path: LOGIN, Component: Login },
   // { key: "register", path: REGISTER, Component: Register },
   // { key: "electroMoto", path: ELECTRO_MOTO, Component: ElectroMoto },
@@ -69,7 +70,6 @@ export const privateRoutes: IAppRoutes[] = [
   // },
   // { key: "helmets", path: HELMETS, Component: Helmets },
   // { key: "helmetInfo", path: HELMET_INFO, Component: HelmetInfo },
-  // { key: "profile", path: PROFILE, Component: Profile },
   // { key: "editProfile", path: EDIT_PROFILE, Component: EditProfile },
   // { key: "messages", path: MESSSAGES, Component: Messages },
   // { key: "likedProducts", path: LIKED_PRODUCTS, Component: LikedProducts },

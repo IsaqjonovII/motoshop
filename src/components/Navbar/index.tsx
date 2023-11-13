@@ -1,19 +1,15 @@
 import { Link } from "react-router-dom";
-import { GrClose } from "react-icons/gr";
-import { FiUser, FiMenu } from "react-icons/fi";
+import { CloseOutlined, MenuOutlined} from "@ant-design/icons";
 import { navRoutes } from "routes";
 import StyledNav from "./style";
 import { ISidebar } from "interfaces";
 import { useAppSelector } from "hooks";
 import { routes } from "constants/routes";
-import { useEffect } from "react";
+import { FiUser } from 'react-icons/fi';
 
-const { HOME, AUTH } = routes;
+const { HOME, AUTH, PROFILE } = routes;
 const Navbar = ({ isSidebarOpen, setIsSidebarOpen }: ISidebar) => {
   const user = useAppSelector(({ auth }) => auth.user);
-  useEffect(() => {
-    if (user) console.log(user);
-  }, [user]);
 
   return (
     <StyledNav>
@@ -32,10 +28,12 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }: ISidebar) => {
         </div>
         <div className="nav__right">
           {user ? (
-            <div className="user__wrp">
-              <FiUser />
-              <span>Profil</span>
-            </div>
+            <Link to={PROFILE}>
+              <div className="user__wrp">
+                <FiUser />
+                <span>{user.name}</span>
+              </div>
+            </Link>
           ) : (
             <Link className="login__link" to={AUTH}>
               Kirish
@@ -43,12 +41,12 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }: ISidebar) => {
           )}
 
           {isSidebarOpen ? (
-            <GrClose
+            <CloseOutlined
               className="bars__icon"
               onClick={() => setIsSidebarOpen(false)}
             />
           ) : (
-            <FiMenu
+            <MenuOutlined
               className="bars__icon"
               onClick={() => setIsSidebarOpen(true)}
             />
