@@ -1,6 +1,7 @@
 import { Avatar, Tabs } from "antd";
 import type { TabsProps } from "antd";
 import { useNavigate } from "react-router-dom";
+import { Ads } from "pages/Ads";
 import { Messages } from "./Tabs";
 import StyledProfile from "./style";
 import { LastSeen } from "./Tabs/LastSeen";
@@ -14,6 +15,11 @@ const user_tabs: TabsProps["items"] = [
     key: "msg",
     label: "Xabarlar",
     children: <Messages />,
+  },
+  {
+    key: "posted-ads",
+    label: "E'lonlar",
+    children: <Ads />,
   },
   {
     key: "saved",
