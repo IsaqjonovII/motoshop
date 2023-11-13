@@ -18,3 +18,8 @@ export interface IButton {
   type?: "button" | "reset" | "submit";
   children: (string | JSX.Element)[] | string | JSX.Element;
 }
+export interface IText {
+  children: (string | JSX.Element)[] | string | JSX.Element;
+  size: "sm" | "md" | "lg" | "xl" | "xxl";
+  className?: string;
+}

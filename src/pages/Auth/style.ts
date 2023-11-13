@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { btn } from "styles/mixin";
 import { pxToRem } from "utils";
 
-const { teal, gray } = colors;
+const { gray } = colors;
 export default styled.div`
   padding: ${pxToRem(30)} 0;
   .auth__title {
@@ -12,21 +12,6 @@ export default styled.div`
   }
   .auth__btn {
     width: 100%;
-  }
-  .ant-tabs-tab {
-    font-size: ${pxToRem(18)} !important;
-    &:hover {
-      color: ${teal};
-    }
-  }
-  .ant-tabs-ink-bar {
-    background: ${teal};
-  }
-  .ant-tabs-tab-active .ant-tabs-tab-btn {
-    color: ${teal} !important;
-  }
-
-  .ant-tabs-tab:hover {
   }
   .back {
     display: inline-block;
