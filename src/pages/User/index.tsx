@@ -1,11 +1,13 @@
 import { Avatar, Tabs } from "antd";
 import type { TabsProps } from "antd";
-import StyledProfile from "./style";
-import { useAppSelector } from "hooks";
-import { logoutIcon, setttingsIcon } from "assets";
+import { useNavigate } from "react-router-dom";
 import { Messages } from "./Tabs";
-import { SavedBikes } from "./Tabs/SavedBikes";
+import StyledProfile from "./style";
 import { LastSeen } from "./Tabs/LastSeen";
+import { SavedBikes } from "./Tabs/SavedBikes";
+import { logOut } from "store/reducers/AuthSlice";
+import { logoutIcon, setttingsIcon } from "assets";
+import { useAppDispatch, useAppSelector } from "hooks";
 
 const user_tabs: TabsProps["items"] = [
   {
@@ -25,7 +27,15 @@ const user_tabs: TabsProps["items"] = [
   },
 ];
 const UserProfile = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const user = useAppSelector(({ auth }) => auth.user);
+  const logOutUser = () => {
+    if (confirm("Rostan ham tizimdan chiqmoqchimisiz?")) {
+      dispatch(logOut());
+      navigate("/");
+    }
+  };
   return (
     <StyledProfile>
       <div className="profile__user">
@@ -49,7 +59,12 @@ const UserProfile = () => {
         <hr />
 
         <div className="user__actions">
-          <div className="action__wrp flex" role="button" tabIndex={0}>
+          <div
+            className="action__wrp flex"
+            role="button"
+            tabIndex={0}
+            onClick={logOutUser}
+          >
             <img className="action__icon" src={logoutIcon} alt="logout icon" />
             <span>Chiqish</span>
           </div>
