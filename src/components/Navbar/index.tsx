@@ -5,6 +5,7 @@ import StyledNav from "./style";
 import { ISidebar } from "interfaces";
 import { useAppSelector } from "hooks";
 import { routes } from "constants/routes";
+import { FiUser } from 'react-icons/fi';
 
 const { HOME, AUTH, PROFILE } = routes;
 const Navbar = ({ isSidebarOpen, setIsSidebarOpen }: ISidebar) => {
