@@ -1,9 +1,7 @@
 import styled from "styled-components";
 import { pxToRem } from "utils";
 import { layout } from "styles/mixin";
-import { colors } from "constants/styles";
 
-const { gray } = colors;
 
 export default styled.main`
   .banner__img {
@@ -17,8 +15,6 @@ export default styled.main`
     margin: ${pxToRem(50)} auto;
   }
   .section__title {
-    font-size: ${pxToRem(40)};
-    color: ${gray};
     margin-bottom: ${pxToRem(30)};
   }
   .grid__wrp {

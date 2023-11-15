@@ -1,9 +1,11 @@
-
+import { Text } from "components/Text";
 
 export const Ads = () => {
-    return (
-        <div>
-            <h1>barcha elonlar</h1>
-        </div>
-    )
-}
+  return (
+    <div>
+      <Text size="md" bold={600}>
+        barcha elonlar
+      </Text>
+    </div>
+  );
+};

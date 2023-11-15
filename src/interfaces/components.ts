@@ -22,4 +22,5 @@ export interface IText {
   children: (string | JSX.Element)[] | string | JSX.Element;
   size: "sm" | "md" | "lg" | "xl" | "xxl";
   className?: string;
+  bold: number;
 }

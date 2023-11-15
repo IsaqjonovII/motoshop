@@ -1,10 +1,14 @@
-
+import { Text } from "components/Text";
 
 export const Messages = () => {
-    return (
-        <div>
-            <h1>hello</h1>
-            <h1>This is for messages</h1>
-        </div>
-    )
-}
+  return (
+    <div>
+      <Text size="md" bold={600}>
+        hello
+      </Text>
+      <Text size="md" bold={400}>
+        This is for messages
+      </Text>
+    </div>
+  );
+};
