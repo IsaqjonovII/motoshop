@@ -1,6 +1,6 @@
 import { Avatar, Tabs } from "antd";
 import type { TabsProps } from "antd";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Ads } from "pages/Ads";
 import { Messages } from "./Tabs";
 import StyledProfile from "./style";
@@ -9,6 +9,7 @@ import { SavedBikes } from "./Tabs/SavedBikes";
 import { logOut } from "store/reducers/AuthSlice";
 import { logoutIcon, setttingsIcon } from "assets";
 import { useAppDispatch, useAppSelector } from "hooks";
+import { routes } from "constants/routes";
 
 const user_tabs: TabsProps["items"] = [
   {
@@ -32,6 +33,7 @@ const user_tabs: TabsProps["items"] = [
     children: <LastSeen />,
   },
 ];
+const { POST_MOTO } = routes;
 const UserProfile = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -59,7 +61,9 @@ const UserProfile = () => {
 
         <hr />
         <div className="user__ads">
-          <button className="ad__btn">E'lon berish</button>
+          <Link to={POST_MOTO}>
+            <button className="ad__btn">E'lon berish</button>
+          </Link>
         </div>
 
         <hr />

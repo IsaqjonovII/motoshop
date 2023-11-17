@@ -1,6 +1,7 @@
 import { lazy } from "react";
 import { routes } from "constants/routes";
 import { IAppRoutes, INavRoutes } from "interfaces";
+import PostAd from "pages/Ads/PostAd";
 const Home = lazy(() => import("pages/Home"));
 
 const {
@@ -23,7 +24,7 @@ const {
   // EDIT_PROFILE,
   // MESSSAGES,
   // LIKED_PRODUCTS,
-  // POST_PRODUCT,
+  POST_MOTO,
 } = routes;
 
 const Auth = lazy(() => import("pages/Auth"));
@@ -44,7 +45,7 @@ const Profile = lazy(() => import("pages/User"));
 // const EditProfile = lazy(() => import("pages/EditProfile"));
 // const Messages = lazy(() => import("pages/Messages"));
 // const LikedProducts = lazy(() => import("pages/LikedProducts"));
-// const PostProduct = lazy(() => import("pages/PostProduct"));
+const PostMoto = lazy(() => import("pages/Ads/PostAd"));
 
 // Define the routes using object destructuring
 export const privateRoutes: IAppRoutes[] = [
@@ -73,7 +74,7 @@ export const privateRoutes: IAppRoutes[] = [
   // { key: "editProfile", path: EDIT_PROFILE, Component: EditProfile },
   // { key: "messages", path: MESSSAGES, Component: Messages },
   // { key: "likedProducts", path: LIKED_PRODUCTS, Component: LikedProducts },
-  // { key: "postProduct", path: POST_PRODUCT, Component: PostProduct },
+  { key: "postProduct", path: POST_MOTO, Component: PostAd },
 ];
 
 export const navRoutes: INavRoutes[] = [
