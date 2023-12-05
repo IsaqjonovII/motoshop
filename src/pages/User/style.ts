@@ -8,6 +8,15 @@ const { gray, white, teal } = colors;
 export default styled.div`
   ${layout("flex")}
   align-items: flex-start;
+  .need__auth {
+    width: 100%;
+    padding: ${pxToRem(40)};
+    text-align: center;
+    font-size: ${pxToRem(20)};
+    a {
+      color: ${teal};
+    }
+  }
   .profile__user {
     width: 100%;
     max-width: ${pxToRem(270)};
