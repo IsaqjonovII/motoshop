@@ -1,15 +1,15 @@
+import React from "react";
 import { Tabs } from "antd";
 import type { TabsProps } from "antd";
+import { Link } from "react-router-dom";
 import { Ads } from "pages/Ads";
 import { Messages } from "./Tabs";
 import StyledProfile from "./style";
+import { useAppSelector } from "hooks";
+import { routes } from "constants/routes";
 import { LastSeen } from "./Tabs/LastSeen";
 import { SavedBikes } from "./Tabs/SavedBikes";
 import { User } from "components/Sidebar/User";
-import { useAppSelector } from "hooks";
-import React from "react";
-import { Link } from "react-router-dom";
-import { routes } from "constants/routes";
 
 const user_tabs: TabsProps["items"] = [
   {
