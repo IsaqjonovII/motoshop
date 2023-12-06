@@ -3,6 +3,7 @@ import { IProduct } from "interfaces";
 import CardStyle from "./style";
 import LazyImage from "components/LazyImage";
 import { formatNumbers } from "utils";
+import { Text } from "components/Text";
 
 const MotoCard = ({ id, price, name, img, address, types }: IProduct) => {
   return (
@@ -12,11 +13,17 @@ const MotoCard = ({ id, price, name, img, address, types }: IProduct) => {
           <LazyImage className="card__img" src={img} alt="YZF R1M" />
         </div>
         <div className="card__head flex">
-          <h1 className="card__title">{name}</h1>
-          <b>{formatNumbers(price)} so'm</b>
+          <Text className="card__title" size="lg" bold={600}>
+            {name}
+          </Text>
+          <Text size="md" bold={600}>
+            {formatNumbers(price)} so'm
+          </Text>
         </div>
 
-        <div className="product__address">{address}</div>
+        <Text className="product__address" size="sm" bold={400}>
+          {address}
+        </Text>
       </Link>
     </CardStyle>
   );

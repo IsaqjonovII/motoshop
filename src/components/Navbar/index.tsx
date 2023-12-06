@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
-import { CloseOutlined, MenuOutlined} from "@ant-design/icons";
+import { CloseOutlined, MenuOutlined } from "@ant-design/icons";
 import { navRoutes } from "routes";
 import StyledNav from "./style";
 import { ISidebar } from "interfaces";
 import { useAppSelector } from "hooks";
 import { routes } from "constants/routes";
-import { FiUser } from 'react-icons/fi';
+import { FiUser } from "react-icons/fi";
+import { motoLogo } from "assets";
 
 const { HOME, AUTH, PROFILE } = routes;
 const Navbar = ({ isSidebarOpen, setIsSidebarOpen }: ISidebar) => {
@@ -16,7 +17,10 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }: ISidebar) => {
       <div className="nav__container">
         <div className="nav__left">
           <Link to={HOME}>
-            <div className="nav__logo">MotoShop</div>
+            <div className="nav__logo">
+              <img src={motoLogo} alt="" />
+            </div>
+            {/* <div className="nav__logo">MotoShop</div> */}
           </Link>
           <nav className="nav__menu">
             {navRoutes.map(({ key, path }) => (

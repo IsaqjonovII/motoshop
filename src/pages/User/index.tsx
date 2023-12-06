@@ -1,17 +1,26 @@
-import { Avatar, Tabs } from "antd";
+import React from "react";
+import { Tabs } from "antd";
 import type { TabsProps } from "antd";
+import { Link } from "react-router-dom";
+import { Ads } from "pages/Ads";
+import { Messages } from "./Tabs";
 import StyledProfile from "./style";
 import { useAppSelector } from "hooks";
-import { logoutIcon, setttingsIcon } from "assets";
-import { Messages } from "./Tabs";
-import { SavedBikes } from "./Tabs/SavedBikes";
+import { routes } from "constants/routes";
 import { LastSeen } from "./Tabs/LastSeen";
+import { SavedBikes } from "./Tabs/SavedBikes";
+import { User } from "components/Sidebar/User";
 
 const user_tabs: TabsProps["items"] = [
   {
     key: "msg",
     label: "Xabarlar",
     children: <Messages />,
+  },
+  {
+    key: "posted-ads",
+    label: "E'lonlar",
+    children: <Ads />,
   },
   {
     key: "saved",
@@ -24,48 +33,26 @@ const user_tabs: TabsProps["items"] = [
     children: <LastSeen />,
   },
 ];
+const { AUTH } = routes;
 const UserProfile = () => {
   const user = useAppSelector(({ auth }) => auth.user);
+
   return (
     <StyledProfile>
-      <div className="profile__user">
-        <div className="user__avatar">
-          <Avatar
-            className="avatar__img"
-            src="https://api.dicebear.com/7.x/fun-emoji/svg?eyes=closed&mouth=lilSmile"
-            size={{ xs: 24, sm: 32, md: 40, lg: 60, xl: 70, xxl: 80 }}
-          />
-          <div>
-            <div className="user__name">{user?.name}</div>
-            <div className="info__detail">+{user?.phone}</div>
-          </div>
+      {!user ? (
+        <div className="need__auth">
+          <p>
+            Siz tizimga kirishingiz kerak! <Link to={AUTH}>Kirish</Link>
+          </p>
         </div>
-
-        <hr />
-        <div className="user__ads">
-          <button className="ad__btn">E'lon berish</button>
-        </div>
-
-        <hr />
-
-        <div className="user__actions">
-          <div className="action__wrp flex" role="button" tabIndex={0}>
-            <img className="action__icon" src={logoutIcon} alt="logout icon" />
-            <span>Chiqish</span>
+      ) : (
+        <React.Fragment>
+          <User />
+          <div className="profile__content">
+            <Tabs defaultActiveKey="msg" size="large" items={user_tabs} />
           </div>
-          <div className="action__wrp flex" role="button" tabIndex={0}>
-            <img
-              className="action__icon"
-              src={setttingsIcon}
-              alt="settings icon"
-            />
-            <span>Sozlamalar</span>
-          </div>
-        </div>
-      </div>
-      <div className="profile__content">
-        <Tabs defaultActiveKey="msg" size="large" items={user_tabs} />
-      </div>
+        </React.Fragment>
+      )}
     </StyledProfile>
   );
 };

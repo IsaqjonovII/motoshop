@@ -2,7 +2,7 @@ import { colors } from "constants/styles";
 import styled from "styled-components";
 import { pxToRem } from "utils";
 
-const { black, gray, white, teal, borderGray } = colors;
+const { white, teal, borderGray } = colors;
 
 export default styled.div`
   box-shadow: rgba(0, 0, 0, 0.05) 0 ${pxToRem(6)} ${pxToRem(24)} 0,
@@ -35,16 +35,11 @@ export default styled.div`
   .card__head {
     margin: ${pxToRem(10)} 0 0 0;
     .card__title {
-      font-size: ${pxToRem(23)};
-      color: ${black};
-      font-weight: 600;
       transition: 200ms ease-in-out;
     }
   }
   .product__address {
     margin-top: ${pxToRem(20)};
-    font-size: ${pxToRem(16)};
-    color: ${gray}80;
   }
 
   &:hover {

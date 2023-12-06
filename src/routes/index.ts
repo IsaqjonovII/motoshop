@@ -2,6 +2,9 @@ import { lazy } from "react";
 import { routes } from "constants/routes";
 import { IAppRoutes, INavRoutes } from "interfaces";
 const Home = lazy(() => import("pages/Home"));
+const Auth = lazy(() => import("pages/Auth"));
+const Profile = lazy(() => import("pages/User"));
+const PostMoto = lazy(() => import("pages/Ads/PostAd"));
 
 const {
   HOME,
@@ -23,11 +26,9 @@ const {
   // EDIT_PROFILE,
   // MESSSAGES,
   // LIKED_PRODUCTS,
-  // POST_PRODUCT,
+  POST_MOTO,
 } = routes;
 
-const Auth = lazy(() => import("pages/Auth"));
-const Profile = lazy(() => import("pages/User"));
 // const ElectroMoto = lazy(() => import("pages/ElectroMoto"));
 // const EmotoInfo = lazy(() => import("pages/EmotoInfo"));
 // const Motocycles = lazy(() => import("pages/Motocycles"));
@@ -44,7 +45,6 @@ const Profile = lazy(() => import("pages/User"));
 // const EditProfile = lazy(() => import("pages/EditProfile"));
 // const Messages = lazy(() => import("pages/Messages"));
 // const LikedProducts = lazy(() => import("pages/LikedProducts"));
-// const PostProduct = lazy(() => import("pages/PostProduct"));
 
 // Define the routes using object destructuring
 export const privateRoutes: IAppRoutes[] = [
@@ -73,7 +73,7 @@ export const privateRoutes: IAppRoutes[] = [
   // { key: "editProfile", path: EDIT_PROFILE, Component: EditProfile },
   // { key: "messages", path: MESSSAGES, Component: Messages },
   // { key: "likedProducts", path: LIKED_PRODUCTS, Component: LikedProducts },
-  // { key: "postProduct", path: POST_PRODUCT, Component: PostProduct },
+  { key: "postProduct", path: POST_MOTO, Component: PostMoto },
 ];
 
 export const navRoutes: INavRoutes[] = [
