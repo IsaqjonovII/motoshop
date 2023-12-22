@@ -19,6 +19,7 @@ export default styled.header`
   }
   .nav__left {
     ${layout("flex")}
+    height: 100%;
     .nav__logo {
         font-size: ${pxToRem(30)};
         font-weight: 700;
@@ -27,6 +28,9 @@ export default styled.header`
         margin-right: ${pxToRem(25)};
         line-height: 1.5;
         color: ${teal};
+        & img {
+          height: 100%;
+        }
     }
     .nav__menu {
         ${layout("flex")}

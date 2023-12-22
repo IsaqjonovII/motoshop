@@ -4,6 +4,7 @@ import { privateRoutes } from "routes";
 import Navbar from "components/Navbar";
 import Sidebar from "components/Sidebar";
 import Container from "components/Container";
+import NotFound from "pages/NotFound";
 
 function App() {
   const [isSidebarOpen, setisSidebarOpen] = useState<boolean>(false);
@@ -35,6 +36,7 @@ function App() {
           {privateRoutes.map(({ key, path, Component }) => (
             <Route key={key} path={path} element={<Component />} />
           ))}
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Container>
     </div>

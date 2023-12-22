@@ -19,4 +19,5 @@ export enum routes {
   MESSSAGES = "/profile/messages",
   LIKED_MOTOS = "/profile/liked-moto",
   POST_MOTO = "/post-moto",
+  NOT_FOUND = "*",
 }
