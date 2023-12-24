@@ -66,6 +66,7 @@ export const Input = ({
           placeholder={placeholder}
           type={type ?? "text"}
           required
+          min={type === "number" ? 1 : 0}
         />
       )}
     </StyledInput>
