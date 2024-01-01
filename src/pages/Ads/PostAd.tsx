@@ -5,6 +5,7 @@ import { ChangeEvent, useState } from "react";
 import { IPostAd } from "interfaces/forms";
 import { StyledInput } from "components/Input/style";
 import { InputFile, InputSelect } from "components/Input/CustomInput";
+import { Button } from "components/Button";
 
 const PostAd = () => {
   const [adForm, setAdForm] = useState<IPostAd>({
@@ -63,7 +64,7 @@ const PostAd = () => {
             id="price"
             name="price"
             type="number"
-            label="Mototsikl narxi"
+            label="Mototsikl narxi(so'm)"
             value={adForm.price}
             onChange={onInputChange}
           />
@@ -85,6 +86,8 @@ const PostAd = () => {
             onChange={onSelectChange}
           />
           <InputFile />
+
+          <Button>E&apos;lonni joylash</Button>
         </div>
       </form>
     </StyledPostAd>
