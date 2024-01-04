@@ -40,7 +40,7 @@ export interface IUser {
 }
 export interface IBackendResponse {
   data: {
-    msg: string;
+    message: string;
   };
   user?: IUser;
   msg?: string;

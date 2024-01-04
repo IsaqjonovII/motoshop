@@ -36,10 +36,12 @@ const Register = () => {
       if (err.status === "FETCH_ERROR")
         toast.error("Serverda xatolik. Iltimos birozdan so'ng urinib ko'ring");
       toast.error(err.msg);
+      console.log(error);
     }
     if (data) {
-      dispatch(logIn(data));
-      navigate(HOME);
+      console.log(data);
+      // dispatch(logIn(data));
+      // navigate(HOME);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [error, data]);

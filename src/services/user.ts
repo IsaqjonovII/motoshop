@@ -20,7 +20,7 @@ export const appAPI = createApi({
   endpoints: (builder) => ({
     register: builder.mutation<IBackendResponse, IRegisterForm>({
       query: (formData) => ({
-        url: "auth/register",
+        url: "auth",
         method: "POST",
         body: formData,
       }),
