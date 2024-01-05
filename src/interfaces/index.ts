@@ -29,7 +29,6 @@ export interface IUser {
   phone: string | number;
   name: string;
   email?: string;
-  password: string;
   postedAds?: string[];
   viewedAds?: string[];
   address?: string;
@@ -39,13 +38,16 @@ export interface IUser {
   savedSearches: string[];
 }
 export interface IBackendResponse {
-  data: {
-    msg: string;
-  };
+  message: string;
   user?: IUser;
-  msg?: string;
+  data?: {
+    message: string;
+  };
 }
-export interface IBackendErr extends IBackendResponse {
+export interface IServerError {
   status: string;
-  error?: string;
+  error: string;
+  data?: {
+    message: string;
+  };
 }

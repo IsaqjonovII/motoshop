@@ -10,9 +10,10 @@ export interface IInput {
   name: string;
   label?: string;
   placeholder?: string;
-  value: string;
+  value: string | number | any;
   onChange: ChangeEventHandler<HTMLInputElement>;
 }
+
 export interface IButton {
   className?: string;
   type?: "button" | "reset" | "submit";

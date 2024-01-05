@@ -7,7 +7,7 @@ const { teal, gray, white } = colors;
 
 const StyledInput = styled.div`
   margin: 0 0 ${pxToRem(15)} 0;
-  input {
+  input, textarea, .ant-select {
     width: 100%;
     max-width: ${pxToRem(550)};
     height: ${pxToRem(45)};
@@ -16,12 +16,32 @@ const StyledInput = styled.div`
     background-color: ${white};
     padding: 0 ${pxToRem(10)};
     border-radius: ${pxToRem(6)};
+    font-size: ${pxToRem(17)};
     &:focus,
     :focus-visible,
     :focus-within {
       border-color: ${teal};
       outline: ${pxToRem(2)} solid ${teal}70;
     }
+    .ant-select-selector {
+      border: none !important;
+      & :focus, :focus-within, :focus-visible {
+      border: none !important;
+        outline: none !important;
+      }
+    }
+  }
+  .ant-select-focused .ant-select-selector,
+  .ant-select-selector:focus,
+  .ant-select-selector:active,
+  .ant-select-open .ant-select-selector {
+    border: none !important;
+    box-shadow: none !important;
+}
+  textarea {
+    height: ${pxToRem(120)};
+    padding: ${pxToRem(8)};
+    resize: none;
   }
   .inp__label {
     display: block;
