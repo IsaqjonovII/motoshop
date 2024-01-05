@@ -3,7 +3,7 @@ import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { Loading3QuartersOutlined, UserAddOutlined } from "@ant-design/icons";
 import { toast } from "react-toastify";
 import StyledAuth from "./style";
-import { IBackendErr } from "interfaces";
+import { IServerError } from "interfaces";
 import { Input } from "components/Input";
 import { routes } from "constants/routes";
 import { Button } from "components/Button";
@@ -32,16 +32,16 @@ const Register = () => {
   };
   useEffect(() => {
     if (error) {
-      const err = error as IBackendErr;
-      if (err.status === "FETCH_ERROR")
+      const { status, data } = error as IServerError;
+      if (status.includes("FETCH_ERROR"))
         toast.error("Serverda xatolik. Iltimos birozdan so'ng urinib ko'ring");
-      toast.error(err.msg);
+      if (data?.message) toast.error(data.message);
       console.log(error);
     }
     if (data) {
-      console.log(data);
-      // dispatch(logIn(data));
-      // navigate(HOME);
+      toast.success(data.message);
+      dispatch(logIn(data.user));
+      navigate(HOME);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [error, data]);

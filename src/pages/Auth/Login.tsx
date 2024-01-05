@@ -6,7 +6,7 @@ import StyledAuth from "./style";
 import { Input } from "components/Input";
 import { Button } from "components/Button";
 import { useLoginMutation } from "services/user";
-import { IBackendErr } from "interfaces";
+import { IServerError } from "interfaces";
 import { routes } from "constants/routes";
 import { logIn } from "store/reducers/AuthSlice";
 import { useAppDispatch } from "hooks";
@@ -36,18 +36,19 @@ const Login = () => {
   };
 
   useEffect(() => {
+    if (error) {
+      const { status, data } = error as IServerError;
+      if (status === "FETCH_ERROR") {
+        toast.error("Serverda xatolik. Iltimos birozdan so'ng urinib ko'ring");
+      }
+      if (data?.message) {
+        toast.error(data?.message);
+      }
+    }
     if (data) {
       dispatch(logIn(data.user));
-      toast.success(data.msg);
+      toast.success(data.message);
       navigate(HOME);
-    }
-    if (error) {
-      const err = error as IBackendErr;
-      if (err?.status === "FETCH_ERROR") {
-        toast.error("Serverda xatolik. Iltimos birozdan so'ng urinib ko'ring");
-      } else {
-        toast.error(err.data.msg);
-      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, error]);
