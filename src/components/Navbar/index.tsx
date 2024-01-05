@@ -20,7 +20,6 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }: ISidebar) => {
             <div className="nav__logo">
               <img src={motoLogo} alt="" />
             </div>
-            {/* <div className="nav__logo">MotoShop</div> */}
           </Link>
           <nav className="nav__menu">
             {navRoutes.map(({ key, path }) => (

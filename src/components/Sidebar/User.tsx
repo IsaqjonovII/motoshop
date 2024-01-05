@@ -1,10 +1,12 @@
 import { Avatar } from "antd";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import StyledProfile from "pages/User/style";
 import { logOut } from "store/reducers/AuthSlice";
 import { logoutIcon, setttingsIcon } from "assets";
 import { useAppDispatch, useAppSelector } from "hooks";
+import { routes } from "constants/routes";
 
+const { POST_MOTO } = routes;
 export const User = () => {
   const user = useAppSelector(({ auth }) => auth.user);
   const dispatch = useAppDispatch();
@@ -32,7 +34,9 @@ export const User = () => {
 
         <hr />
         <div className="user__ads">
-          <button className="ad__btn">E'lon berish</button>
+          <Link to={POST_MOTO}>
+            <button className="ad__btn">E'lon berish</button>
+          </Link>
         </div>
 
         <hr />

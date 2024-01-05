@@ -17,7 +17,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <GlobalStyle />
     <ToastContainer
-      position="top-center"
+      position="bottom-center"
       autoClose={1000}
       newestOnTop={true}
       closeOnClick
