@@ -1,4 +1,3 @@
-import type { UploadFile } from "antd";
 import { ChangeEvent, useState } from "react";
 import { Text } from "components/Text";
 import { StyledPostAd } from "./style";
@@ -9,7 +8,7 @@ import { StyledInput } from "components/Input/style";
 import { InputFile, InputSelect } from "components/Input/CustomInput";
 
 const PostAd = () => {
-  const [fileList, setFileList] = useState<UploadFile[]>([]);
+  const [fileList, setFileList] = useState<string[]>([]);
   const [adForm, setAdForm] = useState<IPostAd>({
     name: "",
     description: "",
