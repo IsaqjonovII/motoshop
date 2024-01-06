@@ -1,13 +1,15 @@
+import type { UploadFile } from "antd";
+import { ChangeEvent, useState } from "react";
 import { Text } from "components/Text";
 import { StyledPostAd } from "./style";
 import { Input } from "components/Input";
-import { ChangeEvent, useState } from "react";
 import { IPostAd } from "interfaces/forms";
+import { Button } from "components/Button";
 import { StyledInput } from "components/Input/style";
 import { InputFile, InputSelect } from "components/Input/CustomInput";
-import { Button } from "components/Button";
 
 const PostAd = () => {
+  const [fileList, setFileList] = useState<UploadFile[]>([]);
   const [adForm, setAdForm] = useState<IPostAd>({
     name: "",
     description: "",
@@ -85,7 +87,7 @@ const PostAd = () => {
             value={adForm.category}
             onChange={onSelectChange}
           />
-          <InputFile />
+          <InputFile fileList={fileList} setFileList={setFileList} />
 
           <Button>E&apos;lonni joylash</Button>
         </div>
