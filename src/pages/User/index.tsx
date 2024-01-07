@@ -1,8 +1,7 @@
-import React from "react";
+import { Fragment } from "react";
 import { Tabs } from "antd";
 import type { TabsProps } from "antd";
 import { Link } from "react-router-dom";
-import { Ads } from "pages/Ads";
 import { Messages } from "./Tabs";
 import StyledProfile from "./style";
 import { useAppSelector } from "hooks";
@@ -16,11 +15,6 @@ const user_tabs: TabsProps["items"] = [
     key: "msg",
     label: "Xabarlar",
     children: <Messages />,
-  },
-  {
-    key: "posted-ads",
-    label: "E'lonlar",
-    children: <Ads />,
   },
   {
     key: "saved",
@@ -46,12 +40,12 @@ const UserProfile = () => {
           </p>
         </div>
       ) : (
-        <React.Fragment>
+        <Fragment>
           <User />
           <div className="profile__content">
             <Tabs defaultActiveKey="msg" size="large" items={user_tabs} />
           </div>
-        </React.Fragment>
+        </Fragment>
       )}
     </StyledProfile>
   );

@@ -1,11 +1,12 @@
-import { Text } from "components/Text";
 
-export const Ads = () => {
+const Ads = () => {
   return (
     <div>
-      <Text size="md" bold={600}>
+      <h1>Hello</h1>
+      {/* <Text size="md" bold={600}>
         barcha elonlar
-      </Text>
+      </Text> */}
     </div>
   );
 };
+export default Ads;
