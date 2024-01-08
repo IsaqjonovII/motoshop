@@ -11,8 +11,8 @@ interface IRegisterForm extends ILoginForm {
   name: string;
 }
 
-export const appAPI = createApi({
-  reducerPath: "appapi",
+export const authApi = createApi({
+  reducerPath: "authAPI",
   baseQuery: fetchBaseQuery({
     baseUrl,
   }),
@@ -48,4 +48,4 @@ export const {
   useLoginMutation,
   useRegisterMutation,
   useUserInfoQuery,
-} = appAPI;
+} = authApi;
