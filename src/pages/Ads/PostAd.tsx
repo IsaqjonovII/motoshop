@@ -22,7 +22,6 @@ const PostAd = () => {
     category: "",
     owner: userId!,
   });
-  console.log(userId);
   
   useEffect(() => {
     setAdForm({

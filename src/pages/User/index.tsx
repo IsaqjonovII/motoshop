@@ -9,7 +9,11 @@ import { routes } from "constants/routes";
 import { LastSeen } from "./Tabs/LastSeen";
 import { SavedBikes } from "./Tabs/SavedBikes";
 import { User } from "components/Sidebar/User";
-import Ads from "pages/Ads";
+
+
+
+// import Ads from "pages/Ads";
+// import Ads from "../Ads";
 
 const user_tabs: TabsProps["items"] = [
   {
@@ -17,11 +21,11 @@ const user_tabs: TabsProps["items"] = [
     label: "Xabarlar",
     children: <Messages />,
   },
-  {
-    key: "posted-ads",
-    label: "E'lonlar",
-    children: <Ads />,
-  },
+  // {
+  //   key: "posted-ads",
+  //   label: "E'lonlar",
+  //   children: <Ads />,
+  // },
   {
     key: "saved",
     label: "Saqlanganlar",
