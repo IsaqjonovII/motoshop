@@ -7,10 +7,12 @@ import { IPostAd } from "interfaces/forms";
 import { Button } from "components/Button";
 import { StyledInput } from "components/Input/style";
 import { InputFile, InputSelect } from "components/Input/CustomInput";
+import { useAppSelector } from "hooks";
 // import { toast } from "react-toastify";
 
 const PostAd = () => {
   const [fileList, setFileList] = useState<string[]>([]);
+  const userId = useAppSelector(({ auth }) => auth.user?._id);
   const [adForm, setAdForm] = useState<IPostAd>({
     name: "",
     description: "",
@@ -18,7 +20,10 @@ const PostAd = () => {
     location: "",
     images: fileList,
     category: "",
+    owner: userId!,
   });
+  console.log(userId);
+  
   useEffect(() => {
     setAdForm({
       ...adForm,
@@ -38,7 +43,7 @@ const PostAd = () => {
   const onSelectChange = (category: string | any) => {
     setAdForm({
       ...adForm,
-      category,
+      category: category.split(" ")[0],
     });
   };
   const handleSubmit = () => {
