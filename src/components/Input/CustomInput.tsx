@@ -31,6 +31,7 @@ export const InputSelect = ({
 };
 
 import { ChangeEvent } from "react";
+import { getBase64 } from "utils";
 
 interface IFileInput {
   fileList: string[];
@@ -52,14 +53,6 @@ export const InputFile = ({ fileList, setFileList }: IFileInput) => {
     }
   };
 
-  const getBase64 = (file: File): Promise<string> => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result as string);
-      reader.onerror = (error) => reject(error);
-    });
-  };
   const handleRemoveImage = (index: number) => {
     setFileList((prev) => prev.filter((_, i) => i !== index));
   };

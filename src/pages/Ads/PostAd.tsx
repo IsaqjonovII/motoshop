@@ -1,4 +1,5 @@
-import { ChangeEvent, useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { ChangeEvent, useEffect, useState } from "react";
 import { Text } from "components/Text";
 import { StyledPostAd } from "./style";
 import { Input } from "components/Input";
@@ -6,7 +7,7 @@ import { IPostAd } from "interfaces/forms";
 import { Button } from "components/Button";
 import { StyledInput } from "components/Input/style";
 import { InputFile, InputSelect } from "components/Input/CustomInput";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 
 const PostAd = () => {
   const [fileList, setFileList] = useState<string[]>([]);
@@ -15,9 +16,16 @@ const PostAd = () => {
     description: "",
     price: 0,
     location: "",
-    images: [],
+    images: fileList,
     category: "",
   });
+  useEffect(() => {
+    setAdForm({
+      ...adForm,
+      images: fileList,
+    });
+  }, [fileList]);
+
   const onInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
@@ -33,39 +41,7 @@ const PostAd = () => {
       category,
     });
   };
-  async function uploadToCloudinary(file: string) {
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_present", "motoshop");
-    formData.append("cloud_name", "doswy0zdn");
-    return fetch("https://api.cloudinary.com/v1_1/doswy0zdn/image/upload", {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => res.json())
-      .catch((err) => console.log(err));
-  }
-
-  const handleImgUpload = async () => {
-    try {
-      const cloudinaryResponses = await Promise.all(
-        fileList.map((file) => uploadToCloudinary(file))
-      );
-
-      const imageUrls = cloudinaryResponses.map((res) => res.secure_url);
-      setAdForm({
-        ...adForm,
-        images: imageUrls,
-      });
-    } catch (error) {
-      toast.error(
-        "Rasmlarni yuklashda xatolik bo'ldi. Iltimos qaytadan urinib ko'ring"
-      );
-      console.log(error);
-    }
-  };
   const handleSubmit = () => {
-    handleImgUpload();
     console.log(adForm);
   };
   return (
