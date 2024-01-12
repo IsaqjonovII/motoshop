@@ -9,23 +9,18 @@ import { routes } from "constants/routes";
 import { LastSeen } from "./Tabs/LastSeen";
 import { SavedBikes } from "./Tabs/SavedBikes";
 import { User } from "components/Sidebar/User";
-
-
-
-// import Ads from "pages/Ads";
-// import Ads from "../Ads";
-
+import { Ads } from "pages/Ads";
 const user_tabs: TabsProps["items"] = [
   {
     key: "msg",
     label: "Xabarlar",
     children: <Messages />,
   },
-  // {
-  //   key: "posted-ads",
-  //   label: "E'lonlar",
-  //   children: <Ads />,
-  // },
+  {
+    key: "posted-ads",
+    label: "E'lonlar",
+    children: <Ads />,
+  },
   {
     key: "saved",
     label: "Saqlanganlar",

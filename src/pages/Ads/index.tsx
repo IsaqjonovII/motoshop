@@ -1,6 +1,6 @@
 import { Text } from "components/Text";
 
-const Ads = () => {
+export const Ads = () => {
   return (
     <div>
       <Text size="md" bold={600}>
@@ -9,4 +9,3 @@ const Ads = () => {
     </div>
   );
 };
-export default Ads;

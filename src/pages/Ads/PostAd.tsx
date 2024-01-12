@@ -22,7 +22,7 @@ const PostAd = () => {
     category: "",
     owner: userId!,
   });
-  
+
   useEffect(() => {
     setAdForm({
       ...adForm,
@@ -50,7 +50,7 @@ const PostAd = () => {
   };
   return (
     <StyledPostAd>
-      <Text size="xl" bold={600}>
+      <Text size="xl" bold={600} className="ad__title">
         E'lon joylash
       </Text>
       <br />
@@ -98,12 +98,15 @@ const PostAd = () => {
             name="category"
             label="Mototsikl turini tanlang"
             placeholder="Masalan sportbike"
+            className="inp__select"
             value={adForm.category}
             onChange={onSelectChange}
           />
           <InputFile fileList={fileList} setFileList={setFileList} />
 
-          <Button onClick={handleSubmit}>E&apos;lonni joylash</Button>
+          <Button onClick={handleSubmit} className="ad__btn">
+            E&apos;lonni joylash
+          </Button>
         </div>
       </form>
     </StyledPostAd>

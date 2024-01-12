@@ -1,7 +1,14 @@
 import { Select } from "antd";
+import { ChangeEvent } from "react";
 import { StyledInput } from "./style";
+import { getBase64 } from "utils";
 import { bikeTypes } from "constants";
 import { IInput } from "interfaces/components";
+
+interface IFileInput {
+  fileList: string[];
+  setFileList: React.Dispatch<React.SetStateAction<string[]>>;
+}
 
 export const InputSelect = ({
   id,
@@ -29,14 +36,6 @@ export const InputSelect = ({
     </StyledInput>
   );
 };
-
-import { ChangeEvent } from "react";
-import { getBase64 } from "utils";
-
-interface IFileInput {
-  fileList: string[];
-  setFileList: React.Dispatch<React.SetStateAction<string[]>>;
-}
 
 export const InputFile = ({ fileList, setFileList }: IFileInput) => {
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
