@@ -1,9 +1,13 @@
 import { IButton } from "interfaces/components";
 import StyledButton from "./style";
 
-export const Button = ({ type, children, className }: IButton) => {
+export const Button = ({ type, children, className, onClick }: IButton) => {
   return (
-    <StyledButton className={className} type={type ?? "button"}>
+    <StyledButton
+      onClick={onClick}
+      className={className}
+      type={type ?? "button"}
+    >
       {children}
     </StyledButton>
   );

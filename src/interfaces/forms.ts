@@ -5,4 +5,5 @@ export interface IPostAd {
   location: string;
   images?: string[];
   category?: string;
+  owner: string;
 }

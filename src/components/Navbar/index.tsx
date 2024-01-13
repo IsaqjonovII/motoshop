@@ -1,12 +1,11 @@
 import { Link } from "react-router-dom";
-import { CloseOutlined, MenuOutlined } from "@ant-design/icons";
+import { AiOutlineUser, AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { navRoutes } from "routes";
 import StyledNav from "./style";
+import { motoLogo } from "assets";
 import { ISidebar } from "interfaces";
 import { useAppSelector } from "hooks";
 import { routes } from "constants/routes";
-import { FiUser } from "react-icons/fi";
-import { motoLogo } from "assets";
 
 const { HOME, AUTH, PROFILE } = routes;
 const Navbar = ({ isSidebarOpen, setIsSidebarOpen }: ISidebar) => {
@@ -33,7 +32,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }: ISidebar) => {
           {user ? (
             <Link to={PROFILE}>
               <div className="user__wrp">
-                <FiUser />
+                <AiOutlineUser />
                 <span>{user.name}</span>
               </div>
             </Link>
@@ -42,14 +41,13 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }: ISidebar) => {
               Kirish
             </Link>
           )}
-
           {isSidebarOpen ? (
-            <CloseOutlined
+            <AiOutlineClose
               className="bars__icon"
               onClick={() => setIsSidebarOpen(false)}
             />
           ) : (
-            <MenuOutlined
+            <AiOutlineMenu
               className="bars__icon"
               onClick={() => setIsSidebarOpen(true)}
             />
