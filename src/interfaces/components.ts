@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ChangeEventHandler } from "react";
 
 export interface IInput {
@@ -17,6 +18,7 @@ export interface IInput {
 export interface IButton {
   className?: string;
   type?: "button" | "reset" | "submit";
+  onClick?: () => void;
   children: (string | JSX.Element)[] | string | JSX.Element;
 }
 export interface IText {

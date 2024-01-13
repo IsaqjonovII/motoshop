@@ -1,21 +1,35 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { ChangeEvent, useEffect, useState } from "react";
 import { Text } from "components/Text";
 import { StyledPostAd } from "./style";
 import { Input } from "components/Input";
-import { ChangeEvent, useState } from "react";
 import { IPostAd } from "interfaces/forms";
+import { Button } from "components/Button";
 import { StyledInput } from "components/Input/style";
 import { InputFile, InputSelect } from "components/Input/CustomInput";
-import { Button } from "components/Button";
+import { useAppSelector } from "hooks";
+// import { toast } from "react-toastify";
 
 const PostAd = () => {
+  const [fileList, setFileList] = useState<string[]>([]);
+  const userId = useAppSelector(({ auth }) => auth.user?._id);
   const [adForm, setAdForm] = useState<IPostAd>({
     name: "",
     description: "",
     price: 0,
     location: "",
-    images: [],
+    images: fileList,
     category: "",
+    owner: userId!,
   });
+
+  useEffect(() => {
+    setAdForm({
+      ...adForm,
+      images: fileList,
+    });
+  }, [fileList]);
+
   const onInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
@@ -28,17 +42,19 @@ const PostAd = () => {
   const onSelectChange = (category: string | any) => {
     setAdForm({
       ...adForm,
-      category,
+      category: category.split(" ")[0],
     });
   };
-
+  const handleSubmit = () => {
+    console.log(adForm);
+  };
   return (
     <StyledPostAd>
-      <Text size="xl" bold={600}>
+      <Text size="xl" bold={600} className="ad__title">
         E'lon joylash
       </Text>
       <br />
-      <form className="post__form">
+      <form className="post__form" autoComplete="off">
         <div>
           <Input
             id="name"
@@ -82,12 +98,15 @@ const PostAd = () => {
             name="category"
             label="Mototsikl turini tanlang"
             placeholder="Masalan sportbike"
+            className="inp__select"
             value={adForm.category}
             onChange={onSelectChange}
           />
-          <InputFile />
+          <InputFile fileList={fileList} setFileList={setFileList} />
 
-          <Button>E&apos;lonni joylash</Button>
+          <Button onClick={handleSubmit} className="ad__btn">
+            E&apos;lonni joylash
+          </Button>
         </div>
       </form>
     </StyledPostAd>

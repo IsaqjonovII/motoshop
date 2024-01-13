@@ -40,7 +40,7 @@ export const bikeTypes = [
     label: "Skuter-elektro",
   },
   {
-    value: "bolalar uchun bolalar-uchun-bayk",
+    value: "bolalar-uchun bolalar-uchun-bayk",
     label: "Yosh bolalar uchun",
   },
 ];

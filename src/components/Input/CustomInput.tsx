@@ -1,9 +1,14 @@
-import { Select, Upload } from "antd";
-import type { RcFile, UploadFile, UploadProps } from "antd/es/upload/interface";
+import { Select } from "antd";
+import { ChangeEvent } from "react";
 import { StyledInput } from "./style";
-import { IInput } from "interfaces/components";
+import { getBase64 } from "utils";
 import { bikeTypes } from "constants";
-import { useState } from "react";
+import { IInput } from "interfaces/components";
+
+interface IFileInput {
+  fileList: string[];
+  setFileList: React.Dispatch<React.SetStateAction<string[]>>;
+}
 
 export const InputSelect = ({
   id,
@@ -31,39 +36,60 @@ export const InputSelect = ({
     </StyledInput>
   );
 };
-export const InputFile = () => {
-  const [fileList, setFileList] = useState<UploadFile[]>([]);
 
-  const onChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
-    setFileList(newFileList);
-  };
+export const InputFile = ({ fileList, setFileList }: IFileInput) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
 
-  const onPreview = async (file: UploadFile) => {
-    let src = file.url as string;
-    if (!src) {
-      src = await new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file.originFileObj as RcFile);
-        reader.onload = () => resolve(reader.result as string);
-      });
+    if (files && files.length > 0) {
+      const newFiles: File[] = Array.from(files);
+
+      Promise.all(newFiles.map((file) => getBase64(file)))
+        .then((base64Strings) => {
+          setFileList((prev) => [...prev, ...base64Strings]);
+        })
+        .catch((error) => console.error("Error converting to base64:", error));
     }
-    const image = new Image();
-    image.src = src;
-    const imgWindow = window.open(src);
-    imgWindow?.document.write(image.outerHTML);
   };
+
+  const handleRemoveImage = (index: number) => {
+    setFileList((prev) => prev.filter((_, i) => i !== index));
+  };
+
   return (
     <StyledInput>
-      <Upload
-        action=""
-        listType="picture-card"
-        fileList={fileList}
-        onChange={onChange}
-        onPreview={onPreview}
-      >
-        {" "}
-        {fileList.length < 5 && "+ Upload"}
-      </Upload>
+      <label className="inp__label">Rasm Yuklash</label>
+      <div className="container">
+        <label htmlFor="inputfile" className="add__image">
+          <span>+</span>
+          Rasm yuklash
+        </label>
+        <input
+          id="inputfile"
+          type="file"
+          accept="image/*"
+          onChange={handleInputChange}
+          multiple
+        />
+        <div className="selected__images">
+          {fileList.map((base64String, index) => (
+            <div key={index} className="image__container">
+              <img
+                className="preview__image"
+                src={base64String}
+                alt={`Image ${index + 1}`}
+              />
+              <button
+                type="button"
+                className="remove__image"
+                onClick={() => handleRemoveImage(index)}
+              >
+                X
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
     </StyledInput>
   );
 };

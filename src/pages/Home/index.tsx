@@ -7,11 +7,25 @@ import HelmetCard from "components/Card/HelmetCard";
 const Home = () => {
   return (
     <StyledHome>
-      <img
-        className="banner__img"
-        src="https://www.one3motoshop.com/site/uploads/slideshow/5ebd43b6bcaaa-1920-2.jpg"
-        alt="Yamaha R1m yzf-r1m"
-      />
+      <picture className="banner__img">
+        <source
+          srcSet="https://res.cloudinary.com/doswy0zdn/image/upload/f_auto,q_auto/moto-bg-xl"
+          media="(min-width: 1400px)"
+        />
+        <source
+          srcSet="https://res.cloudinary.com/doswy0zdn/image/upload/f_auto,q_auto/moto-bg-xl"
+          media="(min-width: 1200px)"
+        />
+        <source
+          srcSet="https://res.cloudinary.com/doswy0zdn/image/upload/f_auto,q_auto/moto-bg-sm"
+          media="(min-width: 800px)"
+        />
+        <img
+          className="banner__img"
+          src="https://res.cloudinary.com/doswy0zdn/image/upload/f_auto,q_auto/moto-bg-sm"
+          alt="example"
+        />
+      </picture>
       <section id="sportbikes" className="section">
         <Text className="section__title" size="xxl" bold={600}>
           SportBayklar
