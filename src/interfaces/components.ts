@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import type { BaseOptionType, DefaultOptionType } from "antd/es/select";
 import { ChangeEventHandler } from "react";
 
 export interface IInput {
@@ -12,6 +13,7 @@ export interface IInput {
   label?: string;
   placeholder?: string;
   value: string | number | any;
+  options?: (BaseOptionType | DefaultOptionType)[];
   onChange: ChangeEventHandler<HTMLInputElement>;
 }
 
@@ -26,4 +28,8 @@ export interface IText {
   size: "sm" | "md" | "lg" | "xl" | "xxl";
   className?: string;
   bold: number;
+}
+export interface ISpinner {
+  isLoading: boolean;
+  loadingText: string;
 }

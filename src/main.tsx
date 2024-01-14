@@ -10,9 +10,7 @@ import { store, persistor } from "store";
 import Loader from "components/Loader";
 import { GlobalStyle } from "styles/index.ts";
 
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/service-worker.js");
-}
+ 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <GlobalStyle />
