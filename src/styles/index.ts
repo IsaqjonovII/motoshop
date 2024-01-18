@@ -59,4 +59,18 @@ export const GlobalStyle = createGlobalStyle`
         font-family: 'lato Normal';
         src: url(/fonts/Lato-Regular.ttf) format('truetype');
     }
+    .icon {
+        font-size: ${pxToRem(22)};
+        vertical-align: middle;
+        margin: 0 ${pxToRem(5)};
+        cursor: pointer;
+    }
+    .spinning {
+        animation: spin 450ms infinite linear;
+    }
+    @keyframes spin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
     `;

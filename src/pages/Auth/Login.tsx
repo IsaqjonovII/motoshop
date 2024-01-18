@@ -1,4 +1,4 @@
-import { Loading3QuartersOutlined, LoginOutlined } from "@ant-design/icons";
+import { AiOutlineLoading3Quarters, AiOutlineLogin } from "react-icons/ai";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -10,13 +10,14 @@ import { IServerError } from "interfaces";
 import { routes } from "constants/routes";
 import { logIn } from "store/reducers/AuthSlice";
 import { useAppDispatch } from "hooks";
+import { ILoginForm } from "interfaces/forms";
 
 const { HOME } = routes;
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [login, { data, isLoading, error }] = useLoginMutation();
-  const [authForm, setAuthForm] = useState({
+  const [authForm, setAuthForm] = useState<ILoginForm>({
     phone: "",
     password: "",
   });
@@ -78,9 +79,9 @@ const Login = () => {
         <Button type="submit" className="auth__btn">
           {" "}
           {isLoading ? (
-            <Loading3QuartersOutlined spin />
+            <AiOutlineLoading3Quarters className="spinning icon" />
           ) : (
-            <LoginOutlined />
+            <AiOutlineLogin className="icon" />
           )}{" "}
           Hisobga kirish
         </Button>
