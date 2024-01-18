@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "hooks";
 import { routes } from "constants/routes";
 
 const { POST_MOTO } = routes;
-export const User = () => {
+const User = () => {
   const user = useAppSelector(({ auth }) => auth.user);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -64,3 +64,4 @@ export const User = () => {
     </StyledProfile>
   );
 };
+export default User;

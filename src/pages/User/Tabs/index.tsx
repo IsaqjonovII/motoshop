@@ -1,6 +1,6 @@
 import { Text } from "components/Text";
 
-export const Messages = () => {
+const Messages = () => {
   return (
     <div>
       <Text size="md" bold={600}>
@@ -12,3 +12,4 @@ export const Messages = () => {
     </div>
   );
 };
+export default Messages

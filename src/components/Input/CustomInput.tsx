@@ -2,7 +2,6 @@ import { Select } from "antd";
 import { ChangeEvent } from "react";
 import { StyledInput } from "./style";
 import { getBase64 } from "utils";
-import { bikeTypes } from "constants";
 import { IInput } from "interfaces/components";
 
 interface IFileInput {
@@ -16,6 +15,7 @@ export const InputSelect = ({
   label,
   placeholder,
   value,
+  options,
   onChange,
 }: IInput) => {
   return (
@@ -31,7 +31,7 @@ export const InputSelect = ({
         placeholder={placeholder}
         onChange={onChange}
         getPopupContainer={(trigger) => trigger.parentElement}
-        options={bikeTypes}
+        options={options}
       />
     </StyledInput>
   );

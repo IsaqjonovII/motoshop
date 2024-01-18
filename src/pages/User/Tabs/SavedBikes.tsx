@@ -1,8 +1,4 @@
-
-export const SavedBikes = () => {
-    return (
-        <div>
-            
-        </div>
-    )
-}
+const SavedBikes = () => {
+  return <div></div>;
+};
+export default SavedBikes;

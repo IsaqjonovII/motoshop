@@ -1,3 +1,5 @@
+import { IUser } from "interfaces";
+
 export interface IPostAd {
   name: string;
   description: string;
@@ -5,5 +7,5 @@ export interface IPostAd {
   location: string;
   images?: string[];
   category?: string;
-  owner: string;
+  owner: string | IUser;
 }

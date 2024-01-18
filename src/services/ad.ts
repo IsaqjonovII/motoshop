@@ -1,16 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { baseUrl } from "constants";
-import { IBackendResponse, IUser } from "interfaces";
-
-export interface IAdForm {
-  name: string;
-  description: string;
-  price: number | string;
-  location: string;
-  category: string;
-  images: string[];
-  owner: string | IUser;
-}
+import { IBackendResponse } from "interfaces";
+import { IPostAd } from "interfaces/forms";
 
 export const adApi = createApi({
   reducerPath: "adAPI",
@@ -19,7 +10,7 @@ export const adApi = createApi({
   }),
   tagTypes: ["Ad"],
   endpoints: (builder) => ({
-    uploadAd: builder.mutation<IBackendResponse, IAdForm>({
+    uploadAd: builder.mutation<IBackendResponse, IPostAd>({
       query: (adForm) => ({
         url: "/ad",
         method: "POST",
@@ -27,13 +18,13 @@ export const adApi = createApi({
       }),
       invalidatesTags: ["Ad"],
     }),
-    getAllAds: builder.query<IBackendResponse, IAdForm[]>({
+    getAllAds: builder.query<IBackendResponse, IPostAd[]>({
       query: () => ({
         url: "/",
         method: "GET",
       }),
     }),
-    getAdById: builder.query<IBackendResponse, IAdForm>({
+    getAdById: builder.query<IBackendResponse, IPostAd>({
       query: (id) => ({
         url: `/${id}`,
         method: "GET",

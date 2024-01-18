@@ -1,15 +1,17 @@
-import { Fragment } from "react";
 import { Tabs } from "antd";
 import type { TabsProps } from "antd";
+import { Fragment, lazy } from "react";
 import { Link } from "react-router-dom";
-import { Messages } from "./Tabs";
 import StyledProfile from "./style";
 import { useAppSelector } from "hooks";
 import { routes } from "constants/routes";
-import { LastSeen } from "./Tabs/LastSeen";
-import { SavedBikes } from "./Tabs/SavedBikes";
-import { User } from "components/Sidebar/User";
-import { Ads } from "pages/Ads";
+const Ads = lazy(() => import("pages/Ads/Ads"));
+
+const Messages = lazy(() => import("./Tabs"));
+const LastSeen = lazy(() => import("./Tabs/LastSeen"));
+const SavedBikes = lazy(() => import("./Tabs/SavedBikes"));
+const User = lazy(() => import("components/Sidebar/User"));
+
 const user_tabs: TabsProps["items"] = [
   {
     key: "msg",
