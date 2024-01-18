@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ChangeEvent, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAppSelector } from "hooks";
 import { useUploadAdMutation } from "services/ad";
@@ -16,7 +16,7 @@ import { IServerError } from "interfaces";
 import { Spinner } from "components/Loader";
 
 const PostAd = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [fileList, setFileList] = useState<string[]>([]);
   const [uploadAd, { data, isLoading, error }] = useUploadAdMutation();
   const userId = useAppSelector(({ auth }) => auth.user?._id);
@@ -35,7 +35,7 @@ const PostAd = () => {
       ...adForm,
       images: fileList,
     });
-  }, [fileList]);
+  }, [fileList, adForm]);
 
   const onInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
