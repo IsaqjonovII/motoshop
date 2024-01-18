@@ -1,8 +1,9 @@
 
-export const LastSeen = () => {
+const LastSeen = () => {
     return (
         <div>
             
         </div>
     )
 }
+export default LastSeen

@@ -67,7 +67,7 @@ const PostAd = () => {
       if (data?.message) {
         toast.error(data?.message);
       }
-    }
+    } 
   }, [error]);
   return (
     <StyledPostAd>
