@@ -30,6 +30,7 @@ export const InputSelect = ({
         showSearch
         placeholder={placeholder}
         onChange={onChange}
+        tokenSeparators={[" "]}
         getPopupContainer={(trigger) => trigger.parentElement}
         options={options}
       />

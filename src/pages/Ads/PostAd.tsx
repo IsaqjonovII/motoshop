@@ -1,23 +1,21 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ChangeEvent, useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import type { RadioChangeEvent } from "antd";
 import { useAppSelector } from "hooks";
 import { useUploadAdMutation } from "services/ad";
 import { Text } from "components/Text";
 import { StyledPostAd } from "./style";
 import { Input } from "components/Input";
 import { IPostAd } from "interfaces/forms";
-import { Button } from "components/Button";
+import { Button, RadioButton } from "components/Button";
 import { StyledInput } from "components/Input/style";
 import { InputFile, InputSelect } from "components/Input/CustomInput";
 import { adTypes, bikeTypes } from "constants";
 import { IServerError } from "interfaces";
 import { Spinner } from "components/Loader";
-import { Select } from "antd";
 
 const PostAd = () => {
-  // const navigate = useNavigate();
   const [selectedAdType, setSelectedAdType] = useState<
     string | null | undefined
   >("moto");
@@ -78,7 +76,7 @@ const PostAd = () => {
       }
     }
   }, [error]);
-  const onChange = (val: string) => setSelectedAdType(val);
+  const onChange = (e: RadioChangeEvent) => setSelectedAdType(e.target.value);
   return (
     <StyledPostAd>
       {isLoading && (
@@ -89,27 +87,19 @@ const PostAd = () => {
       </Text>
       <br />
 
-      <div className="flex">
-        <StyledInput>
-          <label className="inp__label" htmlFor="ad-type">
-            E&apos;lon turini tanlang
-          </label>
-          <Select
-            id="ad-type"
-            className="inp__select"
-            defaultValue="moto"
-            value={selectedAdType}
-            onChange={onChange}
-            options={adTypes}
-          />
-        </StyledInput>
-      </div>
       <form className="post__form" autoComplete="off" onSubmit={handleSubmit}>
         <div>
+          <div className="flex">
+            <StyledInput>
+              <label className="inp__label">E&apos;lon turini tanlang</label>
+              <RadioButton chilren={adTypes} onChange={onChange} />
+            </StyledInput>
+          </div>
           <Input
             id="name"
             name="name"
             label="E'longa nom bering"
+            placeholder="Masalan Yamaha R1"
             value={adForm.name}
             onChange={onInputChange}
           />
@@ -124,10 +114,11 @@ const PostAd = () => {
               id="moto-info-description"
               cols={76}
               rows={10}
+              minLength={40}
+              placeholder="Eng kamida 40 ta belgi yozing"
               value={adForm.description}
               onChange={onInputChange}
             ></textarea>
-            <small>Eng kamida 40 ta belgi yozing</small>
           </StyledInput>
           <Input
             id="price"

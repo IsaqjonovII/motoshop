@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { RadioChangeEvent } from "antd";
 import type { BaseOptionType, DefaultOptionType } from "antd/es/select";
 import { ChangeEventHandler } from "react";
 
@@ -32,4 +33,12 @@ export interface IText {
 export interface ISpinner {
   isLoading: boolean;
   loadingText: string;
+}
+export interface IRadioBtn {
+  btnStyle?: "solid" | null;
+  chilren: {
+    value: string;
+    label: string;
+  }[];
+  onChange: (e: RadioChangeEvent) => void;
 }
