@@ -33,9 +33,15 @@ export const Input = ({
             onChange={onChange}
           />
           {isPassword ? (
-            <AiOutlineEye className="icon" onClick={() => setIsPassword(!isPassword)} />
+            <AiOutlineEye
+              className="icon"
+              onClick={() => setIsPassword(!isPassword)}
+            />
           ) : (
-            <AiOutlineEyeInvisible className="icon" onClick={() => setIsPassword(!isPassword)} />
+            <AiOutlineEyeInvisible
+              className="icon"
+              onClick={() => setIsPassword(!isPassword)}
+            />
           )}
         </div>
       ) : type === "phone" ? (

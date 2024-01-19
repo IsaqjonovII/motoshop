@@ -11,12 +11,16 @@ import { IPostAd } from "interfaces/forms";
 import { Button } from "components/Button";
 import { StyledInput } from "components/Input/style";
 import { InputFile, InputSelect } from "components/Input/CustomInput";
-import { bikeTypes } from "constants";
+import { adTypes, bikeTypes } from "constants";
 import { IServerError } from "interfaces";
 import { Spinner } from "components/Loader";
+import { Select } from "antd";
 
 const PostAd = () => {
   // const navigate = useNavigate();
+  const [selectedAdType, setSelectedAdType] = useState<
+    string | null | undefined
+  >("moto");
   const [fileList, setFileList] = useState<string[]>([]);
   const [uploadAd, { data, isLoading, error }] = useUploadAdMutation();
   const userId = useAppSelector(({ auth }) => auth.user?._id);
@@ -39,7 +43,8 @@ const PostAd = () => {
       ...adForm,
       images: fileList,
     });
-  }, [fileList, adForm]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fileList]);
 
   const onInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -73,6 +78,7 @@ const PostAd = () => {
       }
     }
   }, [error]);
+  const onChange = (val: string) => setSelectedAdType(val);
   return (
     <StyledPostAd>
       {isLoading && (
@@ -84,20 +90,33 @@ const PostAd = () => {
       <br />
 
       <div className="flex">
-        <button>Mototsikl</button>
-        <button></button>
+        <StyledInput>
+          <label className="inp__label" htmlFor="ad-type">
+            E&apos;lon turini tanlang
+          </label>
+          <Select
+            id="ad-type"
+            className="inp__select"
+            defaultValue="moto"
+            value={selectedAdType}
+            onChange={onChange}
+            options={adTypes}
+          />
+        </StyledInput>
       </div>
       <form className="post__form" autoComplete="off" onSubmit={handleSubmit}>
         <div>
           <Input
             id="name"
             name="name"
-            label="Mototsikl nomi/rusumi"
+            label="E'longa nom bering"
             value={adForm.name}
             onChange={onInputChange}
           />
+          <InputFile fileList={fileList} setFileList={setFileList} />
+
           <StyledInput>
-            <label className="inp__label" htmlFor="moto-info-descriptionF">
+            <label className="inp__label" htmlFor="moto-info-description">
               Izoh
             </label>
             <textarea
@@ -108,12 +127,13 @@ const PostAd = () => {
               value={adForm.description}
               onChange={onInputChange}
             ></textarea>
+            <small>Eng kamida 40 ta belgi yozing</small>
           </StyledInput>
           <Input
             id="price"
             name="price"
             type="number"
-            label="Mototsikl narxi(so'm)"
+            label="Narxi(so'm)"
             value={adForm.price}
             onChange={onInputChange}
           />
@@ -126,17 +146,19 @@ const PostAd = () => {
           />
         </div>
         <div>
-          <InputSelect
-            id="moto-type"
-            name="category"
-            label="Mototsikl turini tanlang"
-            placeholder="Masalan sportbike"
-            className="inp__select"
-            value={adForm.category}
-            onChange={onSelectChange}
-            options={bikeTypes}
-          />
-          <InputFile fileList={fileList} setFileList={setFileList} />
+          {selectedAdType?.includes("moto") && (
+            <InputSelect
+              id="moto-type"
+              name="category"
+              label="Mototsikl turini tanlang"
+              placeholder="Masalan sportbike"
+              className="inp__select"
+              value={adForm.category}
+              onChange={onSelectChange}
+              options={bikeTypes}
+            />
+          )}
+          {selectedAdType?.includes("helmet") && <h1>Shlm</h1>}
         </div>
         <Button type="submit" className="ad__btn">
           E&apos;lonni joylash

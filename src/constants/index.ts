@@ -43,3 +43,17 @@ export const bikeTypes = [
     label: "Yosh bolalar uchun",
   },
 ];
+export const adTypes = [
+  {
+    value: "moto",
+    label: "Mototsikl",
+  },
+  {
+    value: "helmet",
+    label: "Shlem va kiyimlar",
+  },
+  {
+    value: "gear",
+    label: "Ehtiyot qismlar",
+  },
+];
