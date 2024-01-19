@@ -79,9 +79,14 @@ const PostAd = () => {
         <Spinner isLoading={isLoading} loadingText="E'lon joylanmoqda" />
       )}
       <Text size="xl" bold={600} className="ad__title">
-        E'lon joylash
+        E'lon joylashtirish
       </Text>
       <br />
+
+      <div className="flex">
+        <button>Mototsikl</button>
+        <button></button>
+      </div>
       <form className="post__form" autoComplete="off" onSubmit={handleSubmit}>
         <div>
           <Input
