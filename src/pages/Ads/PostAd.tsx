@@ -28,6 +28,10 @@ const PostAd = () => {
     images: fileList,
     category: "",
     owner: userId!,
+    engineSize: "",
+    mileage: "",
+    manufacturedAt: "",
+    contactLinks: [],
   });
 
   useEffect(() => {
@@ -67,7 +71,7 @@ const PostAd = () => {
       if (data?.message) {
         toast.error(data?.message);
       }
-    } 
+    }
   }, [error]);
   return (
     <StyledPostAd>

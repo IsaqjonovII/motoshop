@@ -1,7 +1,7 @@
-import { IInput } from "interfaces/components";
-import { StyledInput } from "./style";
-import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
 import { useState } from "react";
+import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
+import { StyledInput } from "./style";
+import { IInput } from "interfaces/components";
 
 export const Input = ({
   id,
@@ -33,9 +33,9 @@ export const Input = ({
             onChange={onChange}
           />
           {isPassword ? (
-            <EyeOutlined onClick={() => setIsPassword(!isPassword)} />
+            <AiOutlineEye className="icon" onClick={() => setIsPassword(!isPassword)} />
           ) : (
-            <EyeInvisibleOutlined onClick={() => setIsPassword(!isPassword)} />
+            <AiOutlineEyeInvisible className="icon" onClick={() => setIsPassword(!isPassword)} />
           )}
         </div>
       ) : type === "phone" ? (
