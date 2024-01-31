@@ -99,7 +99,7 @@ const PostAd = () => {
             id="name"
             name="name"
             label="E'longa nom bering"
-            placeholder="Masalan Yamaha R1"
+            placeholder="Masalan Yamaha R6"
             value={adForm.name}
             onChange={onInputChange}
           />
@@ -138,16 +138,44 @@ const PostAd = () => {
         </div>
         <div>
           {selectedAdType?.includes("moto") && (
-            <InputSelect
-              id="moto-type"
-              name="category"
-              label="Mototsikl turini tanlang"
-              placeholder="Masalan sportbike"
-              className="inp__select"
-              value={adForm.category}
-              onChange={onSelectChange}
-              options={bikeTypes}
-            />
+            <>
+              <InputSelect
+                id="moto-type"
+                name="category"
+                label="Turini tanlang"
+                placeholder="Masalan sportbike"
+                className="inp__select"
+                value={adForm.category}
+                onChange={onSelectChange}
+                options={bikeTypes}
+              />
+              <Input
+                id="moto-cc"
+                name="engineSize"
+                label="Dvigatel hajmi"
+                placeholder="Masalan 600 cm³"
+                value={adForm.engineSize}
+                onChange={onInputChange}
+              />
+              <Input
+                id="moto-mileage"
+                name="mileage"
+                label="Bosgan yo'li"
+                placeholder="0 km"
+                minLength={0}
+                value={adForm.mileage}
+                onChange={onInputChange}
+              />
+              <Input
+                id="moto-date"
+                name="manufacturedAt"
+                label="Ishlab chiqarilgan sana"
+                placeholder="kun.oy.yil"
+                type="date"
+                value={adForm.manufacturedAt}
+                onChange={onInputChange}
+              />
+            </>
           )}
           {selectedAdType?.includes("helmet") && <h1>Shlm</h1>}
         </div>
