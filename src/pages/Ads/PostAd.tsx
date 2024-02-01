@@ -25,7 +25,7 @@ const PostAd = () => {
   const [adForm, setAdForm] = useState<IPostAd>({
     name: "",
     description: "",
-    price: 0,
+    price: "",
     location: "",
     images: fileList,
     category: "",
@@ -43,7 +43,6 @@ const PostAd = () => {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fileList]);
-
   const onInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
@@ -76,6 +75,7 @@ const PostAd = () => {
       }
     }
   }, [error]);
+
   const onChange = (e: RadioChangeEvent) => setSelectedAdType(e.target.value);
   return (
     <StyledPostAd>
@@ -154,6 +154,8 @@ const PostAd = () => {
                 name="engineSize"
                 label="Dvigatel hajmi"
                 placeholder="Masalan 600 cm³"
+                type="number"
+                min={0}
                 value={adForm.engineSize}
                 onChange={onInputChange}
               />
@@ -163,6 +165,8 @@ const PostAd = () => {
                 label="Bosgan yo'li"
                 placeholder="0 km"
                 minLength={0}
+                min={0}
+                type="number"
                 value={adForm.mileage}
                 onChange={onInputChange}
               />
@@ -179,7 +183,11 @@ const PostAd = () => {
           )}
           {selectedAdType?.includes("helmet") && <h1>Shlm</h1>}
         </div>
-        <Button type="submit" className="ad__btn">
+        <Button
+          type="submit"
+          className="ad__btn"
+          disabled={adForm.images?.every(() => Boolean)}
+        >
           E&apos;lonni joylash
         </Button>
       </form>

@@ -16,6 +16,8 @@ export interface IInput {
   value: string | number | any;
   options?: (BaseOptionType | DefaultOptionType)[];
   onChange: ChangeEventHandler<HTMLInputElement>;
+  min?: number;
+  max?: number;
 }
 
 export interface IButton {
@@ -23,6 +25,7 @@ export interface IButton {
   type?: "button" | "reset" | "submit";
   onClick?: () => void;
   children: (string | JSX.Element)[] | string | JSX.Element;
+  disabled?: boolean;
 }
 export interface IText {
   children: (string | JSX.Element)[] | string | JSX.Element;

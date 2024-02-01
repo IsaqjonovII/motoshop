@@ -2,12 +2,19 @@ import { IButton, IRadioBtn } from "interfaces/components";
 import StyledButton, { StyledRadioBtn } from "./style";
 import { Radio } from "antd";
 
-export const Button = ({ type, children, className, onClick }: IButton) => {
+export const Button = ({
+  type,
+  children,
+  className,
+  onClick,
+  disabled,
+}: IButton) => {
   return (
     <StyledButton
       onClick={onClick}
       className={className}
       type={type ?? "button"}
+      disabled={disabled}
     >
       {children}
     </StyledButton>

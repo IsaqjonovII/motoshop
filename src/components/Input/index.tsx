@@ -12,6 +12,8 @@ export const Input = ({
   placeholder,
   value,
   onChange,
+  min,
+  max,
 }: IInput) => {
   const [isPassword, setIsPassword] = useState(false);
   return (
@@ -72,7 +74,8 @@ export const Input = ({
           placeholder={placeholder}
           type={type ?? "text"}
           required
-          min={type === "number" ? 1 : 0}
+          min={min}
+          max={max}
         />
       )}
     </StyledInput>
