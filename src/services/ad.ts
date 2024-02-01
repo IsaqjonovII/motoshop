@@ -12,7 +12,7 @@ export const adApi = createApi({
   endpoints: (builder) => ({
     uploadAd: builder.mutation<IBackendResponse, IPostAd>({
       query: (adForm) => ({
-        url: "/ad",
+        url: "ad",
         method: "POST",
         body: adForm,
       }),

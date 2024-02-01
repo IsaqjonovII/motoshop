@@ -35,7 +35,6 @@ const PostAd = () => {
     manufacturedAt: "",
     contactLinks: [],
   });
-
   useEffect(() => {
     setAdForm({
       ...adForm,
@@ -58,12 +57,16 @@ const PostAd = () => {
       category: category.split(" ")[0],
     });
   };
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
     await uploadAd(adForm);
     if ("ad" in data!) {
       toast.success(data.message);
     }
+    console.log(data);
   };
+  console.log(adForm);
+  
   useEffect(() => {
     if (error) {
       const { status, data } = error as IServerError;
@@ -183,11 +186,7 @@ const PostAd = () => {
           )}
           {selectedAdType?.includes("helmet") && <h1>Shlm</h1>}
         </div>
-        <Button
-          type="submit"
-          className="ad__btn"
-          disabled={adForm.images?.every(() => Boolean)}
-        >
+        <Button type="submit" className="ad__btn">
           E&apos;lonni joylash
         </Button>
       </form>
