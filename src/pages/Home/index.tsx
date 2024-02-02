@@ -3,6 +3,7 @@ import StyledHome from "./style";
 import { Text } from "components/Text";
 import { helmetsData, productsData } from "data";
 import HelmetCard from "components/Card/HelmetCard";
+import { Carousel } from "components/Carousel";
 
 const Home = () => {
   return (
@@ -30,6 +31,7 @@ const Home = () => {
         <Text className="section__title" size="xxl" bold={600}>
           SportBayklar
         </Text>
+        <Carousel data={[]} />
         <div className="grid__wrp">
           {productsData.slice(0, 3).map((data) => (
             <MotoCard key={data.id} {...data} />
