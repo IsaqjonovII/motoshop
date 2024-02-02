@@ -60,20 +60,24 @@ const PostAd = () => {
   const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     await uploadAd(adForm);
-    if ("ad" in data!) {
-      toast.success(data.message);
-    }
-    console.log(data);
+    console.log(adForm);
+    // if ("ad" in data!) {
+    //   toast.success(data.message);
+    // }
   };
-  console.log(adForm);
-  
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
   useEffect(() => {
     if (error) {
       const { status, data } = error as IServerError;
       if (status === "FETCH_ERROR") {
+        console.log(data);
+        console.log(data);
         toast.error("Serverda xatolik. Iltimos birozdan so'ng urinib ko'ring");
       }
       if (data?.message) {
+        console.log(data);
         toast.error(data?.message);
       }
     }
