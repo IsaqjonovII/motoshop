@@ -14,8 +14,10 @@ import { InputFile, InputSelect } from "components/Input/CustomInput";
 import { adTypes, bikeTypes } from "constants";
 import { IServerError } from "interfaces";
 import { Spinner } from "components/Loader";
+import { useNavigate } from "react-router-dom";
 
 const PostAd = () => {
+  const navigate = useNavigate();
   const [selectedAdType, setSelectedAdType] = useState<
     string | null | undefined
   >("moto");
@@ -61,13 +63,11 @@ const PostAd = () => {
     e.preventDefault();
     await uploadAd(adForm);
     console.log(adForm);
-    // if ("ad" in data!) {
-    //   toast.success(data.message);
-    // }
+    if ("ad" in data!) {
+      toast.success(data.message);
+      navigate("/");
+    }
   };
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
   useEffect(() => {
     if (error) {
       const { status, data } = error as IServerError;
