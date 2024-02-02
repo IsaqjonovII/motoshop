@@ -3,7 +3,6 @@ import { pxToRem } from "utils";
 
 export const StyledPostAd = styled.div`
   padding: ${pxToRem(30)};
-
   .post__form {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -29,6 +28,9 @@ export const StyledPostAd = styled.div`
   }
   @media only screen and (max-width: ${pxToRem(768)}) {
     padding: ${pxToRem(20)} 0;
+    .ad__title {
+      font-size: ${pxToRem(25)};
+    }
   }
 `;
 

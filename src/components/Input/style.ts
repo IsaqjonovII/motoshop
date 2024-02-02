@@ -6,6 +6,7 @@ import { pxToRem } from "utils";
 const { teal, gray, white, red } = colors;
 
 const StyledInput = styled.div`
+  position: relative;
   margin: 0 0 ${pxToRem(15)} 0;
   input, textarea, .ant-select {
     width: 100%;
@@ -140,6 +141,12 @@ textarea {
     opacity: 1;
     top: ${pxToRem(10)};
     left: 80%;
+  }
+  input, textarea, .ant-select  {
+    font-size: ${pxToRem(15)};
+  }
+  .inp__label {
+  font-size: ${pxToRem(17)};
   }
 }
 `;

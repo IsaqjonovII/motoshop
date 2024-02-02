@@ -1,5 +1,5 @@
-// export const baseUrl = "http://127.0.0.1:5000/api/v0/";
-export const baseUrl = "https://motoshop-server.onrender.com/api/v0/";
+// export const baseUrl = "http://0.0.0.0:8000/api/v0/";
+export const baseUrl = "https://motoshop-server.onrender.com/api/v0";
 
 export const bikeTypes = [
   {
@@ -41,5 +41,19 @@ export const bikeTypes = [
   {
     value: "bolalar-uchun bolalar-uchun-bayk",
     label: "Yosh bolalar uchun",
+  },
+];
+export const adTypes = [
+  {
+    value: "moto",
+    label: "Mototsikl",
+  },
+  {
+    value: "helmet",
+    label: "Shlem va kiyimlar",
+  },
+  {
+    value: "gear",
+    label: "Ehtiyot qismlar",
   },
 ];
