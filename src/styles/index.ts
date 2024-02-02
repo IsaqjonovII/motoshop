@@ -40,7 +40,7 @@ export const GlobalStyle = createGlobalStyle`
         position: relative;
     }
     .container__nav {
-        height: 5rem;
+        /* height: 5rem; */
         width: 100%;
         position: sticky;
         top: 0;

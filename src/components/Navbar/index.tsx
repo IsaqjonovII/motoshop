@@ -6,6 +6,7 @@ import { motoLogo } from "assets";
 import { ISidebar } from "interfaces";
 import { useAppSelector } from "hooks";
 import { routes } from "constants/routes";
+import { SearchNavbar } from "components/Search";
 
 const { HOME, AUTH, PROFILE } = routes;
 const Navbar = ({ isSidebarOpen, setIsSidebarOpen }: ISidebar) => {
@@ -15,11 +16,11 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }: ISidebar) => {
     <StyledNav>
       <div className="nav__container">
         <div className="nav__left">
-          <Link to={HOME}>
-            <div className="nav__logo">
-              <img src={motoLogo} alt="" />
-            </div>
-          </Link>
+          <div className="nav__logo">
+            <Link to={HOME}>
+              <img src={motoLogo} alt="motoshop" />
+            </Link>
+          </div>
           <nav className="nav__menu">
             {navRoutes.map(({ key, path }) => (
               <Link key={key} to={path} className="menu__item" aria-label={key}>
@@ -28,6 +29,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }: ISidebar) => {
             ))}
           </nav>
         </div>
+        <SearchNavbar />
         <div className="nav__right">
           {user ? (
             <Link to={PROFILE}>
