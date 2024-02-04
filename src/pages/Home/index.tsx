@@ -1,9 +1,6 @@
-import MotoCard from "components/Card";
 import StyledHome from "./style";
-import { Text } from "components/Text";
 import { helmetsData, productsData } from "data";
-import HelmetCard from "components/Card/HelmetCard";
-import { Carousel } from "components/Carousel";
+import Carousel from "components/Carousel";
 
 const Home = () => {
   return (
@@ -28,25 +25,10 @@ const Home = () => {
         />
       </picture>
       <section id="sportbikes" className="section">
-        <Text className="section__title" size="xxl" bold={600}>
-          SportBayklar
-        </Text>
-        <Carousel data={[]} />
-        <div className="grid__wrp">
-          {productsData.slice(0, 3).map((data) => (
-            <MotoCard key={data.id} {...data} />
-          ))}
-        </div>
+        <Carousel title="Sportbayklar" items={productsData} />
       </section>
       <section id="helmets" className="section">
-        <Text className="section__title" size="xxl" bold={600}>
-          Shlemlar
-        </Text>
-        <div className="grid__wrp">
-          {helmetsData.slice(0, 3).map((data) => (
-            <HelmetCard key={data.id} {...data} />
-          ))}
-        </div>
+        <Carousel title="Shlemlar" items={helmetsData} />
       </section>
     </StyledHome>
   );

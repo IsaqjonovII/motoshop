@@ -61,6 +61,9 @@ export const GlobalStyle = createGlobalStyle`
       color: ${teal} !important;
     }
   }
+  .swiper-wrapper {
+    padding: ${pxToRem(15)};
+  }
   .ant-tabs-ink-bar {
     background: ${teal} !important;
   }

@@ -1,83 +1,76 @@
-import { IProduct } from "interfaces";
+import { IRecommendCard } from "interfaces/responses";
 
-export const productsData: IProduct[] = [
+export const productsData: IRecommendCard[] = [
   {
-    id: "1",
+    _id: "1",
     name: "Yamaha R1M",
     postedAt: "20-10-2023",
-    price: 30_000_000,
-    types: ["fuel-moto"],
-    isActive: true,
-    img:
+    price: "30000000",
+    location: "Toshkent Sh. Mirzo Ulug'bek",
+    images: [
       "https://ik.imagekit.io/iii299/motoshop/bg.jpg?updatedAt=1697609532380",
-    address: "Toshkent Sh. Mirzo Ulug'bek",
+    ],
   },
   {
-    id: "2",
+    _id: "2",
     name: "Yamaha R1M",
     postedAt: "20-10-2023",
-    price: 30_000_000,
-    types: ["fuel-moto"],
-    isActive: true,
-    img:
+    price: "30000000",
+    location: "Toshkent Sh. Mirzo Ulug'bek",
+    images: [
       "https://ik.imagekit.io/iii299/motoshop/bg.jpg?updatedAt=1697609532380",
-    address: "Toshkent Sh. Mirzo Ulug'bek",
+    ],
   },
   {
-    id: "3",
+    _id: "3",
     name: "Yamaha R1M",
     postedAt: "20-10-2023",
-    price: 30_000_000,
-    types: ["fuel-moto"],
-    isActive: true,
-    img:
+    price: "30000000",
+    location: "Toshkent Sh. Mirzo Ulug'bek",
+    images: [
       "https://ik.imagekit.io/iii299/motoshop/bg.jpg?updatedAt=1697609532380",
-    address: "Toshkent Sh. Mirzo Ulug'bek",
+    ],
   },
   {
-    id: "4",
+    _id: "4",
     name: "Yamaha R1M",
     postedAt: "20-10-2023",
-    price: 30_000_000,
-    types: ["fuel-moto"],
-    isActive: true,
-    img:
+    price: "30000000",
+    location: "Toshkent Sh. Mirzo Ulug'bek",
+    images: [
       "https://ik.imagekit.io/iii299/motoshop/bg.jpg?updatedAt=1697609532380",
-    address: "Toshkent Sh. Mirzo Ulug'bek",
+    ],
   },
 ];
-export const helmetsData: IProduct[] = [
+export const helmetsData: IRecommendCard[] = [
   {
-    id: "1",
+    _id: "1",
     name: "AGV Full Face",
     postedAt: "20-10-2023",
-    price: 30_000_000,
-    types: ["full-face"],
-    isActive: true,
-    img:
+    price: "30000000",
+    location: "Toshkent Sh. Mirzo Ulug'bek",
+    images: [
       "https://motorangutan.com/cdn/shop/products/AGV_20Pista_20GP_20RR_20Performance_20Full_20Face_20Helmet.jpg?v=1620667491",
-    address: "Toshkent Sh. Mirzo Ulug'bek",
+    ],
   },
   {
-    id: "2",
+    _id: "2",
     name: "AGV Full Face",
     postedAt: "20-10-2023",
-    price: 30_000_000,
-    types: ["full-face"],
-    isActive: true,
-    img:
+    price: "30000000",
+    location: "Toshkent Sh. Mirzo Ulug'bek",
+    images: [
       "https://motorangutan.com/cdn/shop/products/AGV_20Pista_20GP_20RR_20Performance_20Full_20Face_20Helmet.jpg?v=1620667491",
-    address: "Toshkent Sh. Mirzo Ulug'bek",
+    ],
   },
   {
-    id: "3",
+    _id: "3",
     name: "AGV Full Face",
     postedAt: "20-10-2023",
-    price: 30_000_000,
-    types: ["full-face"],
-    isActive: true,
-    img:
+    price: "30000000",
+    location: "Toshkent Sh. Mirzo Ulug'bek",
+    images: [
       "https://motorangutan.com/cdn/shop/products/AGV_20Pista_20GP_20RR_20Performance_20Full_20Face_20Helmet.jpg?v=1620667491",
-    address: "Toshkent Sh. Mirzo Ulug'bek",
+    ],
   },
-]
+];

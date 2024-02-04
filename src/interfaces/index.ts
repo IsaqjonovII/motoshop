@@ -14,16 +14,6 @@ export interface ISidebar {
   isSidebarOpen: boolean;
   setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
-export interface IProduct {
-  id: number | string;
-  name: string;
-  price: number;
-  types: string[];
-  postedAt: string;
-  isActive: boolean;
-  img: string;
-  address: string;
-}
 export interface IUser {
   _id: string;
   phone: string | number;

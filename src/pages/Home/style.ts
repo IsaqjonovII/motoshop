@@ -13,6 +13,7 @@ export default styled.main`
   }
   .section {
     margin: ${pxToRem(50)} auto;
+    position: relative;
   }
   .section__title {
     margin-bottom: ${pxToRem(30)};
@@ -20,7 +21,9 @@ export default styled.main`
   .grid__wrp {
     ${layout("grid", { cols: 3, rows: "auto" })}
     grid-gap: ${pxToRem(30)};
-   
+  }
+  .swiper-button-prev, .swiper-button-next {
+    display: block;
   }
   @media only screen and (max-width: ${pxToRem(1024)}) {
     .grid__wrp {

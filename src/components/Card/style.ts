@@ -12,7 +12,7 @@ export default styled.div`
   border-radius: ${pxToRem(10)};
   cursor: pointer;
   transition: 200ms ease-in-out;
-
+  
   .img__wrp {
     width: 100%;
     .card__img {
