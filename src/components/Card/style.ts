@@ -2,7 +2,7 @@ import { colors } from "constants/styles";
 import styled from "styled-components";
 import { pxToRem } from "utils";
 
-const { white, teal, borderGray } = colors;
+const { teal, borderGray } = colors;
 
 export default styled.div`
   box-shadow: rgba(0, 0, 0, 0.05) 0 ${pxToRem(6)} ${pxToRem(24)} 0,
@@ -12,22 +12,12 @@ export default styled.div`
   border-radius: ${pxToRem(10)};
   cursor: pointer;
   transition: 200ms ease-in-out;
-  
+
   .img__wrp {
     width: 100%;
     .card__img {
       width: 100%;
-      object-fit: cover;
-      border-radius: ${pxToRem(6)};
-    }
-  }
-  .helmet__img {
-    background-color: ${white};
-    border-radius: ${pxToRem(10)};
-    padding: ${pxToRem(15)};
-    .card__img {
-      width: 100%;
-      max-height: ${pxToRem(250)};
+      max-height: 350px;
       object-fit: contain;
       border-radius: ${pxToRem(6)};
     }
@@ -41,7 +31,6 @@ export default styled.div`
   .product__address {
     margin-top: ${pxToRem(20)};
   }
-
   &:hover {
     border-color: ${teal};
     .card__title {
