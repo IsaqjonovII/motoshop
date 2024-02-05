@@ -20,8 +20,8 @@ const RecommendCard = ({
         <div className="img__wrp">
           <LazyImage className="card__img" src={images[0]} alt="YZF R1M" />
         </div>
-        <div className="card__head flex">
-          <Text className="card__title" size="lg" bold={600}>
+        <div className="card__head">
+          <Text className="card__title" size="xl" bold={600}>
             {name}
           </Text>
           <Text size="md" bold={600}>

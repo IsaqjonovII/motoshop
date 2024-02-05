@@ -7,16 +7,15 @@ const { bgGray, gray, teal, white } = colors;
 
 export const GlobalStyle = createGlobalStyle`
     :root {
-        --font-h1: clamp(3.2rem, 0.5692rem + 4.638vw, 13.75rem);
-        --font-h2: clamp(1.5rem, 1.0982rem + 1.7143vw, 2.8125rem);
-        --font-h3: clamp(1.375rem, 1.1837rem + 0.8163vw, 2rem);
+        --font-h1: clamp(2.2rem, 0.5692rem + 1.638vw, 4.75rem);
+        --font-h2: clamp(1.5rem, .882rem + .7143vw, 2.8125rem);
+        --font-h3: clamp(1.375rem, .8837rem + 0.8163vw, 2rem);
         --font-h4: clamp(1.375rem, 1.1837rem + 0.8163vw, 1.6rem);
-        --font-h5: clamp(1rem, 0.9235rem + 0.3265vw, 1.25rem);
+        --font-h5: clamp(1rem, 0.7235rem + 0.3265vw, 1.25rem);
         --font-h6: clamp(1rem, 0.9617rem + 0.1633vw, 1.125rem);
         --font-body: clamp(1rem, 0.8852rem + 0.4898vw, 1.375rem);
         --font-link: clamp(0.875rem, 0.875rem + 0.3265vw, 1.125rem);
         --font-mini: clamp(0.875rem, 0.8367rem + 0.1633vw, 1rem);
-        --font-h2-display: clamp(1.875rem, 1.41rem + 2.449vw, 3.95rem);
     }
     * {
         margin: 0;

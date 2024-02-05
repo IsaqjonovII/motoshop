@@ -17,7 +17,7 @@ export default styled.div`
     width: 100%;
     .card__img {
       width: 100%;
-      max-height: 350px;
+      max-height: 300px;
       object-fit: contain;
       border-radius: ${pxToRem(6)};
     }
