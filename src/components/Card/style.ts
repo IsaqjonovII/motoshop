@@ -2,7 +2,7 @@ import { colors } from "constants/styles";
 import styled from "styled-components";
 import { pxToRem } from "utils";
 
-const { teal, borderGray } = colors;
+const { teal, borderGray, white } = colors;
 
 export default styled.div`
   box-shadow: rgba(0, 0, 0, 0.05) 0 ${pxToRem(6)} ${pxToRem(24)} 0,
@@ -15,6 +15,9 @@ export default styled.div`
   .img__wrp {
     width: 100%;
     height: 250px;
+    background-image: linear-gradient(${white}, ${borderGray});
+    background-position: 200% auto;
+    animation: loading 1s infinite linear;
     .card__img {
       width: 100%;
       height: 100%;
@@ -45,6 +48,11 @@ export default styled.div`
     }
     .product__address {
       font-size: ${pxToRem(14)};
+    }
+  }
+  @keyframes loading {
+    to {
+      background-position: 200% center;
     }
   }
 `;
