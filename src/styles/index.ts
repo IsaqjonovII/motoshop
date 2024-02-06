@@ -76,6 +76,7 @@ export const GlobalStyle = createGlobalStyle`
         height: 3rem;
         border-radius: 50%;
         ${layout("center")}
+        border: 1px solid ${gray}aa;
         margin-left: ${pxToRem(10)};
         cursor: pointer;
     svg {

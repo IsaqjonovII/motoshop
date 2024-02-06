@@ -12,13 +12,13 @@ export default styled.div`
   border-radius: ${pxToRem(10)};
   cursor: pointer;
   transition: 200ms ease-in-out;
-
   .img__wrp {
     width: 100%;
+    height: 250px;
     .card__img {
       width: 100%;
-      max-height: 300px;
-      object-fit: contain;
+      height: 100%;
+      object-fit: cover;
       border-radius: ${pxToRem(6)};
     }
   }

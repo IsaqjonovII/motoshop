@@ -4,16 +4,10 @@ import LazyImage from "components/LazyImage";
 import { formatNumbers } from "utils";
 import { Text } from "components/Text";
 import { routes } from "constants/routes";
-import { IRecommendCard } from "interfaces/responses";
+import { IAd } from "interfaces/responses";
 
 const { MOTOCYCLES } = routes;
-const RecommendCard = ({
-  _id,
-  price,
-  name,
-  location,
-  images,
-}: IRecommendCard) => {
+const RecommendCard = ({ _id, price, name, location, images }: IAd) => {
   return (
     <CardStyle>
       <Link to={`${MOTOCYCLES}${_id}`} key={_id}>

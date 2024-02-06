@@ -2,13 +2,15 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { baseUrl } from "constants";
 import { IBackendResponse } from "interfaces";
 import { IPostAd } from "interfaces/forms";
+import { IAd } from "interfaces/responses";
+import { SetStateAction } from "react";
 
 export const adApi = createApi({
   reducerPath: "adAPI",
   baseQuery: fetchBaseQuery({
     baseUrl,
   }),
-  tagTypes: ["Ad"],
+  tagTypes: ["Ad", "Random-Ads"],
   endpoints: (builder) => ({
     uploadAd: builder.mutation<IBackendResponse, IPostAd>({
       query: (adForm) => ({
@@ -36,6 +38,12 @@ export const adApi = createApi({
         method: "DELETE",
       }),
     }),
+    getAdsByCategory: builder.query<SetStateAction<IAd[]>, string>({
+      query: (category) => ({
+        url: "/ad/ads-by-category/" + category,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -44,4 +52,5 @@ export const {
   useGetAllAdsQuery,
   useGetAdByIdQuery,
   useDeleteAdMutation,
+  useGetAdsByCategoryQuery,
 } = adApi;
