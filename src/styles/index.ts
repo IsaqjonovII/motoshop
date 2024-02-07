@@ -20,7 +20,6 @@ export const GlobalStyle = createGlobalStyle`
     * {
         margin: 0;
         padding: 0;
-        scroll-behavior: smooth;
         box-sizing: border-box;
         text-rendering: optimizeLegibility;
         font-family: 'lato Normal';
@@ -68,6 +67,14 @@ export const GlobalStyle = createGlobalStyle`
     }
     .ant-tabs-tab-active .ant-tabs-tab-btn {
       color: ${teal} !important;
+    }
+    .ant-select {
+        height: 100%;
+    }
+    :where(.css-dev-only-do-not-override-dkbvqv).ant-select:not(.ant-select-disabled):not(.ant-select-customize-input):not(.ant-pagination-size-changer):hover
+    .ant-select-selector,
+    .ant-select-focused .ant-select-selector {
+      border-color: ${teal} !important;
     }
     .swiper__icon {
         font-size: 2rem;

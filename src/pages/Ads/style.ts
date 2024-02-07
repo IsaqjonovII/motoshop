@@ -1,6 +1,9 @@
+import { colors } from "constants/styles";
 import styled from "styled-components";
+import { layout } from "styles/mixin";
 import { pxToRem } from "utils";
 
+const { gray } = colors;
 export const StyledPostAd = styled.div`
   padding: ${pxToRem(30)};
   .post__form {
@@ -34,4 +37,20 @@ export const StyledPostAd = styled.div`
   }
 `;
 
-export default styled.div``;
+export default styled.div`
+  padding: ${pxToRem(30)} 0;
+
+  .filters__wrp {
+    ${layout("grid", { rows: "auto", cols: "6" })}
+    gap: 0 ${pxToRem(10)};
+  }
+  .filter {
+    height: ${pxToRem(45)};
+    .ant-select {
+      width: 100%;
+    }
+  }
+  .ant-select-selection-placeholder {
+    color: ${gray};
+  }
+`;

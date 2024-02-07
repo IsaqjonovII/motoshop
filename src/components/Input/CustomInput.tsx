@@ -27,7 +27,7 @@ export const InputSelect = ({
         id={id}
         value={value}
         className={className}
-        showSearch
+        // showSearch
         placeholder={placeholder}
         onChange={onChange}
         tokenSeparators={[" "]}

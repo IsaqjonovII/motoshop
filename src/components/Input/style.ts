@@ -7,12 +7,11 @@ const { teal, gray, white, red } = colors;
 
 const StyledInput = styled.div`
   position: relative;
-  margin: 0 0 ${pxToRem(15)} 0;
   input, textarea, .ant-select {
     width: 100%;
     max-width: ${pxToRem(550)};
     height: ${pxToRem(45)};
-    border: ${pxToRem(1)} solid ${gray}40;
+    border: ${pxToRem(1)} solid ${gray}30;
     outline: none;
     background-color: ${white};
     padding: 0 ${pxToRem(10)};

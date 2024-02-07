@@ -10,7 +10,7 @@ export const adApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl,
   }),
-  tagTypes: ["Ad", "Random-Ads"],
+  tagTypes: ["Ad"],
   endpoints: (builder) => ({
     uploadAd: builder.mutation<IBackendResponse, IPostAd>({
       query: (adForm) => ({
@@ -37,10 +37,17 @@ export const adApi = createApi({
         url: `/${id}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["Ad"],
     }),
     getAdsByCategory: builder.query<SetStateAction<IAd[]>, string>({
       query: (category) => ({
         url: "/ad/ads-by-category/" + category,
+        method: "GET",
+      }),
+    }),
+    getRandomAds: builder.query<SetStateAction<IAd[]>, any>({
+      query: () => ({
+        url: "/ad/random-ads/",
         method: "GET",
       }),
     }),
@@ -53,4 +60,5 @@ export const {
   useGetAdByIdQuery,
   useDeleteAdMutation,
   useGetAdsByCategoryQuery,
+  useGetRandomAdsQuery,
 } = adApi;

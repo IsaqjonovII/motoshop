@@ -12,10 +12,10 @@ export default styled.div<{ $isInputActive: boolean }>`
   padding: ${pxToRem(5)} ${pxToRem(10)};
   box-shadow: 0 0 ${pxToRem(3)} ${borderGray};
   border: ${pxToRem(1)} solid
-    ${({ $isInputActive }) => ($isInputActive ? teal : borderGray)};
+    ${({ $isInputActive }) => ($isInputActive ? teal : `${gray}40`)};
   border-radius: 0.25rem;
   ${({ $isInputActive }) =>
-    $isInputActive ? `outline: 0.15rem solid ${teal}aa;` : null}
+    $isInputActive ? `outline: 0.2rem solid ${teal}40;` : null}
   margin: 0 ${pxToRem(10)};
   margin-left: auto;
   .search__icon {

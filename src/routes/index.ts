@@ -5,6 +5,7 @@ const Home = lazy(() => import("pages/Home"));
 const Auth = lazy(() => import("pages/Auth"));
 const Profile = lazy(() => import("pages/User"));
 const PostMoto = lazy(() => import("pages/Ads/PostAd"));
+const Ads = lazy(() => import("pages/Ads"));
 
 const {
   HOME,
@@ -29,6 +30,7 @@ export const privateRoutes: IAppRoutes[] = [
   // { key: "messages", path: MESSSAGES, Component: Messages },
   // { key: "likedProducts", path: LIKED_PRODUCTS, Component: LikedProducts },
   { key: "postProduct", path: POST_MOTO, Component: PostMoto },
+  { key: "ads", path: MOTOCYCLES, Component: Ads },
 ];
 
 export const navRoutes: INavRoutes[] = [
