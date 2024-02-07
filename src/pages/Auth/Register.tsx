@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { Loading3QuartersOutlined, UserAddOutlined } from "@ant-design/icons";
+import { AiOutlineLoading3Quarters, AiOutlineUserAdd } from "react-icons/ai";
 import { toast } from "react-toastify";
 import StyledAuth from "./style";
 import { IServerError } from "interfaces";
@@ -83,7 +83,11 @@ const Register = () => {
         />
         <Button type="submit" className="auth__btn">
           {" "}
-          {isLoading ? <Loading3QuartersOutlined spin /> : <UserAddOutlined />}
+          {isLoading ? (
+            <AiOutlineLoading3Quarters className="spinning icon" />
+          ) : (
+            <AiOutlineUserAdd className="icon" />
+          )}
           Hisob yaratish
         </Button>
       </form>

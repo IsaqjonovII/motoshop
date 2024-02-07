@@ -30,6 +30,7 @@ export default styled.header`
         color: ${teal};
         & img {
           height: 100%;
+          object-fit: cover;
         }
     }
     .nav__menu {
@@ -85,7 +86,7 @@ export default styled.header`
     }
   }
   .bars__icon {
-    margin-left: ${pxToRem(15)};
+    margin-left: ${pxToRem(5)};
     font-size: ${pxToRem(24)};
     cursor: pointer;
   }
@@ -141,11 +142,28 @@ export default styled.header`
       padding: ${pxToRem(20)};
     }
   }
-  @media screen and (max-width: ${pxToRem(350)}){
+  @media screen and (max-width: ${pxToRem(768)}){
+    .nav__left .nav__logo{
+      max-width: ${pxToRem(100)};
+      img {
+      max-width: ${pxToRem(100)};
+        object-fit: cover;
+      }
+    }
+  } 
+  @media screen and (max-width: ${pxToRem(550)}){
     .nav__right .user__wrp {
       span {
         display: none;
       }
+    }
+    .nav__container {
+      ${layout("grid", { rows: 2, cols: 6 })}
+      padding: 0 auto;
+      height: ${pxToRem(130)};
+    }
+    .nav__right {
+      grid-column: 6 / 7;
     }
   } 
 `;

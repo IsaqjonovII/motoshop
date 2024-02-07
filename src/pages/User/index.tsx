@@ -5,9 +5,8 @@ import { Link } from "react-router-dom";
 import StyledProfile from "./style";
 import { useAppSelector } from "hooks";
 import { routes } from "constants/routes";
-const Ads = lazy(() => import("pages/Ads/Ads"));
-
 const Messages = lazy(() => import("./Tabs"));
+const Ads = lazy(() => import("./Tabs/Ads"));
 const LastSeen = lazy(() => import("./Tabs/LastSeen"));
 const SavedBikes = lazy(() => import("./Tabs/SavedBikes"));
 const User = lazy(() => import("components/Sidebar/User"));

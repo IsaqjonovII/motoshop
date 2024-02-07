@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { colors } from "constants/styles";
-import { pxToRem } from "utils";
 
 const { gray } = colors;
 export const StyledH1 = styled.div<{
@@ -13,14 +12,14 @@ export const StyledH1 = styled.div<{
     color: ${gray};
     ${
       $size === "sm"
-        ? `font-size: ${pxToRem(16)}`
+        ? `font-size: var(--font-mini)`
         : $size === "md"
-        ? `font-size: ${pxToRem(20)}`
+        ? `font-size: var(--font-h5)`
         : $size === "lg"
-        ? `font-size: ${pxToRem(25)}`
+        ? `font-size: var(--font-h3)`
         : $size === "xl"
-        ? `font-size: ${pxToRem(35)}`
-        : `font-size: ${pxToRem(40)}`
+        ? `font-size: var(--font-h2)`
+        : `font-size: var(--font-h1)`
     }
   `}
 `;

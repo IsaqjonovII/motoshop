@@ -6,12 +6,12 @@ import { pxToRem } from "utils";
 const { teal, gray, white, red } = colors;
 
 const StyledInput = styled.div`
-  margin: 0 0 ${pxToRem(15)} 0;
+  position: relative;
   input, textarea, .ant-select {
     width: 100%;
     max-width: ${pxToRem(550)};
     height: ${pxToRem(45)};
-    border: ${pxToRem(1)} solid ${gray}40;
+    border: ${pxToRem(1)} solid ${gray}30;
     outline: none;
     background-color: ${white};
     padding: 0 ${pxToRem(10)};
@@ -140,6 +140,12 @@ textarea {
     opacity: 1;
     top: ${pxToRem(10)};
     left: 80%;
+  }
+  input, textarea, .ant-select  {
+    font-size: ${pxToRem(15)};
+  }
+  .inp__label {
+  font-size: ${pxToRem(17)};
   }
 }
 `;
