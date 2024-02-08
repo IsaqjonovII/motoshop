@@ -9,7 +9,7 @@ export const GlobalStyle = createGlobalStyle`
     :root {
         --font-h1: clamp(2.2rem, 0.5692rem + 1.638vw, 4.75rem);
         --font-h2: clamp(1.5rem, .882rem + .7143vw, 2.8125rem);
-        --font-h3: clamp(1.375rem, .8837rem + 0.8163vw, 2rem);
+        --font-h3: clamp(1.375rem, .4837rem + 0.5163vw, 2rem);
         --font-h4: clamp(1.375rem, 1.1837rem + 0.8163vw, 1.6rem);
         --font-h5: clamp(1rem, 0.7235rem + 0.3265vw, 1.25rem);
         --font-h6: clamp(1rem, 0.9617rem + 0.1633vw, 1.125rem);
@@ -102,6 +102,18 @@ export const GlobalStyle = createGlobalStyle`
     }
     .spinning {
         animation: spin 450ms infinite linear;
+    }
+    :where(.css-dev-only-do-not-override-dkbvqv).ant-pagination .ant-pagination-item-active {
+        border-color: ${teal};
+        a {
+            color: ${teal};
+        }
+        &:hover {
+            border-color: ${teal} !important;
+            a {
+                color: ${teal};
+            }
+        }
     }
     @keyframes spin {
         to {

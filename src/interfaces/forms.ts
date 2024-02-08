@@ -12,6 +12,7 @@ export interface IPostAd {
   mileage?: string | number;
   manufacturedAt?: string;
   contactLinks?: string[];
+  brand?: string;
 }
 
 export interface ILoginForm {

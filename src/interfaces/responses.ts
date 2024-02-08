@@ -21,5 +21,6 @@ export interface IAd {
   mileage?: string | number;
   manufacturedAt?: string;
   contactLinks?: string[];
-  postedAt: Date; 
+  postedAt: Date;
+  views: number | string;
 }

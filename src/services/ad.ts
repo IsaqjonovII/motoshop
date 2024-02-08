@@ -45,9 +45,9 @@ export const adApi = createApi({
         method: "GET",
       }),
     }),
-    getRandomAds: builder.query<SetStateAction<IAd[]>, any>({
-      query: () => ({
-        url: "/ad/random-ads/",
+    getRandomAds: builder.query<SetStateAction<IAd[]>, number>({
+      query: (limit) => ({
+        url: `/ad/random-ads?limit=${limit}`,
         method: "GET",
       }),
     }),
