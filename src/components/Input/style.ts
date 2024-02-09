@@ -7,7 +7,7 @@ const { teal, gray, white, red } = colors;
 
 const StyledInput = styled.div`
   position: relative;
-  input, textarea, .ant-select {
+  input, textarea, .ant-select, .ant-picker {
     width: 100%;
     max-width: ${pxToRem(550)};
     height: ${pxToRem(45)};

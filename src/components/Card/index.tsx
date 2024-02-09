@@ -20,7 +20,7 @@ const { MOTOCYCLES } = routes;
 const RecommendCard = ({
   _id,
   price,
-  name,
+  title,
   location,
   images,
   mileage,
@@ -84,7 +84,7 @@ const RecommendCard = ({
             </Text>
           </div>
           <Text className="card__title" size="md" bold={600}>
-            {manufacturedAt} • {name}
+            {title} • {manufacturedAt}
           </Text>
           <div className="card__title">
             <Text size="lg" bold={600}>

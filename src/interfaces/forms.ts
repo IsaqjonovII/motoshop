@@ -1,7 +1,7 @@
 import { IUser } from "interfaces";
 
 export interface IPostAd {
-  name: string;
+  title: string;
   description: string;
   price: string;
   location: string;
@@ -11,8 +11,8 @@ export interface IPostAd {
   engineSize?: string | number;
   mileage?: string | number;
   manufacturedAt?: string;
-  contactLinks?: string[];
-  brand?: string;
+  color: string;
+  
 }
 
 export interface ILoginForm {

@@ -10,17 +10,18 @@ export interface IRecommendCard {
 }
 export interface IAd {
   _id: string;
-  name: string;
-  description: string;
+  title: string;
+  owner: IUser;
   price: string;
+  postedAt: Date;
   location: string;
   images: string[];
   category: string;
-  owner: IUser;
-  engineSize?: string | number;
-  mileage?: string | number;
+  description: string;
   manufacturedAt: string;
-  contactLinks?: string[];
-  postedAt: Date;
   views: number | string;
+  mileage?: string | number;
+  engineSize?: string | number;
+  color: string;
+  likes: number | string;
 }

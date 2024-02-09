@@ -1,20 +1,21 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ChangeEvent, useEffect, useState } from "react";
+import { DatePicker } from "antd";
 import { toast } from "react-toastify";
-import type { RadioChangeEvent } from "antd";
 import { useAppSelector } from "hooks";
+import { useNavigate } from "react-router-dom";
+import { type ChangeEvent, useEffect, useState } from "react";
+import type { DatePickerProps, RadioChangeEvent } from "antd";
+import { StyledPostAd } from "./style";
+import { IServerError } from "interfaces";
+import { IPostAd } from "interfaces/forms";
+import { adTypes, bikeTypes } from "constants";
 import { useUploadAdMutation } from "services/ad";
 import { Text } from "components/Text";
-import { StyledPostAd } from "./style";
 import { Input } from "components/Input";
-import { IPostAd } from "interfaces/forms";
-import { Button, RadioButton } from "components/Button";
-import { StyledInput } from "components/Input/style";
-import { InputFile, InputSelect } from "components/Input/CustomInput";
-import { adTypes, bikeTypes } from "constants";
-import { IServerError } from "interfaces";
 import { Spinner } from "components/Loader";
-import { useNavigate } from "react-router-dom";
+import { StyledInput } from "components/Input/style";
+import { Button, RadioButton } from "components/Button";
+import { InputFile, InputSelect } from "components/Input/CustomInput";
 
 const PostAd = () => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const PostAd = () => {
   const [uploadAd, { data, isLoading, error }] = useUploadAdMutation();
   const userId = useAppSelector(({ auth }) => auth.user?._id);
   const [adForm, setAdForm] = useState<IPostAd>({
-    name: "",
+    title: "",
     description: "",
     price: "",
     location: "",
@@ -35,7 +36,7 @@ const PostAd = () => {
     engineSize: "",
     mileage: "",
     manufacturedAt: "",
-    contactLinks: [],
+    color: "",
   });
   useEffect(() => {
     setAdForm({
@@ -57,6 +58,12 @@ const PostAd = () => {
     setAdForm({
       ...adForm,
       category: category.split(" ")[0],
+    });
+  };
+  const onDateChange: DatePickerProps["onChange"] = (_, dateString) => {
+    setAdForm({
+      ...adForm,
+      manufacturedAt: dateString,
     });
   };
   const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
@@ -103,11 +110,11 @@ const PostAd = () => {
             </StyledInput>
           </div>
           <Input
-            id="name"
-            name="name"
+            id="title"
+            name="title"
             label="E'longa nom bering"
             placeholder="Masalan Yamaha R6"
-            value={adForm.name}
+            value={adForm.title}
             onChange={onInputChange}
           />
           <InputFile fileList={fileList} setFileList={setFileList} />
@@ -177,15 +184,15 @@ const PostAd = () => {
                 value={adForm.mileage}
                 onChange={onInputChange}
               />
-              <Input
-                id="moto-date"
-                name="manufacturedAt"
-                label="Ishlab chiqarilgan sana"
-                placeholder="kun.oy.yil"
-                type="date"
-                value={adForm.manufacturedAt}
-                onChange={onInputChange}
-              />
+              <StyledInput>
+
+              <DatePicker
+                className="date__input"
+                onChange={onDateChange}
+                picker="year"
+                disabledDate={(current) => current.year() > 2024}
+                />
+                </StyledInput>
             </>
           )}
           {selectedAdType?.includes("helmet") && <h1>Shlm</h1>}
