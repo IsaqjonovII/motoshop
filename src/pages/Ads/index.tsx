@@ -10,7 +10,6 @@ import { Text } from "components/Text";
 import { Button } from "components/Button";
 import CustomSelect from "components/Select";
 import RecommendCard from "components/Card";
-import { formatNumbers } from "utils";
 
 const Ads = () => {
   const { data, isLoading, error } = useGetRandomAdsQuery(30);
@@ -19,9 +18,7 @@ const Ads = () => {
   const [isFiltersOpened, setisFiltersOpened] = useState<boolean>(false);
   const [selectedBikeTypes, setSelectedBikeTypes] = useState<string[]>([]);
   const [selectedEngine, setSelectedEngine] = useState("");
-  console.log(selectedBikeTypes, selectedEngine);
-  console.log(isLoading);
-  const handleEngine = (val: string | any) => {
+  const handleEngine = (val: string) => {
     setSelectedEngine(val);
   };
   const handleBikeTypesChange = (value: string[]) =>
@@ -36,7 +33,6 @@ const Ads = () => {
   useEffect(() => {
     if (error) console.log(error);
   }, [error]);
-  console.log(formatNumbers(10_000))
   return (
     <StyledAds>
       <div className="ads__header">
