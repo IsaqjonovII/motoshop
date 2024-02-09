@@ -17,6 +17,7 @@ const Carousel = ({ items, title, isLoading }: props) => {
   /* eslint-disable @typescript-eslint/no-explicit-any */
   const swiperRef = useRef<any>();
   console.log(isLoading);
+  
   return (
     <div>
       <div className="flex">

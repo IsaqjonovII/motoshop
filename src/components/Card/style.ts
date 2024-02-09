@@ -16,6 +16,7 @@ export default styled.div`
   .card__content {
     padding: ${pxToRem(15)};
   }
+  position: relative;
   .img__wrp {
     width: 100%;
     height: 250px;
@@ -23,17 +24,18 @@ export default styled.div`
     background-image: linear-gradient(${white}, ${borderGray});
     background-position: 200% auto;
     animation: loading 1s infinite linear;
-    position: relative;
+    .icon__wrp {
+      position: absolute;
+      top: .825rem;
+      right: .5rem;
+    }
     .heart__icon {
       width: ${pxToRem(35)};
       height: ${pxToRem(35)};
       background-color: ${white};
       border-radius: ${pxToRem(4)};
-      position: absolute;
-      z-index: 99;
+      z-index: 999;
       padding: .25rem;
-      top: .825rem;
-      right: .5rem;
       color: ${teal};
     }
     .card__img {
@@ -45,13 +47,13 @@ export default styled.div`
   }
   .card__head {
     ${layout("flex")}
-    margin: 0 0 ${pxToRem(10)} 0;
-    .head__text:first-child {
+    .head__text {
       text-transform: capitalize;
     }
   }
   .card__title {
-    transition: 200ms ease-in-out;
+    ${layout("flex")}
+    margin: ${pxToRem(15)} 0;
   }
   @media only screen and (max-width: ${pxToRem(1200)}) {
     .card__head {

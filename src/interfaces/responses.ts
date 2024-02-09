@@ -16,10 +16,10 @@ export interface IAd {
   location: string;
   images: string[];
   category: string;
-  owner: string | IUser;
+  owner: IUser;
   engineSize?: string | number;
   mileage?: string | number;
-  manufacturedAt?: string;
+  manufacturedAt: string;
   contactLinks?: string[];
   postedAt: Date;
   views: number | string;

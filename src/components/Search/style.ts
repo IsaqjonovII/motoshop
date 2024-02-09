@@ -28,6 +28,10 @@ export default styled.div<{ $isInputActive: boolean }>`
     outline: none;
     flex: 1;
   }
+  @media only screen and (max-width: 1024px) {
+      max-width: ${pxToRem(500)};
+      flex-shrink: 1;
+  }
   @media screen and (max-width: ${pxToRem(550)}) {
     grid-row: 2 / 3;
     grid-column: 1 / 7;

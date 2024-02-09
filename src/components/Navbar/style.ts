@@ -136,7 +136,7 @@ export default styled.header`
   }
   @media screen and (max-width: ${pxToRem(1024)}) {
     .nav__left .nav__menu {
-      display: none;
+      padding: 0;
     }
     .nav__container {
       padding: ${pxToRem(20)};
@@ -157,10 +157,15 @@ export default styled.header`
         display: none;
       }
     }
+    height: ${pxToRem(130)};
+    padding: 0.5rem 0.825rem;
     .nav__container {
       ${layout("grid", { rows: 2, cols: 6 })}
-      padding: 0 auto;
-      height: ${pxToRem(130)};
+      padding: 0;
+      height: 100%;
+    }
+    .nav__left, .nav__right {
+      height: 60px !important;
     }
     .nav__right {
       grid-column: 6 / 7;

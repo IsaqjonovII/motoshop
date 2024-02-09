@@ -1,15 +1,13 @@
 import { Link } from "react-router-dom";
-import { AiOutlineUser, AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
-import { navRoutes } from "routes";
+import { AiOutlineUser } from "react-icons/ai";
 import StyledNav from "./style";
 import { motoLogo } from "assets";
-import { ISidebar } from "interfaces";
 import { useAppSelector } from "hooks";
 import { routes } from "constants/routes";
 import { SearchNavbar } from "components/Search";
 
-const { HOME, AUTH, PROFILE } = routes;
-const Navbar = ({ isSidebarOpen, setIsSidebarOpen }: ISidebar) => {
+const { HOME, AUTH, PROFILE, MOTOCYCLES } = routes;
+const Navbar = () => {
   const user = useAppSelector(({ auth }) => auth.user);
 
   return (
@@ -22,11 +20,9 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }: ISidebar) => {
             </Link>
           </div>
           <nav className="nav__menu">
-            {navRoutes.map(({ key, path }) => (
-              <Link key={key} to={path} className="menu__item" aria-label={key}>
-                {key}
-              </Link>
-            ))}
+            <Link to={MOTOCYCLES} className="menu__item">
+              E'lonlar
+            </Link>
           </nav>
         </div>
         <SearchNavbar />
@@ -42,17 +38,6 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }: ISidebar) => {
             <Link className="login__link" to={AUTH}>
               Kirish
             </Link>
-          )}
-          {isSidebarOpen ? (
-            <AiOutlineClose
-              className="bars__icon"
-              onClick={() => setIsSidebarOpen(false)}
-            />
-          ) : (
-            <AiOutlineMenu
-              className="bars__icon"
-              onClick={() => setIsSidebarOpen(true)}
-            />
           )}
         </div>
       </div>

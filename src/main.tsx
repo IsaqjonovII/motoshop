@@ -1,6 +1,6 @@
-import React, { Suspense } from "react";
+import { Suspense, StrictMode } from "react";
 import { Provider } from "react-redux";
-import ReactDOM from "react-dom/client";
+import { createRoot } from "react-dom/client";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter } from "react-router-dom";
@@ -10,9 +10,8 @@ import { store, persistor } from "store";
 import Loader from "components/Loader";
 import { GlobalStyle } from "styles/index.ts";
 
- 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
     <GlobalStyle />
     <ToastContainer
       position="bottom-center"
@@ -30,5 +29,5 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         </Suspense>
       </PersistGate>
     </Provider>
-  </React.StrictMode>
+  </StrictMode>
 );
