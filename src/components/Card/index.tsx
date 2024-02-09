@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link } from "react-router-dom";
 import CardStyle from "./style";
 import LazyImage from "components/LazyImage";
@@ -62,12 +63,12 @@ const RecommendCard = ({
             {isLiked ? (
               <IoMdHeart
                 className="heart__icon icon"
-                onClick={(e) => handleRemoveLikedProducts(_id, e)}
+                onClick={(e: any) => handleRemoveLikedProducts(_id, e)}
               />
             ) : (
               <IoMdHeartEmpty
                 className="heart__icon icon"
-                onClick={(e) => handleAddToLikedProducts(_id, e)}
+                onClick={(e: any) => handleAddToLikedProducts(_id, e)}
               />
             )}
           </div>
@@ -92,7 +93,7 @@ const RecommendCard = ({
               <b>{mileage ?? 0} km</b>
             </Text>
           </div>
-          <FiPhone onClick={(e) => handlePhoneCall("tel:" + owner.phone, e)} />
+          <FiPhone onClick={(e: any) => handlePhoneCall("tel:" + owner.phone, e)} />
         </div>
       </Link>
     </CardStyle>
