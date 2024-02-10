@@ -20,36 +20,24 @@ export const adApi = createApi({
       }),
       invalidatesTags: ["Ad"],
     }),
-    getAllAds: builder.query<IBackendResponse, IPostAd[]>({
-      query: () => ({
-        url: "/",
-        method: "GET",
-      }),
+    getAllAds: builder.query<IAd[], void>({
+      query: () => "/ad",
     }),
     getAdById: builder.query<IBackendResponse, IPostAd>({
-      query: (id) => ({
-        url: `/${id}`,
-        method: "GET",
-      }),
+      query: (id) => `ad/${id}`,
     }),
     deleteAd: builder.mutation<IBackendResponse, string>({
       query: (id) => ({
-        url: `/${id}`,
+        url: `ad/${id}`,
         method: "DELETE",
       }),
       invalidatesTags: ["Ad"],
     }),
     getAdsByCategory: builder.query<SetStateAction<IAd[]>, string>({
-      query: (category) => ({
-        url: "/ad/ads-by-category/" + category,
-        method: "GET",
-      }),
+      query: (category) => "ad/ads-by-category/" + category,
     }),
     getRandomAds: builder.query<SetStateAction<IAd[]>, number>({
-      query: (limit) => ({
-        url: `/ad/random-ads?limit=${limit}`,
-        method: "GET",
-      }),
+      query: (limit) => `ad/random-ads?limit=${limit}`,
     }),
   }),
 });
