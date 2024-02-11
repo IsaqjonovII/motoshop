@@ -19,10 +19,17 @@ export const engineCC = [
   { value: "250-600", label: "250 - 600 cm³" },
   { value: "600-1000", label: "600 - 1000 cm³" },
 ];
-export const bikeState = [
-  { value: "barchasi", label: "Barchasi" },
+export const condition = [
   { value: "yangi", label: "Yangi" },
   { value: "ishlatilgan", label: "Ishlatilgan" },
+];
+export const helmetBrands = [
+  { value: "agv", label: "AGV" },
+  { value: "shoei", label: "Shoei" },
+  { value: "hjc", label: "HJC" },
+  { value: "xlite", label: "X-Lite" },
+  { value: "ls2", label: "LS2" },
+  { value: "boshqa", label: "Boshqa" },
 ];
 export const mileage = [
   { value: "0-1000", label: "0 km - 1 000 km" },
@@ -37,6 +44,14 @@ export const bikeColors = [
   { value: "sariq", label: "Sariq" },
   { value: "kok", label: "Ko'k" },
   { value: "kulrang", label: "Kulrang" },
+];
+export const gearSizes = [
+  { value: "s", label: "S" },
+  { value: "m", label: "M" },
+  { value: "l", label: "L" },
+  { value: "xl", label: "XL" },
+  { value: "2xl", label: "2XL" },
+  { value: "3xl", label: "3XL" },
 ];
 export const adTypes = [
   {

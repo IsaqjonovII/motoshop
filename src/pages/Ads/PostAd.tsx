@@ -7,8 +7,15 @@ import { type ChangeEvent, useEffect, useState } from "react";
 import type { DatePickerProps, RadioChangeEvent } from "antd";
 import { StyledPostAd } from "./style";
 import { IServerError } from "interfaces";
-import { IPostAd } from "interfaces/forms";
-import { adTypes, bikeTypes } from "constants";
+import { IGearAd, IMotoAd } from "interfaces/forms";
+import {
+  adTypes,
+  bikeColors,
+  bikeTypes,
+  condition,
+  gearSizes,
+  helmetBrands,
+} from "constants";
 import { useUploadAdMutation } from "services/ad";
 import { Text } from "components/Text";
 import { Input } from "components/Input";
@@ -25,7 +32,7 @@ const PostAd = () => {
   const [fileList, setFileList] = useState<string[]>([]);
   const [uploadAd, { data, isLoading, error }] = useUploadAdMutation();
   const userId = useAppSelector(({ auth }) => auth.user?._id);
-  const [adForm, setAdForm] = useState<IPostAd>({
+  const [adForm, setAdForm] = useState<IMotoAd | IGearAd>({
     title: "",
     description: "",
     price: "",
@@ -37,6 +44,9 @@ const PostAd = () => {
     mileage: "",
     manufacturedAt: "",
     color: "",
+    size: "",
+    brand: "",
+    condition: "",
   });
   useEffect(() => {
     setAdForm({
@@ -54,12 +64,14 @@ const PostAd = () => {
       [name]: value,
     });
   };
-  const onSelectChange = (category: string | any) => {
+  const onSelectChange = (fieldName: string, value: any) => {
     setAdForm({
       ...adForm,
-      category: category.split(" ")[0],
+      [fieldName]: value,
     });
   };
+  console.log(adForm);
+
   const onDateChange: DatePickerProps["onChange"] = (_, dateString) => {
     setAdForm({
       ...adForm,
@@ -118,7 +130,7 @@ const PostAd = () => {
             onChange={onInputChange}
           />
           <InputFile fileList={fileList} setFileList={setFileList} />
-
+          <small>Maksimalk 10 tagacha rasm joylash mumkin</small>
           <StyledInput>
             <label className="inp__label" htmlFor="moto-info-description">
               Izoh
@@ -129,7 +141,7 @@ const PostAd = () => {
               cols={76}
               rows={10}
               minLength={40}
-              placeholder="Eng kamida 40 ta belgi yozing"
+              placeholder="E'longa tushunarli va batafsil tarif bering"
               value={adForm.description}
               onChange={onInputChange}
             ></textarea>
@@ -151,7 +163,15 @@ const PostAd = () => {
           />
         </div>
         <div>
-          {selectedAdType?.includes("moto") && (
+          <InputSelect
+            id="ad-color"
+            name="color"
+            label="Rangini tanlang"
+            value={adForm.color}
+            onChange={(e: any) => onSelectChange("color", e)}
+            options={bikeColors}
+          />
+          {selectedAdType === "moto" && (
             <>
               <InputSelect
                 id="moto-type"
@@ -159,8 +179,8 @@ const PostAd = () => {
                 label="Turini tanlang"
                 placeholder="Masalan sportbike"
                 className="inp__select"
-                value={adForm.category}
-                onChange={onSelectChange}
+                value={(adForm as IMotoAd)?.category || ""}
+                onChange={(e: any) => onSelectChange("category", e)}
                 options={bikeTypes}
               />
               <Input
@@ -170,7 +190,7 @@ const PostAd = () => {
                 placeholder="Masalan 600 cm³"
                 type="number"
                 min={0}
-                value={adForm.engineSize}
+                value={(adForm as IMotoAd)?.engineSize || ""}
                 onChange={onInputChange}
               />
               <Input
@@ -181,21 +201,50 @@ const PostAd = () => {
                 minLength={0}
                 min={0}
                 type="number"
-                value={adForm.mileage}
+                value={(adForm as IMotoAd)?.mileage || ""}
                 onChange={onInputChange}
               />
               <StyledInput>
-
-              <DatePicker
-                className="date__input"
-                onChange={onDateChange}
-                picker="year"
-                disabledDate={(current) => current.year() > 2024}
+                <label className="inp__label">Ishlab chiqarilgan sana</label>
+                <DatePicker
+                  className="date__input"
+                  onChange={onDateChange}
+                  picker="year"
+                  disabledDate={(current) => current.year() > 2024}
                 />
-                </StyledInput>
+              </StyledInput>
             </>
           )}
-          {selectedAdType?.includes("helmet") && <h1>Shlm</h1>}
+          {selectedAdType === "helmet" ? (
+            <>
+              <InputSelect
+                id="helmet-size"
+                name="size"
+                label="O'lchami"
+                value={(adForm as IGearAd)?.size}
+                onChange={(e: any) => onSelectChange("size", e)}
+                options={gearSizes}
+              />
+              <InputSelect
+                id="condition"
+                name="condition"
+                label="Holati"
+                value={(adForm as IGearAd)?.condition}
+                onChange={(e: any) => onSelectChange("condition", e)}
+                options={condition}
+              />
+              <InputSelect
+                id="brand"
+                name="brand"
+                label="Brand"
+                value={(adForm as IGearAd)?.brand}
+                onChange={(e: any) => onSelectChange("brand", e)}
+                options={helmetBrands}
+              />
+            </>
+          ) : selectedAdType === "gear" ? (
+            <h1>accessories</h1>
+          ) : null}
         </div>
         <Button type="submit" className="ad__btn">
           E&apos;lonni joylash

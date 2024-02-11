@@ -6,13 +6,19 @@ export interface IPostAd {
   price: string;
   location: string;
   images: string[];
-  category?: string;
   owner: string | IUser;
-  engineSize?: string | number;
-  mileage?: string | number;
-  manufacturedAt?: string;
   color: string;
-  
+}
+export interface IMotoAd extends IPostAd {
+  category: string;
+  engineSize: string | number;
+  mileage: string | number;
+  manufacturedAt: string;
+}
+export interface IGearAd extends IPostAd {
+  size: string;
+  condition: string;
+  brand: string;
 }
 
 export interface ILoginForm {
