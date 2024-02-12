@@ -5,7 +5,7 @@ const Home = lazy(() => import("pages/Home"));
 const Auth = lazy(() => import("pages/Auth"));
 const Profile = lazy(() => import("pages/User"));
 const PostMoto = lazy(() => import("pages/Ads/PostAd"));
-const Ads = lazy(() => import("pages/Ads"));
+const Ads = lazy(() => import("pages/Ads/All"));
 
 const {
   HOME,

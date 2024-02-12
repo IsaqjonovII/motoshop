@@ -8,6 +8,7 @@ export interface IPostAd {
   images: string[];
   owner: string | IUser;
   color: string;
+  adType: string;
 }
 export interface IMotoAd extends IPostAd {
   category: string;

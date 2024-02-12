@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { DatePicker } from "antd";
 import { toast } from "react-toastify";
-import { useAppSelector } from "hooks";
 import { useNavigate } from "react-router-dom";
 import { type ChangeEvent, useEffect, useState } from "react";
 import type { DatePickerProps, RadioChangeEvent } from "antd";
 import { StyledPostAd } from "./style";
+import { useAppSelector } from "hooks";
 import { IServerError } from "interfaces";
 import { IGearAd, IMotoAd } from "interfaces/forms";
 import {
@@ -26,9 +26,7 @@ import { InputFile, InputSelect } from "components/Input/CustomInput";
 
 const PostAd = () => {
   const navigate = useNavigate();
-  const [selectedAdType, setSelectedAdType] = useState<
-    string | null | undefined
-  >("moto");
+  const [selectedAdType, setSelectedAdType] = useState<string>("moto");
   const [fileList, setFileList] = useState<string[]>([]);
   const [uploadAd, { data, isLoading, error }] = useUploadAdMutation();
   const userId = useAppSelector(({ auth }) => auth.user?._id);
@@ -47,6 +45,7 @@ const PostAd = () => {
     size: "",
     brand: "",
     condition: "",
+    adType: selectedAdType,
   });
   useEffect(() => {
     setAdForm({
@@ -70,7 +69,6 @@ const PostAd = () => {
       [fieldName]: value,
     });
   };
-  console.log(adForm);
 
   const onDateChange: DatePickerProps["onChange"] = (_, dateString) => {
     setAdForm({
@@ -82,11 +80,15 @@ const PostAd = () => {
     e.preventDefault();
     await uploadAd(adForm);
     console.log(adForm);
-    if ("ad" in data!) {
-      toast.success(data.message);
-      navigate("/");
-    }
+    console.log(selectedAdType);
+    // if ("ad" in data!) {
+    //   toast.success(data.message);
+    //   navigate("/");
+    // }
   };
+  useEffect(() => {
+    if (data) console.log(data);
+  }, [data]);
   useEffect(() => {
     if (error) {
       const { status, data } = error as IServerError;
@@ -102,7 +104,13 @@ const PostAd = () => {
     }
   }, [error]);
 
-  const onChange = (e: RadioChangeEvent) => setSelectedAdType(e.target.value);
+  const onChange = (e: RadioChangeEvent) => {
+    setSelectedAdType(e.target.value);
+    setAdForm({
+      ...adForm,
+      adType: e.target.value,
+    });
+  };
   return (
     <StyledPostAd>
       {isLoading && (

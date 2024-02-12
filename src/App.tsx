@@ -12,13 +12,15 @@ function App() {
     // setisSidebarOpen(false);
     window.scrollTo(0, 0);
   }, [pathname]);
-  // const isAuthRoute = ["/auth"].includes(pathname);
+  const isAuthRoute = ["/auth"].includes(pathname);
 
   return (
     <div className="app">
-      <div className="container__nav">
-        <Navbar />
-      </div>
+      {!isAuthRoute && (
+        <div className="container__nav">
+          <Navbar />
+        </div>
+      )}
       <Container>
         <Routes>
           {privateRoutes.map(({ key, path, Component }) => (
