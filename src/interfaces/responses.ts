@@ -1,4 +1,5 @@
 import { IUser } from "interfaces";
+import { IPostAd } from "./forms";
 
 export interface IRecommendCard {
   _id: string;
@@ -8,20 +9,21 @@ export interface IRecommendCard {
   postedAt: string;
   location: string;
 }
-export interface IAd {
+export interface IAdMoto extends IPostAd {
   _id: string;
-  title: string;
   owner: IUser;
-  price: string;
   postedAt: Date;
-  location: string;
-  images: string[];
+  likes: number;
+  views: number;
+}
+export interface IAdHelmetAndGear extends IAdMoto {
+  brand: string;
+  size: string;
+  condition: string;
+}
+export interface IMotoAd extends IAdMoto {
   category: string;
-  description: string;
   manufacturedAt: string;
-  views: number | string;
-  mileage?: string | number;
-  engineSize?: string | number;
-  color: string;
-  likes: number | string;
+  mileage: string | number;
+  engineSize: string | number;
 }

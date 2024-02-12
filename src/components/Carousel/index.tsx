@@ -3,13 +3,13 @@ import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { HiOutlineChevronRight, HiOutlineChevronLeft } from "react-icons/hi";
 import RecommendCard from "components/Card";
-import { IAd } from "interfaces/responses";
+import { IAdHelmetAndGear, IAdMoto, IMotoAd } from "interfaces/responses";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Text } from "components/Text";
 
 type props = {
-  items: IAd[];
+  items: IAdMoto[] | IMotoAd[] | IAdHelmetAndGear[];
   title: string;
   isLoading?: boolean;
 };
@@ -17,7 +17,7 @@ const Carousel = ({ items, title, isLoading }: props) => {
   /* eslint-disable @typescript-eslint/no-explicit-any */
   const swiperRef = useRef<any>();
   console.log(isLoading);
-  
+
   return (
     <div>
       <div className="flex">

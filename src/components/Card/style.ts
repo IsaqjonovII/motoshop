@@ -16,6 +16,14 @@ export default styled.div`
   .card__content {
     padding: ${pxToRem(15)};
   }
+  .ad__detail {
+    ${layout("flex")}
+    /* justify-content: start; */
+    .detail__text {
+      /* text-transform: uppercase; */
+      padding: 0 ${pxToRem(10)};
+    }
+  }
   position: relative;
   .img__wrp {
     width: 100%;

@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { baseUrl } from "constants";
 import { IBackendResponse } from "interfaces";
 import { IPostAd } from "interfaces/forms";
-import { IAd } from "interfaces/responses";
+import { IAdMoto, IAdHelmetAndGear } from "interfaces/responses";
 import { SetStateAction } from "react";
 
 export const adApi = createApi({
@@ -20,7 +20,7 @@ export const adApi = createApi({
       }),
       invalidatesTags: ["Ad"],
     }),
-    getAllAds: builder.query<IAd[], void>({
+    getAllAds: builder.query<IAdMoto[] | IAdHelmetAndGear[], void>({
       query: () => "/ad",
     }),
     getAdById: builder.query<IBackendResponse, IPostAd>({
@@ -33,10 +33,16 @@ export const adApi = createApi({
       }),
       invalidatesTags: ["Ad"],
     }),
-    getAdsByCategory: builder.query<SetStateAction<IAd[]>, string>({
-      query: (category) => "ad/ads-by-category/" + category,
+    getAdsByCategory: builder.query<
+      SetStateAction<IAdMoto[] | IAdHelmetAndGear[]>,
+      string
+    >({
+      query: (type) => `ad/ads-by-type?type=${type}`,
     }),
-    getRandomAds: builder.query<SetStateAction<IAd[]>, number>({
+    getRandomAds: builder.query<
+      SetStateAction<IAdMoto[] | IAdHelmetAndGear[]>,
+      number
+    >({
       query: (limit) => `ad/random-ads?limit=${limit}`,
     }),
   }),

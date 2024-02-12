@@ -21,7 +21,6 @@ export interface IGearAd extends IPostAd {
   condition: string;
   brand: string;
 }
-
 export interface ILoginForm {
   phone: string | number;
   password: string;

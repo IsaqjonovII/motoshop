@@ -3,7 +3,7 @@ import type { PaginationProps } from "antd";
 import { CiFilter } from "react-icons/ci";
 import { useEffect, useState } from "react";
 import StyledAds from "./style";
-import { IAd } from "interfaces/responses";
+import { IAdMoto, IAdHelmetAndGear } from "interfaces/responses";
 import { useGetRandomAdsQuery } from "services/ad";
 import { bikeColors, condition, bikeTypes, engineCC, mileage } from "constants";
 import { Text } from "components/Text";
@@ -12,8 +12,10 @@ import CustomSelect from "components/Select";
 import RecommendCard from "components/Card";
 
 const Ads = () => {
-  const { data, isLoading, error } = useGetRandomAdsQuery(30);
-  const [randomAdsData, setRandomAdsData] = useState<IAd[]>([]);
+  const { data, isLoading, error, refetch } = useGetRandomAdsQuery(30);
+  const [randomAdsData, setRandomAdsData] = useState<
+    IAdMoto[] | IAdHelmetAndGear[]
+  >([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [isFiltersOpened, setisFiltersOpened] = useState<boolean>(false);
   const [selectedBikeTypes, setSelectedBikeTypes] = useState<string[]>([]);
@@ -30,10 +32,13 @@ const Ads = () => {
   useEffect(() => {
     if (data) setRandomAdsData(data);
   }, [data]);
-
   useEffect(() => {
     if (error) console.log(error);
   }, [error]);
+  useEffect(() => {
+    refetch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <StyledAds>
       <div className="ads__header">

@@ -28,7 +28,7 @@ export interface IButton {
   disabled?: boolean;
 }
 export interface IText {
-  children: (string | JSX.Element)[] | string | JSX.Element;
+  children: (string | JSX.Element)[] | string | JSX.Element | any;
   size: "sm" | "md" | "lg" | "xl" | "xxl";
   className?: string;
   bold: number;

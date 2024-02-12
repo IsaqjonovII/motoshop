@@ -92,10 +92,6 @@ export default styled.div`
   @media only screen and (max-width: 400px) {
     .filters__wrp {
       ${layout("grid", { rows: 6, cols: 1 })}
-      position: fixed;
-      top: 30%;
-      left: 1rem;
-      width: calc(100% - 2rem);
     }
   }
 `;

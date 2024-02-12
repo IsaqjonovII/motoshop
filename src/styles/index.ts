@@ -48,6 +48,12 @@ export const GlobalStyle = createGlobalStyle`
     .flex {
         ${layout("flex")}
     }
+    .capitalize {
+        text-transform: capitalize;
+    }
+    .uppercase {
+        text-transform: uppercase;
+    }
     hr {
         border: none;
         border-top: 1px solid ${gray}30;
