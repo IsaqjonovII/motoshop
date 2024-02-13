@@ -109,6 +109,9 @@ export const GlobalStyle = createGlobalStyle`
     .spinning {
         animation: spin 450ms infinite linear;
     }
+    .swiper-slide {
+        margin: 0;
+    }
     :where(.css-dev-only-do-not-override-dkbvqv).ant-pagination .ant-pagination-item-active {
         border-color: ${teal};
         a {

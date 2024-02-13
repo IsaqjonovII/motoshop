@@ -54,14 +54,14 @@ export default styled.div`
     }
   }
   .card__head {
-    ${layout("flex")}
-    .head__text {
-      text-transform: capitalize;
-    }
+   margin-top: ${pxToRem(10)};
   }
-  .card__title {
+  .card__row {
     ${layout("flex")}
-    margin: ${pxToRem(15)} 0;
+    margin: ${pxToRem(15)} 0 0 0;
+  }
+  .label {
+    font-weight: 300;
   }
   @media only screen and (max-width: ${pxToRem(1200)}) {
     .card__head {

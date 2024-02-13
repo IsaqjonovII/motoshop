@@ -44,22 +44,19 @@ const Carousel = ({ items, title, isLoading }: props) => {
         modules={[Navigation]}
         className="mySwiper"
         slidesPerView={1}
-        spaceBetween={20}
+        spaceBetween={10}
         onSwiper={(swiper) => {
           swiperRef.current = swiper;
         }}
         breakpoints={{
           768: {
             slidesPerView: 2,
-            spaceBetween: 40,
           },
           1024: {
             slidesPerView: 3,
-            spaceBetween: 10,
           },
           1224: {
             slidesPerView: 4,
-            spaceBetween: 15,
           },
         }}
       >

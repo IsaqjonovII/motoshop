@@ -2,15 +2,12 @@ export function pxToRem(px: number): string {
   return px / 16 + "rem";
 }
 export function formatNumbers(num: number): string {
-  let absNum = Math.abs(num);
-  const suffixes = ["", "K", "M", "B"];
-  let suffixIndex = 0;
-  while (absNum >= 1000 && suffixIndex < suffixes.length - 1) {
-    absNum /= 1000;
-    suffixIndex++;
+  const splittedNums = String(num).split("").reverse();
+  for (let i = 0; i < splittedNums.length; i += 4) {
+    splittedNums.splice(i, 0, ",");
   }
-  const formattedNum = absNum.toFixed(0);
-  return `${formattedNum}${suffixes[suffixIndex]}`;
+  splittedNums.shift();
+  return splittedNums.reverse().join("");
 }
 
 export const getBase64 = (file: File): Promise<string> => {

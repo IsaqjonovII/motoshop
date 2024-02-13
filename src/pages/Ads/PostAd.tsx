@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { DatePicker } from "antd";
+import { DatePicker, Form } from "antd";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { type ChangeEvent, useEffect, useState } from "react";
@@ -79,12 +79,10 @@ const PostAd = () => {
   const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     await uploadAd(adForm);
-    console.log(adForm);
-    console.log(selectedAdType);
-    // if ("ad" in data!) {
-    //   toast.success(data.message);
-    //   navigate("/");
-    // }
+    if ("ad" in data!) {
+      toast.success(data.message);
+      navigate("/");
+    }
   };
   useEffect(() => {
     if (data) console.log(data);
@@ -121,7 +119,7 @@ const PostAd = () => {
       </Text>
       <br />
 
-      <form className="post__form" autoComplete="off" onSubmit={handleSubmit}>
+      <Form className="post__form" autoComplete="off" onFinish={handleSubmit}>
         <div>
           <div className="flex">
             <StyledInput>
@@ -257,7 +255,7 @@ const PostAd = () => {
         <Button type="submit" className="ad__btn">
           E&apos;lonni joylash
         </Button>
-      </form>
+      </Form>
     </StyledPostAd>
   );
 };
