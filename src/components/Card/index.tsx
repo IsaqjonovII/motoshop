@@ -64,14 +64,9 @@ const RecommendCard = (props: IAdMoto) => {
           </div>
         </div>
         <div className="card__content">
-          <div className="card__head">
+          <div className="card__row">
             <Text className="head__text" size="sm" bold={400}>
               {location}
-            </Text>
-          </div>
-          <div className="card__row">
-            <Text size="lg" bold={600}>
-              {formatNumbers(parseInt(price))} so'm
             </Text>
             <Text size="sm" bold={300} className="uppercase">
               {props.adType === "moto" ? (
@@ -79,6 +74,11 @@ const RecommendCard = (props: IAdMoto) => {
               ) : (
                 <b>{(props as IAdHelmetAndGear)?.size}</b>
               )}
+            </Text>
+          </div>
+          <div className="card__row">
+            <Text size="lg" bold={600}>
+              {formatNumbers(parseInt(price))} so'm
             </Text>
           </div>
           <Text className="card__head" size="md" bold={600}>
