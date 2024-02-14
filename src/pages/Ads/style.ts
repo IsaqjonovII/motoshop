@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { layout } from "styles/mixin";
 import { pxToRem } from "utils";
 
-const { gray } = colors;
+const { gray, teal } = colors;
 export const StyledPostAd = styled.div`
   padding: ${pxToRem(30)};
   .post__form {
@@ -14,6 +14,14 @@ export const StyledPostAd = styled.div`
       width: 100%;
       max-width: ${pxToRem(520)};
     }
+  }
+  .switch__wrp,
+  .price__wrp {
+    ${layout("flex")}
+  }
+  .ant-switch.ant-switch-checked,
+  .ant-switch.ant-switch-checked:hover {
+    background-color: ${teal};
   }
   @media only screen and (max-width: ${pxToRem(920)}) {
     .ad__title {

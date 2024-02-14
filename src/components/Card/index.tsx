@@ -6,7 +6,7 @@ import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import CardStyle from "./style";
 import { formatNumbers } from "utils";
 import { useAppDispatch, useAppSelector } from "hooks";
-import { IAdMoto, IAdHelmetAndGear, IMotoAd } from "interfaces/responses";
+import { IAdMoto } from "interfaces/responses";
 import {
   addToLikedProducts,
   removeLikedProducts,
@@ -68,25 +68,18 @@ const RecommendCard = (props: IAdMoto) => {
             <Text className="head__text" size="sm" bold={400}>
               {location}
             </Text>
-            <Text size="sm" bold={300} className="uppercase">
-              {props.adType === "moto" ? (
-                <b>{(props as IMotoAd)?.mileage} km</b>
-              ) : (
-                <b>{(props as IAdHelmetAndGear)?.size}</b>
-              )}
-            </Text>
           </div>
           <div className="card__row">
             <Text size="lg" bold={600}>
-              {formatNumbers(parseInt(price))} so'm
+              {price.currency === "usd"
+                ? `$${formatNumbers(parseInt(price.amount))}`
+                : price.currency === "uzs"
+                ? `${formatNumbers(parseInt(price.amount))} so'm`
+                : `€${formatNumbers(parseInt(price.amount))}`}
             </Text>
           </div>
           <Text className="card__head" size="md" bold={600}>
             {title}
-            <span className="label">
-              {props.adType === "moto" &&
-                " • " + (props as IMotoAd)?.manufacturedAt}
-            </span>
           </Text>
           <div className="card__row">
             <Button>Batafsil</Button>

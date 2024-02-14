@@ -19,7 +19,6 @@ export interface IInput {
   min?: number;
   max?: number;
 }
-
 export interface IButton {
   className?: string;
   type?: "button" | "reset" | "submit";

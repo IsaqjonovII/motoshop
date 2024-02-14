@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { DatePicker, Form } from "antd";
+import { DatePicker, Form, Switch } from "antd";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { type ChangeEvent, useEffect, useState } from "react";
@@ -13,6 +13,7 @@ import {
   bikeColors,
   bikeTypes,
   condition,
+  currencies,
   gearSizes,
   helmetBrands,
 } from "constants";
@@ -33,7 +34,11 @@ const PostAd = () => {
   const [adForm, setAdForm] = useState<IMotoAd | IGearAd>({
     title: "",
     description: "",
-    price: "",
+    price: {
+      amount: "",
+      currency: "",
+      canBargain: false,
+    },
     location: "",
     images: fileList,
     category: "",
@@ -76,27 +81,22 @@ const PostAd = () => {
       manufacturedAt: dateString,
     });
   };
-  const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     await uploadAd(adForm);
-    if ("ad" in data!) {
+  };
+  useEffect(() => {
+    if (data) {
       toast.success(data.message);
       navigate("/");
     }
-  };
-  useEffect(() => {
-    if (data) console.log(data);
-  }, [data]);
+  }, [data, navigate]);
   useEffect(() => {
     if (error) {
       const { status, data } = error as IServerError;
       if (status === "FETCH_ERROR") {
-        console.log(data);
-        console.log(data);
         toast.error("Serverda xatolik. Iltimos birozdan so'ng urinib ko'ring");
       }
       if (data?.message) {
-        console.log(data);
         toast.error(data?.message);
       }
     }
@@ -107,6 +107,15 @@ const PostAd = () => {
     setAdForm({
       ...adForm,
       adType: e.target.value,
+    });
+  };
+  const onPriceChange = (fieldName: string, value: any) => {
+    setAdForm({
+      ...adForm,
+      price: {
+        ...adForm.price,
+        [fieldName]: value,
+      },
     });
   };
   return (
@@ -136,7 +145,7 @@ const PostAd = () => {
             onChange={onInputChange}
           />
           <InputFile fileList={fileList} setFileList={setFileList} />
-          <small>Maksimalk 10 tagacha rasm joylash mumkin</small>
+          <small>Maksimal 10 tagacha rasm joylash mumkin</small>
           <StyledInput>
             <label className="inp__label" htmlFor="moto-info-description">
               Izoh
@@ -152,14 +161,31 @@ const PostAd = () => {
               onChange={onInputChange}
             ></textarea>
           </StyledInput>
-          <Input
-            id="price"
-            name="price"
-            type="number"
-            label="Narxi(so'm)"
-            value={adForm.price}
-            onChange={onInputChange}
-          />
+          <div>
+            <div className="price__wrp">
+              <Input
+                id="price-amount"
+                name="amount"
+                type="number"
+                label="Narxi"
+                min={0}
+                value={adForm.price.amount}
+                onChange={({ target }) => onPriceChange("amount", target.value)}
+              />
+              <InputSelect
+                id="currency"
+                name="currency"
+                label="Pul birligini tanlang"
+                value={adForm.price.currency}
+                onChange={(e: any) => onPriceChange("currency", e)}
+                options={currencies}
+              />
+            </div>
+            <div className="switch__wrp">
+              <span>Kelishuv asosida</span>
+              <Switch onChange={(e: any) => onPriceChange("canBargain", e)} />
+            </div>
+          </div>
           <Input
             id="moto-localtion"
             name="location"
@@ -169,14 +195,16 @@ const PostAd = () => {
           />
         </div>
         <div>
-          <InputSelect
-            id="ad-color"
-            name="color"
-            label="Rangini tanlang"
-            value={adForm.color}
-            onChange={(e: any) => onSelectChange("color", e)}
-            options={bikeColors}
-          />
+          {selectedAdType !== "gear" && (
+            <InputSelect
+              id="ad-color"
+              name="color"
+              label="Rangini tanlang"
+              value={adForm.color}
+              onChange={(e: any) => onSelectChange("color", e)}
+              options={bikeColors}
+            />
+          )}
           {selectedAdType === "moto" && (
             <>
               <InputSelect
@@ -221,7 +249,7 @@ const PostAd = () => {
               </StyledInput>
             </>
           )}
-          {selectedAdType === "helmet" ? (
+          {selectedAdType === "helmet" && (
             <>
               <InputSelect
                 id="helmet-size"
@@ -248,9 +276,7 @@ const PostAd = () => {
                 options={helmetBrands}
               />
             </>
-          ) : selectedAdType === "gear" ? (
-            <h1>accessories</h1>
-          ) : null}
+          )}
         </div>
         <Button type="submit" className="ad__btn">
           E&apos;lonni joylash

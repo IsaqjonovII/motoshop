@@ -2,6 +2,11 @@
 export const baseUrl = "http://127.0.0.1:8000/api/v0/";
 // export const baseUrl = "https://motoshop-server.onrender.com/api/v0/";
 
+export const currencies = [
+  { value: "uzs", label: "So'm" },
+  { value: "eu", label: "€ euro" },
+  { value: "usd", label: "$ dollar" },
+];
 export const bikeTypes = [
   { value: "sportbayk", label: "Sportbayk" },
   { value: "streetbayk", label: "Streetbayk" },

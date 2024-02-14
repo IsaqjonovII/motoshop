@@ -3,7 +3,11 @@ import { IUser } from "interfaces";
 export interface IPostAd {
   title: string;
   description: string;
-  price: string;
+  price: {
+    amount: string;
+    currency: string;
+    canBargain: boolean;
+  };
   location: string;
   images: string[];
   owner: string | IUser;

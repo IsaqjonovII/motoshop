@@ -3,7 +3,11 @@ import { IPostAd } from "./forms";
 
 export interface IRecommendCard {
   _id: string;
-  price: string;
+  price: {
+    amount: string | number;
+    currency: string;
+    canBargain: boolean;
+  };
   name: string;
   images: string[];
   postedAt: string;

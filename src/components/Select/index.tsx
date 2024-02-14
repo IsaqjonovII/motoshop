@@ -7,7 +7,7 @@ interface Props {
   options: SelectProps["options"];
   placeholder: string;
   onChange: (val: string[]) => void;
-  mode: "tags" | "multiple";
+  mode: "tags" | "multiple" | undefined;
 }
 
 const CustomSelect = ({ options, placeholder, onChange, mode }: Props) => {
