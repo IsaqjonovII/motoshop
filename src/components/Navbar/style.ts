@@ -1,9 +1,9 @@
-import { colors } from "constants/styles";
 import styled from "styled-components";
-import { layout } from "styles/mixin";
 import { pxToRem } from "utils";
+import { layout } from "styles/mixin";
+import { colors } from "constants/styles";
 
-const { white, borderGray, teal, gray } = colors;
+const { white, teal, gray } = colors;
 
 export default styled.header`
   background-color: ${white};
@@ -46,25 +46,14 @@ export default styled.header`
             border-bottom: ${pxToRem(1)} solid transparent;
             &:hover {
               color: ${teal};
-                background-color: ${borderGray}70;
-                border-color: ${teal}30;
             }
         }
     }
   }
   .nav__right {
     ${layout("flex")}
-    #language {
-      outline: none;
-      padding: ${pxToRem(7)} ${pxToRem(13)};
-      border: ${pxToRem(2)} solid ${teal};
-      color: ${teal};
-      margin-right: ${pxToRem(15)};
-      border-radius: ${pxToRem(5)};
-      font-size: ${pxToRem(17)};
-      option {
-      padding: ${pxToRem(7)} ${pxToRem(13)};
-      }
+    .right__btn {
+      margin-right: ${pxToRem(10)};
     }
     .user__wrp {
       ${layout("flex")}

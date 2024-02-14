@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { GoSearch } from "react-icons/go";
 import StyledSearch from "./style";
-import { Button } from "components/Button";
 
-export const SearchNavbar = () => {
+export const Search = () => {
   const [searchVal, setSearchVal] = useState("");
   const [isInputActive, setIsInputActive] = useState(false);
 
@@ -22,7 +21,7 @@ export const SearchNavbar = () => {
           value={searchVal}
           onChange={({ target }) => setSearchVal(target.value)}
         />
-        <Button className="search__btn">Qidirish</Button>
+        <button className="search__btn">Qidirish</button>
       </div>
     </StyledSearch>
   );

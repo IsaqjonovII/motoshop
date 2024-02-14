@@ -54,14 +54,15 @@ export default styled.div`
     margin-top: ${pxToRem(30)};
   }
   .filters__wrp {
-    ${layout("grid", { rows: "auto", cols: 6 })}
+    ${layout("grid", { rows: "auto", cols: 5 })}
     gap: 0 ${pxToRem(10)};
-    margin-bottom: ${pxToRem(10)};
+    margin: ${pxToRem(20)} 0;
   }
   .filter {
     height: ${pxToRem(45)};
     .ant-select {
       width: 100%;
+
     }
   }
   .ant-select-selection-placeholder {

@@ -1,14 +1,19 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineUser } from "react-icons/ai";
 import StyledNav from "./style";
 import { motoLogo } from "assets";
 import { useAppSelector } from "hooks";
 import { routes } from "constants/routes";
-import { SearchNavbar } from "components/Search";
+import { Button } from "components/Button";
 
-const { HOME, AUTH, PROFILE, MOTOCYCLES } = routes;
+const { HOME, AUTH, PROFILE, MOTOCYCLES, POST_MOTO } = routes;
 const Navbar = () => {
+  const navigate = useNavigate();
   const user = useAppSelector(({ auth }) => auth.user);
+
+  const handlePostAd = () => {
+    user ? navigate(POST_MOTO) : navigate(AUTH);
+  };
   return (
     <StyledNav>
       <div className="nav__container">
@@ -20,12 +25,15 @@ const Navbar = () => {
           </div>
           <nav className="nav__menu">
             <Link to={MOTOCYCLES} className="menu__item">
-              E'lonlar
+              Barcha E'lonlar
             </Link>
           </nav>
         </div>
-        <SearchNavbar />
+
         <div className="nav__right">
+          <Button className="right__btn" onClick={handlePostAd}>
+            E'lon joylash
+          </Button>
           {user ? (
             <Link to={PROFILE}>
               <div className="user__wrp">

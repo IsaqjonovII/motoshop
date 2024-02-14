@@ -27,11 +27,17 @@ const {
 export const privateRoutes: IAppRoutes[] = [
   { key: "home", path: HOME, Component: Home },
   { key: "auth", path: AUTH, Component: Auth },
+  { key: "ads", path: MOTOCYCLES, Component: Ads },
+  { key: "adInfo", path: AD_INFO, Component: AdInfo },
   { key: "profile", path: PROFILE, Component: Profile },
+  { key: "postProduct", path: POST_MOTO, Component: PostMoto },
   // { key: "editProfile", path: EDIT_PROFILE, Component: EditProfile },
   // { key: "messages", path: MESSSAGES, Component: Messages },
   // { key: "likedProducts", path: LIKED_PRODUCTS, Component: LikedProducts },
-  { key: "postProduct", path: POST_MOTO, Component: PostMoto },
+];
+export const publicRoutes: IAppRoutes[] = [
+  { key: "home", path: HOME, Component: Home },
+  { key: "auth", path: AUTH, Component: Auth },
   { key: "ads", path: MOTOCYCLES, Component: Ads },
   { key: "adInfo", path: AD_INFO, Component: AdInfo },
 ];
