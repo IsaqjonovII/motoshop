@@ -23,7 +23,7 @@ export const adApi = createApi({
     getAllAds: builder.query<IAdMoto[] | IAdHelmetAndGear[], void>({
       query: () => "/ad",
     }),
-    getAdById: builder.query<IBackendResponse, IPostAd>({
+    getAdById: builder.query({
       query: (id) => `ad/${id}`,
     }),
     deleteAd: builder.mutation<IBackendResponse, string>({

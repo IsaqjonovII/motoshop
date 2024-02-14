@@ -150,15 +150,6 @@ export default styled.header`
         object-fit: cover;
       }
     }
-  } 
-  @media screen and (max-width: ${pxToRem(550)}){
-    .nav__right .user__wrp {
-      span {
-        display: none;
-      }
-    }
-    height: ${pxToRem(130)};
-    padding: 0.5rem 0.825rem;
     .nav__container {
       ${layout("grid", { rows: 2, cols: 6 })}
       padding: 0;
@@ -169,6 +160,15 @@ export default styled.header`
     }
     .nav__right {
       grid-column: 6 / 7;
+    }
+    height: ${pxToRem(130)};
+    padding: 0.5rem 0.825rem;
+  } 
+  @media screen and (max-width: ${pxToRem(550)}){
+    .nav__right .user__wrp {
+      span {
+        display: none;
+      }
     }
   } 
 `;

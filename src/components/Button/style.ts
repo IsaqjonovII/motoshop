@@ -6,6 +6,7 @@ import { pxToRem } from "utils";
 const { teal, white } = colors;
 export default styled.button`
   ${btn("normal")}
+  padding: ${pxToRem(10)} ${pxToRem(15)};
   @media only screen and (max-width: 768px) {
     font-size: ${pxToRem(16)};
   }

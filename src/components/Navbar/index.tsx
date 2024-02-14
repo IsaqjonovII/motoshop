@@ -9,7 +9,6 @@ import { SearchNavbar } from "components/Search";
 const { HOME, AUTH, PROFILE, MOTOCYCLES } = routes;
 const Navbar = () => {
   const user = useAppSelector(({ auth }) => auth.user);
-
   return (
     <StyledNav>
       <div className="nav__container">
@@ -30,8 +29,8 @@ const Navbar = () => {
           {user ? (
             <Link to={PROFILE}>
               <div className="user__wrp">
-                <AiOutlineUser />
-                <span>{user.name}</span>
+                <AiOutlineUser className="icon" />
+                <span>Profil</span>
               </div>
             </Link>
           ) : (

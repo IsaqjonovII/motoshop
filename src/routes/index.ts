@@ -6,12 +6,14 @@ const Auth = lazy(() => import("pages/Auth"));
 const Profile = lazy(() => import("pages/User"));
 const PostMoto = lazy(() => import("pages/Ads/PostAd"));
 const Ads = lazy(() => import("pages/Ads/All"));
+const AdInfo = lazy(() => import("pages/Ads/Info"));
 
 const {
   HOME,
   AUTH,
   PROFILE,
   MOTOCYCLES,
+  AD_INFO,
   // EDIT_PROFILE,
   // MESSAGES,
   // LIKED_PRODUCTS,
@@ -31,6 +33,7 @@ export const privateRoutes: IAppRoutes[] = [
   // { key: "likedProducts", path: LIKED_PRODUCTS, Component: LikedProducts },
   { key: "postProduct", path: POST_MOTO, Component: PostMoto },
   { key: "ads", path: MOTOCYCLES, Component: Ads },
+  { key: "adInfo", path: AD_INFO, Component: AdInfo },
 ];
 
 export const navRoutes: INavRoutes[] = [
