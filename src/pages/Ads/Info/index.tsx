@@ -9,6 +9,7 @@ import { IAdHelmetAndGear, IAdMoto, IMotoAd } from "interfaces/responses";
 import StyledAdInfo from "./style";
 import { Text } from "components/Text";
 import { Button } from "components/Button";
+import ImageGallery from "components/ImageGallery";
 
 type TParams = {
   id: string;
@@ -31,7 +32,12 @@ const AdInfo = () => {
   return (
     <StyledAdInfo>
       <div className="page__container">
-        <div className="images"></div>
+        <div className="images">
+          <ImageGallery
+            images={adData?.images ?? []}
+            title={adData?.title ?? ""}
+          />
+        </div>
 
         <div className="content">
           <div className="content__head">

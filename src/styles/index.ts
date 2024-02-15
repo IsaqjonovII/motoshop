@@ -43,7 +43,7 @@ export const GlobalStyle = createGlobalStyle`
         position: sticky;
         top: 0;
         left: 0;
-        z-index: 9999;
+        z-index: 99;
     }
     .flex {
         ${layout("flex")}

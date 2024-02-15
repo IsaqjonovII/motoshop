@@ -13,6 +13,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fancyapps/ui": "^5.0.33",
     "@reduxjs/toolkit": "^1.9.7",
     "antd": "^5.10.2",
     "moment": "^2.30.1",
