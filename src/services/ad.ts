@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { baseUrl } from "constants";
 import { IBackendResponse } from "interfaces";
@@ -45,6 +46,24 @@ export const adApi = createApi({
     >({
       query: (limit) => `ad/random-ads?limit=${limit}`,
     }),
+    updateAdView: builder.mutation<
+      IBackendResponse,
+      { userId: string; adId: string }
+    >({
+      query: ({ userId, adId }) => ({
+        url: `ad/update-view?userId=${userId}&adId=${adId}`,
+        method: "POST",
+      }),
+    }),
+    updateLikes: builder.mutation<
+      IBackendResponse,
+      { userId: string | any; adId: string }
+    >({
+      query: ({ userId, adId }) => ({
+        url: `ad/update-like?userId=${userId}&adId=${adId}`,
+        method: "POST",
+      }),
+    }),
   }),
 });
 
@@ -55,4 +74,6 @@ export const {
   useDeleteAdMutation,
   useGetAdsByCategoryQuery,
   useGetRandomAdsQuery,
+  useUpdateAdViewMutation,
+  useUpdateLikesMutation,
 } = adApi;

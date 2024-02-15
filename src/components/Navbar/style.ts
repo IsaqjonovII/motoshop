@@ -139,19 +139,9 @@ export default styled.header`
         object-fit: cover;
       }
     }
-    .nav__container {
-      ${layout("grid", { rows: 2, cols: 6 })}
-      padding: 0;
-      height: 100%;
-    }
     .nav__left, .nav__right {
       height: 60px !important;
     }
-    .nav__right {
-      grid-column: 6 / 7;
-    }
-    height: ${pxToRem(130)};
-    padding: 0.5rem 0.825rem;
   } 
   @media screen and (max-width: ${pxToRem(550)}){
     .nav__right .user__wrp {

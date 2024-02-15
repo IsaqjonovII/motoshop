@@ -7,7 +7,10 @@ export default styled.div`
     object-fit: contain;
     max-height: ${pxToRem(450)};
   }
-  .f-thumbs:nth-child(3) {
+  .f-thumbs {
     display: none;
+  }
+  .f-thumbs:where(:first-child, :nth-child(2)) {
+    display: block !important;
   }
 `;

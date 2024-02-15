@@ -8,7 +8,8 @@ export default styled.button`
   ${btn("normal")}
   padding: ${pxToRem(10)} ${pxToRem(15)};
   @media only screen and (max-width: 768px) {
-    font-size: ${pxToRem(16)};
+    font-size: ${pxToRem(14)};
+  padding: ${pxToRem(6)} ${pxToRem(10)};
   }
 `;
 export const StyledRadioBtn = styled.div`

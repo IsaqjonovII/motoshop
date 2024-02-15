@@ -6,8 +6,7 @@ import { IAdMoto, IAdHelmetAndGear } from "interfaces/responses";
 import { IServerError } from "interfaces";
 
 const Home = () => {
-  const { data, isLoading, error, refetch } =
-    useGetAdsByCategoryQuery("moto");
+  const { data, isLoading, error, refetch } = useGetAdsByCategoryQuery("moto");
   const {
     data: helmets,
     isLoading: isHelmetsLoading,

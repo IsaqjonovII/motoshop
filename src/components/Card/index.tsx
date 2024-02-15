@@ -15,12 +15,15 @@ import { Text } from "components/Text";
 import { routes } from "constants/routes";
 import LazyImage from "components/LazyImage";
 import { Button } from "components/Button";
+import { useUpdateLikesMutation } from "services/ad";
 
 const { MOTOCYCLES } = routes;
 const RecommendCard = (props: IAdMoto) => {
   const { _id, price, title, location, images, owner } = props;
   const dispatch = useAppDispatch();
-  const likedProducts = useAppSelector(({ likedProducts }) => likedProducts);
+  const userData = useAppSelector((state) => state);
+  const { likedProducts, auth } = userData;
+  const [updateLikes] = useUpdateLikesMutation();
 
   const handleAddToLikedProducts = (
     id: string,
@@ -28,6 +31,7 @@ const RecommendCard = (props: IAdMoto) => {
   ) => {
     e.preventDefault();
     dispatch(addToLikedProducts(id));
+    updateLikes({ userId: auth.user?._id, adId: id });
   };
   const handleRemoveLikedProducts = (
     id: string,
