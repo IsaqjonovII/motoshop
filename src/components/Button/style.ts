@@ -28,24 +28,22 @@ export const StyledRadioBtn = styled.div`
         outline: none !important;
       }
     }
-    .ant-radio-button-wrapper-checked:where(:hover, :focus-visible, :focus, :focus-within, :checked, :active)
-      span {
-    }
-    :where(.css-dev-only-do-not-override-dkbvqv).ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled),
-    :where(.css-dev-only-do-not-override-dkbvqv).ant-radio-button-wrapper:hover {
-      color: ${white} !important;
-      border-color: ${teal} !important;
+    .ant-radio-button-wrapper-checked:where(:hover, :focus-visible, :focus, :focus-within, :checked, :active),
+    .ant-radio-button-wrapper-checked {
+      color: ${white};
+      border-color: ${teal};
       background-color: ${teal};
     }
-    :where(.css-dev-only-do-not-override-dkbvqv).ant-radio-button-wrapper:hover {
+    .ant-radio-button-wrapper:hover {
+      color: ${white};
       background-color: ${teal};
       opacity: 0.7;
     }
-    :where(.css-dev-only-do-not-override-dkbvqv).ant-radio-button-wrapper {
+    .ant-radio-button-wrapper {
       height: 100%;
       ${layout("flex")}
     }
-    :where(.css-dev-only-do-not-override-dkbvqv).ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled)::before {
+    .ant-radio-button-wrapper-checked::before {
       background-color: ${teal};
     }
   }

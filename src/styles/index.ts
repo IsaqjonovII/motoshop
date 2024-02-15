@@ -77,7 +77,7 @@ export const GlobalStyle = createGlobalStyle`
     .ant-select {
         height: 100%;
     }
-    .ant-select-focused .ant-select-selector, :where(.css-dev-only-do-not-override-1xg9z9n).ant-select-outlined:not(.ant-select-disabled):not(.ant-select-customize-input):not(.ant-pagination-size-changer):hover .ant-select-selector {
+    .ant-select-focused .ant-select-selector, .ant-select-outlined:hover .ant-select-selector {
       border-color: ${teal} !important;
     }
     .swiper__icon {
@@ -110,7 +110,7 @@ export const GlobalStyle = createGlobalStyle`
     .swiper-slide {
         margin: 0;
     }
-    :where(.css-dev-only-do-not-override-dkbvqv).ant-pagination .ant-pagination-item-active {
+    .ant-pagination .ant-pagination-item-active {
         border-color: ${teal};
         a {
             color: ${teal};
