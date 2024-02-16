@@ -1,16 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
-import { privateRoutes } from "routes";
+import { privateRoutes, publicRoutes } from "routes";
 import Navbar from "components/Navbar";
-import Sidebar from "components/Sidebar";
 import Container from "components/Container";
 import NotFound from "pages/NotFound";
+import { useAppSelector } from "hooks";
 
 function App() {
-  const [isSidebarOpen, setisSidebarOpen] = useState<boolean>(false);
+  const user = useAppSelector(({ auth }) => auth.user);
   const { pathname } = useLocation();
   useEffect(() => {
-    setisSidebarOpen(false);
     window.scrollTo(0, 0);
   }, [pathname]);
   const isAuthRoute = ["/auth"].includes(pathname);
@@ -19,23 +18,16 @@ function App() {
     <div className="app">
       {!isAuthRoute && (
         <div className="container__nav">
-          <Navbar
-            isSidebarOpen={isSidebarOpen}
-            setIsSidebarOpen={setisSidebarOpen}
-          />
-          {isSidebarOpen ? (
-            <Sidebar
-              isSidebarOpen={isSidebarOpen}
-              setIsSidebarOpen={setisSidebarOpen}
-            />
-          ) : null}
+          <Navbar />
         </div>
       )}
       <Container>
         <Routes>
-          {privateRoutes.map(({ key, path, Component }) => (
-            <Route key={key} path={path} element={<Component />} />
-          ))}
+          {(user ? privateRoutes : publicRoutes).map(
+            ({ key, path, Component }) => (
+              <Route key={key} path={path} element={<Component />} />
+            )
+          )}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Container>

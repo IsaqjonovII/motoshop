@@ -7,7 +7,7 @@ interface Props {
   options: SelectProps["options"];
   placeholder: string;
   onChange: (val: string[]) => void;
-  mode: "tags" | "multiple";
+  mode: "tags" | "multiple" | undefined;
 }
 
 const CustomSelect = ({ options, placeholder, onChange, mode }: Props) => {
@@ -15,7 +15,7 @@ const CustomSelect = ({ options, placeholder, onChange, mode }: Props) => {
     <StyledSelect>
       <Select
         mode={mode}
-        style={{ width: "100%" }}
+        style={{ width: "100%", maxWidth: "100%" }}
         onChange={onChange}
         tokenSeparators={[","]}
         options={options}

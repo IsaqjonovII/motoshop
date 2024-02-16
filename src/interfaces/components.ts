@@ -19,7 +19,6 @@ export interface IInput {
   min?: number;
   max?: number;
 }
-
 export interface IButton {
   className?: string;
   type?: "button" | "reset" | "submit";
@@ -28,7 +27,7 @@ export interface IButton {
   disabled?: boolean;
 }
 export interface IText {
-  children: (string | JSX.Element)[] | string | JSX.Element;
+  children: (string | JSX.Element)[] | string | JSX.Element | any;
   size: "sm" | "md" | "lg" | "xl" | "xxl";
   className?: string;
   bold: number;
@@ -44,4 +43,12 @@ export interface IRadioBtn {
     label: string;
   }[];
   onChange: (e: RadioChangeEvent) => void;
+}
+export interface IModal {
+  close: () => void;
+  open: () => void;
+  isOpen: boolean;
+  isLoading?: boolean;
+  title: string;
+  children: JSX.Element | JSX.Element[];
 }

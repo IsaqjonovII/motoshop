@@ -1,17 +1,19 @@
-import { Link } from "react-router-dom";
-import { AiOutlineUser, AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
-import { navRoutes } from "routes";
+import { Link, useNavigate } from "react-router-dom";
+import { AiOutlineUser } from "react-icons/ai";
 import StyledNav from "./style";
 import { motoLogo } from "assets";
-import { ISidebar } from "interfaces";
 import { useAppSelector } from "hooks";
 import { routes } from "constants/routes";
-import { SearchNavbar } from "components/Search";
+import { Button } from "components/Button";
 
-const { HOME, AUTH, PROFILE } = routes;
-const Navbar = ({ isSidebarOpen, setIsSidebarOpen }: ISidebar) => {
+const { HOME, AUTH, PROFILE, MOTOCYCLES, POST_MOTO } = routes;
+const Navbar = () => {
+  const navigate = useNavigate();
   const user = useAppSelector(({ auth }) => auth.user);
 
+  const handlePostAd = () => {
+    user ? navigate(POST_MOTO) : navigate(AUTH);
+  };
   return (
     <StyledNav>
       <div className="nav__container">
@@ -22,37 +24,27 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }: ISidebar) => {
             </Link>
           </div>
           <nav className="nav__menu">
-            {navRoutes.map(({ key, path }) => (
-              <Link key={key} to={path} className="menu__item" aria-label={key}>
-                {key}
-              </Link>
-            ))}
+            <Link to={MOTOCYCLES} className="menu__item">
+              Barcha E'lonlar
+            </Link>
           </nav>
         </div>
-        <SearchNavbar />
+
         <div className="nav__right">
+          <Button className="right__btn" onClick={handlePostAd}>
+            E'lon joylash
+          </Button>
           {user ? (
             <Link to={PROFILE}>
               <div className="user__wrp">
-                <AiOutlineUser />
-                <span>{user.name}</span>
+                <AiOutlineUser className="icon" />
+                <span>Profil</span>
               </div>
             </Link>
           ) : (
             <Link className="login__link" to={AUTH}>
               Kirish
             </Link>
-          )}
-          {isSidebarOpen ? (
-            <AiOutlineClose
-              className="bars__icon"
-              onClick={() => setIsSidebarOpen(false)}
-            />
-          ) : (
-            <AiOutlineMenu
-              className="bars__icon"
-              onClick={() => setIsSidebarOpen(true)}
-            />
           )}
         </div>
       </div>

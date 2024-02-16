@@ -3,9 +3,9 @@ import { css } from "styled-components";
 import { pxToRem } from "utils";
 
 type TGridLayout = {
-  cols: number | string;
+  cols: number | "auto";
   colsW?: number | string;
-  rows: number | string;
+  rows: number | "auto";
   rowsH?: number | string;
 };
 const { red, teal, white } = colors;

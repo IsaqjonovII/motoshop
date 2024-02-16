@@ -1,33 +1,44 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ChangeEvent, useEffect, useState } from "react";
+import { DatePicker, Form, Switch } from "antd";
 import { toast } from "react-toastify";
-import type { RadioChangeEvent } from "antd";
+import { useNavigate } from "react-router-dom";
+import { type ChangeEvent, useEffect, useState } from "react";
+import type { DatePickerProps, RadioChangeEvent } from "antd";
+import { StyledPostAd } from "./style";
 import { useAppSelector } from "hooks";
+import { IServerError } from "interfaces";
+import { IGearAd, IMotoAd } from "interfaces/forms";
+import {
+  adTypes,
+  bikeColors,
+  bikeTypes,
+  condition,
+  currencies,
+  gearSizes,
+  helmetBrands,
+} from "constants";
 import { useUploadAdMutation } from "services/ad";
 import { Text } from "components/Text";
-import { StyledPostAd } from "./style";
 import { Input } from "components/Input";
-import { IPostAd } from "interfaces/forms";
-import { Button, RadioButton } from "components/Button";
-import { StyledInput } from "components/Input/style";
-import { InputFile, InputSelect } from "components/Input/CustomInput";
-import { adTypes, bikeTypes } from "constants";
-import { IServerError } from "interfaces";
 import { Spinner } from "components/Loader";
-import { useNavigate } from "react-router-dom";
+import { StyledInput } from "components/Input/style";
+import { Button, RadioButton } from "components/Button";
+import { InputFile, InputSelect } from "components/Input/CustomInput";
 
 const PostAd = () => {
   const navigate = useNavigate();
-  const [selectedAdType, setSelectedAdType] = useState<
-    string | null | undefined
-  >("moto");
+  const [selectedAdType, setSelectedAdType] = useState<string>("moto");
   const [fileList, setFileList] = useState<string[]>([]);
   const [uploadAd, { data, isLoading, error }] = useUploadAdMutation();
   const userId = useAppSelector(({ auth }) => auth.user?._id);
-  const [adForm, setAdForm] = useState<IPostAd>({
-    name: "",
+  const [adForm, setAdForm] = useState<IMotoAd | IGearAd>({
+    title: "",
     description: "",
-    price: "",
+    price: {
+      amount: "",
+      currency: "",
+      canBargain: false,
+    },
     location: "",
     images: fileList,
     category: "",
@@ -35,7 +46,11 @@ const PostAd = () => {
     engineSize: "",
     mileage: "",
     manufacturedAt: "",
-    contactLinks: [],
+    color: "",
+    size: "",
+    brand: "",
+    condition: "",
+    adType: selectedAdType,
   });
   useEffect(() => {
     setAdForm({
@@ -53,37 +68,56 @@ const PostAd = () => {
       [name]: value,
     });
   };
-  const onSelectChange = (category: string | any) => {
+  const onSelectChange = (fieldName: string, value: any) => {
     setAdForm({
       ...adForm,
-      category: category.split(" ")[0],
+      [fieldName]: value,
     });
   };
-  const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
-    e.preventDefault();
+
+  const onDateChange: DatePickerProps["onChange"] = (_, dateString) => {
+    setAdForm({
+      ...adForm,
+      manufacturedAt: dateString,
+    });
+  };
+  const handleSubmit = async () => {
     await uploadAd(adForm);
-    console.log(adForm);
-    if ("ad" in data!) {
+  };
+  useEffect(() => {
+    if (data) {
       toast.success(data.message);
       navigate("/");
     }
-  };
+  }, [data, navigate]);
   useEffect(() => {
     if (error) {
       const { status, data } = error as IServerError;
       if (status === "FETCH_ERROR") {
-        console.log(data);
-        console.log(data);
         toast.error("Serverda xatolik. Iltimos birozdan so'ng urinib ko'ring");
       }
       if (data?.message) {
-        console.log(data);
         toast.error(data?.message);
       }
     }
   }, [error]);
 
-  const onChange = (e: RadioChangeEvent) => setSelectedAdType(e.target.value);
+  const onChange = (e: RadioChangeEvent) => {
+    setSelectedAdType(e.target.value);
+    setAdForm({
+      ...adForm,
+      adType: e.target.value,
+    });
+  };
+  const onPriceChange = (fieldName: string, value: any) => {
+    setAdForm({
+      ...adForm,
+      price: {
+        ...adForm.price,
+        [fieldName]: value,
+      },
+    });
+  };
   return (
     <StyledPostAd>
       {isLoading && (
@@ -94,7 +128,7 @@ const PostAd = () => {
       </Text>
       <br />
 
-      <form className="post__form" autoComplete="off" onSubmit={handleSubmit}>
+      <Form className="post__form" autoComplete="off" onFinish={handleSubmit}>
         <div>
           <div className="flex">
             <StyledInput>
@@ -103,15 +137,15 @@ const PostAd = () => {
             </StyledInput>
           </div>
           <Input
-            id="name"
-            name="name"
+            id="title"
+            name="title"
             label="E'longa nom bering"
             placeholder="Masalan Yamaha R6"
-            value={adForm.name}
+            value={adForm.title}
             onChange={onInputChange}
           />
           <InputFile fileList={fileList} setFileList={setFileList} />
-
+          <small>Maksimal 10 tagacha rasm joylash mumkin</small>
           <StyledInput>
             <label className="inp__label" htmlFor="moto-info-description">
               Izoh
@@ -122,19 +156,36 @@ const PostAd = () => {
               cols={76}
               rows={10}
               minLength={40}
-              placeholder="Eng kamida 40 ta belgi yozing"
+              placeholder="E'longa tushunarli va batafsil tarif bering"
               value={adForm.description}
               onChange={onInputChange}
             ></textarea>
           </StyledInput>
-          <Input
-            id="price"
-            name="price"
-            type="number"
-            label="Narxi(so'm)"
-            value={adForm.price}
-            onChange={onInputChange}
-          />
+          <div>
+            <div className="price__wrp">
+              <Input
+                id="price-amount"
+                name="amount"
+                type="number"
+                label="Narxi"
+                min={0}
+                value={adForm.price.amount}
+                onChange={({ target }) => onPriceChange("amount", target.value)}
+              />
+              <InputSelect
+                id="currency"
+                name="currency"
+                label="Pul birligini tanlang"
+                value={adForm.price.currency}
+                onChange={(e: any) => onPriceChange("currency", e)}
+                options={currencies}
+              />
+            </div>
+            <div className="switch__wrp">
+              <span>Kelishuv asosida</span>
+              <Switch onChange={(e: any) => onPriceChange("canBargain", e)} />
+            </div>
+          </div>
           <Input
             id="moto-localtion"
             name="location"
@@ -144,7 +195,17 @@ const PostAd = () => {
           />
         </div>
         <div>
-          {selectedAdType?.includes("moto") && (
+          {selectedAdType !== "gear" && (
+            <InputSelect
+              id="ad-color"
+              name="color"
+              label="Rangini tanlang"
+              value={adForm.color}
+              onChange={(e: any) => onSelectChange("color", e)}
+              options={bikeColors}
+            />
+          )}
+          {selectedAdType === "moto" && (
             <>
               <InputSelect
                 id="moto-type"
@@ -152,8 +213,8 @@ const PostAd = () => {
                 label="Turini tanlang"
                 placeholder="Masalan sportbike"
                 className="inp__select"
-                value={adForm.category}
-                onChange={onSelectChange}
+                value={(adForm as IMotoAd)?.category || ""}
+                onChange={(e: any) => onSelectChange("category", e)}
                 options={bikeTypes}
               />
               <Input
@@ -163,7 +224,7 @@ const PostAd = () => {
                 placeholder="Masalan 600 cm³"
                 type="number"
                 min={0}
-                value={adForm.engineSize}
+                value={(adForm as IMotoAd)?.engineSize || ""}
                 onChange={onInputChange}
               />
               <Input
@@ -174,26 +235,53 @@ const PostAd = () => {
                 minLength={0}
                 min={0}
                 type="number"
-                value={adForm.mileage}
+                value={(adForm as IMotoAd)?.mileage || ""}
                 onChange={onInputChange}
               />
-              <Input
-                id="moto-date"
-                name="manufacturedAt"
-                label="Ishlab chiqarilgan sana"
-                placeholder="kun.oy.yil"
-                type="date"
-                value={adForm.manufacturedAt}
-                onChange={onInputChange}
+              <StyledInput>
+                <label className="inp__label">Ishlab chiqarilgan sana</label>
+                <DatePicker
+                  className="date__input"
+                  onChange={onDateChange}
+                  picker="year"
+                  disabledDate={(current) => current.year() > 2024}
+                />
+              </StyledInput>
+            </>
+          )}
+          {selectedAdType === "helmet" && (
+            <>
+              <InputSelect
+                id="helmet-size"
+                name="size"
+                label="O'lchami"
+                value={(adForm as IGearAd)?.size}
+                onChange={(e: any) => onSelectChange("size", e)}
+                options={gearSizes}
+              />
+              <InputSelect
+                id="condition"
+                name="condition"
+                label="Holati"
+                value={(adForm as IGearAd)?.condition}
+                onChange={(e: any) => onSelectChange("condition", e)}
+                options={condition}
+              />
+              <InputSelect
+                id="brand"
+                name="brand"
+                label="Brand"
+                value={(adForm as IGearAd)?.brand}
+                onChange={(e: any) => onSelectChange("brand", e)}
+                options={helmetBrands}
               />
             </>
           )}
-          {selectedAdType?.includes("helmet") && <h1>Shlm</h1>}
         </div>
         <Button type="submit" className="ad__btn">
           E&apos;lonni joylash
         </Button>
-      </form>
+      </Form>
     </StyledPostAd>
   );
 };
