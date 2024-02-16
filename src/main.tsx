@@ -7,7 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
 import App from "./App.tsx";
 import { store, persistor } from "store";
-import Loader from "components/Loader";
+import { Spinner } from "components/Loader";
 import { GlobalStyle } from "styles/index.ts";
 
 createRoot(document.getElementById("root")!).render(
@@ -23,7 +23,7 @@ createRoot(document.getElementById("root")!).render(
       />
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <Suspense fallback={<Loader />}>
+        <Suspense fallback={<Spinner isLoading={true} />}>
           <BrowserRouter>
             <App />
           </BrowserRouter>

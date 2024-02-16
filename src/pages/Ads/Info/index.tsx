@@ -70,7 +70,6 @@ const AdInfo = () => {
   useEffect(() => {
     if (ownerAds) setOwnerAdsData(ownerAds);
   }, [ownerAds]);
-
   return (
     <StyledAdInfo>
       <div className="page__container">

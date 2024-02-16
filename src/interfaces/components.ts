@@ -32,10 +32,6 @@ export interface IText {
   className?: string;
   bold: number;
 }
-export interface ISpinner {
-  isLoading: boolean;
-  loadingText: string;
-}
 export interface IRadioBtn {
   btnStyle?: "solid" | null;
   chilren: {
