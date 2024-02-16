@@ -11,19 +11,21 @@ import RecommendCard from "components/Card";
 import { Search } from "components/Search";
 
 const Ads = () => {
-  const { data, isLoading, error, refetch } = useGetRandomAdsQuery(30);
+  const { data, error, refetch } = useGetRandomAdsQuery(30);
   const [randomAdsData, setRandomAdsData] = useState<
     IAdMoto[] | IAdHelmetAndGear[]
   >([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [selectedBikeTypes, setSelectedBikeTypes] = useState<string[]>([]);
   const [selectedEngine, setSelectedEngine] = useState("");
-  console.log(selectedBikeTypes, selectedEngine, isLoading);
   const handleEngine = (val: string) => {
     setSelectedEngine(val);
   };
   const handleBikeTypesChange = (value: string[]) =>
     setSelectedBikeTypes(value);
+  if (selectedBikeTypes && selectedEngine) {
+    // nothing here
+  }
 
   const onPageChange: PaginationProps["onChange"] = (page) =>
     setCurrentPage(page);

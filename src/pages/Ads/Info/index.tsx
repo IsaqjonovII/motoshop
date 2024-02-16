@@ -35,7 +35,7 @@ const AdInfo = () => {
   >([]);
   const [adData, setadData] = useState<IAdMoto | IAdHelmetAndGear>();
   const [updateView, { data: viewData }] = useUpdateAdViewMutation();
-  const { data, isLoading, error, refetch } = useGetAdByIdQuery(id!);
+  const { data, refetch } = useGetAdByIdQuery(id!);
   const { data: ownerAds, isLoading: isOwnerAdsLoading } = useGetAdsByUserQuery(
     {
       userId: adData?.owner._id ?? "",
@@ -47,16 +47,12 @@ const AdInfo = () => {
       type: adData?.adType ?? "moto",
       id: adData?._id ?? "",
     });
-  console.log(isLoading, error);
   useEffect(() => {
     if (similiarAds) setSimiliarAdsData(similiarAds);
   }, [similiarAds]);
   useEffect(() => {
     refetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [viewData]);
-  useEffect(() => {
-    if (viewData) console.log(viewData);
   }, [viewData]);
 
   useEffect(() => {

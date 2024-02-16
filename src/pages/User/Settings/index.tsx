@@ -11,12 +11,11 @@ export const UpdateUser = ({
   isOpen: boolean;
   setisOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
-  const { data, isLoading, error, refetch } = useUserInfoQuery(userId);
+  const { data, error, refetch } = useUserInfoQuery(userId);
   const hideModal = () => setisOpen(false);
   const onOk = () => {
     alert("heeelllo");
   };
-  console.log(isLoading);
   
   useEffect(() => {
     if (error) console.log(error);
