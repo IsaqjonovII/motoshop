@@ -26,7 +26,6 @@ const Ads = () => {
   if (selectedBikeTypes && selectedEngine) {
     // nothing here
   }
-
   const onPageChange: PaginationProps["onChange"] = (page) =>
     setCurrentPage(page);
   useEffect(() => {
@@ -47,7 +46,6 @@ const Ads = () => {
         </Text>
       </div>
       <Search />
-
       <div className="filters__wrp">
         <CustomSelect
           mode="multiple"
@@ -91,7 +89,6 @@ const Ads = () => {
           <RecommendCard key={data._id} {...data} />
         ))}
       </div>
-
       <div className="pagination__wrp">
         <Pagination
           current={currentPage}
