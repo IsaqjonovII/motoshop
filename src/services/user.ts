@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { baseUrl } from "constants";
-import { IBackendResponse, IUser } from "interfaces";
+import { IBackendResponse } from "interfaces";
 import { ILoginForm, IRegisterForm } from "interfaces/forms";
 
 export const authApi = createApi({
@@ -26,12 +26,8 @@ export const authApi = createApi({
       }),
       invalidatesTags: ["User"],
     }),
-    userInfo: builder.query<IBackendResponse, IUser>({
-      query: (details) => ({
-        url: "auth/info",
-        method: "GET",
-        body: details,
-      }),
+    userInfo: builder.query<IBackendResponse, string>({
+      query: (id) => `auth/info?userId=${id}`,
     }),
   }),
 });

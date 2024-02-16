@@ -2,6 +2,7 @@ import { Select } from "antd";
 import { ChangeEvent } from "react";
 import { StyledInput } from "./style";
 import { getBase64 } from "utils";
+import { FiTrash } from "react-icons/fi";
 import { IInput } from "interfaces/components";
 
 interface IFileInput {
@@ -27,7 +28,6 @@ export const InputSelect = ({
         id={id}
         value={value}
         className={className}
-        // showSearch
         placeholder={placeholder}
         onChange={onChange}
         tokenSeparators={[" "]}
@@ -69,6 +69,7 @@ export const InputFile = ({ fileList, setFileList }: IFileInput) => {
           id="inputfile"
           type="file"
           accept="image/*"
+          disabled={fileList.length >= 10}
           onChange={handleInputChange}
           multiple
         />
@@ -85,7 +86,7 @@ export const InputFile = ({ fileList, setFileList }: IFileInput) => {
                 className="remove__image"
                 onClick={() => handleRemoveImage(index)}
               >
-                X
+                <FiTrash />
               </button>
             </div>
           ))}

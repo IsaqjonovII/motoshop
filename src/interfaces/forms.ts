@@ -1,19 +1,30 @@
 import { IUser } from "interfaces";
 
 export interface IPostAd {
-  name: string;
+  title: string;
   description: string;
-  price: string;
+  price: {
+    amount: string;
+    currency: string;
+    canBargain: boolean;
+  };
   location: string;
   images: string[];
-  category?: string;
   owner: string | IUser;
-  engineSize?: string | number;
-  mileage?: string | number;
-  manufacturedAt?: string;
-  contactLinks?: string[];
+  color: string;
+  adType: string;
 }
-
+export interface IMotoAd extends IPostAd {
+  category: string;
+  engineSize: string | number;
+  mileage: string | number;
+  manufacturedAt: string | string[];
+}
+export interface IGearAd extends IPostAd {
+  size: string;
+  condition: string;
+  brand: string;
+}
 export interface ILoginForm {
   phone: string | number;
   password: string;

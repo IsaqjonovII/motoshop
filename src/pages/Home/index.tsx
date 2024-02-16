@@ -2,18 +2,23 @@ import StyledHome from "./style";
 import Carousel from "components/Carousel";
 import { useGetAdsByCategoryQuery } from "services/ad";
 import { useEffect, useState } from "react";
-import { IAd } from "interfaces/responses";
+import { IAdMoto, IAdHelmetAndGear } from "interfaces/responses";
 import { IServerError } from "interfaces";
 
 const Home = () => {
-  const { data, isLoading, error } = useGetAdsByCategoryQuery("sportbike");
+  const { data, isLoading, error, refetch } = useGetAdsByCategoryQuery("moto");
   const {
     data: helmets,
     isLoading: isHelmetsLoading,
     error: helmetError,
-  } = useGetAdsByCategoryQuery("sportbike");
-  const [sportBikes, setSportBikes] = useState<IAd[]>([]);
-  const [helmetsData, setHelmetsData] = useState<IAd[]>([]);
+    refetch: refetchHelmets,
+  } = useGetAdsByCategoryQuery("helmet");
+  const [sportBikes, setSportBikes] = useState<IAdMoto[] | IAdHelmetAndGear[]>(
+    []
+  );
+  const [helmetsData, setHelmetsData] = useState<
+    IAdMoto[] | IAdHelmetAndGear[]
+  >([]);
 
   useEffect(() => {
     if (data) setSportBikes(data);
@@ -28,7 +33,7 @@ const Home = () => {
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, error]);
+  }, [error]);
   useEffect(() => {
     if (helmetError) {
       const { status } = helmetError as IServerError;
@@ -38,6 +43,12 @@ const Home = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [helmetError]);
+
+  useEffect(() => {
+    refetch();
+    refetchHelmets();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <StyledHome>
@@ -62,14 +73,14 @@ const Home = () => {
       </picture>
       <section id="sportbikes" className="section">
         <Carousel
-          title="Sportbayklar"
+          title="Mototsikllar"
           items={sportBikes}
           isLoading={isLoading}
         />
       </section>
       <section id="helmets" className="section">
         <Carousel
-          title="Shlemlar"
+          title="Shlem va Kiyimlar"
           items={helmetsData}
           isLoading={isHelmetsLoading}
         />

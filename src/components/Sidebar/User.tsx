@@ -5,9 +5,12 @@ import { logOut } from "store/reducers/AuthSlice";
 import { logoutIcon, setttingsIcon } from "assets";
 import { useAppDispatch, useAppSelector } from "hooks";
 import { routes } from "constants/routes";
+import { useState } from "react";
+import { UpdateUser } from "pages/User/Settings";
 
 const { POST_MOTO } = routes;
 const User = () => {
+  const [isSettingsOpen, setisSettingsOpen] = useState<boolean>(false);
   const user = useAppSelector(({ auth }) => auth.user);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -51,7 +54,12 @@ const User = () => {
             <img className="action__icon" src={logoutIcon} alt="logout icon" />
             <span>Chiqish</span>
           </div>
-          <div className="action__wrp flex" role="button" tabIndex={0}>
+          <div
+            className="action__wrp flex"
+            role="button"
+            tabIndex={0}
+            onClick={() => setisSettingsOpen(true)}
+          >
             <img
               className="action__icon"
               src={setttingsIcon}
@@ -61,6 +69,11 @@ const User = () => {
           </div>
         </div>
       </div>
+      <UpdateUser
+        isOpen={isSettingsOpen}
+        setisOpen={setisSettingsOpen}
+        userId={user?._id ?? ""}
+      />
     </StyledProfile>
   );
 };

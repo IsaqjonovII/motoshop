@@ -7,7 +7,7 @@ const { teal, gray, white, red } = colors;
 
 const StyledInput = styled.div`
   position: relative;
-  input, textarea, .ant-select {
+  input, textarea, .ant-select, .ant-picker {
     width: 100%;
     max-width: ${pxToRem(550)};
     height: ${pxToRem(45)};
@@ -17,15 +17,14 @@ const StyledInput = styled.div`
     padding: 0 ${pxToRem(10)};
     border-radius: ${pxToRem(6)};
     font-size: ${pxToRem(17)};
-    &:focus,
-    :focus-visible,
-    :focus-within {
+    margin-bottom: ${pxToRem(15)};
+    &:where(:focus, :focus-visible, :focus-within) {
       border-color: ${teal};
       outline: ${pxToRem(2)} solid ${teal}70;
     }
-    .ant-select-selector {
+    .ant-select-selector, .ant-picker-input {
       border: none !important;
-      & :focus, :focus-within, :focus-visible {
+      :where(:focus, :focus-within, :focus-visible) {
       border: none !important;
         outline: none !important;
       }
@@ -46,7 +45,7 @@ textarea {
 .inp__label {
   display: block;
   font-size: ${pxToRem(19)};
-  margin: ${pxToRem(8)} 0;
+  margin: ${pxToRem(10)} 0;
 }
 .phone__code {
   font-size: ${pxToRem(18)};
