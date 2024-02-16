@@ -57,6 +57,7 @@ export default styled.div`
     border-radius: ${pxToRem(4)};
     background-color: ${teal}30;
     transition: 200ms all;
+    text-transform: capitalize;
     &:hover {
       background-color: ${teal}50;
       cursor: pointer;

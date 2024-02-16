@@ -60,7 +60,16 @@ export const adApi = createApi({
       { userId: string | any; adId: string }
     >({
       query: ({ userId, adId }) => ({
-        url: `ad/update-like?userId=${userId}&adId=${adId}`,
+        url: `ad/add-like?userId=${userId}&adId=${adId}`,
+        method: "POST",
+      }),
+    }),
+    removeLike: builder.mutation<
+      IBackendResponse,
+      { userId: string | any; adId: string }
+    >({
+      query: ({ userId, adId }) => ({
+        url: `ad/remove-like?userId=${userId}&adId=${adId}`,
         method: "POST",
       }),
     }),
@@ -76,4 +85,5 @@ export const {
   useGetRandomAdsQuery,
   useUpdateAdViewMutation,
   useUpdateLikesMutation,
+  useRemoveLikeMutation
 } = adApi;

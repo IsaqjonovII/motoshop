@@ -160,14 +160,16 @@ const AdInfo = () => {
                     : null}
                 </Text>
               </li>
-              <li className="label">
-                {adData?.adType === "moto" ? "Dvigatel hajmi: " : null}{" "}
-                <Text size="md" bold={600}>
-                  {adData?.adType === "moto"
-                    ? (adData as IMotoAd).engineSize + " cc"
-                    : null}
-                </Text>
-              </li>
+              {adData?.adType === "moto" && (
+                <li className="label">
+                  {adData?.adType === "moto" ? "Dvigatel hajmi: " : null}{" "}
+                  <Text size="md" bold={600}>
+                    {adData?.adType === "moto"
+                      ? (adData as IMotoAd).engineSize + " cc"
+                      : null}
+                  </Text>
+                </li>
+              )}
               <li className="label">
                 Rangi:{" "}
                 <Text size="md" bold={600}>

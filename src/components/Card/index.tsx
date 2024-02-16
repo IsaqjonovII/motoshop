@@ -15,7 +15,7 @@ import { Text } from "components/Text";
 import { routes } from "constants/routes";
 import LazyImage from "components/LazyImage";
 import { Button } from "components/Button";
-import { useUpdateLikesMutation } from "services/ad";
+import { useRemoveLikeMutation, useUpdateLikesMutation } from "services/ad";
 
 const { MOTOCYCLES } = routes;
 const RecommendCard = (props: IAdMoto) => {
@@ -23,6 +23,7 @@ const RecommendCard = (props: IAdMoto) => {
   const dispatch = useAppDispatch();
   const userData = useAppSelector((state) => state);
   const { likedProducts, auth } = userData;
+  const [removeLike] = useRemoveLikeMutation();
   const [updateLikes] = useUpdateLikesMutation();
 
   const handleAddToLikedProducts = (
@@ -39,6 +40,7 @@ const RecommendCard = (props: IAdMoto) => {
   ) => {
     e.preventDefault();
     dispatch(removeLikedProducts(id));
+    removeLike({ userId: auth.user?._id, adId: id });
   };
 
   const handlePhoneCall = (
