@@ -73,6 +73,18 @@ export const adApi = createApi({
         method: "POST",
       }),
     }),
+    getSimilarAds: builder.query<
+      SetStateAction<IAdMoto[] | IAdHelmetAndGear[]>,
+      { type: string; id: string }
+    >({
+      query: ({ type, id }) => `ad/similar-ads?type=${type}&id=${id}`,
+    }),
+    getAdsByUser: builder.query<
+      SetStateAction<IAdMoto[] | IAdHelmetAndGear[]>,
+      { userId: string; adId: string }
+    >({
+      query: ({ userId, adId }) => `ad/ads-by-user?id=${userId}&adId=${adId}`,
+    }),
   }),
 });
 
@@ -85,5 +97,7 @@ export const {
   useGetRandomAdsQuery,
   useUpdateAdViewMutation,
   useUpdateLikesMutation,
-  useRemoveLikeMutation
+  useRemoveLikeMutation,
+  useGetSimilarAdsQuery,
+  useGetAdsByUserQuery
 } = adApi;

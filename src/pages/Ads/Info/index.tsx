@@ -4,7 +4,12 @@ import { Link, useParams } from "react-router-dom";
 import { FiEye } from "react-icons/fi";
 import { IoMdHeart, IoIosArrowBack } from "react-icons/io";
 import { formatNumbers } from "utils";
-import { useGetAdByIdQuery, useUpdateAdViewMutation } from "services/ad";
+import {
+  useGetAdByIdQuery,
+  useGetAdsByUserQuery,
+  useGetSimilarAdsQuery,
+  useUpdateAdViewMutation,
+} from "services/ad";
 import { IAdHelmetAndGear, IAdMoto, IMotoAd } from "interfaces/responses";
 import StyledAdInfo from "./style";
 import { Text } from "components/Text";
@@ -13,6 +18,7 @@ import ImageGallery from "components/ImageGallery";
 import { Breadcrumb } from "antd";
 import { routes } from "constants/routes";
 import { useAppSelector } from "hooks";
+import Carousel from "components/Carousel";
 
 type TParams = {
   id: string;
@@ -20,12 +26,31 @@ type TParams = {
 const { HOME, MOTOCYCLES } = routes;
 const AdInfo = () => {
   const { id } = useParams<TParams>();
-  const userId = useAppSelector(({ auth }) => auth.user?._id);
+  const user = useAppSelector(({ auth }) => auth.user);
+  const [similiarAdsData, setSimiliarAdsData] = useState<
+    IAdMoto[] | IAdHelmetAndGear[] | IMotoAd[]
+  >([]);
+  const [ownerAdsData, setOwnerAdsData] = useState<
+    IAdMoto[] | IAdHelmetAndGear[] | IMotoAd[]
+  >([]);
   const [adData, setadData] = useState<IAdMoto | IAdHelmetAndGear>();
   const [updateView, { data: viewData }] = useUpdateAdViewMutation();
   const { data, isLoading, error, refetch } = useGetAdByIdQuery(id!);
+  const { data: ownerAds, isLoading: isOwnerAdsLoading } = useGetAdsByUserQuery(
+    {
+      userId: adData?.owner._id ?? "",
+      adId: adData?._id ?? "",
+    }
+  );
+  const { data: similiarAds, isLoading: isSimiliarAdsLoading } =
+    useGetSimilarAdsQuery({
+      type: adData?.adType ?? "moto",
+      id: adData?._id ?? "",
+    });
   console.log(isLoading, error);
-
+  useEffect(() => {
+    if (similiarAds) setSimiliarAdsData(similiarAds);
+  }, [similiarAds]);
   useEffect(() => {
     refetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -35,12 +60,16 @@ const AdInfo = () => {
   }, [viewData]);
 
   useEffect(() => {
-    if (id && userId) updateView({ userId, adId: id });
+    if (id && user && user?._id && !user.viewedAds?.includes(id))
+      updateView({ userId: user?._id, adId: id });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id, userId]);
+  }, [id, user]);
   useEffect(() => {
     if (data) setadData(data);
   }, [data]);
+  useEffect(() => {
+    if (ownerAds) setOwnerAdsData(ownerAds);
+  }, [ownerAds]);
 
   return (
     <StyledAdInfo>
@@ -179,6 +208,20 @@ const AdInfo = () => {
           </div>
         </div>
       </div>
+
+      <br />
+      <br />
+      <br />
+      <Carousel
+        title="Muallifning boshqa e'lonlari"
+        items={ownerAdsData}
+        isLoading={isOwnerAdsLoading}
+      />
+      <Carousel
+        title="O'xshash e'lonlar"
+        items={similiarAdsData}
+        isLoading={isSimiliarAdsLoading}
+      />
     </StyledAdInfo>
   );
 };

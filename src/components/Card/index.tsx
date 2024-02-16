@@ -21,8 +21,8 @@ const { MOTOCYCLES } = routes;
 const RecommendCard = (props: IAdMoto) => {
   const { _id, price, title, location, images, owner } = props;
   const dispatch = useAppDispatch();
-  const userData = useAppSelector((state) => state);
-  const { likedProducts, auth } = userData;
+  const likedProducts = useAppSelector(({ likedProducts }) => likedProducts);
+  const user = useAppSelector(({ auth }) => auth.user);
   const [removeLike] = useRemoveLikeMutation();
   const [updateLikes] = useUpdateLikesMutation();
 
@@ -32,7 +32,7 @@ const RecommendCard = (props: IAdMoto) => {
   ) => {
     e.preventDefault();
     dispatch(addToLikedProducts(id));
-    updateLikes({ userId: auth.user?._id, adId: id });
+    updateLikes({ userId: user?._id, adId: id });
   };
   const handleRemoveLikedProducts = (
     id: string,
@@ -40,7 +40,7 @@ const RecommendCard = (props: IAdMoto) => {
   ) => {
     e.preventDefault();
     dispatch(removeLikedProducts(id));
-    removeLike({ userId: auth.user?._id, adId: id });
+    removeLike({ userId: user?._id, adId: id });
   };
 
   const handlePhoneCall = (
