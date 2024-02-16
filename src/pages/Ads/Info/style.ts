@@ -66,4 +66,18 @@ export default styled.div`
       margin-left: ${pxToRem(5)};
     }
   }
+  @media only screen and (max-width: 1024px) {
+    .page__container {
+      ${layout("grid", { cols: 1, rows: "auto" })}
+    }
+    .content, .images {
+      grid-column: unset !important;
+      grid-row: unset;
+      border-right: none;
+      padding: 0;
+    }
+    .content {
+      margin-top: ${pxToRem(25)};
+    }
+  }
 `;

@@ -68,8 +68,12 @@ export const GlobalStyle = createGlobalStyle`
     .swiper-wrapper {
       padding: ${pxToRem(15)};
     }
-    .ant-tabs-ink-bar {
+    .ant-tabs-ink-bar, .ant-btn-primary {
       background: ${teal} !important;
+    }
+    .ant-btn-default:hover {
+        border-color: ${teal} !important;
+        color: ${teal} !important;
     }
     .ant-tabs-tab-active .ant-tabs-tab-btn {
       color: ${teal} !important;

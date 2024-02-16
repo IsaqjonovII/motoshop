@@ -44,3 +44,11 @@ export interface IRadioBtn {
   }[];
   onChange: (e: RadioChangeEvent) => void;
 }
+export interface IModal {
+  close: () => void;
+  open: () => void;
+  isOpen: boolean;
+  isLoading?: boolean;
+  title: string;
+  children: JSX.Element | JSX.Element[];
+}

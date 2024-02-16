@@ -25,7 +25,6 @@ const AdInfo = () => {
   const [updateView, { data: viewData }] = useUpdateAdViewMutation();
   const { data, isLoading, error, refetch } = useGetAdByIdQuery(id!);
   console.log(isLoading, error);
-  console.log(data);
 
   useEffect(() => {
     refetch();
