@@ -16,6 +16,11 @@ export const UpdateUser = ({
   const onOk = () => {
     alert("heeelllo");
   };
+  console.log(isLoading);
+  
+  useEffect(() => {
+    if (error) console.log(error);
+  }, [error]);
 
   useEffect(() => {
     if (data) console.log(data);

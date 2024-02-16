@@ -18,7 +18,7 @@ export interface IMotoAd extends IPostAd {
   category: string;
   engineSize: string | number;
   mileage: string | number;
-  manufacturedAt: string;
+  manufacturedAt: string | string[];
 }
 export interface IGearAd extends IPostAd {
   size: string;
