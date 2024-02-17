@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import StyledAds from "./style";
 import { IAdMoto, IAdHelmetAndGear } from "interfaces/responses";
 import { useGetRandomAdsQuery } from "services/ad";
-import { condition, bikeTypes, engineCC, mileage } from "constants";
+import { condition, bikeTypes, engineCC, mileage, bikeColors } from "constants";
 import { Text } from "components/Text";
 import CustomSelect from "components/Select";
-import RecommendCard from "components/Card";
+import { AdCard } from "components/Card";
 import { Search } from "components/Search";
 
 const Ads = () => {
@@ -74,16 +74,16 @@ const Ads = () => {
             placeholder="Dvigatel hajmi"
           />
         </div>
-        {/* <CustomSelect
+        <CustomSelect
           mode="multiple"
           onChange={handleBikeTypesChange}
           options={bikeColors}
           placeholder="Mototsikl rangini tanlang"
-        /> */}
+        />
       </div>
       <div className="ads__container">
         {randomAdsData.map((data) => (
-          <RecommendCard key={data._id} {...data} />
+          <AdCard key={data._id} {...data} />
         ))}
       </div>
       <div className="pagination__wrp">

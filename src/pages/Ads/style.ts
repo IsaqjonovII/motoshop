@@ -55,7 +55,7 @@ export default styled.div`
   }
   .filters__wrp {
     ${layout("grid", { rows: "auto", cols: 5 })}
-    gap: 0 ${pxToRem(10)};
+    gap: ${pxToRem(10)};
     margin: ${pxToRem(20)} 0;
   }
   .filter {
@@ -72,13 +72,8 @@ export default styled.div`
     ${layout("flex")}
   }
   .ads__container {
-    ${layout("grid", { rows: "auto", cols: 4 })}
+    ${layout("grid", { rows: "auto", cols: 2 })}
     gap: ${pxToRem(10)};
-  }
-  @media only screen and (max-width: 1300px) {
-      .ads__container {
-        ${layout("grid", { cols: 3, rows: "auto" })}
-      }
   }
   @media only screen and (max-width: 1124px) {
       .filters__wrp {
@@ -86,16 +81,13 @@ export default styled.div`
         gap: ${pxToRem(10)};
       }
       .ads__container {
-        ${layout("grid", { rows: "auto", cols: 2 })}
+        ${layout("grid", { rows: "auto", cols: 1 })}
       }
   }
   @media only screen and (max-width: 768px) {
     .filters__wrp {
       ${layout("grid", { rows: 3, cols: 2 })}
       gap: ${pxToRem(10)};
-    }
-    .ads__container {
-        ${layout("grid", { rows: "auto", cols: 1 })}
     }
   }
   @media only screen and (max-width: 400px) {
