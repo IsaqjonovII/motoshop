@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { layout } from "styles/mixin";
 import { pxToRem } from "utils";
 
-const { gray, teal } = colors;
+const { teal } = colors;
 export const StyledPostAd = styled.div`
   padding: ${pxToRem(30)};
   .post__form {
@@ -52,21 +52,6 @@ export default styled.div`
   }
   .pagination__wrp {
     margin-top: ${pxToRem(30)};
-  }
-  .filters__wrp {
-    ${layout("grid", { rows: "auto", cols: 5 })}
-    gap: ${pxToRem(10)};
-    margin: ${pxToRem(20)} 0;
-  }
-  .filter {
-    height: ${pxToRem(45)};
-    .ant-select {
-      width: 100%;
-
-    }
-  }
-  .ant-select-selection-placeholder {
-    color: ${gray};
   }
   .ads__header {
     ${layout("flex")}
