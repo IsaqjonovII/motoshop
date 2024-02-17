@@ -4,14 +4,14 @@ import { useEffect, useState } from "react";
 import StyledAds from "./style";
 import { IAdMoto, IAdHelmetAndGear } from "interfaces/responses";
 import { useGetRandomAdsQuery } from "services/ad";
-import { bikeColors, condition, bikeTypes, engineCC, mileage } from "constants";
+import { condition, bikeTypes, engineCC, mileage } from "constants";
 import { Text } from "components/Text";
 import CustomSelect from "components/Select";
 import RecommendCard from "components/Card";
 import { Search } from "components/Search";
 
 const Ads = () => {
-  const { data, error, refetch } = useGetRandomAdsQuery(30);
+  const { data, refetch } = useGetRandomAdsQuery(30);
   const [randomAdsData, setRandomAdsData] = useState<
     IAdMoto[] | IAdHelmetAndGear[]
   >([]);
@@ -31,9 +31,6 @@ const Ads = () => {
   useEffect(() => {
     if (data) setRandomAdsData(data);
   }, [data]);
-  useEffect(() => {
-    if (error) console.log(error);
-  }, [error]);
   useEffect(() => {
     refetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -77,12 +74,12 @@ const Ads = () => {
             placeholder="Dvigatel hajmi"
           />
         </div>
-        <CustomSelect
+        {/* <CustomSelect
           mode="multiple"
           onChange={handleBikeTypesChange}
           options={bikeColors}
           placeholder="Mototsikl rangini tanlang"
-        />
+        /> */}
       </div>
       <div className="ads__container">
         {randomAdsData.map((data) => (

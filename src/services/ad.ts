@@ -24,7 +24,7 @@ export const adApi = createApi({
     getAllAds: builder.query<IAdMoto[] | IAdHelmetAndGear[], void>({
       query: () => "/ad",
     }),
-    getAdById: builder.query({
+    getAdById: builder.query<SetStateAction<IAdMoto | IAdHelmetAndGear>, string>({
       query: (id) => `ad/${id}`,
     }),
     deleteAd: builder.mutation<IBackendResponse, string>({
@@ -34,55 +34,37 @@ export const adApi = createApi({
       }),
       invalidatesTags: ["Ad"],
     }),
-    getAdsByCategory: builder.query<
-      SetStateAction<IAdMoto[] | IAdHelmetAndGear[]>,
-      string
-    >({
+    getAdsByCategory: builder.query<SetStateAction<IAdMoto[] | IAdHelmetAndGear[]>,string>({
       query: (type) => `ad/ads-by-type?type=${type}`,
     }),
-    getRandomAds: builder.query<
-      SetStateAction<IAdMoto[] | IAdHelmetAndGear[]>,
-      number
-    >({
+    getRandomAds: builder.query<SetStateAction<IAdMoto[] | IAdHelmetAndGear[]>,number>({
       query: (limit) => `ad/random-ads?limit=${limit}`,
     }),
-    updateAdView: builder.mutation<
-      IBackendResponse,
-      { userId: string; adId: string }
-    >({
+    updateAdView: builder.mutation<IBackendResponse,{ userId: string; adId: string }>({
       query: ({ userId, adId }) => ({
         url: `ad/update-view?userId=${userId}&adId=${adId}`,
         method: "POST",
       }),
+      invalidatesTags: ["Ad"]
     }),
-    updateLikes: builder.mutation<
-      IBackendResponse,
-      { userId: string | any; adId: string }
-    >({
+    updateLikes: builder.mutation<IBackendResponse,{ userId: string | any; adId: string }>({
       query: ({ userId, adId }) => ({
         url: `ad/add-like?userId=${userId}&adId=${adId}`,
         method: "POST",
       }),
+      invalidatesTags: ["Ad"]
     }),
-    removeLike: builder.mutation<
-      IBackendResponse,
-      { userId: string | any; adId: string }
-    >({
+    removeLike: builder.mutation<IBackendResponse,{ userId: string | any; adId: string }>({
       query: ({ userId, adId }) => ({
         url: `ad/remove-like?userId=${userId}&adId=${adId}`,
         method: "POST",
       }),
+      invalidatesTags: ["Ad"]
     }),
-    getSimilarAds: builder.query<
-      SetStateAction<IAdMoto[] | IAdHelmetAndGear[]>,
-      { type: string; id: string }
-    >({
+    getSimilarAds: builder.query<SetStateAction<IAdMoto[] | IAdHelmetAndGear[]>,{ type: string; id: string }>({
       query: ({ type, id }) => `ad/similar-ads?type=${type}&id=${id}`,
     }),
-    getAdsByUser: builder.query<
-      SetStateAction<IAdMoto[] | IAdHelmetAndGear[]>,
-      { userId: string; adId: string }
-    >({
+    getAdsByUser: builder.query<SetStateAction<IAdMoto[] | IAdHelmetAndGear[]>, { userId: string; adId: string }>({
       query: ({ userId, adId }) => `ad/ads-by-user?id=${userId}&adId=${adId}`,
     }),
   }),
@@ -99,5 +81,5 @@ export const {
   useUpdateLikesMutation,
   useRemoveLikeMutation,
   useGetSimilarAdsQuery,
-  useGetAdsByUserQuery
+  useGetAdsByUserQuery,
 } = adApi;

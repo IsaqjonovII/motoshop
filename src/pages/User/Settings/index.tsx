@@ -22,7 +22,9 @@ export const UpdateUser = ({
   }, [error]);
 
   useEffect(() => {
-    if (data) console.log(data);
+    if (data) {
+      //
+    }
   }, [data]);
 
   useEffect(() => {
