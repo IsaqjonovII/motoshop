@@ -1,14 +1,12 @@
 import { lazy } from "react";
 import { Tabs } from "antd";
 import type { TabsProps } from "antd";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 const Login = lazy(() => import("./Login"));
 const Register = lazy(() => import("./Register"));
 import StyledAuth from "./style";
-import { routes } from "constants/routes";
 
-const { HOME } = routes;
 const items: TabsProps["items"] = [
   {
     key: "login",
@@ -22,21 +20,24 @@ const items: TabsProps["items"] = [
   },
 ];
 
-const Auth = () => (
-  <StyledAuth>
-    <Link to={HOME} className="back">
-      {" "}
-      <AiOutlineArrowLeft /> Ortga qaytish
-    </Link>
-    <Tabs
-      defaultActiveKey="login"
-      tabBarStyle={{
-        borderColor: "teal",
-      }}
-      items={items}
-      size="large"
-    />
-  </StyledAuth>
-);
-
+const Auth = () => {
+  const navigate = useNavigate();
+  const handleGoingBack = () => navigate(-1);
+  return (
+    <StyledAuth>
+      <div className="back" onClick={handleGoingBack}>
+        {" "}
+        <AiOutlineArrowLeft /> Ortga qaytish
+      </div>
+      <Tabs
+        defaultActiveKey="login"
+        tabBarStyle={{
+          borderColor: "teal",
+        }}
+        items={items}
+        size="large"
+      />
+    </StyledAuth>
+  );
+};
 export default Auth;
