@@ -5,6 +5,7 @@ import Navbar from "components/Navbar";
 import Container from "components/Container";
 import NotFound from "pages/NotFound";
 import { useAppSelector } from "hooks";
+import Footer from "components/Footer";
 
 function App() {
   const user = useAppSelector(({ auth }) => auth.user);
@@ -31,6 +32,8 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Container>
+
+      <Footer />
     </div>
   );
 }

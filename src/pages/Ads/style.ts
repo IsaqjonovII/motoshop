@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { layout } from "styles/mixin";
 import { pxToRem } from "utils";
 
-const { gray, teal } = colors;
+const { teal } = colors;
 export const StyledPostAd = styled.div`
   padding: ${pxToRem(30)};
   .post__form {
@@ -53,32 +53,12 @@ export default styled.div`
   .pagination__wrp {
     margin-top: ${pxToRem(30)};
   }
-  .filters__wrp {
-    ${layout("grid", { rows: "auto", cols: 5 })}
-    gap: 0 ${pxToRem(10)};
-    margin: ${pxToRem(20)} 0;
-  }
-  .filter {
-    height: ${pxToRem(45)};
-    .ant-select {
-      width: 100%;
-
-    }
-  }
-  .ant-select-selection-placeholder {
-    color: ${gray};
-  }
   .ads__header {
     ${layout("flex")}
   }
   .ads__container {
-    ${layout("grid", { rows: "auto", cols: 4 })}
+    ${layout("grid", { rows: "auto", cols: 2 })}
     gap: ${pxToRem(10)};
-  }
-  @media only screen and (max-width: 1300px) {
-      .ads__container {
-        ${layout("grid", { cols: 3, rows: "auto" })}
-      }
   }
   @media only screen and (max-width: 1124px) {
       .filters__wrp {
@@ -86,16 +66,13 @@ export default styled.div`
         gap: ${pxToRem(10)};
       }
       .ads__container {
-        ${layout("grid", { rows: "auto", cols: 2 })}
+        ${layout("grid", { rows: "auto", cols: 1 })}
       }
   }
   @media only screen and (max-width: 768px) {
     .filters__wrp {
       ${layout("grid", { rows: 3, cols: 2 })}
       gap: ${pxToRem(10)};
-    }
-    .ads__container {
-        ${layout("grid", { rows: "auto", cols: 1 })}
     }
   }
   @media only screen and (max-width: 400px) {

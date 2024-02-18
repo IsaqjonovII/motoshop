@@ -27,36 +27,20 @@ const { HOME, MOTOCYCLES } = routes;
 const AdInfo = () => {
   const { id } = useParams<TParams>();
   const user = useAppSelector(({ auth }) => auth.user);
-  const [similiarAdsData, setSimiliarAdsData] = useState<
-    IAdMoto[] | IAdHelmetAndGear[] | IMotoAd[]
-  >([]);
-  const [ownerAdsData, setOwnerAdsData] = useState<
-    IAdMoto[] | IAdHelmetAndGear[] | IMotoAd[]
-  >([]);
-  const [adData, setadData] = useState<IAdMoto | IAdHelmetAndGear>();
+  const [similiarAdsData, setSimiliarAdsData] = useState<IAdMoto[] | IAdHelmetAndGear[] | IMotoAd[]>([]);
+  const [ownerAdsData, setOwnerAdsData] = useState<IAdMoto[] | IAdHelmetAndGear[] | IMotoAd[]>([]);
+  const [adData, setAdData] = useState<IAdMoto | IAdHelmetAndGear | any>();
   const [updateView, { data: viewData }] = useUpdateAdViewMutation();
-  const { data, isLoading, error, refetch } = useGetAdByIdQuery(id!);
-  const { data: ownerAds, isLoading: isOwnerAdsLoading } = useGetAdsByUserQuery(
-    {
-      userId: adData?.owner._id ?? "",
-      adId: adData?._id ?? "",
-    }
-  );
-  const { data: similiarAds, isLoading: isSimiliarAdsLoading } =
-    useGetSimilarAdsQuery({
-      type: adData?.adType ?? "moto",
-      id: adData?._id ?? "",
-    });
-  console.log(isLoading, error);
+  const { data, refetch } = useGetAdByIdQuery(id!);
+  const { data: ownerAds, isLoading: isOwnerAdsLoading } = useGetAdsByUserQuery({ userId: adData?.owner._id ?? "", adId: adData?._id ?? ""});
+  const { data: similiarAds, isLoading: isSimiliarAdsLoading } = useGetSimilarAdsQuery({ type: adData?.adType ?? "moto", id: adData?._id ?? ""});
+
   useEffect(() => {
     if (similiarAds) setSimiliarAdsData(similiarAds);
   }, [similiarAds]);
   useEffect(() => {
     refetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [viewData]);
-  useEffect(() => {
-    if (viewData) console.log(viewData);
   }, [viewData]);
 
   useEffect(() => {
@@ -65,12 +49,11 @@ const AdInfo = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, user]);
   useEffect(() => {
-    if (data) setadData(data);
+    if (data) setAdData(data);
   }, [data]);
   useEffect(() => {
     if (ownerAds) setOwnerAdsData(ownerAds);
   }, [ownerAds]);
-
   return (
     <StyledAdInfo>
       <div className="page__container">

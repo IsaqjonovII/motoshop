@@ -13,10 +13,9 @@ type props = {
   title: string;
   isLoading?: boolean;
 };
-const Carousel = ({ items, title, isLoading }: props) => {
+const Carousel = ({ items, title }: props) => {
   /* eslint-disable @typescript-eslint/no-explicit-any */
   const swiperRef = useRef<any>();
-  console.log(isLoading);
 
   return (
     <div>

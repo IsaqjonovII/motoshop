@@ -79,3 +79,59 @@ export default styled.div`
     }
   }
 `;
+export const StyledCard = styled.div`
+  height: ${pxToRem(200)};
+  background-color: ${white};
+  border-radius: ${pxToRem(6)};
+  ${layout("flex")}
+  .image__container {
+    width: 100%;
+    max-width: 300px;
+    height: 100%;
+    .img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: ${pxToRem(6)} 0 0 ${pxToRem(6)};
+    }
+  }
+  .content {
+    width: 100%;
+    height: 100%;
+    padding: ${pxToRem(20)};
+    ${layout("flex")}
+    align-items: start;
+    flex-direction: column;
+  }
+  .content__head {
+    width: 100%;
+    ${layout("flex")}
+  }
+  .content__main {
+    margin: ${pxToRem(20)} 0;
+  }
+  .content__bottom {
+    width: 100%;
+    align-self: end;
+    margin-top: auto;
+    ${layout("flex")}
+  }
+  @media only screen and (max-width: 768px) {
+    height: 180px;
+    .image__container {
+      max-width: 200px;
+    }
+    .content {
+      padding: ${pxToRem(8)};
+    }
+  }
+  @media only screen and (max-width: 550px) {
+    .content__bottom {
+      flex-direction: column-reverse;
+      align-items: start;
+      button {
+        margin-top: ${pxToRem(10)};
+      }
+    }
+  }
+`;

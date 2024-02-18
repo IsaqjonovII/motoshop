@@ -6,7 +6,7 @@ import { useAppSelector } from "hooks";
 import { routes } from "constants/routes";
 import { Button } from "components/Button";
 
-const { HOME, AUTH, PROFILE, MOTOCYCLES, POST_MOTO } = routes;
+const { HOME, AUTH, PROFILE, POST_MOTO } = routes;
 const Navbar = () => {
   const navigate = useNavigate();
   const user = useAppSelector(({ auth }) => auth.user);
@@ -23,11 +23,6 @@ const Navbar = () => {
               <img src={motoLogo} alt="motoshop" />
             </Link>
           </div>
-          <nav className="nav__menu">
-            <Link to={MOTOCYCLES} className="menu__item">
-              Barcha E'lonlar
-            </Link>
-          </nav>
         </div>
 
         <div className="nav__right">

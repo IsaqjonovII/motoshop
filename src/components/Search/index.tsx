@@ -9,7 +9,6 @@ export const Search = () => {
   return (
     <StyledSearch $isInputActive={isInputActive}>
       <div className="search__wrp">
-        <GoSearch className="search__icon" />
         <input
           id="search-input"
           type="text"
@@ -21,7 +20,7 @@ export const Search = () => {
           value={searchVal}
           onChange={({ target }) => setSearchVal(target.value)}
         />
-        <button className="search__btn">Qidirish</button>
+        <GoSearch className="search__icon" />
       </div>
     </StyledSearch>
   );

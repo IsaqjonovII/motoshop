@@ -6,10 +6,11 @@ import { compression } from "vite-plugin-compression2";
 export default defineConfig({
   plugins: [react(), tsconfigPaths(), compression()],
   resolve: { alias: [{ find: "@", replacement: "/src" }] },
-  base: "./",
+  base: "/",
   build: {
     outDir: "dist",
     assetsDir: "assets",
     sourcemap: true,
+    target: "modules"
   },
 });

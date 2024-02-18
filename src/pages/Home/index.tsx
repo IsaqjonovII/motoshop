@@ -1,9 +1,14 @@
-import StyledHome from "./style";
-import Carousel from "components/Carousel";
-import { useGetAdsByCategoryQuery } from "services/ad";
+import { Select } from "antd";
 import { useEffect, useState } from "react";
-import { IAdMoto, IAdHelmetAndGear } from "interfaces/responses";
+import StyledHome from "./style";
 import { IServerError } from "interfaces";
+import { useGetAdsByCategoryQuery } from "services/ad";
+import { IAdMoto, IAdHelmetAndGear } from "interfaces/responses";
+import { condition, bikeTypes, engineCC, mileage, bikeColors } from "constants";
+import Carousel from "components/Carousel";
+import { Search } from "components/Search";
+import CustomSelect from "components/Select";
+import { Button } from "components/Button";
 
 const Home = () => {
   const { data, isLoading, error, refetch } = useGetAdsByCategoryQuery("moto");
@@ -19,7 +24,16 @@ const Home = () => {
   const [helmetsData, setHelmetsData] = useState<
     IAdMoto[] | IAdHelmetAndGear[]
   >([]);
-
+  const [selectedBikeTypes, setSelectedBikeTypes] = useState<string[]>([]);
+  const [selectedEngine, setSelectedEngine] = useState("");
+  const handleEngine = (val: string) => {
+    setSelectedEngine(val);
+  };
+  const handleBikeTypesChange = (value: string[]) =>
+    setSelectedBikeTypes(value);
+  if (selectedBikeTypes && selectedEngine) {
+    // nothing here
+  }
   useEffect(() => {
     if (data) setSportBikes(data);
     if (helmets) setHelmetsData(helmets);
@@ -52,25 +66,51 @@ const Home = () => {
 
   return (
     <StyledHome>
-      <picture className="banner__img">
-        <source
-          srcSet="https://res.cloudinary.com/doswy0zdn/image/upload/f_auto,q_auto/moto-bg-xl"
-          media="(min-width: 1400px)"
-        />
-        <source
-          srcSet="https://res.cloudinary.com/doswy0zdn/image/upload/f_auto,q_auto/moto-bg-xl"
-          media="(min-width: 1200px)"
-        />
-        <source
-          srcSet="https://res.cloudinary.com/doswy0zdn/image/upload/f_auto,q_auto/moto-bg-sm"
-          media="(min-width: 800px)"
-        />
-        <img
-          className="banner__img"
-          src="https://res.cloudinary.com/doswy0zdn/image/upload/f_auto,q_auto/moto-bg-sm"
-          alt="example"
-        />
-      </picture>
+      <div className="search__ads">
+        <Search />
+
+        <div className="filters__wrp">
+          <CustomSelect
+            mode="multiple"
+            onChange={handleBikeTypesChange}
+            options={bikeTypes}
+            placeholder="Mototsikl turlarini tanlang"
+          />
+          <div className="filter">
+            <Select
+              defaultValue="barchasi"
+              options={condition}
+              onChange={handleEngine}
+              placeholder="Mototsikl holati"
+            />
+          </div>
+          <div className="filter">
+            <Select
+              defaultValue="50-250"
+              options={engineCC}
+              onChange={handleEngine}
+              placeholder="Dvigatel hajmi"
+            />
+          </div>
+          <div className="filter">
+            <Select
+              defaultValue="0-1000"
+              options={mileage}
+              onChange={handleEngine}
+              placeholder="Dvigatel hajmi"
+            />
+          </div>
+          <CustomSelect
+            mode="multiple"
+            onChange={handleBikeTypesChange}
+            options={bikeColors}
+            placeholder="Mototsikl rangini tanlang"
+          />
+        </div>
+
+        <Button>E'lonlarni ko'rsatish</Button>
+      </div>
+
       <section id="sportbikes" className="section">
         <Carousel
           title="Mototsikllar"
