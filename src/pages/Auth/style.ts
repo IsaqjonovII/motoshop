@@ -17,6 +17,7 @@ export default styled.div`
     display: inline-block;
     font-size: ${pxToRem(18)};
     margin-bottom: ${pxToRem(20)};
+    cursor: pointer;
     color: ${gray};
     svg {
       margin-right: ${pxToRem(10)};

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { MouseEvent } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import CardStyle, { StyledCard } from "./style";
 import { formatNumbers } from "utils";
@@ -16,10 +16,11 @@ import LazyImage from "components/LazyImage";
 import { Button } from "components/Button";
 import { useRemoveLikeMutation, useUpdateLikesMutation } from "services/ad";
 
-const { MOTOCYCLES } = routes;
+const { MOTOCYCLES, AUTH } = routes;
 const RecommendCard = (props: IAdMoto) => {
   const { _id, price, title, location, images } = props;
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const likedProducts = useAppSelector(({ likedProducts }) => likedProducts);
   const user = useAppSelector(({ auth }) => auth.user);
   const [removeLike] = useRemoveLikeMutation();
@@ -30,8 +31,12 @@ const RecommendCard = (props: IAdMoto) => {
     e: MouseEvent<SVGElement, MouseEvent>
   ) => {
     e.preventDefault();
-    dispatch(addToLikedProducts(id));
-    updateLikes({ userId: user?._id, adId: id });
+    if (!user) {
+      navigate(AUTH);
+    } else {
+      dispatch(addToLikedProducts(id));
+      updateLikes({ userId: user?._id, adId: id });
+    }
   };
   const handleRemoveLikedProducts = (
     id: string,
