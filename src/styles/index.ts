@@ -66,7 +66,7 @@ export const GlobalStyle = createGlobalStyle`
     }
     }
     .swiper-wrapper {
-      padding: ${pxToRem(15)};
+      /* padding: ${pxToRem(15)}; */
     }
     :where(.swiper-button-next, .swiper-button-prev)::after {
         display: none;

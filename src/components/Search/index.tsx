@@ -18,7 +18,6 @@ export const Search = ({
           id="search-input"
           type="text"
           minLength={3}
-          name="search-input"
           required
           placeholder="Qidirish..."
           onFocus={() => setIsInputActive(true)}

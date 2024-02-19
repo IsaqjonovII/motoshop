@@ -121,10 +121,14 @@ export default styled.header`
       padding: 0;
     }
     .nav__container {
-      padding: ${pxToRem(20)};
+      padding: 0 ${pxToRem(20)};
     }
   }
   @media screen and (max-width: ${pxToRem(768)}){
+    .nav__container {
+      height: auto;
+      padding: ${pxToRem(10)};
+    }
     .nav__left .nav__logo{
       max-width: ${pxToRem(100)};
       img {
@@ -132,8 +136,10 @@ export default styled.header`
         object-fit: cover;
       }
     }
-    .nav__left, .nav__right {
-      height: 60px !important;
+    .nav__right .user__wrp {
+      padding: ${pxToRem(6)} ${pxToRem(10)};
+      border-width: ${pxToRem(1.8)};
+      font-size: ${pxToRem(16)};
     }
   } 
   @media screen and (max-width: ${pxToRem(550)}){

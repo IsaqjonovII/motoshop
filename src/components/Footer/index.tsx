@@ -8,12 +8,18 @@ import { layout } from "styles/mixin";
 import { pxToRem } from "utils";
 const { gray, teal } = colors;
 const StyledFooter = styled.footer`
-  padding: ${pxToRem(10)} 0 ${pxToRem(30)} 0;
+  padding: ${pxToRem(10)} 0 ${pxToRem(20)} 0;
   border-top: ${pxToRem(1)} solid ${gray}30;
   ${layout("flex")}
   flex-wrap: wrap;
   .logo {
-    max-width: ${pxToRem(200)};
+    max-width: ${pxToRem(150)};
+    text-align: center;
+    img {
+      width: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
   }
   .footer__links {
     ${layout("flex")}
@@ -27,6 +33,10 @@ const StyledFooter = styled.footer`
     flex-direction: column;
     align-items: center;
     text-align: center;
+    .logo {
+      max-width: ${pxToRem(110)};
+      margin: auto;
+    }
   }
 `;
 
