@@ -7,16 +7,42 @@ import { IAdHelmetAndGear, IAdMoto, IMotoAd } from "interfaces/responses";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Text } from "components/Text";
+import { Skeleton } from "antd";
 
 type props = {
   items: IAdMoto[] | IMotoAd[] | IAdHelmetAndGear[];
   title: string;
   isLoading?: boolean;
 };
-const Carousel = ({ items, title }: props) => {
+const Carousel = ({ items, title, isLoading }: props) => {
   /* eslint-disable @typescript-eslint/no-explicit-any */
   const swiperRef = useRef<any>();
 
+  if (isLoading)
+    return (
+      <div className="carousel__loaders">
+        <div className="loader">
+          <Skeleton.Image active={isLoading}></Skeleton.Image>
+          <br />
+          <Skeleton active={isLoading}></Skeleton>
+        </div>
+        <div className="loader">
+          <Skeleton.Image active={isLoading}></Skeleton.Image>
+          <br />
+          <Skeleton active={isLoading}></Skeleton>
+        </div>
+        <div className="loader">
+          <Skeleton.Image active={isLoading}></Skeleton.Image>
+          <br />
+          <Skeleton active={isLoading}></Skeleton>
+        </div>
+        <div className="loader">
+          <Skeleton.Image active={isLoading}></Skeleton.Image>
+          <br />
+          <Skeleton active={isLoading}></Skeleton>
+        </div>
+      </div>
+    );
   return (
     <div>
       <div className="flex">

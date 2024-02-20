@@ -134,4 +134,19 @@ export const GlobalStyle = createGlobalStyle`
             transform: rotate(360deg);
         }
     }
+    .carousel__loaders {
+        ${layout("grid", { cols: 4, rows: "auto" })}
+        width: 100%;
+        gap: ${pxToRem(20)}; 
+        .loader {
+            width: 100%;
+            height: 300px;
+            border: ${pxToRem(1)} solid ${gray}30;
+            padding: ${pxToRem(10)};
+            border-radius: ${pxToRem(10)};
+            .ant-skeleton-image {
+                margin-bottom: ${pxToRem(50)};
+            }
+        }
+    }
 `;

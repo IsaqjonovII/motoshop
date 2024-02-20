@@ -1,13 +1,16 @@
 import { GoSearch } from "react-icons/go";
 import { type Dispatch, type SetStateAction, useState } from "react";
 import StyledSearch from "./style";
+import { Button } from "components/Button";
 
 export const Search = ({
   searchedVal,
-  setSearchedVal
+  setSearchedVal,
+  hasButton,
 }: {
   searchedVal: string;
   setSearchedVal: Dispatch<SetStateAction<string>>;
+  hasButton?: boolean;
 }) => {
   const [isInputActive, setIsInputActive] = useState(false);
 
@@ -19,7 +22,7 @@ export const Search = ({
           type="text"
           minLength={3}
           required
-          placeholder="Qidirish..."
+          placeholder="E'lon nomi yoki turi bilan qidiring..."
           onFocus={() => setIsInputActive(true)}
           onBlur={() => setIsInputActive(false)}
           value={searchedVal}
@@ -27,6 +30,7 @@ export const Search = ({
         />
         <GoSearch className="search__icon" />
       </div>
+      {hasButton && <Button type="submit">Qidirish</Button>}
     </StyledSearch>
   );
 };
