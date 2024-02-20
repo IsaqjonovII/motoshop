@@ -118,7 +118,7 @@ const Home = () => {
               placeholder="Mototsikl rangini tanlang"
             />
           </div>
-
+          
           <Button onClick={navigateToAds} type="submit">
             E'lonlarni ko'rsatish
           </Button>

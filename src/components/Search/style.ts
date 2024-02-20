@@ -38,7 +38,6 @@ export default styled.div<{ $isInputActive: boolean }>`
     background-color: ${gray};
   }
   @media only screen and (max-width: 1024px) {
-      max-width: ${pxToRem(768)};
       flex-shrink: 1;
   }
   @media screen and (max-width: ${pxToRem(768)}) {
