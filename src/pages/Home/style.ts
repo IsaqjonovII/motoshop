@@ -3,7 +3,7 @@ import { pxToRem } from "utils";
 import { layout } from "styles/mixin";
 import { colors } from "constants/styles";
 
-const {gray} = colors;
+const { gray } = colors;
 export default styled.main`
   .banner__img {
     width: 100%;
@@ -30,12 +30,12 @@ export default styled.main`
     ${layout("grid", { rows: "auto", cols: 5 })}
     gap: ${pxToRem(10)};
     margin: ${pxToRem(20)} 0;
+    overflow-x: auto;
   }
   .filter {
     height: ${pxToRem(45)};
-    .ant-select {
+    .ant-select{
       width: 100%;
-
     }
   }
   .ant-select-selection-placeholder {
@@ -57,6 +57,10 @@ export default styled.main`
     }
     .section__title {
       font-size: ${pxToRem(28)};
+    }
+    .filters__wrp {
+    ${layout("grid", { rows: "auto", cols: 3 })}
+    display: none;
     }
   }
 `;

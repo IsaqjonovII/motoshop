@@ -18,9 +18,7 @@ export default styled.div`
   }
   .ad__detail {
     ${layout("flex")}
-    /* justify-content: start; */
     .detail__text {
-      /* text-transform: uppercase; */
       padding: 0 ${pxToRem(10)};
     }
   }
@@ -131,6 +129,13 @@ export const StyledCard = styled.div`
       align-items: start;
       button {
         margin-top: ${pxToRem(10)};
+      }
+    }
+    .image__container {
+      max-width: 130px;
+      max-height: 150px;
+      .img {
+        object-fit: contain;
       }
     }
   }

@@ -19,25 +19,26 @@ import { Breadcrumb } from "antd";
 import { routes } from "constants/routes";
 import { useAppSelector } from "hooks";
 import Carousel from "components/Carousel";
+import { Spinner } from "components/Loader";
 
 type TParams = {
   id: string;
 };
-const { HOME, MOTOCYCLES } = routes;
+const { HOME, MOTOCYCLES, USER_INFO } = routes;
 const AdInfo = () => {
   const { id } = useParams<TParams>();
   const user = useAppSelector(({ auth }) => auth.user);
-  const [similiarAdsData, setSimiliarAdsData] = useState<IAdMoto[] | IAdHelmetAndGear[] | IMotoAd[]>([]);
+  const [similarAdsData, setsimilarAdsData] = useState<IAdMoto[] | IAdHelmetAndGear[] | IMotoAd[]>([]);
   const [ownerAdsData, setOwnerAdsData] = useState<IAdMoto[] | IAdHelmetAndGear[] | IMotoAd[]>([]);
-  const [adData, setAdData] = useState<IAdMoto | IAdHelmetAndGear | any>();
+  const [adData, setAdData] = useState<IAdMoto | IAdHelmetAndGear | IMotoAd>();
   const [updateView, { data: viewData }] = useUpdateAdViewMutation();
-  const { data, refetch } = useGetAdByIdQuery(id!);
-  const { data: ownerAds, isLoading: isOwnerAdsLoading } = useGetAdsByUserQuery({ userId: adData?.owner._id ?? "", adId: adData?._id ?? ""});
-  const { data: similiarAds, isLoading: isSimiliarAdsLoading } = useGetSimilarAdsQuery({ type: adData?.adType ?? "moto", id: adData?._id ?? ""});
+  const { data, isLoading, refetch } = useGetAdByIdQuery(id!);
+  const { data: ownerAds, isLoading: isOwnerAdsLoading } = useGetAdsByUserQuery({ userId: adData?.owner._id ?? "", adId: adData?._id ?? "" });
+  const { data: similarAds, isLoading: isSimilarAdsLoading } =useGetSimilarAdsQuery({ type: adData?.adType ?? "moto",id: adData?._id ?? "" });
 
   useEffect(() => {
-    if (similiarAds) setSimiliarAdsData(similiarAds);
-  }, [similiarAds]);
+    if (similarAds) setsimilarAdsData(similarAds);
+  }, [similarAds]);
   useEffect(() => {
     refetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -54,6 +55,7 @@ const AdInfo = () => {
   useEffect(() => {
     if (ownerAds) setOwnerAdsData(ownerAds);
   }, [ownerAds]);
+  if (isLoading) return <Spinner isLoading={isLoading} />;
   return (
     <StyledAdInfo>
       <div className="page__container">
@@ -112,7 +114,7 @@ const AdInfo = () => {
             <br />
             <div className="owner__contact">
               <div>
-                <Link to="/">
+                <Link to={USER_INFO + `?${adData?.owner._id}`}>
                   <Text size="lg" bold={400}>
                     {adData?.owner.name}
                   </Text>
@@ -129,58 +131,52 @@ const AdInfo = () => {
             </div>
             <br />
             <ul className="labels">
+              {/* Manufactured Year or Size */}
               <li className="label">
-                {adData?.adType === "moto"
-                  ? "Ishlab chiqarilgan yili:"
-                  : adData?.adType === "helmet"
-                  ? "O'lchami"
-                  : null}{" "}
+                {adData?.adType === "moto" && "Ishlab chiqarilgan yili: "}
+                {adData?.adType === "helmet" && "O'lchami: "}
                 <Text size="md" bold={600}>
-                  {adData?.adType === "moto"
-                    ? (adData as IMotoAd).manufacturedAt
-                    : adData?.adType === "helmet"
-                    ? (adData as IAdHelmetAndGear).size
-                    : null}
+                  {adData?.adType === "moto" &&
+                    (adData as IMotoAd).manufacturedAt}
+                  {adData?.adType === "helmet" &&
+                    (adData as IAdHelmetAndGear).size}
                 </Text>
               </li>
+
+              {/* Mileage or Condition */}
               <li className="label">
-                {adData?.adType === "moto"
-                  ? "Bosgan masofasi: "
-                  : adData?.adType === "helmet"
-                  ? "Holati:  "
-                  : null}{" "}
+                {adData?.adType === "moto" && "Bosgan masofasi: "}
+                {adData?.adType === "helmet" && "Holati:  "}
                 <Text size="md" bold={600}>
-                  {adData?.adType === "moto"
-                    ? (adData as IMotoAd).mileage + " km"
-                    : adData?.adType === "helmet"
-                    ? (adData as IAdHelmetAndGear).condition
-                    : null}
+                  {adData?.adType === "moto" &&
+                    (adData as IMotoAd).mileage + " km"}
+                  {adData?.adType === "helmet" &&
+                    (adData as IAdHelmetAndGear).condition}
                 </Text>
               </li>
+
+              {/* Category or Brand */}
               <li className="label">
-                {adData?.adType === "moto"
-                  ? "Turi: "
-                  : adData?.adType === "helmet"
-                  ? "Brand:  "
-                  : null}{" "}
+                {adData?.adType === "moto" && "Turi: "}
+                {adData?.adType === "helmet" && "Brand:  "}
                 <Text size="md" bold={600}>
-                  {adData?.adType === "moto"
-                    ? (adData as IMotoAd).category
-                    : adData?.adType === "helmet"
-                    ? (adData as IAdHelmetAndGear).brand
-                    : null}
+                  {adData?.adType === "moto" && (adData as IMotoAd).category}
+                  {adData?.adType === "helmet" &&
+                    (adData as IAdHelmetAndGear).brand}
                 </Text>
               </li>
+
+              {/* Engine Size (if Moto) */}
               {adData?.adType === "moto" && (
                 <li className="label">
-                  {adData?.adType === "moto" ? "Dvigatel hajmi: " : null}{" "}
+                  Dvigatel hajmi:{" "}
                   <Text size="md" bold={600}>
-                    {adData?.adType === "moto"
-                      ? (adData as IMotoAd).engineSize + " cc"
-                      : null}
+                    {(adData as IMotoAd).engineSize + " cc"}
                   </Text>
                 </li>
               )}
+
+              {/* Color */}
               <li className="label">
                 Rangi:{" "}
                 <Text size="md" bold={600}>
@@ -195,16 +191,20 @@ const AdInfo = () => {
       <br />
       <br />
       <br />
-      <Carousel
-        title="Muallifning boshqa e'lonlari"
-        items={ownerAdsData}
-        isLoading={isOwnerAdsLoading}
-      />
-      <Carousel
-        title="O'xshash e'lonlar"
-        items={similiarAdsData}
-        isLoading={isSimiliarAdsLoading}
-      />
+      {ownerAds && (
+        <Carousel
+          title="Muallifning boshqa e'lonlari"
+          items={ownerAdsData}
+          isLoading={isOwnerAdsLoading}
+        />
+      )}
+      {similarAds && (
+        <Carousel
+          title="O'xshash e'lonlar"
+          items={similarAdsData}
+          isLoading={isSimilarAdsLoading}
+        />
+      )}
     </StyledAdInfo>
   );
 };
