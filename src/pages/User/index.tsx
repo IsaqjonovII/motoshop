@@ -1,21 +1,17 @@
-import { Tabs, type TabsProps } from "antd";
 import { Fragment } from "react";
-import { Link } from "react-router-dom";
+import { Tabs, type TabsProps } from "antd";
+import { Link, useNavigate } from "react-router-dom";
 import StyledProfile from "./style";
-import { useAppSelector } from "hooks";
 import { routes } from "constants/routes";
+import { logOut } from "store/reducers/AuthSlice";
+import { useAppDispatch, useAppSelector } from "hooks";
 import Ads from "./Tabs/Ads";
-import Messages from "./Tabs";
+import { Text } from "components/Text";
 import LastSeen from "./Tabs/LastSeen";
 import SavedBikes from "./Tabs/SavedBikes";
-import User from "components/Sidebar/User";
+import { Button } from "components/Button";
 
 const user_tabs: TabsProps["items"] = [
-  {
-    key: "msg",
-    label: "Xabarlar",
-    children: <Messages />,
-  },
   {
     key: "posted-ads",
     label: "E'lonlar",
@@ -34,7 +30,16 @@ const user_tabs: TabsProps["items"] = [
 ];
 const { AUTH } = routes;
 const UserProfile = () => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const user = useAppSelector(({ auth }) => auth.user);
+  
+  const logOutUser = () => {
+    if (confirm("Rostan ham tizimdan chiqmoqchimisiz?")) {
+      dispatch(logOut());
+      navigate("/");
+    }
+  };
 
   return (
     <StyledProfile>
@@ -46,10 +51,23 @@ const UserProfile = () => {
         </div>
       ) : (
         <Fragment>
-          <User />
-          <div className="profile__content">
-            <Tabs defaultActiveKey="msg" size="large" items={user_tabs} />
+          <div className="profile__user">
+            <div className="user__avatar">
+              <div>
+                <Text size="lg">{user?.name}</Text>
+                <Text size="md" bold={600}>
+                  +{user?.phone}
+                </Text>
+              </div>
+            </div>
+
+            <div className="user__actions flex">
+              <Button className="logout__btn" onClick={logOutUser}>
+                Hisobdan chiqish
+              </Button>
+            </div>
           </div>
+          <Tabs defaultActiveKey="msg" size="large" items={user_tabs} />
         </Fragment>
       )}
     </StyledProfile>

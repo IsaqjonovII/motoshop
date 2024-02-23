@@ -42,8 +42,8 @@ const StyledFooter = styled.footer`
 
 const Footer = () => {
   return (
-    <Container>
-      <StyledFooter>
+    <StyledFooter>
+      <Container>
         <div>
           <div className="logo">
             <LazyImage src={motoLogo} alt="Motoshop.uz" />
@@ -77,8 +77,8 @@ const Footer = () => {
             </Link>
           </li>
         </ul>
-      </StyledFooter>
-    </Container>
+      </Container>
+    </StyledFooter>
   );
 };
 
