@@ -6,8 +6,7 @@ import { pxToRem } from "utils";
 const { gray, white, teal } = colors;
 
 export default styled.div`
-  ${layout("flex")}
-  align-items: flex-start;
+  /* align-items: flex-start; */
   .need__auth {
     width: 100%;
     padding: ${pxToRem(40)};
@@ -19,13 +18,15 @@ export default styled.div`
   }
   .profile__user {
     width: 100%;
-    max-width: ${pxToRem(270)};
-    min-width: ${pxToRem(270)};
-    height: calc(100vh - ${pxToRem(80)});
+    ${layout("flex")}
+    border-bottom: ${pxToRem(1)} solid ${gray}30;
+  }
+  /* .profile__user {
+    background-color: red;
+    height: ${pxToRem(200)};
     position: sticky;
     top: ${pxToRem(80)};
     padding: ${pxToRem(20)} ${pxToRem(10)} ${pxToRem(20)} 0;
-    border-right: ${pxToRem(1)} solid ${gray}30;
   }
   .user__avatar {
     ${layout("flex")}
@@ -49,8 +50,6 @@ export default styled.div`
   }
   .profile__content {
     width: 100%;
-  }
-  .user__actions {
   }
   .action__wrp {
     margin: ${pxToRem(15)} 0;
@@ -91,5 +90,5 @@ export default styled.div`
   }
   .profile__content {
     padding: ${pxToRem(20)};
-  }
+  } */
 `;

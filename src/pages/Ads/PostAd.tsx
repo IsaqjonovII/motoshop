@@ -82,7 +82,12 @@ const PostAd = () => {
     });
   };
   const handleSubmit = async () => {
-    await uploadAd(adForm);
+    const description = adForm.description.replace(/\n/g, "<br />");
+
+    await uploadAd({
+      ...adForm,
+      description,
+    });
   };
   useEffect(() => {
     if (data) {
@@ -126,7 +131,7 @@ const PostAd = () => {
       </Text>
       <br />
 
-      <Form className="post__form" autoComplete="off" onFinish={handleSubmit}>
+      <Form className="post__form" autoComplete="off">
         <div>
           <div className="flex">
             <StyledInput>
@@ -276,7 +281,7 @@ const PostAd = () => {
             </>
           )}
         </div>
-        <Button type="submit" className="ad__btn">
+        <Button type="submit" className="ad__btn" onClick={handleSubmit}>
           E&apos;lonni joylash
         </Button>
       </Form>

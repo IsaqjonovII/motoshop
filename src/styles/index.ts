@@ -22,7 +22,7 @@ export const GlobalStyle = createGlobalStyle`
         padding: 0;
         box-sizing: border-box;
         text-rendering: optimizeLegibility;
-        font-family: 'lato Normal';
+        font-family: 'lato Normal', Arial, sans-serif;
     }
     body {
         background-color: ${bgGray};
@@ -64,9 +64,6 @@ export const GlobalStyle = createGlobalStyle`
     &:hover, & :active {
       color: ${teal} !important;
     }
-    }
-    .swiper-wrapper {
-      /* padding: ${pxToRem(15)}; */
     }
     :where(.swiper-button-next, .swiper-button-prev)::after {
         display: none;
@@ -134,6 +131,12 @@ export const GlobalStyle = createGlobalStyle`
             transform: rotate(360deg);
         }
     }
+    .fixed-position {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 99;
+    }
     .carousel__loaders {
         ${layout("grid", { cols: 4, rows: "auto" })}
         width: 100%;
@@ -147,6 +150,21 @@ export const GlobalStyle = createGlobalStyle`
             .ant-skeleton-image {
                 margin-bottom: ${pxToRem(50)};
             }
+        }
+    }
+    @media only screen and (max-width: 1024px) {
+        .carousel__loaders {
+        ${layout("grid", { cols: 3, rows: "auto" })}
+        }
+    }
+    @media only screen and (max-width: 768px) {
+        .carousel__loaders {
+        ${layout("grid", { cols: 2, rows: "auto" })}
+        }
+    }
+    @media only screen and (max-width: 550) {
+        .carousel__loaders {
+        ${layout("grid", { cols: 1, rows: "auto" })}
         }
     }
 `;

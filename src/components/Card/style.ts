@@ -8,6 +8,8 @@ const { teal, borderGray, white, gray } = colors;
 export default styled.div`
   border: ${pxToRem(1)} solid ${gray}30;
   border-radius: ${pxToRem(10)};
+  max-width: ${pxToRem(380)};
+  margin: auto;
   cursor: pointer;
   transition: 200ms ease-in-out;
   &:hover {

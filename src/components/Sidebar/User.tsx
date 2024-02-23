@@ -35,15 +35,11 @@ const User = () => {
           </div>
         </div>
 
-        <hr />
         <div className="user__ads">
           <Link to={POST_MOTO}>
             <button className="ad__btn">E'lon berish</button>
           </Link>
         </div>
-
-        <hr />
-
         <div className="user__actions">
           <div
             className="action__wrp flex"

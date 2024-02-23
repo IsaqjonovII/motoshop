@@ -38,21 +38,26 @@ const Login = () => {
 
   useEffect(() => {
     if (error) {
-      const { status, data } = error as IServerError;
-      if (status === "FETCH_ERROR") {
+      console.log(error);
+      const { data, status } = error as IServerError;
+      if (data?.message) {
+        toast.error(data.message);
+      }
+      if (isNaN(parseInt(status))) {
         toast.error("Serverda xatolik. Iltimos birozdan so'ng urinib ko'ring");
       }
-      if (data?.message) {
-        toast.error(data?.message);
-      }
+      console.log(error);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [error]);
+  useEffect(() => {
     if (data) {
       dispatch(logIn(data.user));
       toast.success(data.message);
       navigate(HOME);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, error]);
+  }, [data]);
 
   return (
     <StyledAuth>
@@ -76,7 +81,8 @@ const Login = () => {
           value={authForm.password}
           onChange={handleChanges}
         />
-        <Button type="submit" className="auth__btn">
+        <br />
+        <Button type="submit" className="auth__btn" disabled={isLoading}>
           {" "}
           {isLoading ? (
             <AiOutlineLoading3Quarters className="spinning icon" />

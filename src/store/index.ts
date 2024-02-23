@@ -9,6 +9,7 @@ const persistedReducer = persistReducer(
   {
     key: "root",
     storage,
+    blacklist: ["adAPI"],
   },
   rootReducers
 );

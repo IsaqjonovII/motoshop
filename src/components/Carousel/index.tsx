@@ -46,7 +46,7 @@ const Carousel = ({ items, title, isLoading }: props) => {
   return (
     <div>
       <div className="flex">
-        <Text className="section__title" size="xl" bold={600}>
+        <Text className="section__title" size="lg" bold={600}>
           {title}
         </Text>
         <div className="flex">
