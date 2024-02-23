@@ -1,5 +1,5 @@
 import { Avatar } from "antd";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import StyledProfile from "pages/User/style";
 import { logOut } from "store/reducers/AuthSlice";
 import { logoutIcon, setttingsIcon } from "assets";
@@ -8,8 +8,8 @@ import { routes } from "constants/routes";
 import { useState } from "react";
 import { UpdateUser } from "pages/User/Settings";
 
-const { POST_MOTO, MESSAGES, LIKED_ADS, VIEWED_ADS, USER_ADS } = routes;
-const User = ({ children }: { children: JSX.Element | JSX.Element[] }) => {
+const { POST_MOTO } = routes;
+const User = () => {
   const [isSettingsOpen, setisSettingsOpen] = useState<boolean>(false);
   const user = useAppSelector(({ auth }) => auth.user);
   const dispatch = useAppDispatch();
@@ -69,13 +69,6 @@ const User = ({ children }: { children: JSX.Element | JSX.Element[] }) => {
           </div>
         </div>
       </div>
-      <div className="links">
-        <NavLink to={MESSAGES}>Xabarlar</NavLink>
-        <NavLink to={LIKED_ADS}>Saqlangan e'lonlar</NavLink>
-        <NavLink to={VIEWED_ADS}>Oxirgi ko'rilgan</NavLink>
-        <NavLink to={USER_ADS}>E'lonlar</NavLink>
-      </div>
-      {children}
       <UpdateUser
         isOpen={isSettingsOpen}
         setisOpen={setisSettingsOpen}
