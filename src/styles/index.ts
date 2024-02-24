@@ -87,16 +87,16 @@ export const GlobalStyle = createGlobalStyle`
     .swiper__icon {
         font-size: 2rem;
         background-color: ${white}80;
-        width: 3rem;
-        height: 3rem;
+        width: 2.5rem;
+        height: 2.5rem;
         border-radius: 50%;
         ${layout("center")}
         border: 1px solid ${gray}aa;
         margin-left: ${pxToRem(10)};
         cursor: pointer;
-    svg {
+      svg {
         color: ${gray}aa;
-    }
+      }
     }
     @font-face {
         font-family: 'lato Normal';

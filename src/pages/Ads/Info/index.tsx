@@ -24,7 +24,7 @@ import ImageGallery from "components/ImageGallery";
 type TParams = {
   id: string;
 };
-const { HOME, MOTOCYCLES, USER_INFO } = routes;
+const { HOME, MOTOCYCLES } = routes;
 const AdInfo = () => {
   const { id } = useParams<TParams>();
   const user = useAppSelector(({ auth }) => auth.user);
@@ -127,11 +127,9 @@ const AdInfo = () => {
             <br />
             <div className="owner__contact">
               <div>
-                <Link to={USER_INFO + `?${adData?.owner._id}`}>
-                  <Text size="lg" bold={400}>
-                    {adData?.owner.name}
-                  </Text>
-                </Link>
+                <Text size="lg" bold={400}>
+                  {adData?.owner.name}
+                </Text>
                 <Link to={"tel:" + adData?.owner.phone}>
                   <Text size="md" bold={400}>
                     +{adData?.owner.phone}

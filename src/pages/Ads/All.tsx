@@ -8,7 +8,7 @@ import StyledAds from "./style";
 import { useGetRandomAdsQuery } from "services/ad";
 import { IAdMoto, IAdHelmetAndGear } from "interfaces/responses";
 import { Text } from "components/Text";
-import { AdCard } from "components/Card";
+import Card from "components/Card";
 
 const Ads = () => {
   const { data, refetch } = useGetRandomAdsQuery(30);
@@ -100,7 +100,7 @@ const Ads = () => {
 
       <div className="ads__container">
         {randomAdsData.map((data) => (
-          <AdCard key={data._id} {...data} />
+          <Card key={data._id} {...data} />
         ))}
       </div>
       <div className="pagination__wrp">

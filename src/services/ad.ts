@@ -67,6 +67,9 @@ export const adApi = createApi({
     getAdsByUser: builder.query<SetStateAction<IAdMoto[] | IAdHelmetAndGear[]>, { userId: string; adId?: string }>({
       query: ({ userId, adId }) => `ad/ads-by-user?id=${userId}&${adId && "adId=" + adId}`,
     }),
+    getLikedAds: builder.query<SetStateAction<IAdMoto[] | IAdHelmetAndGear[]>, string>({
+      query: (id) => `ad/liked-ads?userId=${id}`
+    })
   }),
 });
 
@@ -82,4 +85,5 @@ export const {
   useRemoveLikeMutation,
   useGetSimilarAdsQuery,
   useGetAdsByUserQuery,
+  useGetLikedAdsQuery
 } = adApi;

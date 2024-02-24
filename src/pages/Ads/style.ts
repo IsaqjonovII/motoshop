@@ -1,6 +1,6 @@
 import { colors } from "constants/styles";
 import styled from "styled-components";
-import { layout } from "styles/mixin";
+import { btn, layout } from "styles/mixin";
 import { pxToRem } from "utils";
 
 const { teal } = colors;
@@ -33,6 +33,7 @@ export const StyledPostAd = styled.div`
       justify-items: center;
     }
     .ad__btn {
+      ${btn("normal")}
       width: 100%;
       max-width: ${pxToRem(520)};
     }

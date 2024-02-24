@@ -6,16 +6,12 @@ import StyledTabs from "./style";
 import { IAdHelmetAndGear, IAdMoto, IMotoAd } from "interfaces/responses";
 import { useGetAdsByUserQuery } from "services/ad";
 import { Empty } from "antd";
-import { AdCard } from "components/Card";
+import Card from "components/Card";
 
 const Ads = () => {
   const user = useAppSelector((state) => state.auth.user);
-  const [ads, setAds] = useState<IAdMoto[] | IMotoAd[] | IAdHelmetAndGear[]>(
-    []
-  );
-  const { data, isLoading, error } = useGetAdsByUserQuery({
-    userId: user?._id ?? "",
-  });
+  const [ads, setAds] = useState<IAdMoto[] | IMotoAd[] | IAdHelmetAndGear[]>([]);
+  const { data, isLoading, error } = useGetAdsByUserQuery({ userId: user?._id ?? "" });
 
   useEffect(() => {
     if (data) setAds(data);
@@ -31,9 +27,7 @@ const Ads = () => {
         <Empty description={<Text size="md">Hech narsa topilmadi. :(</Text>} />
       )}
       <div className="ads__wrp">
-        {ads.map((props) => (
-          <AdCard key={props._id} {...props} />
-        ))}
+        {ads.map((props) =><Card key={props._id} {...props} />)}
       </div>
     </StyledTabs>
   );

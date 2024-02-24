@@ -3,9 +3,10 @@ import styled from "styled-components";
 import { layout } from "styles/mixin";
 import { pxToRem } from "utils";
 
-const { gray, teal, red } = colors;
+const { gray, teal, red, bgGray } = colors;
 
 export default styled.div`
+min-height: calc(100svh - 100px);
   .need__auth {
     width: 100%;
     padding: ${pxToRem(40)};
@@ -24,4 +25,16 @@ export default styled.div`
   .logout__btn {
     background: ${red};
   }
+  .ant-tabs-nav {
+    position: sticky;
+    top: ${pxToRem(74)};
+    z-index: 999;
+    overflow-x: auto;
+    background-color: ${bgGray};
+  }
+  @media only screen and (min-width: 768px) {
+      .ant-tabs-nav {
+        top: ${pxToRem(80)};
+      }
+  } 
 `;

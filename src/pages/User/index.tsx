@@ -9,6 +9,7 @@ import Ads from "./Tabs/Ads";
 import { Text } from "components/Text";
 import LastSeen from "./Tabs/LastSeen";
 import SavedBikes from "./Tabs/SavedBikes";
+import Settings from "./Tabs";
 import { Button } from "components/Button";
 
 const user_tabs: TabsProps["items"] = [
@@ -27,13 +28,18 @@ const user_tabs: TabsProps["items"] = [
     label: "Oxirgi ko'rilgan",
     children: <LastSeen />,
   },
+  {
+    key: "settings",
+    label: "Sozlamalar",
+    children: <Settings />,
+  },
 ];
 const { AUTH } = routes;
 const UserProfile = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const user = useAppSelector(({ auth }) => auth.user);
-  
+
   const logOutUser = () => {
     if (confirm("Rostan ham tizimdan chiqmoqchimisiz?")) {
       dispatch(logOut());
@@ -67,7 +73,9 @@ const UserProfile = () => {
               </Button>
             </div>
           </div>
-          <Tabs defaultActiveKey="msg" size="large" items={user_tabs} />
+          <div className="user__tabs">
+            <Tabs defaultActiveKey="msg" size="large" items={user_tabs} />
+          </div>
         </Fragment>
       )}
     </StyledProfile>

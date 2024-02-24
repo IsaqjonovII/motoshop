@@ -34,8 +34,8 @@ export const btn = (btnType?: string) => css`
   border-radius: ${pxToRem(6)};
   ${btnType?.includes("normal")
     ? `
+    color: ${white};
       background: ${teal}; 
-      color: ${white};
       border: ${pxToRem(2)} solid transparent;
     `
     : btnType?.includes("danger")
