@@ -10,8 +10,9 @@ import Card from "components/Card";
 import { Link } from "react-router-dom";
 import { routes } from "constants/routes";
 import { Button } from "components/Button";
+import { Spinner } from "components/Loader";
 
-const { MOTOCYCLES } = routes;
+const { ADS } = routes;
 const LikedAds = () => {
   const [likedAds, setLikedAds] = useState<
     IAdMoto[] | IAdHelmetAndGear[] | IMotoAd[]
@@ -41,9 +42,10 @@ const LikedAds = () => {
 
   useEffect(() => {
     refetch();
-  });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  if (isLoading) return <div>Loading please wait bro</div>;
+  if (isLoading) return <Spinner isLoading={isLoading} />;
   if (isError) return <div>{(error as IServerError).data?.message}</div>;
   return (
     <StyledTabs>
@@ -52,7 +54,7 @@ const LikedAds = () => {
           <Empty description={(likedAds as { message: string }).message} />
           <br />
           <Link
-            to={MOTOCYCLES}
+            to={ADS}
             style={{ textAlign: "center", display: "block" }}
           >
             <Button>Barcha e&apos;lonlar</Button>

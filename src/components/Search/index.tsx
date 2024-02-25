@@ -5,7 +5,7 @@ import { Button } from "components/Button";
 import { useNavigate } from "react-router-dom";
 import { routes } from "constants/routes";
 
-const { MOTOCYCLES } = routes;
+const { ADS } = routes;
 export const Search = ({
   searchedVal,
   setSearchedVal,
@@ -19,7 +19,7 @@ export const Search = ({
   const [isInputActive, setIsInputActive] = useState(false);
   const navigateToAds = () => {
     if (searchedVal.length) {
-      navigate(`${MOTOCYCLES}?query=${searchedVal}`);
+      navigate(`${ADS}?query=${searchedVal}`);
     }
   };
 

@@ -12,7 +12,7 @@ const {
   HOME,
   AUTH,
   PROFILE,
-  MOTOCYCLES,
+  ADS,
   AD_INFO,
   POST_MOTO,
 } = routes;
@@ -21,7 +21,7 @@ const {
 export const privateRoutes: IAppRoutes[] = [
   { key: "home", path: HOME, Component: Home },
   { key: "auth", path: AUTH, Component: Auth },
-  { key: "ads", path: MOTOCYCLES, Component: Ads },
+  { key: "ads", path: ADS, Component: Ads },
   { key: "adInfo", path: AD_INFO, Component: AdInfo },
   { key: "postProduct", path: POST_MOTO, Component: PostMoto },
   { key: "profile", path: PROFILE, Component: Profile }
@@ -29,13 +29,13 @@ export const privateRoutes: IAppRoutes[] = [
 export const publicRoutes: IAppRoutes[] = [
   { key: "home", path: HOME, Component: Home },
   { key: "auth", path: AUTH, Component: Auth },
-  { key: "ads", path: MOTOCYCLES, Component: Ads },
+  { key: "ads", path: ADS, Component: Ads },
   { key: "adInfo", path: AD_INFO, Component: AdInfo },
 ];
 
 export const navRoutes: INavRoutes[] = [
   {
     key: "Barcha e'lonlar",
-    path: MOTOCYCLES,
+    path: ADS,
   },
 ];

@@ -1,7 +1,7 @@
 export enum routes {
   HOME = "/",
   AUTH = "/auth",
-  MOTOCYCLES = "/ads/",
+  ADS = "/ads/",
   AD_INFO = "/ads/:id",
   PROFILE = "/profile",
   POST_MOTO = "/post-moto",

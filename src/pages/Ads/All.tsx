@@ -35,10 +35,10 @@ const Ads = () => {
   //   setSelectedBikeTypes(value);
   // const navigateToAds = () => {
   //   if (searchedVal.length) {
-  //     navigate(`${MOTOCYCLES}?query=${searchedVal}`);
+  //     navigate(`${ADS}?query=${searchedVal}`);
   //   } else if (selectedBikeTypes) {
   //     navigate(
-  //       MOTOCYCLES +
+  //       ADS +
   //         `${selectedBikeTypes && "?category=" + selectedBikeTypes}
   //     ${selectedEngine && "&engine=" + selectedEngine}
   //     ${selectedEngine && "&condition=" + selectedEngine}
@@ -46,7 +46,7 @@ const Ads = () => {
   //     ${selectedEngine && "&color=" + selectedEngine}`
   //     );
   //   } else {
-  //     navigate(MOTOCYCLES);
+  //     navigate(ADS);
   //   }
   // };
   return (

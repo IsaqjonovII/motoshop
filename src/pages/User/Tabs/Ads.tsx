@@ -20,6 +20,8 @@ const Ads = () => {
   useEffect(() => {
     if (error) console.log(error);
   }, [error]);
+
+  
   if (isLoading) return <Spinner isLoading={isLoading} />;
   return (
     <StyledTabs>

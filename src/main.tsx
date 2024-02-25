@@ -19,6 +19,7 @@ createRoot(document.getElementById("root")!).render(
       newestOnTop={true}
       closeOnClick
       theme="light"
+      stacked
     />
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>

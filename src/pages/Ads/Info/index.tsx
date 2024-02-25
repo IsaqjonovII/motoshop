@@ -24,7 +24,7 @@ import ImageGallery from "components/ImageGallery";
 type TParams = {
   id: string;
 };
-const { HOME, MOTOCYCLES } = routes;
+const { HOME, ADS } = routes;
 const AdInfo = () => {
   const { id } = useParams<TParams>();
   const user = useAppSelector(({ auth }) => auth.user);
@@ -79,7 +79,7 @@ const AdInfo = () => {
                   title: <Link to={HOME}>Bosh sahifa</Link>,
                 },
                 {
-                  title: <Link to={MOTOCYCLES}>Barcha e'lonlar</Link>,
+                  title: <Link to={ADS}>Barcha e'lonlar</Link>,
                 },
                 {
                   title: adData?.title,

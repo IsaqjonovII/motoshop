@@ -17,7 +17,7 @@ import LazyImage from "components/LazyImage";
 import moment from "moment";
 import { FiEye } from "react-icons/fi";
 
-const { MOTOCYCLES, AUTH } = routes;
+const { ADS, AUTH } = routes;
 const Card = ({
   _id,
   price,
@@ -26,6 +26,7 @@ const Card = ({
   images,
   postedAt,
   views,
+  onLike,
 }: IAdMoto) => {
   const date = moment(postedAt).format("HH:MM L");
 
@@ -46,6 +47,7 @@ const Card = ({
     } else {
       dispatch(addToLikedProducts(id));
       updateLikes({ userId: user?._id, adId: id });
+      onLike && onLike();
     }
   };
   const handleRemoveLikedProducts = (
@@ -55,11 +57,12 @@ const Card = ({
     e.preventDefault();
     dispatch(removeLikedProducts(id));
     removeLike({ userId: user?._id, adId: id });
+    onLike && onLike();
   };
 
   return (
     <CardStyle>
-      <Link to={`${MOTOCYCLES}${_id}`}>
+      <Link to={`${ADS}${_id}`}>
         <div className="img__wrp">
           <LazyImage className="card__img" src={images[0]} alt={title} />
           <div className="icon__wrp">
