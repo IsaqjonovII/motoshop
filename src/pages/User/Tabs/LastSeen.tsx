@@ -1,9 +1,9 @@
-import { Empty } from "antd";
+import { Empty, Pagination } from "antd";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { useAppSelector } from "hooks";
 import { IServerError } from "interfaces";
-import { useGetLikedAdsQuery } from "services/ad";
+import { useGetViewedAdsQuery } from "services/ad";
 import { IAdHelmetAndGear, IAdMoto, IMotoAd } from "interfaces/responses";
 import StyledTabs from "./style";
 import Card from "components/Card";
@@ -13,22 +13,28 @@ import { Button } from "components/Button";
 import { Spinner } from "components/Loader";
 
 const { ADS } = routes;
-const LikedAds = () => {
-  const [likedAds, setLikedAds] = useState<
-    IAdMoto[] | IAdHelmetAndGear[] | IMotoAd[]
-  >([]);
+const ViewedAds = () => {
+  const [currentPage, setCurrentPage] = useState<number>(0);
+  const [currentPageData, setCurrentPageData] = useState<IAdMoto[] | IAdHelmetAndGear[]>([]);
+  const [viewedAds, setViewedAds] = useState<IAdMoto[] | IAdHelmetAndGear[] | IMotoAd[]>([]);
   const userId = useAppSelector(({ auth }) => auth.user?._id);
-  const { data, isLoading, error, isError, refetch } = useGetLikedAdsQuery(
+  const { data, isLoading, error, isError, refetch } = useGetViewedAdsQuery(
     userId ?? ""
   );
 
+  function handlePagination(pageNum: number) {
+    const startIndex: number = (pageNum - 1) * 10;
+    const endIndex: number = startIndex + 10;
+    setCurrentPage(pageNum);
+    const data = viewedAds.slice(startIndex, endIndex);
+    setCurrentPageData(data);
+  }
   useEffect(() => {
-    if (data) setLikedAds(data);
+    if (data) setViewedAds(data);
   }, [data]);
 
   useEffect(() => {
     if (error) {
-      console.log(error);
       const { data, status } = error as IServerError;
       if (data?.message) {
         toast.error(data.message);
@@ -36,28 +42,21 @@ const LikedAds = () => {
       if (isNaN(parseInt(status))) {
         toast.error("Serverda xatolik. Iltimos birozdan so'ng urinib ko'ring");
       }
-      console.log(error);
     }
   }, [error]);
 
   useEffect(() => {
-    console.log("refecthed");
     refetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  function handleRefresh() {
-    refetch();
-    console.log("refecthed");
-  }
 
   if (isLoading) return <Spinner isLoading={isLoading} />;
   if (isError) return <div>{(error as IServerError).data?.message}</div>;
   return (
     <StyledTabs>
-      {"message" in likedAds && (
+      {"message" in viewedAds && (
         <>
-          <Empty description={(likedAds as { message: string }).message} />
+          <Empty description={(viewedAds as { message: string }).message} />
           <br />
           <Link to={ADS} style={{ textAlign: "center", display: "block" }}>
             <Button>Barcha e&apos;lonlar</Button>
@@ -65,12 +64,17 @@ const LikedAds = () => {
         </>
       )}
       <div className="ads__wrp">
-        {likedAds.length > 0 &&
-          likedAds?.map((props) => (
-            <Card key={props._id} {...props} onLike={handleRefresh} />
-          ))}
+        {viewedAds.length > 0 &&
+          currentPageData.map((props) => <Card key={props._id} {...props} />)}
       </div>
+
+      <Pagination
+        current={currentPage}
+        total={viewedAds.length}
+        pageSize={10}
+        onChange={handlePagination}
+      />
     </StyledTabs>
   );
 };
-export default LikedAds;
+export default ViewedAds;

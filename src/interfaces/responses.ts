@@ -19,7 +19,6 @@ export interface IAdMoto extends IPostAd {
   postedAt: string;
   likes: number;
   views: number;
-  onLike?: () => void;
 }
 export interface IAdHelmetAndGear extends IAdMoto {
   brand: string;

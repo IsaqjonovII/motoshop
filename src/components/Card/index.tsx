@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import moment from "moment";
 import type { MouseEvent } from "react";
+import { FiEye } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import CardStyle from "./style";
@@ -14,26 +16,19 @@ import {
 import { Text } from "components/Text";
 import { routes } from "constants/routes";
 import LazyImage from "components/LazyImage";
-import moment from "moment";
-import { FiEye } from "react-icons/fi";
 
 const { ADS, AUTH } = routes;
-const Card = ({
-  _id,
-  price,
-  title,
-  location,
-  images,
-  postedAt,
-  views,
-  onLike,
-}: IAdMoto) => {
+interface ILike extends IAdMoto {
+  refetch: () => void;
+}
+const Card = (props: IAdMoto | ILike) => {
+  const { _id, price, title, location, images, postedAt, views } = props;
   const date = moment(postedAt).format("HH:MM L");
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const likedProducts = useAppSelector(({ likedProducts }) => likedProducts);
-  const user = useAppSelector(({ auth }) => auth.user);
+  const userId = useAppSelector(({ auth }) => auth.user?._id);
   const [removeLike] = useRemoveLikeMutation();
   const [updateLikes] = useUpdateLikesMutation();
 
@@ -42,12 +37,11 @@ const Card = ({
     e: MouseEvent<SVGElement, MouseEvent>
   ) => {
     e.preventDefault();
-    if (!user) {
+    if (!userId) {
       navigate(AUTH);
     } else {
       dispatch(addToLikedProducts(id));
-      updateLikes({ userId: user?._id, adId: id });
-      onLike && onLike();
+      updateLikes({ userId, adId: id });
     }
   };
   const handleRemoveLikedProducts = (
@@ -56,8 +50,7 @@ const Card = ({
   ) => {
     e.preventDefault();
     dispatch(removeLikedProducts(id));
-    removeLike({ userId: user?._id, adId: id });
-    onLike && onLike();
+    removeLike({ userId, adId: id });
   };
 
   return (

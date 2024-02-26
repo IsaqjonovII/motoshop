@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { type SetStateAction } from "react";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { baseUrl } from "constants";
 import { IBackendResponse } from "interfaces";
 import { IPostAd } from "interfaces/forms";
 import { IAdMoto, IAdHelmetAndGear, IMotoAd } from "interfaces/responses";
-import { SetStateAction } from "react";
 
 export const adApi = createApi({
   reducerPath: "adAPI",
@@ -69,6 +69,9 @@ export const adApi = createApi({
     }),
     getLikedAds: builder.query<SetStateAction<IAdMoto[] | IAdHelmetAndGear[]>, string>({
       query: (id) => `ad/liked-ads?userId=${id}`
+    }),
+    getViewedAds: builder.query<SetStateAction<IAdMoto[] | IAdHelmetAndGear[]>, string>({
+      query: (id) => `ad/viewed-ads?id=${id}`
     })
   }),
 });
@@ -85,5 +88,6 @@ export const {
   useRemoveLikeMutation,
   useGetSimilarAdsQuery,
   useGetAdsByUserQuery,
-  useGetLikedAdsQuery
+  useGetLikedAdsQuery,
+  useGetViewedAdsQuery
 } = adApi;

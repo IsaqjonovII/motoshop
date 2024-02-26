@@ -42,8 +42,11 @@ const LikedAds = () => {
 
   useEffect(() => {
     refetch();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  function handleRefetch() {
+    refetch();
+  }
 
   if (isLoading) return <Spinner isLoading={isLoading} />;
   if (isError) return <div>{(error as IServerError).data?.message}</div>;
@@ -53,17 +56,16 @@ const LikedAds = () => {
         <>
           <Empty description={(likedAds as { message: string }).message} />
           <br />
-          <Link
-            to={ADS}
-            style={{ textAlign: "center", display: "block" }}
-          >
+          <Link to={ADS} style={{ textAlign: "center", display: "block" }}>
             <Button>Barcha e&apos;lonlar</Button>
           </Link>
         </>
       )}
       <div className="ads__wrp">
         {likedAds.length > 0 &&
-          likedAds?.map((props) => <Card key={props._id} {...props} />)}
+          likedAds?.map((props) => (
+            <Card key={props._id} {...props} refetch={handleRefetch} />
+          ))}
       </div>
     </StyledTabs>
   );
