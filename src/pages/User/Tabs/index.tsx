@@ -1,41 +1,33 @@
-// import CustomModal from "components/Modal";
-// import { useEffect, type Dispatch, type SetStateAction } from "react";
-// import { useUserInfoQuery } from "services/user";
+import StyledTabs from "./style";
+import { Text } from "components/Text";
+import { Button } from "components/Button";
+import { useState } from "react";
+import { ChangeUserInfo, DeleteUser } from "./Settings";
 
 const UpdateUser = () => {
-  // isOpen,
-  // setisOpen,
-  // userId,
-  // : {
-  //   userId: string;
-  //   isOpen: boolean;
-  //   setisOpen: Dispatch<SetStateAction<boolean>>;
-  // }
-  // const { data, error, refetch } = useUserInfoQuery(userId);
-  // const hideModal = () => setisOpen(false);
-  // const onOk = () => {
-  //   alert("heeelllo");
-  // };
-
-  // useEffect(() => {
-  //   if (error) console.log(error);
-  // }, [error]);
-
-  // useEffect(() => {
-  //   if (data) {
-  //     //
-  //   }
-  // }, [data]);
-
-  // useEffect(() => {
-  //   refetch();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+  const [isFormModalOpen, setIsFormModalOpen] = useState<boolean>(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
 
   return (
-    <div>
-      <h1>hello</h1>
-    </div>
+    <StyledTabs>
+      <div className="row">
+        <Text size="md">Ma'lumotlarni o'zgaritirish</Text>
+        <Button onClick={() => setIsFormModalOpen(true)}>
+          O&apos;zgartirish
+        </Button>
+      </div>
+      <div className="danger__zone">
+        <div className="row">
+          <Text size="md">Hisobni o&apos;chirish</Text>
+          <Button onClick={() => setIsDeleteModalOpen(true)}>
+            O&apos;chirish
+          </Button>
+        </div>
+      </div>
+
+      <ChangeUserInfo isOpen={isFormModalOpen} setIsOpen={setIsFormModalOpen} />
+      <DeleteUser isOpen={isDeleteModalOpen} setIsOpen={setIsDeleteModalOpen} />
+    </StyledTabs>
   );
 };
 export default UpdateUser;

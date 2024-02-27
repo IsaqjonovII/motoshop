@@ -42,9 +42,11 @@ export interface IRadioBtn {
 }
 export interface IModal {
   close: () => void;
-  open: () => void;
+  handleOk: () => void;
   isOpen: boolean;
   isLoading?: boolean;
   title: string;
   children: JSX.Element | JSX.Element[];
+  okText?: string;
+  cancelText?: string;
 }

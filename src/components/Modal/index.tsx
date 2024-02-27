@@ -8,16 +8,21 @@ const CustomModal = ({
   isOpen,
   isLoading,
   close,
-  open,
+  handleOk,
+  cancelText,
+  okText,
 }: IModal) => {
   return (
     <StyledModal>
       <Modal
         title={title}
         open={isOpen}
-        onOk={open}
+        onOk={handleOk}
         confirmLoading={isLoading}
         onCancel={close}
+        cancelText={cancelText ?? "Bekor qilish"}
+        okText={okText ?? "Tasdiqlash"}
+        centered
       >
         {children}
       </Modal>

@@ -16,7 +16,6 @@ export const authApi = createApi({
         method: "POST",
         body: formData,
       }),
-      invalidatesTags: ["User"],
     }),
     login: builder.mutation<IBackendResponse, ILoginForm>({
       query: (formData) => ({
@@ -24,10 +23,16 @@ export const authApi = createApi({
         method: "POST",
         body: formData,
       }),
-      invalidatesTags: ["User"],
     }),
     userInfo: builder.query<IBackendResponse, string>({
       query: (id) => `auth/info?userId=${id}`,
+    }),
+    updateUser: builder.mutation({
+      query: (formData) => ({
+        url: "auth/update",
+        method: "PUT",
+        body: formData,
+      }),
     }),
   }),
 });
