@@ -1,7 +1,7 @@
-import { Empty } from "antd";
+import { Empty, Pagination } from "antd";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
-import { useAppSelector } from "hooks";
+import { useAppSelector, usePaginate } from "hooks";
 import { IServerError } from "interfaces";
 import { useGetLikedAdsQuery } from "services/ad";
 import { IAdHelmetAndGear, IAdMoto, IMotoAd } from "interfaces/responses";
@@ -13,18 +13,29 @@ import { Button } from "components/Button";
 import { Spinner } from "components/Loader";
 
 const { ADS } = routes;
+
 const LikedAds = () => {
-  const [likedAds, setLikedAds] = useState<
-    IAdMoto[] | IAdHelmetAndGear[] | IMotoAd[]
-  >([]);
+  const [likedAds, setLikedAds] = useState<IAdMoto[] | IAdHelmetAndGear[] | IMotoAd[]>([]);
+  const { currentData, currentPage, handlePagination, setCurrentData } = usePaginate(likedAds);
   const userId = useAppSelector(({ auth }) => auth.user?._id);
-  const { data, isLoading, error, isError, refetch } = useGetLikedAdsQuery(
-    userId ?? ""
-  );
+  const likedAdsStore = useAppSelector(({ likedProducts }) => likedProducts);
+  const { data, isLoading, error, isError, refetch } = useGetLikedAdsQuery(userId ?? "");
 
   useEffect(() => {
     if (data) setLikedAds(data);
   }, [data]);
+  useEffect(() => {
+    if (likedAds.length > 0) {
+      setCurrentData(likedAds.slice(0, 8));
+    }
+  }, [likedAds, setCurrentData]);
+
+  useEffect(() => {
+    refetch();
+    if (likedAds.length > 0) {
+      setCurrentData(likedAds.slice(0, 8));
+    }
+  }, [likedAds, likedAdsStore, refetch, setCurrentData]);
 
   useEffect(() => {
     if (error) {
@@ -44,29 +55,35 @@ const LikedAds = () => {
     refetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  function handleRefetch() {
-    refetch();
-  }
 
   if (isLoading) return <Spinner isLoading={isLoading} />;
   if (isError) return <div>{(error as IServerError).data?.message}</div>;
   return (
     <StyledTabs>
-      {"message" in likedAds && (
+      {likedAds.length <= 0 || "message" in likedAds ? (
         <>
-          <Empty description={(likedAds as { message: string }).message} />
+          <Empty description="Hech qanday ma'lumot topilmadi" />
           <br />
           <Link to={ADS} style={{ textAlign: "center", display: "block" }}>
             <Button>Barcha e&apos;lonlar</Button>
           </Link>
         </>
+      ) : (
+        <>
+          <div className="ads__wrp">
+            {currentData.length > 0 &&
+              currentData?.map((props) => <Card key={props._id} {...props} />)}
+          </div>
+          <br />
+
+          <Pagination
+            pageSize={8}
+            current={currentPage}
+            onChange={handlePagination}
+            total={likedAds.length}
+          />
+        </>
       )}
-      <div className="ads__wrp">
-        {likedAds.length > 0 &&
-          likedAds?.map((props) => (
-            <Card key={props._id} {...props} refetch={handleRefetch} />
-          ))}
-      </div>
     </StyledTabs>
   );
 };

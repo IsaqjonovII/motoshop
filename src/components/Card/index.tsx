@@ -9,22 +9,15 @@ import { formatNumbers } from "utils";
 import { IAdMoto } from "interfaces/responses";
 import { useAppDispatch, useAppSelector } from "hooks";
 import { useRemoveLikeMutation, useUpdateLikesMutation } from "services/ad";
-import {
-  addToLikedProducts,
-  removeLikedProducts,
-} from "store/reducers/ProductSlice";
+import { addToLikedProducts, removeLikedProducts } from "store/reducers/ProductSlice";
 import { Text } from "components/Text";
 import { routes } from "constants/routes";
 import LazyImage from "components/LazyImage";
 
 const { ADS, AUTH } = routes;
-interface ILike extends IAdMoto {
-  refetch: () => void;
-}
-const Card = (props: IAdMoto | ILike) => {
+const Card = (props: IAdMoto) => {
   const { _id, price, title, location, images, postedAt, views } = props;
   const date = moment(postedAt).format("HH:MM L");
-
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const likedProducts = useAppSelector(({ likedProducts }) => likedProducts);
@@ -32,10 +25,7 @@ const Card = (props: IAdMoto | ILike) => {
   const [removeLike] = useRemoveLikeMutation();
   const [updateLikes] = useUpdateLikesMutation();
 
-  const handleAddToLikedProducts = (
-    id: string,
-    e: MouseEvent<SVGElement, MouseEvent>
-  ) => {
+  const handleAddToLikedProducts = (id: string, e: MouseEvent<SVGElement, MouseEvent>) => {
     e.preventDefault();
     if (!userId) {
       navigate(AUTH);
@@ -44,10 +34,7 @@ const Card = (props: IAdMoto | ILike) => {
       updateLikes({ userId, adId: id });
     }
   };
-  const handleRemoveLikedProducts = (
-    id: string,
-    e: MouseEvent<SVGElement, MouseEvent>
-  ) => {
+  const handleRemoveLikedProducts = (id: string, e: MouseEvent<SVGElement, MouseEvent>) => {
     e.preventDefault();
     dispatch(removeLikedProducts(id));
     removeLike({ userId, adId: id });

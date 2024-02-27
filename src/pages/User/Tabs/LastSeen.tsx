@@ -1,7 +1,7 @@
 import { Empty, Pagination } from "antd";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
-import { useAppSelector } from "hooks";
+import { useAppSelector, usePaginate } from "hooks";
 import { IServerError } from "interfaces";
 import { useGetViewedAdsQuery } from "services/ad";
 import { IAdHelmetAndGear, IAdMoto, IMotoAd } from "interfaces/responses";
@@ -14,24 +14,16 @@ import { Spinner } from "components/Loader";
 
 const { ADS } = routes;
 const ViewedAds = () => {
-  const [currentPage, setCurrentPage] = useState<number>(0);
-  const [currentPageData, setCurrentPageData] = useState<IAdMoto[] | IAdHelmetAndGear[]>([]);
   const [viewedAds, setViewedAds] = useState<IAdMoto[] | IAdHelmetAndGear[] | IMotoAd[]>([]);
+  const { currentData, currentPage, handlePagination, setCurrentData } = usePaginate(viewedAds);
   const userId = useAppSelector(({ auth }) => auth.user?._id);
-  const { data, isLoading, error, isError, refetch } = useGetViewedAdsQuery(
-    userId ?? ""
-  );
+  const { data, isLoading, error, isError, refetch } = useGetViewedAdsQuery(userId ?? "");
 
-  function handlePagination(pageNum: number) {
-    const startIndex: number = (pageNum - 1) * 10;
-    const endIndex: number = startIndex + 10;
-    setCurrentPage(pageNum);
-    const data = viewedAds.slice(startIndex, endIndex);
-    setCurrentPageData(data);
-  }
   useEffect(() => {
     if (data) setViewedAds(data);
-  }, [data]);
+    setCurrentData(viewedAds.slice(0, 8));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data, viewedAds]);
 
   useEffect(() => {
     if (error) {
@@ -54,26 +46,30 @@ const ViewedAds = () => {
   if (isError) return <div>{(error as IServerError).data?.message}</div>;
   return (
     <StyledTabs>
-      {"message" in viewedAds && (
+      {viewedAds.length <= 0 || "message" in viewedAds  ? (
         <>
-          <Empty description={(viewedAds as { message: string }).message} />
+          <Empty description="Hech qanday ma'lumot topilmadi" />
           <br />
           <Link to={ADS} style={{ textAlign: "center", display: "block" }}>
             <Button>Barcha e&apos;lonlar</Button>
           </Link>
         </>
-      )}
-      <div className="ads__wrp">
-        {viewedAds.length > 0 &&
-          currentPageData.map((props) => <Card key={props._id} {...props} />)}
-      </div>
+      ) : (
+        <>
+          <div className="ads__wrp">
+            {currentData.length > 0 &&
+              currentData?.map((props) => <Card key={props._id} {...props} />)}
+          </div>
+          <br />
 
-      <Pagination
-        current={currentPage}
-        total={viewedAds.length}
-        pageSize={10}
-        onChange={handlePagination}
-      />
+          <Pagination
+            pageSize={8}
+            current={currentPage}
+            onChange={handlePagination}
+            total={viewedAds.length}
+          />
+        </>
+      )}
     </StyledTabs>
   );
 };
