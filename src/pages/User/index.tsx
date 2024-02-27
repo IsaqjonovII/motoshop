@@ -3,7 +3,7 @@ import { Tabs, type TabsProps } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import StyledProfile from "./style";
 import { routes } from "constants/routes";
-import { logOut } from "store/reducers/AuthSlice";
+import { logOut } from "store/reducers/UserSlice";
 import { useAppDispatch, useAppSelector } from "hooks";
 import Ads from "./Tabs/Ads";
 import { Text } from "components/Text";

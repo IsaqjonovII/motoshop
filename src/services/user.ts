@@ -34,6 +34,12 @@ export const authApi = createApi({
         body: formData,
       }),
     }),
+    deleteUser: builder.mutation({
+      query: (id) => ({
+        url: `auth/${id}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
@@ -41,4 +47,6 @@ export const {
   useLoginMutation,
   useRegisterMutation,
   useUserInfoQuery,
+  useUpdateUserMutation,
+  useDeleteUserMutation
 } = authApi;

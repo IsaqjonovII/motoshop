@@ -8,7 +8,7 @@ import { Button } from "components/Button";
 import { useLoginMutation } from "services/user";
 import { IServerError } from "interfaces";
 import { routes } from "constants/routes";
-import { logIn } from "store/reducers/AuthSlice";
+import { logIn } from "store/reducers/UserSlice";
 import { useAppDispatch } from "hooks";
 import { ILoginForm } from "interfaces/forms";
 

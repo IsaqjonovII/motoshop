@@ -4,7 +4,7 @@ import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { AiOutlineLoading3Quarters, AiOutlineUserAdd } from "react-icons/ai";
 import { useAppDispatch } from "hooks";
 import { IServerError } from "interfaces";
-import { logIn } from "store/reducers/AuthSlice";
+import { logIn } from "store/reducers/UserSlice";
 import { useRegisterMutation } from "services/user";
 import StyledAuth from "./style";
 import { Input } from "components/Input";

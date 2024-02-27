@@ -38,14 +38,14 @@ const AdInfo = () => {
   const [updateView, { data: viewData }] = useUpdateAdViewMutation();
   const { data, isLoading, refetch } = useGetAdByIdQuery(id!);
   const { data: ownerAds, isLoading: isOwnerAdsLoading } = useGetAdsByUserQuery(
-    { userId: adData?.owner._id ?? "", adId: adData?._id ?? "" },
+    { userId: adData?.owner?._id ?? "", adId: adData?._id ?? "" },
     { skip: adData?._id == null }
   );
   const { data: similarAds, isLoading: isSimilarAdsLoading } =
     useGetSimilarAdsQuery({
       type: adData?.adType ?? "moto",
       id: adData?._id ?? "",
-    });
+    }, { skip: adData?._id == null });
 
   useEffect(() => {
     if (similarAds) setsimilarAdsData(similarAds);
