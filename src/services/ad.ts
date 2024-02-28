@@ -2,8 +2,8 @@
 import { type SetStateAction } from "react";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { baseUrl } from "constants";
-import { IBackendResponse } from "interfaces";
 import { IPostAd } from "interfaces/forms";
+import { IBackendResponse } from "interfaces";
 import { IAdMoto, IAdHelmetAndGear, IMotoAd } from "interfaces/responses";
 
 export const adApi = createApi({
@@ -21,7 +21,7 @@ export const adApi = createApi({
       }),
       invalidatesTags: ["Ad"],
     }),
-    getAllAds: builder.query<IAdMoto[] | IAdHelmetAndGear[], void>({
+    getAllAds: builder.query<IAdMoto[] | IAdHelmetAndGear[] | IMotoAd[], void>({
       query: () => "/ad",
     }),
     getAdById: builder.query<SetStateAction<IAdMoto | IAdHelmetAndGear | IMotoAd | undefined>, string>({

@@ -1,7 +1,7 @@
-import { colors } from "constants/styles";
 import styled from "styled-components";
-import { btn, layout } from "styles/mixin";
 import { pxToRem } from "utils";
+import { colors } from "constants/styles";
+import { btn, layout } from "styles/mixin";
 
 const { teal } = colors;
 export const StyledPostAd = styled.div`
@@ -48,14 +48,14 @@ export const StyledPostAd = styled.div`
 
 export default styled.div`
   padding: ${pxToRem(30)} 0;
-  .ads__header {
-    margin-bottom: ${pxToRem(10)};
-  }
+  min-height: 80svh;
   .pagination__wrp {
     margin-top: ${pxToRem(30)};
   }
   .ads__header {
     ${layout("flex")}
+    justify-content: center;
+    margin-bottom: ${pxToRem(15)};
   }
   .ads__container {
     ${layout("grid", { rows: "auto", cols: 2 })}

@@ -31,6 +31,7 @@ export interface IText {
   size: "sm" | "md" | "lg" | "xl" | "xxl";
   className?: string;
   bold?: number;
+  center?: boolean;
 }
 export interface IRadioBtn {
   btnStyle?: "solid" | null;

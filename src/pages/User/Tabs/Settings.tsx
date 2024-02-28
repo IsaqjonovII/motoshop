@@ -1,27 +1,25 @@
 import { Form } from "antd";
-import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
+import type {ChangeEvent, Dispatch, SetStateAction } from "react";
+import { useAppSelector, useAppDispatch } from "hooks";
+import { IServerError } from "interfaces";
+import { logIn, logOut } from "store/reducers/UserSlice";
+import { useDeleteUserMutation, useUpdateUserMutation } from "services/user";
+import { Text } from "components/Text";
 import { Input } from "components/Input";
 import CustomModal from "components/Modal";
-import { Text } from "components/Text";
-import { useAppSelector } from "hooks";
-import { useDeleteUserMutation, useUpdateUserMutation } from "services/user";
-import { useAppDispatch } from '../../../hooks/index';
-import { logIn, logOut } from "store/reducers/UserSlice";
-import { IServerError } from "interfaces";
-import { toast } from "react-toastify";
 
-interface IUpdateForm { name: string, phone: number | string }
+interface IUpdateForm { name: string, phone: string }
 
 export const ChangeUserInfo = ({isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: Dispatch<SetStateAction<boolean>> }) => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(({ auth }) => auth.user);
-  const [userForm, setUserForm] = useState<IUpdateForm>({ name: (user!).name, phone: (user!).phone });
+  const [userForm, setUserForm] = useState<IUpdateForm>({ name: (user!).name, phone: (user!).phone.replace(/998/g, "") });
   const [updateUser, { data, isLoading, error }] = useUpdateUserMutation();
 
   function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
     const { value, name } = e.target;
-
-  
       setUserForm({
         ...userForm,
         [name]: value,

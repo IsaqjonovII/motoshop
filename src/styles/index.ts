@@ -164,10 +164,13 @@ export const GlobalStyle = createGlobalStyle`
         .carousel__loaders {
         ${layout("grid", { cols: 2, rows: "auto" })}
         }
+        .swiper__icon {
+            transform: scale(.8);
+        }
     }
-    @media only screen and (max-width: 550) {
+    @media only screen and (max-width: 550px) {
         .carousel__loaders {
-        ${layout("grid", { cols: 1, rows: "auto" })}
+        ${layout("grid", { cols: 1, rows: 1 })}
         }
     }
 `;

@@ -1,5 +1,6 @@
-import { Empty, Pagination } from "antd";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
+import { Empty, Pagination } from "antd";
 import { useEffect, useState } from "react";
 import { useAppSelector, usePaginate } from "hooks";
 import { IServerError } from "interfaces";
@@ -7,10 +8,9 @@ import { useGetLikedAdsQuery } from "services/ad";
 import { IAdHelmetAndGear, IAdMoto, IMotoAd } from "interfaces/responses";
 import StyledTabs from "./style";
 import Card from "components/Card";
-import { Link } from "react-router-dom";
 import { routes } from "constants/routes";
 import { Button } from "components/Button";
-import { Spinner } from "components/Loader";
+import { CardLoader } from "components/Loader";
 
 const { ADS } = routes;
 
@@ -19,7 +19,7 @@ const LikedAds = () => {
   const { currentData, currentPage, handlePagination, setCurrentData } = usePaginate(likedAds);
   const userId = useAppSelector(({ auth }) => auth.user?._id);
   const likedAdsStore = useAppSelector(({ likedProducts }) => likedProducts);
-  const { data, isLoading, error, isError, refetch } = useGetLikedAdsQuery(userId ?? "");
+  const { data, isLoading, error, refetch } = useGetLikedAdsQuery(userId ?? "");
 
   useEffect(() => {
     if (data) setLikedAds(data);
@@ -56,8 +56,11 @@ const LikedAds = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (isLoading) return <Spinner isLoading={isLoading} />;
-  if (isError) return <div>{(error as IServerError).data?.message}</div>;
+  if (isLoading) return <div className="carousel__loaders">
+      <CardLoader isLoading={isLoading} />
+      <CardLoader isLoading={isLoading} />
+      <CardLoader isLoading={isLoading} />
+  </div>;
   return (
     <StyledTabs>
       {likedAds.length <= 0 || "message" in likedAds ? (

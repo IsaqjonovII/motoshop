@@ -16,7 +16,7 @@ export interface ISidebar {
 }
 export interface IUser {
   _id: string;
-  phone: string | number;
+  phone: string;
   name: string;
   email?: string;
   postedAds?: string[];

@@ -1,7 +1,7 @@
-import { colors } from "constants/styles";
 import styled from "styled-components";
-import { layout } from "styles/mixin";
 import { pxToRem } from "utils";
+import { layout } from "styles/mixin";
+import { colors } from "constants/styles";
 
 const { red } = colors;
 export default styled.div`

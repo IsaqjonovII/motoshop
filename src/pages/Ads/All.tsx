@@ -1,5 +1,4 @@
-import { Pagination } from "antd";
-import type { PaginationProps } from "antd";
+import { Empty, Pagination } from "antd";
 import { useEffect, useState } from "react";
 // import { useSearchParams } from "react-router-dom";
 // import { condition, bikeTypes, engineCC, mileage, bikeColors } from "constants";
@@ -7,24 +6,25 @@ import { useEffect, useState } from "react";
 import StyledAds from "./style";
 import { useGetRandomAdsQuery } from "services/ad";
 import { IAdMoto, IAdHelmetAndGear } from "interfaces/responses";
-import { Text } from "components/Text";
 import Card from "components/Card";
+import { Text } from "components/Text";
+import { usePaginate } from "hooks";
 
 const Ads = () => {
   const { data, refetch } = useGetRandomAdsQuery(30);
   // const [searchParams, setSearchParams] = useSearchParams();
   // const [selectedEngine, setSelectedEngine] = useState("");
   // const [selectedBikeTypes, setSelectedBikeTypes] = useState<string[]>([]);
-  const [randomAdsData, setRandomAdsData] = useState<
-    IAdMoto[] | IAdHelmetAndGear[]
-  >([]);
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [randomAdsData, setRandomAdsData] = useState<IAdMoto[] | IAdHelmetAndGear[]>([]);
+  const { handlePagination, currentData, currentPage, setCurrentData } =
+    usePaginate(randomAdsData);
 
-  const onPageChange: PaginationProps["onChange"] = (page) =>
-    setCurrentPage(page);
   useEffect(() => {
     if (data) setRandomAdsData(data);
-  }, [data]);
+    if (randomAdsData.length > 0) setCurrentData(randomAdsData.slice(0, 8));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data, randomAdsData]);
+
   useEffect(() => {
     refetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -52,8 +52,8 @@ const Ads = () => {
   return (
     <StyledAds>
       <div className="ads__header">
-        <Text size="xl" bold={600}>
-          Barcha e'lonlarni shu yerdan topishingiz va qidirishingiz mumkin
+        <Text size="xl" bold={600} center={true}> 
+            Barcha e&apos;lonlar
         </Text>
       </div>
 
@@ -99,17 +99,21 @@ const Ads = () => {
       */}
 
       <div className="ads__container">
-        {randomAdsData.map((data) => (
+        {currentData.map((data) => (
           <Card key={data._id} {...data} />
         ))}
       </div>
-      <div className="pagination__wrp">
-        <Pagination
-          current={currentPage}
-          onChange={onPageChange}
-          total={randomAdsData.length}
-        />
-      </div>
+      {currentData.length <= 0 ? (
+        <Empty description="Hech qanday ma'lumot topilmadi :(" />
+      ) : (
+        <div className="pagination__wrp">
+          <Pagination
+            current={currentPage}
+            onChange={handlePagination}
+            total={randomAdsData.length}
+          />
+        </div>
+      )}
     </StyledAds>
   );
 };

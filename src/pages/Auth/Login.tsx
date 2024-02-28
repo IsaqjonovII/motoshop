@@ -1,15 +1,15 @@
-import { AiOutlineLoading3Quarters, AiOutlineLogin } from "react-icons/ai";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { AiOutlineLoading3Quarters, AiOutlineLogin } from "react-icons/ai";
 import StyledAuth from "./style";
-import { Input } from "components/Input";
-import { Button } from "components/Button";
-import { useLoginMutation } from "services/user";
+import { useAppDispatch } from "hooks";
 import { IServerError } from "interfaces";
 import { routes } from "constants/routes";
 import { logIn } from "store/reducers/UserSlice";
-import { useAppDispatch } from "hooks";
+import { useLoginMutation } from "services/user";
+import { Input } from "components/Input";
+import { Button } from "components/Button";
 import { ILoginForm } from "interfaces/forms";
 
 const { HOME } = routes;

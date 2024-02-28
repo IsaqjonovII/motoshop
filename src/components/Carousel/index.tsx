@@ -8,6 +8,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Text } from "components/Text";
 import { CardLoader } from "components/Loader";
+import { Empty } from "antd";
 
 type props = {
   items: IAdMoto[] | IMotoAd[] | IAdHelmetAndGear[];
@@ -69,6 +70,11 @@ const Carousel = ({ items, title, isLoading }: props) => {
           },
         }}
       >
+        {items.length <= 0 && (
+          <>
+            <Empty description="Hech qanday ma'lumot topilmadi" />
+          </>
+        )}
         {items.map((card) => (
           <SwiperSlide key={card._id}>
             <RecommendCard {...card} />

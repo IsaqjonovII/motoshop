@@ -6,10 +6,10 @@ import { routes } from "constants/routes";
 import { logOut } from "store/reducers/UserSlice";
 import { useAppDispatch, useAppSelector } from "hooks";
 import Ads from "./Tabs/Ads";
-import { Text } from "components/Text";
-import LastSeen from "./Tabs/LastSeen";
-import SavedBikes from "./Tabs/SavedBikes";
 import Settings from "./Tabs";
+import LastSeen from "./Tabs/LastSeen";
+import { Text } from "components/Text";
+import SavedBikes from "./Tabs/SavedBikes";
 import { Button } from "components/Button";
 
 const user_tabs: TabsProps["items"] = [

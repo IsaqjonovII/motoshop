@@ -10,18 +10,18 @@ import Card from "components/Card";
 import { Link } from "react-router-dom";
 import { routes } from "constants/routes";
 import { Button } from "components/Button";
-import { Spinner } from "components/Loader";
+import { CardLoader } from "components/Loader";
 
 const { ADS } = routes;
 const ViewedAds = () => {
   const [viewedAds, setViewedAds] = useState<IAdMoto[] | IAdHelmetAndGear[] | IMotoAd[]>([]);
   const { currentData, currentPage, handlePagination, setCurrentData } = usePaginate(viewedAds);
   const userId = useAppSelector(({ auth }) => auth.user?._id);
-  const { data, isLoading, error, isError, refetch } = useGetViewedAdsQuery(userId ?? "");
+  const { data, isLoading, error, refetch } = useGetViewedAdsQuery(userId ?? "");
 
   useEffect(() => {
     if (data) setViewedAds(data);
-    setCurrentData(viewedAds.slice(0, 8));
+    if(viewedAds.length > 0) setCurrentData(viewedAds.slice(0, 8));
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, viewedAds]);
 
@@ -42,8 +42,11 @@ const ViewedAds = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (isLoading) return <Spinner isLoading={isLoading} />;
-  if (isError) return <div>{(error as IServerError).data?.message}</div>;
+  if (isLoading) return <div className="carousel__loaders">
+      <CardLoader isLoading={isLoading} />
+      <CardLoader isLoading={isLoading} />
+      <CardLoader isLoading={isLoading} />
+  </div>;
   return (
     <StyledTabs>
       {viewedAds.length <= 0 || "message" in viewedAds  ? (

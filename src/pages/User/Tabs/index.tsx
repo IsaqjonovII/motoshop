@@ -1,7 +1,7 @@
+import { useState } from "react";
 import StyledTabs from "./style";
 import { Text } from "components/Text";
 import { Button } from "components/Button";
-import { useState } from "react";
 import { ChangeUserInfo, DeleteUser } from "./Settings";
 
 const UpdateUser = () => {

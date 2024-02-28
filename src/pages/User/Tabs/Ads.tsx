@@ -1,12 +1,16 @@
 import { Empty, Pagination } from "antd";
 import { useEffect, useState } from "react";
-import { Spinner } from "components/Loader";
+import { CardLoader } from "components/Loader";
 import { useAppSelector, usePaginate } from "hooks";
 import StyledTabs from "./style";
 import { IAdHelmetAndGear, IAdMoto, IMotoAd } from "interfaces/responses";
 import { useGetAdsByUserQuery } from "services/ad";
 import Card from "components/Card";
+import { Link } from "react-router-dom";
+import { Button } from "components/Button";
+import { routes } from "constants/routes";
 
+const { POST_MOTO } = routes;
 const Ads = () => {
   const user = useAppSelector((state) => state.auth.user);
   const [ads, setAds] = useState<IAdMoto[] | IMotoAd[] | IAdHelmetAndGear[]>([]);
@@ -31,11 +35,21 @@ const Ads = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  if (isLoading) return <Spinner isLoading={isLoading} />;
+  if (isLoading) return <div className="carousel__loaders">
+    <CardLoader isLoading={isLoading} />
+    <CardLoader isLoading={isLoading} />
+    <CardLoader isLoading={isLoading} />
+  </div>;
   return (
     <StyledTabs>
-      {ads.length < 0 ? (
+      {ads.length <= 0 ? (
+      <>
         <Empty description="Hech qanday ma'lumot topilmadi" />
+        <br />
+        <Link to={POST_MOTO}  style={{ textAlign: "center", display: "block" }}>
+          <Button>E&apos;lon joylash</Button>
+        </Link>
+      </>
       ) : (
         <>
           <div className="ads__wrp">
