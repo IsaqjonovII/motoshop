@@ -5,7 +5,7 @@ import { AiOutlineLoading3Quarters, AiOutlineUserAdd } from "react-icons/ai";
 import { useAppDispatch } from "hooks";
 import { IServerError } from "interfaces";
 import { logIn } from "store/reducers/UserSlice";
-import { useRegisterMutation } from "services/user";
+import { useRegisterMutation } from "services/auth";
 import StyledAuth from "./style";
 import { Input } from "components/Input";
 import { routes } from "constants/routes";

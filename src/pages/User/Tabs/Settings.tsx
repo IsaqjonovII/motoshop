@@ -5,7 +5,7 @@ import type {ChangeEvent, Dispatch, SetStateAction } from "react";
 import { useAppSelector, useAppDispatch } from "hooks";
 import { IServerError } from "interfaces";
 import { logIn, logOut } from "store/reducers/UserSlice";
-import { useDeleteUserMutation, useUpdateUserMutation } from "services/user";
+import { useDeleteUserMutation, useUpdateUserMutation } from "services/auth";
 import { Text } from "components/Text";
 import { Input } from "components/Input";
 import CustomModal from "components/Modal";

@@ -4,7 +4,7 @@ import { CardLoader } from "components/Loader";
 import { useAppSelector, usePaginate } from "hooks";
 import StyledTabs from "./style";
 import { IAdHelmetAndGear, IAdMoto, IMotoAd } from "interfaces/responses";
-import { useGetAdsByUserQuery } from "services/ad";
+import { useGetAdsByUserQuery } from "services/user";
 import Card from "components/Card";
 import { Link } from "react-router-dom";
 import { Button } from "components/Button";

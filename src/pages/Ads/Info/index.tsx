@@ -7,7 +7,6 @@ import { IoMdHeart, IoIosArrowBack } from "react-icons/io";
 import { formatNumbers } from "utils";
 import {
   useGetAdByIdQuery,
-  useGetAdsByUserQuery,
   useGetSimilarAdsQuery,
   useUpdateAdViewMutation,
 } from "services/ad";
@@ -20,6 +19,7 @@ import { routes } from "constants/routes";
 import Carousel from "components/Carousel";
 import { Spinner } from "components/Loader";
 import ImageGallery from "components/ImageGallery";
+import { useGetAdsByUserQuery } from "services/user";
 
 type TParams = {
   id: string;
@@ -28,12 +28,8 @@ const { HOME, ADS } = routes;
 const AdInfo = () => {
   const { id } = useParams<TParams>();
   const user = useAppSelector(({ auth }) => auth.user);
-  const [similarAdsData, setsimilarAdsData] = useState<
-    IAdMoto[] | IAdHelmetAndGear[] | IMotoAd[]
-  >([]);
-  const [ownerAdsData, setOwnerAdsData] = useState<
-    IAdMoto[] | IAdHelmetAndGear[] | IMotoAd[]
-  >([]);
+  const [similarAdsData, setsimilarAdsData] = useState<IAdMoto[] | IAdHelmetAndGear[] | IMotoAd[]>([]);
+  const [ownerAdsData, setOwnerAdsData] = useState<IAdMoto[] | IAdHelmetAndGear[] | IMotoAd[]>([]);
   const [adData, setAdData] = useState<IAdMoto | IAdHelmetAndGear | IMotoAd>();
   const [updateView, { data: viewData }] = useUpdateAdViewMutation();
   const { data, isLoading, refetch } = useGetAdByIdQuery(id!);
@@ -95,7 +91,7 @@ const AdInfo = () => {
           <Text size="md" bold={400}>
             <span
               dangerouslySetInnerHTML={{ __html: adData?.description ?? "" }}
-            ></span>
+           />
           </Text>
         </div>
 
@@ -111,7 +107,7 @@ const AdInfo = () => {
               </Text>
               <Text size="sm" bold={300}>
                 <IoMdHeart className="icon" />
-                {adData?.likes} kishi yoqtirgan
+                {adData?.likes.likedUsers.length} kishi yoqtirgan
               </Text>
             </div>
           </div>
@@ -128,15 +124,15 @@ const AdInfo = () => {
             <div className="owner__contact">
               <div>
                 <Text size="lg" bold={400}>
-                  {adData?.owner.name}
+                  {adData?.owner?.name}
                 </Text>
-                <Link to={"tel:" + adData?.owner.phone}>
+                <Link to={"tel:" + adData?.owner?.phone}>
                   <Text size="md" bold={400}>
-                    +{adData?.owner.phone}
+                    +{adData?.owner?.phone}
                   </Text>
                 </Link>
               </div>
-              <Link to={"tel:" + adData?.owner.phone}>
+              <Link to={"tel:" + adData?.owner?.phone}>
                 <Button>Qo&apos;ng&apos;iroq qilish</Button>
               </Link>
             </div>

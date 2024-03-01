@@ -1,52 +1,25 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import type { SetStateAction } from "react";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { baseUrl } from "constants";
-import { IBackendResponse } from "interfaces";
-import { ILoginForm, IRegisterForm } from "interfaces/forms";
+import { IAdHelmetAndGear, IAdMoto } from "interfaces/responses";
 
-export const authApi = createApi({
-  reducerPath: "authAPI",
-  baseQuery: fetchBaseQuery({
-    baseUrl,
-  }),
-  tagTypes: ["User"],
-  endpoints: (builder) => ({
-    register: builder.mutation<IBackendResponse, IRegisterForm>({
-      query: (formData) => ({
-        url: "auth",
-        method: "POST",
-        body: formData,
-      }),
+export const userApi = createApi({
+    reducerPath: "userAPI",
+    baseQuery: fetchBaseQuery({
+        baseUrl: baseUrl + "user/",
     }),
-    login: builder.mutation<IBackendResponse, ILoginForm>({
-      query: (formData) => ({
-        url: "auth/login",
-        method: "POST",
-        body: formData,
-      }),
-    }),
-    userInfo: builder.query<IBackendResponse, string>({
-      query: (id) => `auth/info?userId=${id}`,
-    }),
-    updateUser: builder.mutation({
-      query: (formData) => ({
-        url: "auth/update",
-        method: "PUT",
-        body: formData,
-      }),
-    }),
-    deleteUser: builder.mutation({
-      query: (id) => ({
-        url: `auth/${id}`,
-        method: "DELETE",
-      }),
-    }),
-  }),
-});
+    tagTypes: ["User"],
+    endpoints: (builder) => ({
+        getAdsByUser: builder.query<SetStateAction<IAdMoto[] | IAdHelmetAndGear[]>, { userId: string; adId?: string }>({
+            query: ({ userId, adId }) => `ads-by-user?id=${userId}&${adId && "adId=" + adId}`,
+        }),
+        getLikedAds: builder.query<SetStateAction<IAdMoto[] | IAdHelmetAndGear[]>, string>({
+          query: (id) => `liked-ads?userId=${id}`
+        }),
+        getViewedAds: builder.query<SetStateAction<IAdMoto[] | IAdHelmetAndGear[]>, string>({
+          query: (id) => `viewed-ads?id=${id}`
+        })
+    })
+})
 
-export const {
-  useLoginMutation,
-  useRegisterMutation,
-  useUserInfoQuery,
-  useUpdateUserMutation,
-  useDeleteUserMutation
-} = authApi;
+export const { useGetAdsByUserQuery, useGetLikedAdsQuery, useGetViewedAdsQuery } = userApi;

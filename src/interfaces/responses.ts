@@ -17,7 +17,10 @@ export interface IAdMoto extends IPostAd {
   _id: string;
   owner: IUser;
   postedAt: string;
-  likes: number;
+  likes: {
+    likedUsers: string[];
+    count: number;
+  };
   views: number;
 }
 export interface IAdHelmetAndGear extends IAdMoto {

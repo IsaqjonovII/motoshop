@@ -7,20 +7,20 @@ import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import CardStyle from "./style";
 import { formatNumbers } from "utils";
 import { IAdMoto } from "interfaces/responses";
-import { useAppDispatch, useAppSelector } from "hooks";
+import { useAppSelector } from "hooks";
 import { useRemoveLikeMutation, useUpdateLikesMutation } from "services/ad";
-import { addToLikedProducts, removeLikedProducts } from "store/reducers/ProductSlice";
 import { Text } from "components/Text";
 import { routes } from "constants/routes";
 import LazyImage from "components/LazyImage";
 
 const { ADS, AUTH } = routes;
 const Card = (props: IAdMoto) => {
-  const { _id, price, title, location, images, postedAt, views } = props;
+  const { _id, price, title, location, images, postedAt, views, likes } = props;
+  console.log('====================================');
+  console.log(likes);
+  console.log('====================================');
   const date = moment(postedAt).format("HH:MM L");
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const likedProducts = useAppSelector(({ likedProducts }) => likedProducts);
   const userId = useAppSelector(({ auth }) => auth.user?._id);
   const [removeLike] = useRemoveLikeMutation();
   const [updateLikes] = useUpdateLikesMutation();
@@ -30,13 +30,11 @@ const Card = (props: IAdMoto) => {
     if (!userId) {
       navigate(AUTH);
     } else {
-      dispatch(addToLikedProducts(id));
       updateLikes({ userId, adId: id });
     }
   };
   const handleRemoveLikedProducts = (id: string, e: MouseEvent<SVGElement, MouseEvent>) => {
     e.preventDefault();
-    dispatch(removeLikedProducts(id));
     removeLike({ userId, adId: id });
   };
 
@@ -46,7 +44,7 @@ const Card = (props: IAdMoto) => {
         <div className="img__wrp">
           <LazyImage className="card__img" src={images[0]} alt={title} />
           <div className="icon__wrp">
-            {likedProducts.includes(_id) ? (
+            {likes.likedUsers.includes(userId!) ? (
               <IoMdHeart
                 className="heart__icon icon"
                 onClick={(e: any) => handleRemoveLikedProducts(_id, e)}

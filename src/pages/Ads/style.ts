@@ -3,7 +3,7 @@ import { pxToRem } from "utils";
 import { colors } from "constants/styles";
 import { btn, layout } from "styles/mixin";
 
-const { teal } = colors;
+const { teal, gray } = colors;
 export const StyledPostAd = styled.div`
   padding: ${pxToRem(30)};
   .post__form {
@@ -23,6 +23,16 @@ export const StyledPostAd = styled.div`
   .ant-switch.ant-switch-checked:hover {
     background-color: ${teal};
   }
+  .ad__btn {
+    ${btn("normal")}
+    width: 100%;
+    max-width: ${pxToRem(520)};
+  }
+  .ad__btn:disabled {
+    background-color: ${teal}40;
+    color: ${gray};
+    cursor: not-allowed;
+  }
   @media only screen and (max-width: ${pxToRem(920)}) {
     .ad__title {
       text-align: center;
@@ -31,11 +41,6 @@ export const StyledPostAd = styled.div`
       margin: 0 auto;
       grid-template-columns: 1fr;
       justify-items: center;
-    }
-    .ad__btn {
-      ${btn("normal")}
-      width: 100%;
-      max-width: ${pxToRem(520)};
     }
   }
   @media only screen and (max-width: ${pxToRem(768)}) {

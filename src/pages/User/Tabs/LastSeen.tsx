@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { useAppSelector, usePaginate } from "hooks";
 import { IServerError } from "interfaces";
-import { useGetViewedAdsQuery } from "services/ad";
+import { useGetViewedAdsQuery } from "services/user";
 import { IAdHelmetAndGear, IAdMoto, IMotoAd } from "interfaces/responses";
 import StyledTabs from "./style";
 import Card from "components/Card";

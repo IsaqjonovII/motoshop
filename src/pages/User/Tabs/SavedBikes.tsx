@@ -4,7 +4,7 @@ import { Empty, Pagination } from "antd";
 import { useEffect, useState } from "react";
 import { useAppSelector, usePaginate } from "hooks";
 import { IServerError } from "interfaces";
-import { useGetLikedAdsQuery } from "services/ad";
+import { useGetLikedAdsQuery } from "services/user";
 import { IAdHelmetAndGear, IAdMoto, IMotoAd } from "interfaces/responses";
 import StyledTabs from "./style";
 import Card from "components/Card";
