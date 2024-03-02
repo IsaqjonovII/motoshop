@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import moment from "moment";
-import type { MouseEvent } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 import { FiEye } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
@@ -8,7 +8,7 @@ import CardStyle from "./style";
 import { formatNumbers } from "utils";
 import { IAdMoto } from "interfaces/responses";
 import { useAppSelector } from "hooks";
-import { useRemoveLikeMutation, useUpdateLikesMutation } from "services/ad";
+import { useToggleLikeAdMutation } from "services/ad";
 import { Text } from "components/Text";
 import { routes } from "constants/routes";
 import LazyImage from "components/LazyImage";
@@ -16,26 +16,41 @@ import LazyImage from "components/LazyImage";
 const { ADS, AUTH } = routes;
 const Card = (props: IAdMoto) => {
   const { _id, price, title, location, images, postedAt, views, likes } = props;
-  console.log('====================================');
-  console.log(likes);
-  console.log('====================================');
   const date = moment(postedAt).format("HH:MM L");
   const navigate = useNavigate();
   const userId = useAppSelector(({ auth }) => auth.user?._id);
-  const [removeLike] = useRemoveLikeMutation();
-  const [updateLikes] = useUpdateLikesMutation();
+  const [isAdLiked, setisAdLiked] = useState<boolean>(false);
+  const [toggleLikeAd, { data, error }] = useToggleLikeAdMutation();
 
-  const handleAddToLikedProducts = (id: string, e: MouseEvent<SVGElement, MouseEvent>) => {
+  useEffect(() => {
+    checkAdLiked();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
+  useEffect(() => {
+    if (error) console.log(error);
+  }, [error]);
+
+  function checkAdLiked() {
+    console.log("workin");
+
+    if (
+      likes.likedUsers.includes(userId ?? "") ||
+      data?.message.includes("qo'shildi")
+    ) {
+      setisAdLiked(true);
+      console.log(isAdLiked);
+    } else {
+      setisAdLiked(false);
+      console.log(isAdLiked);
+    }
+  }
+  const handleLikeAd = (id: string, e: MouseEvent<SVGElement, MouseEvent>) => {
     e.preventDefault();
     if (!userId) {
       navigate(AUTH);
     } else {
-      updateLikes({ userId, adId: id });
+      toggleLikeAd({ userId, adId: id });
     }
-  };
-  const handleRemoveLikedProducts = (id: string, e: MouseEvent<SVGElement, MouseEvent>) => {
-    e.preventDefault();
-    removeLike({ userId, adId: id });
   };
 
   return (
@@ -44,15 +59,15 @@ const Card = (props: IAdMoto) => {
         <div className="img__wrp">
           <LazyImage className="card__img" src={images[0]} alt={title} />
           <div className="icon__wrp">
-            {likes.likedUsers.includes(userId!) ? (
+            {isAdLiked ? (
               <IoMdHeart
                 className="heart__icon icon"
-                onClick={(e: any) => handleRemoveLikedProducts(_id, e)}
+                onClick={(e: any) => handleLikeAd(_id, e)}
               />
             ) : (
               <IoMdHeartEmpty
                 className="heart__icon icon"
-                onClick={(e: any) => handleAddToLikedProducts(_id, e)}
+                onClick={(e: any) => handleLikeAd(_id, e)}
               />
             )}
           </div>

@@ -62,6 +62,7 @@ const AdInfo = () => {
   useEffect(() => {
     if (ownerAds) setOwnerAdsData(ownerAds);
   }, [ownerAds]);
+  
   if (isLoading) return <Spinner isLoading={isLoading} />;
   return (
     <StyledAdInfo>

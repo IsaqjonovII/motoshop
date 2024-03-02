@@ -9,22 +9,15 @@ import { Search } from "components/Search";
 
 const Home = () => {
   const { data, isLoading, error, refetch } = useGetAdsByCategoryQuery("moto");
-  const {
-    data: helmets,
-    isLoading: isHelmetsLoading,
-    error: helmetError,
-    refetch: refetchHelmets,
-  } = useGetAdsByCategoryQuery("helmet");
+  const { data: helmets, isLoading: isHelmetsLoading, error: helmetError, refetch: refetchHelmets } = useGetAdsByCategoryQuery("helmet");
   const [searchedVal, setSearchedVal] = useState<string>("");
-  const [sportBikes, setSportBikes] = useState<IAdMoto[] | IAdHelmetAndGear[]>(
-    []
-  );
-  const [helmetsData, setHelmetsData] = useState<
-    IAdMoto[] | IAdHelmetAndGear[]
-  >([]);
+  const [sportBikes, setSportBikes] = useState<IAdMoto[] | IAdHelmetAndGear[]>([]);
+  const [helmetsData, setHelmetsData] = useState<IAdMoto[] | IAdHelmetAndGear[]>([]);
+
   useEffect(() => {
     if (data) setSportBikes(data);
   }, [data]);
+  
   useEffect(() => {
     if (helmets) setHelmetsData(helmets);
   }, [helmets]);

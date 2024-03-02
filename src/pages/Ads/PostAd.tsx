@@ -146,7 +146,6 @@ const PostAd = () => {
       object
     );
   }
-  console.log(checkFormIsValid());
   return (
     <StyledPostAd>
       {isLoading && <Spinner isLoading={isLoading} />}

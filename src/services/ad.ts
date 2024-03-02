@@ -47,20 +47,27 @@ export const adApi = createApi({
       }),
       invalidatesTags: ["Ad"]
     }),
-    updateLikes: builder.mutation<IBackendResponse,{ userId: string | any; adId: string }>({
+    toggleLikeAd: builder.mutation<IBackendResponse,{ userId: string | any; adId: string }>({
       query: ({ userId, adId }) => ({
-        url: `ad/add-like?userId=${userId}&adId=${adId}`,
-        method: "POST",
+        url: `ad/update-like?userId=${userId}&adId=${adId}`,
+        method: "PUT"
       }),
       invalidatesTags: ["Ad"]
     }),
-    removeLike: builder.mutation<IBackendResponse,{ userId: string | any; adId: string }>({
-      query: ({ userId, adId }) => ({
-        url: `ad/remove-like?userId=${userId}&adId=${adId}`,
-        method: "POST",
-      }),
-      invalidatesTags: ["Ad"]
-    }),
+    // updateLikes: builder.mutation<IBackendResponse,{ userId: string | any; adId: string }>({
+    //   query: ({ userId, adId }) => ({
+    //     url: `ad/add-like?userId=${userId}&adId=${adId}`,
+    //     method: "POST",
+    //   }),
+    //   invalidatesTags: ["Ad"]
+    // }),
+    // removeLike: builder.mutation<IBackendResponse,{ userId: string | any; adId: string }>({
+    //   query: ({ userId, adId }) => ({
+    //     url: `ad/remove-like?userId=${userId}&adId=${adId}`,
+    //     method: "POST",
+    //   }),
+    //   invalidatesTags: ["Ad"]
+    // }),
     getSimilarAds: builder.query<SetStateAction<IAdMoto[] | IAdHelmetAndGear[]>,{ type: string; id: string }>({
       query: ({ type, id }) => `ad/similar-ads?type=${type}&id=${id}`,
     }),
@@ -75,7 +82,6 @@ export const {
   useGetAdsByCategoryQuery,
   useGetRandomAdsQuery,
   useUpdateAdViewMutation,
-  useUpdateLikesMutation,
-  useRemoveLikeMutation,
   useGetSimilarAdsQuery,
+  useToggleLikeAdMutation
 } = adApi;
