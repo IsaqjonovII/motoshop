@@ -2,7 +2,10 @@ import { GoSearch } from "react-icons/go";
 import { type Dispatch, type SetStateAction, useState } from "react";
 import StyledSearch from "./style";
 import { Button } from "components/Button";
+import { useNavigate } from "react-router-dom";
+import { routes } from "constants/routes";
 
+const { ADS } = routes;
 export const Search = ({
   searchedVal,
   setSearchedVal,
@@ -12,7 +15,13 @@ export const Search = ({
   setSearchedVal: Dispatch<SetStateAction<string>>;
   hasButton?: boolean;
 }) => {
+  const navigate = useNavigate();
   const [isInputActive, setIsInputActive] = useState(false);
+  const navigateToAds = () => {
+    if (searchedVal.length) {
+      navigate(`${ADS}?query=${searchedVal}`);
+    }
+  };
 
   return (
     <StyledSearch $isInputActive={isInputActive}>
@@ -30,7 +39,11 @@ export const Search = ({
         />
         <GoSearch className="search__icon" />
       </div>
-      {hasButton && <Button type="submit">Qidirish</Button>}
+      {hasButton && (
+        <Button type="submit" onClick={navigateToAds}>
+          Qidirish
+        </Button>
+      )}
     </StyledSearch>
   );
 };

@@ -22,7 +22,7 @@ export const GlobalStyle = createGlobalStyle`
         padding: 0;
         box-sizing: border-box;
         text-rendering: optimizeLegibility;
-        font-family: 'lato Normal';
+        font-family: 'lato Normal', Arial, sans-serif;
     }
     body {
         background-color: ${bgGray};
@@ -30,6 +30,9 @@ export const GlobalStyle = createGlobalStyle`
     a {
         text-decoration: none;
         color: inherit;
+        &:hover {
+            color: inherit;
+        }
     }
     ul, li {
         color: inherit;
@@ -65,9 +68,6 @@ export const GlobalStyle = createGlobalStyle`
       color: ${teal} !important;
     }
     }
-    .swiper-wrapper {
-      /* padding: ${pxToRem(15)}; */
-    }
     :where(.swiper-button-next, .swiper-button-prev)::after {
         display: none;
     }
@@ -90,16 +90,16 @@ export const GlobalStyle = createGlobalStyle`
     .swiper__icon {
         font-size: 2rem;
         background-color: ${white}80;
-        width: 3rem;
-        height: 3rem;
+        width: 2.5rem;
+        height: 2.5rem;
         border-radius: 50%;
         ${layout("center")}
         border: 1px solid ${gray}aa;
         margin-left: ${pxToRem(10)};
         cursor: pointer;
-    svg {
+      svg {
         color: ${gray}aa;
-    }
+      }
     }
     @font-face {
         font-family: 'lato Normal';
@@ -134,6 +134,12 @@ export const GlobalStyle = createGlobalStyle`
             transform: rotate(360deg);
         }
     }
+    .fixed-position {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 99;
+    }
     .carousel__loaders {
         ${layout("grid", { cols: 4, rows: "auto" })}
         width: 100%;
@@ -147,6 +153,24 @@ export const GlobalStyle = createGlobalStyle`
             .ant-skeleton-image {
                 margin-bottom: ${pxToRem(50)};
             }
+        }
+    }
+    @media only screen and (max-width: 1024px) {
+        .carousel__loaders {
+        ${layout("grid", { cols: 3, rows: "auto" })}
+        }
+    }
+    @media only screen and (max-width: 768px) {
+        .carousel__loaders {
+        ${layout("grid", { cols: 2, rows: "auto" })}
+        }
+        .swiper__icon {
+            transform: scale(.8);
+        }
+    }
+    @media only screen and (max-width: 550px) {
+        .carousel__loaders {
+        ${layout("grid", { cols: 1, rows: 1 })}
         }
     }
 `;

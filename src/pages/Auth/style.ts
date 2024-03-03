@@ -1,7 +1,7 @@
-import { colors } from "constants/styles";
 import styled from "styled-components";
-import { btn } from "styles/mixin";
 import { pxToRem } from "utils";
+import { btn } from "styles/mixin";
+import { colors } from "constants/styles";
 
 const { gray } = colors;
 export default styled.div`

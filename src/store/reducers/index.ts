@@ -1,14 +1,14 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import AuthSlice from "./AuthSlice";
-import ProductSlice from "./ProductSlice";
-import { authApi } from "services/user";
+import AuthSlice from "./UserSlice";
+import { authApi } from "services/auth";
 import { adApi } from "services/ad";
+import { userApi } from "services/user";
 
 const rootReducers = combineReducers({
   auth: AuthSlice,
-  likedProducts: ProductSlice,
   [authApi.reducerPath]: authApi.reducer,
   [adApi.reducerPath]: adApi.reducer,
+  [userApi.reducerPath]: userApi.reducer
 });
 
 export default rootReducers;

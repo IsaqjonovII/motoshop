@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { type SetStateAction } from "react";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { baseUrl } from "constants";
-import { IBackendResponse } from "interfaces";
 import { IPostAd } from "interfaces/forms";
+import { IBackendResponse } from "interfaces";
 import { IAdMoto, IAdHelmetAndGear, IMotoAd } from "interfaces/responses";
-import { SetStateAction } from "react";
 
 export const adApi = createApi({
   reducerPath: "adAPI",
@@ -21,7 +21,7 @@ export const adApi = createApi({
       }),
       invalidatesTags: ["Ad"],
     }),
-    getAllAds: builder.query<IAdMoto[] | IAdHelmetAndGear[], void>({
+    getAllAds: builder.query<IAdMoto[] | IAdHelmetAndGear[] | IMotoAd[], void>({
       query: () => "/ad",
     }),
     getAdById: builder.query<SetStateAction<IAdMoto | IAdHelmetAndGear | IMotoAd | undefined>, string>({
@@ -47,25 +47,29 @@ export const adApi = createApi({
       }),
       invalidatesTags: ["Ad"]
     }),
-    updateLikes: builder.mutation<IBackendResponse,{ userId: string | any; adId: string }>({
+    toggleLikeAd: builder.mutation<IBackendResponse,{ userId: string | any; adId: string }>({
       query: ({ userId, adId }) => ({
-        url: `ad/add-like?userId=${userId}&adId=${adId}`,
-        method: "POST",
+        url: `ad/update-like?userId=${userId}&adId=${adId}`,
+        method: "PUT"
       }),
       invalidatesTags: ["Ad"]
     }),
-    removeLike: builder.mutation<IBackendResponse,{ userId: string | any; adId: string }>({
-      query: ({ userId, adId }) => ({
-        url: `ad/remove-like?userId=${userId}&adId=${adId}`,
-        method: "POST",
-      }),
-      invalidatesTags: ["Ad"]
-    }),
+    // updateLikes: builder.mutation<IBackendResponse,{ userId: string | any; adId: string }>({
+    //   query: ({ userId, adId }) => ({
+    //     url: `ad/add-like?userId=${userId}&adId=${adId}`,
+    //     method: "POST",
+    //   }),
+    //   invalidatesTags: ["Ad"]
+    // }),
+    // removeLike: builder.mutation<IBackendResponse,{ userId: string | any; adId: string }>({
+    //   query: ({ userId, adId }) => ({
+    //     url: `ad/remove-like?userId=${userId}&adId=${adId}`,
+    //     method: "POST",
+    //   }),
+    //   invalidatesTags: ["Ad"]
+    // }),
     getSimilarAds: builder.query<SetStateAction<IAdMoto[] | IAdHelmetAndGear[]>,{ type: string; id: string }>({
       query: ({ type, id }) => `ad/similar-ads?type=${type}&id=${id}`,
-    }),
-    getAdsByUser: builder.query<SetStateAction<IAdMoto[] | IAdHelmetAndGear[]>, { userId: string; adId: string }>({
-      query: ({ userId, adId }) => `ad/ads-by-user?id=${userId}&adId=${adId}`,
     }),
   }),
 });
@@ -78,8 +82,6 @@ export const {
   useGetAdsByCategoryQuery,
   useGetRandomAdsQuery,
   useUpdateAdViewMutation,
-  useUpdateLikesMutation,
-  useRemoveLikeMutation,
   useGetSimilarAdsQuery,
-  useGetAdsByUserQuery,
+  useToggleLikeAdMutation
 } = adApi;

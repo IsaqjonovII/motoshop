@@ -36,6 +36,7 @@ interface IGalleryData {
 }
 import StyledGallery from "./style";
 import Carousel from "./Carousel";
+import { SlSizeFullscreen } from "react-icons/sl";
 function ImageGallery({ images, title }: IGalleryData) {
   return (
     <StyledGallery>
@@ -57,6 +58,7 @@ function ImageGallery({ images, title }: IGalleryData) {
               data-thumb-src={img_src}
             >
               <LazyImage className="gallery__img" src={img_src} alt={title} />
+              <SlSizeFullscreen className="icon fullscreen-icon" />
             </div>
           ))}
         </Carousel>

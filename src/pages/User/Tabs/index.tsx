@@ -1,18 +1,33 @@
-import UserSidebar from "components/Sidebar/User";
+import { useState } from "react";
+import StyledTabs from "./style";
 import { Text } from "components/Text";
+import { Button } from "components/Button";
+import { ChangeUserInfo, DeleteUser } from "./Settings";
 
-const Messages = () => {
+const UpdateUser = () => {
+  const [isFormModalOpen, setIsFormModalOpen] = useState<boolean>(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
+
   return (
-    <UserSidebar>
-      <div>
-        <Text size="md" bold={600}>
-          hello
-        </Text>
-        <Text size="md" bold={400}>
-          This is for messages
-        </Text>
+    <StyledTabs>
+      <div className="row">
+        <Text size="md">Ma'lumotlarni o'zgaritirish</Text>
+        <Button onClick={() => setIsFormModalOpen(true)}>
+          O&apos;zgartirish
+        </Button>
       </div>
-    </UserSidebar>
+      <div className="danger__zone">
+        <div className="row">
+          <Text size="md">Hisobni o&apos;chirish</Text>
+          <Button onClick={() => setIsDeleteModalOpen(true)}>
+            O&apos;chirish
+          </Button>
+        </div>
+      </div>
+
+      <ChangeUserInfo isOpen={isFormModalOpen} setIsOpen={setIsFormModalOpen} />
+      <DeleteUser isOpen={isDeleteModalOpen} setIsOpen={setIsDeleteModalOpen} />
+    </StyledTabs>
   );
 };
-export default Messages;
+export default UpdateUser;

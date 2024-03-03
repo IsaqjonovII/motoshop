@@ -30,7 +30,8 @@ export interface IText {
   children: (string | JSX.Element)[] | string | JSX.Element | any;
   size: "sm" | "md" | "lg" | "xl" | "xxl";
   className?: string;
-  bold: number;
+  bold?: number;
+  center?: boolean;
 }
 export interface IRadioBtn {
   btnStyle?: "solid" | null;
@@ -42,9 +43,11 @@ export interface IRadioBtn {
 }
 export interface IModal {
   close: () => void;
-  open: () => void;
+  handleOk: () => void;
   isOpen: boolean;
   isLoading?: boolean;
   title: string;
   children: JSX.Element | JSX.Element[];
+  okText?: string;
+  cancelText?: string;
 }

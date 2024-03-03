@@ -16,9 +16,9 @@ const defaults: Partial<OptionsType> = {
   Thumbs: {
     type: "modern",
     Carousel: {
-      dragFree: false,
       slidesPerPage: 1,
       center: true,
+      dragFree: false
     },
   },
 };

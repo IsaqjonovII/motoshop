@@ -1,77 +1,81 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { MouseEvent } from "react";
+import moment from "moment";
+import { useEffect, useState, type MouseEvent } from "react";
+import { FiEye } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
-import CardStyle, { StyledCard } from "./style";
+import CardStyle from "./style";
 import { formatNumbers } from "utils";
-import { useAppDispatch, useAppSelector } from "hooks";
 import { IAdMoto } from "interfaces/responses";
-import {
-  addToLikedProducts,
-  removeLikedProducts,
-} from "store/reducers/ProductSlice";
+import { useAppSelector } from "hooks";
+import { useToggleLikeAdMutation } from "services/ad";
 import { Text } from "components/Text";
 import { routes } from "constants/routes";
 import LazyImage from "components/LazyImage";
-import { Button } from "components/Button";
-import { useRemoveLikeMutation, useUpdateLikesMutation } from "services/ad";
 
-const { MOTOCYCLES, AUTH } = routes;
-const RecommendCard = (props: IAdMoto) => {
-  const { _id, price, title, location, images } = props;
-  const dispatch = useAppDispatch();
+const { ADS, AUTH } = routes;
+const Card = (props: IAdMoto) => {
+  const { _id, price, title, location, images, postedAt, views, likes } = props;
+  const date = moment(postedAt).format("HH:MM L");
   const navigate = useNavigate();
-  const likedProducts = useAppSelector(({ likedProducts }) => likedProducts);
-  const user = useAppSelector(({ auth }) => auth.user);
-  const [removeLike] = useRemoveLikeMutation();
-  const [updateLikes] = useUpdateLikesMutation();
+  const userId = useAppSelector(({ auth }) => auth.user?._id);
+  const [isAdLiked, setisAdLiked] = useState<boolean>(false);
+  const [toggleLikeAd, { data, error }] = useToggleLikeAdMutation();
 
-  const handleAddToLikedProducts = (
-    id: string,
-    e: MouseEvent<SVGElement, MouseEvent>
-  ) => {
+  useEffect(() => {
+    checkAdLiked();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
+  useEffect(() => {
+    if (error) console.log(error);
+  }, [error]);
+
+  function checkAdLiked() {
+    console.log("workin");
+
+    if (
+      likes.likedUsers.includes(userId ?? "") ||
+      data?.message.includes("qo'shildi")
+    ) {
+      setisAdLiked(true);
+      console.log(isAdLiked);
+    } else {
+      setisAdLiked(false);
+      console.log(isAdLiked);
+    }
+  }
+  const handleLikeAd = (id: string, e: MouseEvent<SVGElement, MouseEvent>) => {
     e.preventDefault();
-    if (!user) {
+    if (!userId) {
       navigate(AUTH);
     } else {
-      dispatch(addToLikedProducts(id));
-      updateLikes({ userId: user?._id, adId: id });
+      toggleLikeAd({ userId, adId: id });
     }
-  };
-  const handleRemoveLikedProducts = (
-    id: string,
-    e: MouseEvent<SVGElement, MouseEvent>
-  ) => {
-    e.preventDefault();
-    dispatch(removeLikedProducts(id));
-    removeLike({ userId: user?._id, adId: id });
   };
 
   return (
     <CardStyle>
-      <Link to={`${MOTOCYCLES}${_id}`}>
+      <Link to={`${ADS}${_id}`}>
         <div className="img__wrp">
           <LazyImage className="card__img" src={images[0]} alt={title} />
           <div className="icon__wrp">
-            {likedProducts.includes(_id) ? (
+            {isAdLiked ? (
               <IoMdHeart
                 className="heart__icon icon"
-                onClick={(e: any) => handleRemoveLikedProducts(_id, e)}
+                onClick={(e: any) => handleLikeAd(_id, e)}
               />
             ) : (
               <IoMdHeartEmpty
                 className="heart__icon icon"
-                onClick={(e: any) => handleAddToLikedProducts(_id, e)}
+                onClick={(e: any) => handleLikeAd(_id, e)}
               />
             )}
           </div>
         </div>
         <div className="card__content">
-          <div className="card__row">
-            <Text className="head__text" size="sm" bold={400}>
-              {location}
-            </Text>
-          </div>
+          <Text className="head__text" size="sm" bold={400}>
+            {location}
+          </Text>
           <div className="card__row">
             <Text size="lg" bold={600}>
               {price.currency === "usd"
@@ -85,7 +89,12 @@ const RecommendCard = (props: IAdMoto) => {
             {title}
           </Text>
           <div className="card__row">
-            <Button>Batafsil</Button>
+            <small>{date}</small>
+
+            <small>
+              {views}
+              <FiEye className="views__icon" />
+            </small>
           </div>
         </div>
       </Link>
@@ -93,81 +102,4 @@ const RecommendCard = (props: IAdMoto) => {
   );
 };
 
-export default RecommendCard;
-
-export const AdCard = (props: IAdMoto) => {
-  const { _id, price, title, location, images } = props;
-  const dispatch = useAppDispatch();
-  const likedProducts = useAppSelector(({ likedProducts }) => likedProducts);
-  const user = useAppSelector(({ auth }) => auth.user);
-  const [removeLike] = useRemoveLikeMutation();
-  const [updateLikes] = useUpdateLikesMutation();
-
-  const handleAddToLikedProducts = (
-    id: string,
-    e: MouseEvent<SVGElement, MouseEvent>
-  ) => {
-    e.preventDefault();
-    dispatch(addToLikedProducts(id));
-    updateLikes({ userId: user?._id, adId: id });
-  };
-  const handleRemoveLikedProducts = (
-    id: string,
-    e: MouseEvent<SVGElement, MouseEvent>
-  ) => {
-    e.preventDefault();
-    dispatch(removeLikedProducts(id));
-    removeLike({ userId: user?._id, adId: id });
-  };
-
-  return (
-    <Link to={`${MOTOCYCLES}${_id}`}>
-      <StyledCard>
-        <div className="image__container">
-          <LazyImage
-            className="img"
-            src={images[0]}
-            alt={title + "  motoshop.uz, motoshop uz"}
-          />
-        </div>
-
-        <div className="content">
-          <div className="content__head">
-            <Text className="card__head" size="md" bold={600}>
-              {title}
-            </Text>
-            <div className="icon__wrp">
-              {likedProducts.includes(_id) ? (
-                <IoMdHeart
-                  className="heart__icon icon"
-                  onClick={(e: any) => handleRemoveLikedProducts(_id, e)}
-                />
-              ) : (
-                <IoMdHeartEmpty
-                  className="heart__icon icon"
-                  onClick={(e: any) => handleAddToLikedProducts(_id, e)}
-                />
-              )}
-            </div>
-          </div>
-          <div className="content__main">
-            <Text size="lg" bold={600}>
-              {price.currency === "usd"
-                ? `$${formatNumbers(parseInt(price.amount))}`
-                : price.currency === "uzs"
-                ? `${formatNumbers(parseInt(price.amount))} so'm`
-                : `€${formatNumbers(parseInt(price.amount))}`}
-            </Text>
-          </div>
-          <div className="content__bottom">
-            <Button>Batafsil</Button>
-
-            <Text size="md" bold={400}>
-              {location}
-            </Text>
-          </div>
-        </div>
-      </StyledCard>
-    </Link>
-  );
-};
+export default Card;

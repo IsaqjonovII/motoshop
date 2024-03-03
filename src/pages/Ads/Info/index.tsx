@@ -1,30 +1,30 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { Breadcrumb } from "antd";
+import { FiEye } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { FiEye } from "react-icons/fi";
 import { IoMdHeart, IoIosArrowBack } from "react-icons/io";
 import { formatNumbers } from "utils";
 import {
   useGetAdByIdQuery,
-  useGetAdsByUserQuery,
   useGetSimilarAdsQuery,
   useUpdateAdViewMutation,
 } from "services/ad";
+import { useAppSelector } from "hooks";
 import { IAdHelmetAndGear, IAdMoto, IMotoAd } from "interfaces/responses";
 import StyledAdInfo from "./style";
 import { Text } from "components/Text";
 import { Button } from "components/Button";
-import ImageGallery from "components/ImageGallery";
-import { Breadcrumb } from "antd";
 import { routes } from "constants/routes";
-import { useAppSelector } from "hooks";
 import Carousel from "components/Carousel";
 import { Spinner } from "components/Loader";
+import ImageGallery from "components/ImageGallery";
+import { useGetAdsByUserQuery } from "services/user";
 
 type TParams = {
   id: string;
 };
-const { HOME, MOTOCYCLES, USER_INFO } = routes;
+const { HOME, ADS } = routes;
 const AdInfo = () => {
   const { id } = useParams<TParams>();
   const user = useAppSelector(({ auth }) => auth.user);
@@ -33,8 +33,15 @@ const AdInfo = () => {
   const [adData, setAdData] = useState<IAdMoto | IAdHelmetAndGear | IMotoAd>();
   const [updateView, { data: viewData }] = useUpdateAdViewMutation();
   const { data, isLoading, refetch } = useGetAdByIdQuery(id!);
-  const { data: ownerAds, isLoading: isOwnerAdsLoading } = useGetAdsByUserQuery({ userId: adData?.owner._id ?? "", adId: adData?._id ?? "" });
-  const { data: similarAds, isLoading: isSimilarAdsLoading } =useGetSimilarAdsQuery({ type: adData?.adType ?? "moto",id: adData?._id ?? "" });
+  const { data: ownerAds, isLoading: isOwnerAdsLoading } = useGetAdsByUserQuery(
+    { userId: adData?.owner?._id ?? "", adId: adData?._id ?? "" },
+    { skip: adData?._id == null }
+  );
+  const { data: similarAds, isLoading: isSimilarAdsLoading } =
+    useGetSimilarAdsQuery({
+      type: adData?.adType ?? "moto",
+      id: adData?._id ?? "",
+    }, { skip: adData?._id == null });
 
   useEffect(() => {
     if (similarAds) setsimilarAdsData(similarAds);
@@ -55,6 +62,7 @@ const AdInfo = () => {
   useEffect(() => {
     if (ownerAds) setOwnerAdsData(ownerAds);
   }, [ownerAds]);
+  
   if (isLoading) return <Spinner isLoading={isLoading} />;
   return (
     <StyledAdInfo>
@@ -68,7 +76,7 @@ const AdInfo = () => {
                   title: <Link to={HOME}>Bosh sahifa</Link>,
                 },
                 {
-                  title: <Link to={MOTOCYCLES}>Barcha e'lonlar</Link>,
+                  title: <Link to={ADS}>Barcha e'lonlar</Link>,
                 },
                 {
                   title: adData?.title,
@@ -82,7 +90,9 @@ const AdInfo = () => {
           />
           <br />
           <Text size="md" bold={400}>
-            {adData?.description}
+            <span
+              dangerouslySetInnerHTML={{ __html: adData?.description ?? "" }}
+           />
           </Text>
         </div>
 
@@ -98,7 +108,7 @@ const AdInfo = () => {
               </Text>
               <Text size="sm" bold={300}>
                 <IoMdHeart className="icon" />
-                {adData?.likes} kishi yoqtirgan
+                {adData?.likes.likedUsers.length} kishi yoqtirgan
               </Text>
             </div>
           </div>
@@ -114,18 +124,16 @@ const AdInfo = () => {
             <br />
             <div className="owner__contact">
               <div>
-                <Link to={USER_INFO + `?${adData?.owner._id}`}>
-                  <Text size="lg" bold={400}>
-                    {adData?.owner.name}
-                  </Text>
-                </Link>
-                <Link to={"tel:" + adData?.owner.phone}>
+                <Text size="lg" bold={400}>
+                  {adData?.owner?.name}
+                </Text>
+                <Link to={"tel:" + adData?.owner?.phone}>
                   <Text size="md" bold={400}>
-                    +{adData?.owner.phone}
+                    +{adData?.owner?.phone}
                   </Text>
                 </Link>
               </div>
-              <Link to={"tel:" + adData?.owner.phone}>
+              <Link to={"tel:" + adData?.owner?.phone}>
                 <Button>Qo&apos;ng&apos;iroq qilish</Button>
               </Link>
             </div>
@@ -191,20 +199,20 @@ const AdInfo = () => {
       <br />
       <br />
       <br />
-      {ownerAds && (
+      {ownerAds?.length ? (
         <Carousel
           title="Muallifning boshqa e'lonlari"
           items={ownerAdsData}
           isLoading={isOwnerAdsLoading}
         />
-      )}
-      {similarAds && (
+      ) : null}
+      {similarAds?.length ? (
         <Carousel
           title="O'xshash e'lonlar"
           items={similarAdsData}
           isLoading={isSimilarAdsLoading}
         />
-      )}
+      ) : null}
     </StyledAdInfo>
   );
 };

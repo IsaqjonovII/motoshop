@@ -1,6 +1,5 @@
 import { lazy } from "react";
-import { Tabs } from "antd";
-import type { TabsProps } from "antd";
+import { Tabs, type TabsProps } from "antd";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 const Login = lazy(() => import("./Login"));

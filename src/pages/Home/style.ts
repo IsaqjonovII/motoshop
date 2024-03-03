@@ -16,8 +16,8 @@ export default styled.main`
     margin: ${pxToRem(50)} auto;
     position: relative;
   }
-  .section__title {
-    margin-bottom: ${pxToRem(30)};
+  .swiper__nav {
+    margin-bottom: ${pxToRem(20)};
   }
   .grid__wrp {
     ${layout("grid", { cols: 3, rows: "auto" })}
@@ -46,17 +46,11 @@ export default styled.main`
       ${layout("grid", { cols: 2, rows: "auto" })}
       grid-gap: ${pxToRem(15)};
     }
-    .section__title {
-      font-size: ${pxToRem(34)};
-    }
   }
   @media only screen and (max-width: ${pxToRem(768)}) {
     .grid__wrp {
       ${layout("grid", { cols: 1, rows: "auto" })}
       grid-gap: ${pxToRem(20)};
-    }
-    .section__title {
-      font-size: ${pxToRem(28)};
     }
     .filters__wrp {
     ${layout("grid", { rows: "auto", cols: 3 })}

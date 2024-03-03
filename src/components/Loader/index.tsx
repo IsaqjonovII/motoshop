@@ -1,3 +1,4 @@
+import { Skeleton } from "antd";
 import { BiLoaderAlt } from "react-icons/bi";
 export const Spinner = ({ isLoading }: { isLoading: boolean }) => {
   return (
@@ -6,3 +7,13 @@ export const Spinner = ({ isLoading }: { isLoading: boolean }) => {
     </div>
   );
 };
+
+export function CardLoader({ isLoading }: { isLoading: boolean }) {
+  return (
+    <div className="loader">
+      <Skeleton.Image active={isLoading}></Skeleton.Image>
+      <br />
+      <Skeleton active={isLoading}></Skeleton>
+    </div>
+  );
+}

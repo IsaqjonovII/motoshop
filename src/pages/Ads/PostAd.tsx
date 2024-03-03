@@ -82,7 +82,11 @@ const PostAd = () => {
     });
   };
   const handleSubmit = async () => {
-    await uploadAd(adForm);
+    const description = adForm.description.replace(/\n/g, "<br />");
+    await uploadAd({
+      ...adForm,
+      description,
+    });
   };
   useEffect(() => {
     if (data) {
@@ -92,13 +96,15 @@ const PostAd = () => {
   }, [data, navigate]);
   useEffect(() => {
     if (error) {
-      const { status, data } = error as IServerError;
-      if (status === "FETCH_ERROR") {
+      console.log(error);
+      const { data, status } = error as IServerError;
+      if (data?.message) {
+        toast.error(data.message);
+      }
+      if (isNaN(parseInt(status))) {
         toast.error("Serverda xatolik. Iltimos birozdan so'ng urinib ko'ring");
       }
-      if (data?.message) {
-        toast.error(data?.message);
-      }
+      console.log(error);
     }
   }, [error]);
 
@@ -118,6 +124,28 @@ const PostAd = () => {
       },
     });
   };
+  const checkFormIsValid = () => {
+    const requiredFields = [
+      "title",
+      "description",
+      "price.amount",
+      "price.currency",
+      "location",
+      "images",
+    ];
+    return requiredFields.every((field) => {
+      const value = getNestedValue(adForm, field);
+      return value !== undefined && value !== "";
+    });
+  };
+
+  function getNestedValue(object: any, path: string) {
+    const keys = path.split(".");
+    return keys.reduce(
+      (val, key) => (val && val[key] !== "undefined" ? val[key] : undefined),
+      object
+    );
+  }
   return (
     <StyledPostAd>
       {isLoading && <Spinner isLoading={isLoading} />}
@@ -126,7 +154,7 @@ const PostAd = () => {
       </Text>
       <br />
 
-      <Form className="post__form" autoComplete="off" onFinish={handleSubmit}>
+      <Form className="post__form" autoComplete="off">
         <div>
           <div className="flex">
             <StyledInput>
@@ -276,9 +304,18 @@ const PostAd = () => {
             </>
           )}
         </div>
-        <Button type="submit" className="ad__btn">
-          E&apos;lonni joylash
-        </Button>
+        {isLoading ? (
+          <Button type="button">E&apos;lon joylanmoqda</Button>
+        ) : (
+          <button
+            type="submit"
+            className="ad__btn"
+            onClick={handleSubmit}
+            disabled={!checkFormIsValid()}
+          >
+            E&apos;lonni joylash
+          </button>
+        )}
       </Form>
     </StyledPostAd>
   );

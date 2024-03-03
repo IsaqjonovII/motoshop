@@ -4,11 +4,11 @@ import { colors } from "constants/styles";
 const { gray } = colors;
 export const StyledH1 = styled.h1<{
   $size: "sm" | "md" | "lg" | "xl" | "xxl";
-  $bold: number;
+  $bold?: number;
 }>`
   ${({ $size, $bold }) =>
     `
-    font-weight: ${$bold};
+    font-weight: ${$bold ?? 400};
     color: ${gray};
     ${
       $size === "sm"

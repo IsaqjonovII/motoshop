@@ -7,7 +7,8 @@ import { IAdHelmetAndGear, IAdMoto, IMotoAd } from "interfaces/responses";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Text } from "components/Text";
-import { Skeleton } from "antd";
+import { CardLoader } from "components/Loader";
+import { Empty } from "antd";
 
 type props = {
   items: IAdMoto[] | IMotoAd[] | IAdHelmetAndGear[];
@@ -21,32 +22,16 @@ const Carousel = ({ items, title, isLoading }: props) => {
   if (isLoading)
     return (
       <div className="carousel__loaders">
-        <div className="loader">
-          <Skeleton.Image active={isLoading}></Skeleton.Image>
-          <br />
-          <Skeleton active={isLoading}></Skeleton>
-        </div>
-        <div className="loader">
-          <Skeleton.Image active={isLoading}></Skeleton.Image>
-          <br />
-          <Skeleton active={isLoading}></Skeleton>
-        </div>
-        <div className="loader">
-          <Skeleton.Image active={isLoading}></Skeleton.Image>
-          <br />
-          <Skeleton active={isLoading}></Skeleton>
-        </div>
-        <div className="loader">
-          <Skeleton.Image active={isLoading}></Skeleton.Image>
-          <br />
-          <Skeleton active={isLoading}></Skeleton>
-        </div>
+        <CardLoader isLoading={isLoading} />
+        <CardLoader isLoading={isLoading} />
+        <CardLoader isLoading={isLoading} />
+        <CardLoader isLoading={isLoading} />
       </div>
     );
   return (
     <div>
-      <div className="flex">
-        <Text className="section__title" size="xl" bold={600}>
+      <div className="swiper__nav flex">
+        <Text className="section__title" size="lg" bold={600}>
           {title}
         </Text>
         <div className="flex">
@@ -74,7 +59,7 @@ const Carousel = ({ items, title, isLoading }: props) => {
           swiperRef.current = swiper;
         }}
         breakpoints={{
-          768: {
+          550: {
             slidesPerView: 2,
           },
           1024: {
@@ -85,6 +70,11 @@ const Carousel = ({ items, title, isLoading }: props) => {
           },
         }}
       >
+        {items.length <= 0 && (
+          <>
+            <Empty description="Hech qanday ma'lumot topilmadi" />
+          </>
+        )}
         {items.map((card) => (
           <SwiperSlide key={card._id}>
             <RecommendCard {...card} />

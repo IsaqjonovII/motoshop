@@ -7,6 +7,6 @@ export default styled.div`
   padding: 0 ${pxToRem(50)};
 
   @media only screen and (max-width: ${pxToRem(1024)}) {
-    padding: 0 ${pxToRem(20)};
+    padding: 0 ${pxToRem(10)};
   }
 `;

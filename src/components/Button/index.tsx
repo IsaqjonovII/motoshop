@@ -30,7 +30,7 @@ export const RadioButton = ({ btnStyle, chilren, onChange }: IRadioBtn) => {
       >
         {chilren.map(({ label, value }) => (
           <Radio.Button value={value} key={value}>
-            {label}
+            <pre>{label}</pre>
           </Radio.Button>
         ))}
       </Radio.Group>

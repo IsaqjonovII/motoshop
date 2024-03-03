@@ -16,8 +16,11 @@ export interface IRecommendCard {
 export interface IAdMoto extends IPostAd {
   _id: string;
   owner: IUser;
-  postedAt: Date;
-  likes: number;
+  postedAt: string;
+  likes: {
+    likedUsers: string[];
+    count: number;
+  };
   views: number;
 }
 export interface IAdHelmetAndGear extends IAdMoto {

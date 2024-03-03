@@ -1,9 +1,9 @@
-import { colors } from "constants/styles";
 import styled from "styled-components";
-import { layout } from "styles/mixin";
 import { pxToRem } from "utils";
+import { colors } from "constants/styles";
+import { btn, layout } from "styles/mixin";
 
-const { teal } = colors;
+const { teal, gray } = colors;
 export const StyledPostAd = styled.div`
   padding: ${pxToRem(30)};
   .post__form {
@@ -23,6 +23,16 @@ export const StyledPostAd = styled.div`
   .ant-switch.ant-switch-checked:hover {
     background-color: ${teal};
   }
+  .ad__btn {
+    ${btn("normal")}
+    width: 100%;
+    max-width: ${pxToRem(520)};
+  }
+  .ad__btn:disabled {
+    background-color: ${teal}40;
+    color: ${gray};
+    cursor: not-allowed;
+  }
   @media only screen and (max-width: ${pxToRem(920)}) {
     .ad__title {
       text-align: center;
@@ -31,10 +41,6 @@ export const StyledPostAd = styled.div`
       margin: 0 auto;
       grid-template-columns: 1fr;
       justify-items: center;
-    }
-    .ad__btn {
-      width: 100%;
-      max-width: ${pxToRem(520)};
     }
   }
   @media only screen and (max-width: ${pxToRem(768)}) {
@@ -47,14 +53,14 @@ export const StyledPostAd = styled.div`
 
 export default styled.div`
   padding: ${pxToRem(30)} 0;
-  .ads__header {
-    margin-bottom: ${pxToRem(10)};
-  }
+  min-height: 80svh;
   .pagination__wrp {
     margin-top: ${pxToRem(30)};
   }
   .ads__header {
     ${layout("flex")}
+    justify-content: center;
+    margin-bottom: ${pxToRem(15)};
   }
   .ads__container {
     ${layout("grid", { rows: "auto", cols: 2 })}

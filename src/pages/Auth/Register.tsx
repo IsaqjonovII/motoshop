@@ -1,15 +1,15 @@
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { AiOutlineLoading3Quarters, AiOutlineUserAdd } from "react-icons/ai";
-import { toast } from "react-toastify";
-import StyledAuth from "./style";
+import { useAppDispatch } from "hooks";
 import { IServerError } from "interfaces";
+import { logIn } from "store/reducers/UserSlice";
+import { useRegisterMutation } from "services/auth";
+import StyledAuth from "./style";
 import { Input } from "components/Input";
 import { routes } from "constants/routes";
 import { Button } from "components/Button";
-import { logIn } from "store/reducers/AuthSlice";
-import { useRegisterMutation } from "services/user";
-import { useAppDispatch } from "hooks";
 
 const { HOME } = routes;
 
@@ -32,19 +32,27 @@ const Register = () => {
   };
   useEffect(() => {
     if (error) {
-      const { status, data } = error as IServerError;
-      if (status.includes("FETCH_ERROR"))
+      console.log(error);
+      const { data, status } = error as IServerError;
+      if (data?.message) {
+        toast.error(data.message);
+      }
+      if (isNaN(parseInt(status))) {
         toast.error("Serverda xatolik. Iltimos birozdan so'ng urinib ko'ring");
-      if (data?.message) toast.error(data.message);
+      }
       console.log(error);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [error]);
+
+  useEffect(() => {
     if (data) {
       toast.success(data.message);
       dispatch(logIn(data.user));
       navigate(HOME);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [error, data]);
+  }, [data]);
 
   const registerUser = async (e: FormEvent) => {
     e.preventDefault();
@@ -81,6 +89,7 @@ const Register = () => {
           value={authForm.password}
           onChange={handleChanges}
         />
+        <br />
         <Button type="submit" className="auth__btn">
           {" "}
           {isLoading ? (

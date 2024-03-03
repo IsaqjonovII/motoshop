@@ -1,4 +1,4 @@
-import { Suspense, StrictMode } from "react";
+import { Suspense} from "react";
 import { Provider } from "react-redux";
 import { createRoot } from "react-dom/client";
 import { ToastContainer } from "react-toastify";
@@ -11,8 +11,7 @@ import { Spinner } from "components/Loader";
 import { GlobalStyle } from "styles/index.ts";
 
 createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <>
+  <>
     <GlobalStyle />
     <ToastContainer
       position="bottom-center"
@@ -20,7 +19,8 @@ createRoot(document.getElementById("root")!).render(
       newestOnTop={true}
       closeOnClick
       theme="light"
-      />
+      stacked
+    />
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <Suspense fallback={<Spinner isLoading={true} />}>
@@ -30,6 +30,5 @@ createRoot(document.getElementById("root")!).render(
         </Suspense>
       </PersistGate>
     </Provider>
-      </>
-  </StrictMode>
+  </>
 );
