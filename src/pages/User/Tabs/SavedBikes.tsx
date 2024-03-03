@@ -18,7 +18,6 @@ const LikedAds = () => {
   const [likedAds, setLikedAds] = useState<IAdMoto[] | IAdHelmetAndGear[] | IMotoAd[]>([]);
   const { currentData, currentPage, handlePagination, setCurrentData } = usePaginate(likedAds);
   const userId = useAppSelector(({ auth }) => auth.user?._id);
-  const likedAdsStore = useAppSelector(({ likedProducts }) => likedProducts);
   const { data, isLoading, error, refetch } = useGetLikedAdsQuery(userId ?? "");
 
   useEffect(() => {
@@ -35,7 +34,7 @@ const LikedAds = () => {
     if (likedAds.length > 0) {
       setCurrentData(likedAds.slice(0, 8));
     }
-  }, [likedAds, likedAdsStore, refetch, setCurrentData]);
+  }, [likedAds, refetch, setCurrentData]);
 
   useEffect(() => {
     if (error) {
