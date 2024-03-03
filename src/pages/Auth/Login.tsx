@@ -38,7 +38,6 @@ const Login = () => {
 
   useEffect(() => {
     if (error) {
-      console.log(error);
       const { data, status } = error as IServerError;
       if (data?.message) {
         toast.error(data.message);
@@ -46,7 +45,6 @@ const Login = () => {
       if (isNaN(parseInt(status))) {
         toast.error("Serverda xatolik. Iltimos birozdan so'ng urinib ko'ring");
       }
-      console.log(error);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [error]);
