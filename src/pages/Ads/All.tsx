@@ -1,10 +1,10 @@
 import { Empty, Pagination } from "antd";
 import { useEffect, useState } from "react";
-// import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 // import { condition, bikeTypes, engineCC, mileage, bikeColors } from "constants";
 // import CustomSelect from "components/Select";
 import StyledAds from "./style";
-import { useGetRandomAdsQuery } from "services/ad";
+import { useGetRandomAdsQuery, useGetSearchedDataQuery } from "services/ad";
 import { IAdMoto, IAdHelmetAndGear } from "interfaces/responses";
 import Card from "components/Card";
 import { Text } from "components/Text";
@@ -12,13 +12,23 @@ import { usePaginate } from "hooks";
 
 const Ads = () => {
   const { data, refetch } = useGetRandomAdsQuery(30);
-  // const [searchParams, setSearchParams] = useSearchParams();
-  // const [selectedEngine, setSelectedEngine] = useState("");
-  // const [selectedBikeTypes, setSelectedBikeTypes] = useState<string[]>([]);
+  const [searchParams] = useSearchParams();
   const [randomAdsData, setRandomAdsData] = useState<IAdMoto[] | IAdHelmetAndGear[]>([]);
-  const { handlePagination, currentData, currentPage, setCurrentData } =
-    usePaginate(randomAdsData);
+  
+  const query = searchParams.get("s_query");  
+  const {data: searchedData, error, isLoading, refetch: searchRefetch } = useGetSearchedDataQuery(query ?? "", { skip: query?.length === 0 });
+  const { handlePagination, currentData, currentPage, setCurrentData } = usePaginate(randomAdsData);
 
+  useEffect(() => {
+    searchRefetch();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams]);
+
+  useEffect(() => {
+    if(searchedData){
+      console.log(searchedData)
+    }
+  }, [searchedData])
   useEffect(() => {
     if (data) setRandomAdsData(data);
     if (randomAdsData.length > 0) setCurrentData(randomAdsData.slice(0, 8));
@@ -30,29 +40,10 @@ const Ads = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // const handleEngine = (val: string) => setSelectedEngine(val);
-  // const handleBikeTypesChange = (value: string[]) =>
-  //   setSelectedBikeTypes(value);
-  // const navigateToAds = () => {
-  //   if (searchedVal.length) {
-  //     navigate(`${ADS}?query=${searchedVal}`);
-  //   } else if (selectedBikeTypes) {
-  //     navigate(
-  //       ADS +
-  //         `${selectedBikeTypes && "?category=" + selectedBikeTypes}
-  //     ${selectedEngine && "&engine=" + selectedEngine}
-  //     ${selectedEngine && "&condition=" + selectedEngine}
-  //     ${selectedEngine && "&mileage=" + selectedEngine}
-  //     ${selectedEngine && "&color=" + selectedEngine}`
-  //     );
-  //   } else {
-  //     navigate(ADS);
-  //   }
-  // };
   return (
     <StyledAds>
       <div className="ads__header">
-        <Text size="xl" bold={600} center={true}> 
+        <Text size="xl" bold={600}> 
             Barcha e&apos;lonlar
         </Text>
       </div>

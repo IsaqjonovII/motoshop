@@ -19,7 +19,7 @@ export const Search = ({
   const [isInputActive, setIsInputActive] = useState(false);
   const navigateToAds = () => {
     if (searchedVal.length) {
-      navigate(`${ADS}?query=${searchedVal}`);
+      navigate(`${ADS}?s_query=${searchedVal}`);
     }
   };
 
