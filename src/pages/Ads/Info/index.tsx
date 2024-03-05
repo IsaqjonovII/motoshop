@@ -28,8 +28,12 @@ const { HOME, ADS } = routes;
 const AdInfo = () => {
   const { id } = useParams<TParams>();
   const user = useAppSelector(({ auth }) => auth.user);
-  const [similarAdsData, setsimilarAdsData] = useState<IAdMoto[] | IAdHelmetAndGear[] | IMotoAd[]>([]);
-  const [ownerAdsData, setOwnerAdsData] = useState<IAdMoto[] | IAdHelmetAndGear[] | IMotoAd[]>([]);
+  const [similarAdsData, setsimilarAdsData] = useState<
+    IAdMoto[] | IAdHelmetAndGear[] | IMotoAd[]
+  >([]);
+  const [ownerAdsData, setOwnerAdsData] = useState<
+    IAdMoto[] | IAdHelmetAndGear[] | IMotoAd[]
+  >([]);
   const [adData, setAdData] = useState<IAdMoto | IAdHelmetAndGear | IMotoAd>();
   const [updateView, { data: viewData }] = useUpdateAdViewMutation();
   const { data, isLoading, refetch } = useGetAdByIdQuery(id!);
@@ -38,10 +42,13 @@ const AdInfo = () => {
     { skip: adData?._id == null }
   );
   const { data: similarAds, isLoading: isSimilarAdsLoading } =
-    useGetSimilarAdsQuery({
-      type: adData?.adType ?? "moto",
-      id: adData?._id ?? "",
-    }, { skip: adData?._id == null });
+    useGetSimilarAdsQuery(
+      {
+        type: adData?.adType ?? "moto",
+        id: adData?._id ?? "",
+      },
+      { skip: adData?._id == null }
+    );
 
   useEffect(() => {
     if (similarAds) setsimilarAdsData(similarAds);
@@ -62,7 +69,7 @@ const AdInfo = () => {
   useEffect(() => {
     if (ownerAds) setOwnerAdsData(ownerAds);
   }, [ownerAds]);
-  
+
   if (isLoading) return <Spinner isLoading={isLoading} />;
   return (
     <StyledAdInfo>
@@ -92,7 +99,7 @@ const AdInfo = () => {
           <Text size="md" bold={400}>
             <span
               dangerouslySetInnerHTML={{ __html: adData?.description ?? "" }}
-           />
+            />
           </Text>
         </div>
 
@@ -138,60 +145,62 @@ const AdInfo = () => {
               </Link>
             </div>
             <br />
-            <ul className="labels">
-              {/* Manufactured Year or Size */}
-              <li className="label">
-                {adData?.adType === "moto" && "Ishlab chiqarilgan yili: "}
-                {adData?.adType === "helmet" && "O'lchami: "}
-                <Text size="md" bold={600}>
-                  {adData?.adType === "moto" &&
-                    (adData as IMotoAd).manufacturedAt}
-                  {adData?.adType === "helmet" &&
-                    (adData as IAdHelmetAndGear).size}
-                </Text>
-              </li>
-
-              {/* Mileage or Condition */}
-              <li className="label">
-                {adData?.adType === "moto" && "Bosgan masofasi: "}
-                {adData?.adType === "helmet" && "Holati:  "}
-                <Text size="md" bold={600}>
-                  {adData?.adType === "moto" &&
-                    (adData as IMotoAd).mileage + " km"}
-                  {adData?.adType === "helmet" &&
-                    (adData as IAdHelmetAndGear).condition}
-                </Text>
-              </li>
-
-              {/* Category or Brand */}
-              <li className="label">
-                {adData?.adType === "moto" && "Turi: "}
-                {adData?.adType === "helmet" && "Brand:  "}
-                <Text size="md" bold={600}>
-                  {adData?.adType === "moto" && (adData as IMotoAd).category}
-                  {adData?.adType === "helmet" &&
-                    (adData as IAdHelmetAndGear).brand}
-                </Text>
-              </li>
-
-              {/* Engine Size (if Moto) */}
-              {adData?.adType === "moto" && (
+            {adData?.adType !== "gear" && (
+              <ul className="labels">
+                {/* Manufactured Year or Size */}
                 <li className="label">
-                  Dvigatel hajmi:{" "}
+                  {adData?.adType === "moto" && "Ishlab chiqarilgan yili: "}
+                  {adData?.adType === "helmet" && "O'lchami: "}
                   <Text size="md" bold={600}>
-                    {(adData as IMotoAd).engineSize + " cc"}
+                    {adData?.adType === "moto" &&
+                      (adData as IMotoAd).manufacturedAt}
+                    {adData?.adType === "helmet" &&
+                      (adData as IAdHelmetAndGear).size}
                   </Text>
                 </li>
-              )}
 
-              {/* Color */}
-              <li className="label">
-                Rangi:{" "}
-                <Text size="md" bold={600}>
-                  {adData?.color}
-                </Text>
-              </li>
-            </ul>
+                {/* Mileage or Condition */}
+                <li className="label">
+                  {adData?.adType === "moto" && "Bosgan masofasi: "}
+                  {adData?.adType === "helmet" && "Holati:  "}
+                  <Text size="md" bold={600}>
+                    {adData?.adType === "moto" &&
+                      (adData as IMotoAd).mileage + " km"}
+                    {adData?.adType === "helmet" &&
+                      (adData as IAdHelmetAndGear).condition}
+                  </Text>
+                </li>
+
+                {/* Category or Brand */}
+                <li className="label">
+                  {adData?.adType === "moto" && "Turi: "}
+                  {adData?.adType === "helmet" && "Brand:  "}
+                  <Text size="md" bold={600}>
+                    {adData?.adType === "moto" && (adData as IMotoAd).category}
+                    {adData?.adType === "helmet" &&
+                      (adData as IAdHelmetAndGear).brand}
+                  </Text>
+                </li>
+
+                {/* Engine Size (if Moto) */}
+                {adData?.adType === "moto" && (
+                  <li className="label">
+                    Dvigatel hajmi:{" "}
+                    <Text size="md" bold={600}>
+                      {(adData as IMotoAd).engineSize + " cc"}
+                    </Text>
+                  </li>
+                )}
+
+                {/* Color */}
+                <li className="label">
+                  Rangi:{" "}
+                  <Text size="md" bold={600}>
+                    {adData?.color}
+                  </Text>
+                </li>
+              </ul>
+            )}
           </div>
         </div>
       </div>

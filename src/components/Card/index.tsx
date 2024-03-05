@@ -50,7 +50,7 @@ const Card = (props: IAdMoto) => {
 
   return (
     <CardStyle>
-      <Link to={`${ADS}${_id}`}>
+      <Link to={`${ADS}/${_id}`}>
         <div className="img__wrp">
           <LazyImage className="card__img" src={images[0]} alt={title} />
           <div className="icon__wrp">
