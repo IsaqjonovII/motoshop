@@ -9,6 +9,8 @@ import { useDeleteUserMutation, useUpdateUserMutation } from "services/auth";
 import { Text } from "components/Text";
 import { Input } from "components/Input";
 import CustomModal from "components/Modal";
+import { useNavigate } from "react-router-dom";
+import { routes } from "constants/routes";
 
 interface IUpdateForm { name: string, phone: string }
 
@@ -77,7 +79,11 @@ export const ChangeUserInfo = ({isOpen, setIsOpen }: { isOpen: boolean; setIsOpe
     </CustomModal>
   );
 };
+
+const { HOME }  =routes;
+
 export const DeleteUser = ({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: Dispatch<SetStateAction<boolean>>}) => {
+  const navigate = useNavigate();
   const userId = useAppSelector(({ auth }) => auth.user?._id);
   const [deleteUser, { data, isLoading, error }] = useDeleteUserMutation();
   const dispatch = useAppDispatch();
@@ -93,8 +99,9 @@ export const DeleteUser = ({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: 
       dispatch(logOut());
       setIsOpen(false);
       toast.success("Hisobingiz o'chirildi :(")
+      navigate(HOME);
     }
-  }, [data, dispatch, setIsOpen])
+  }, [data, dispatch, navigate, setIsOpen])
 
   useEffect(() => {
     if (error) {

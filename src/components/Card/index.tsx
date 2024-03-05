@@ -19,7 +19,9 @@ const Card = (props: IAdMoto) => {
   const date = moment(postedAt).format("HH:MM L");
   const navigate = useNavigate();
   const userId = useAppSelector(({ auth }) => auth.user?._id);
-  const [isAdLiked, setisAdLiked] = useState<boolean>(false);
+  const [isAdLiked, setisAdLiked] = useState<boolean>(() =>
+    likes.likedUsers.includes(userId!)
+  );
   const [toggleLikeAd, { data, error }] = useToggleLikeAdMutation();
 
   useEffect(() => {
@@ -31,17 +33,10 @@ const Card = (props: IAdMoto) => {
   }, [error]);
 
   function checkAdLiked() {
-    console.log("workin");
-
-    if (
-      likes.likedUsers.includes(userId ?? "") ||
-      data?.message.includes("qo'shildi")
-    ) {
+    if (likes.likedUsers.includes(userId!)) {
       setisAdLiked(true);
-      console.log(isAdLiked);
     } else {
-      setisAdLiked(false);
-      console.log(isAdLiked);
+      setisAdLiked(() => false);
     }
   }
   const handleLikeAd = (id: string, e: MouseEvent<SVGElement, MouseEvent>) => {
@@ -55,7 +50,7 @@ const Card = (props: IAdMoto) => {
 
   return (
     <CardStyle>
-      <Link to={`${ADS}${_id}`}>
+      <Link to={`${ADS}/${_id}`}>
         <div className="img__wrp">
           <LazyImage className="card__img" src={images[0]} alt={title} />
           <div className="icon__wrp">

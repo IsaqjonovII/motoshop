@@ -7,7 +7,7 @@ export const Text = ({ className, children, size, bold, center }: IText) => {
       className={className}
       $size={size}
       $bold={bold}
-      style={center ? { textAlign: "center" } : {}}
+      style={center ? { textAlign: "center" } : { textAlign: "unset" }}
     >
       {children}
     </StyledH1>
