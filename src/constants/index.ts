@@ -1,5 +1,5 @@
-// export const baseUrl = "http://127.0.0.1:8000/api/v0/";
-export const baseUrl = "https://motoshop-server.onrender.com/api/v0/";
+export const baseUrl = "http://127.0.0.1:8000/api/v0/";
+// export const baseUrl = "https://motoshop-server.onrender.com/api/v0/";
 
 export const currencies = [
   { value: "uzs", label: "So'm" },
@@ -26,14 +26,6 @@ export const engineCC = [
 export const condition = [
   { value: "yangi", label: "Yangi" },
   { value: "ishlatilgan", label: "Ishlatilgan" },
-];
-export const helmetBrands = [
-  { value: "agv", label: "AGV" },
-  { value: "shoei", label: "Shoei" },
-  { value: "hjc", label: "HJC" },
-  { value: "xlite", label: "X-Lite" },
-  { value: "ls2", label: "LS2" },
-  { value: "boshqa", label: "Boshqa" },
 ];
 export const mileage = [
   { value: "0-1000", label: "0 km - 1 000 km" },

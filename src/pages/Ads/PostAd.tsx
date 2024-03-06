@@ -15,7 +15,6 @@ import {
   condition,
   currencies,
   gearSizes,
-  helmetBrands,
 } from "constants";
 import { useUploadAdMutation } from "services/ad";
 import { Text } from "components/Text";
@@ -24,6 +23,7 @@ import { Spinner } from "components/Loader";
 import { StyledInput } from "components/Input/style";
 import { Button, RadioButton } from "components/Button";
 import { InputFile, InputSelect } from "components/Input/CustomInput";
+import CustomSelect from "components/Select";
 
 const PostAd = () => {
   const navigate = useNavigate();
@@ -59,9 +59,7 @@ const PostAd = () => {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fileList]);
-  const onInputChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
+  const onInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setAdForm({
       ...adForm,
@@ -222,14 +220,15 @@ const PostAd = () => {
         </div>
         <div>
           {selectedAdType !== "gear" && (
-            <InputSelect
-              id="ad-color"
-              name="color"
-              label="Rangini tanlang"
-              value={adForm.color}
-              onChange={(e: any) => onSelectChange("color", e)}
-              options={bikeColors}
-            />
+            <StyledInput>
+              <label className="inp__label">Rangini tanlang</label>
+              <CustomSelect
+                mode="tags"
+                placeholder=""
+                onChange={(e: any) => onSelectChange("color", e)}
+                options={bikeColors}
+              />
+            </StyledInput>
           )}
           {selectedAdType === "moto" && (
             <>
@@ -293,13 +292,12 @@ const PostAd = () => {
                 onChange={(e: any) => onSelectChange("condition", e)}
                 options={condition}
               />
-              <InputSelect
+              <Input
                 id="brand"
                 name="brand"
                 label="Brand"
                 value={(adForm as IGearAd)?.brand}
-                onChange={(e: any) => onSelectChange("brand", e)}
-                options={helmetBrands}
+                onChange={onInputChange}
               />
             </>
           )}
