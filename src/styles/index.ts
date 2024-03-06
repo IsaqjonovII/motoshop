@@ -140,6 +140,14 @@ export const GlobalStyle = createGlobalStyle`
         left: 0;
         z-index: 99;
     }
+    .not__found {
+        min-height: 50svh;
+        padding: 3rem 0;
+        text-align: center;
+        a {
+            color:${teal};
+        }
+    }
     .carousel__loaders {
         ${layout("grid", { cols: 4, rows: "auto" })}
         width: 100%;

@@ -1,21 +1,34 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import moment from "moment";
 import { useEffect, useState, type MouseEvent } from "react";
-import { FiEye } from "react-icons/fi";
+import { FiEye, FiTrash } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import CardStyle from "./style";
 import { formatNumbers } from "utils";
 import { IAdMoto } from "interfaces/responses";
 import { useAppSelector } from "hooks";
-import { useToggleLikeAdMutation } from "services/ad";
+import { useDeleteAdMutation, useToggleLikeAdMutation } from "services/ad";
 import { Text } from "components/Text";
 import { routes } from "constants/routes";
 import LazyImage from "components/LazyImage";
 
 const { ADS, AUTH } = routes;
-const Card = (props: IAdMoto) => {
-  const { _id, price, title, location, images, postedAt, views, likes } = props;
+interface ICard extends IAdMoto {
+  hasDelete?: boolean;
+}
+const Card = (props: ICard) => {
+  const {
+    _id,
+    price,
+    title,
+    location,
+    images,
+    postedAt,
+    views,
+    likes,
+    hasDelete,
+  } = props;
   const date = moment(postedAt).format("HH:MM L");
   const navigate = useNavigate();
   const userId = useAppSelector(({ auth }) => auth.user?._id);
@@ -23,14 +36,18 @@ const Card = (props: IAdMoto) => {
     likes.likedUsers.includes(userId!)
   );
   const [toggleLikeAd, { data, error }] = useToggleLikeAdMutation();
+  const [deleteAd, { data: deleteData, error: deleteErr }] =
+    useDeleteAdMutation();
 
   useEffect(() => {
     checkAdLiked();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
+
   useEffect(() => {
     if (error) console.log(error);
-  }, [error]);
+    if (deleteErr) console.log(deleteErr);
+  }, [error, deleteErr]);
 
   function checkAdLiked() {
     if (likes.likedUsers.includes(userId!)) {
@@ -47,23 +64,45 @@ const Card = (props: IAdMoto) => {
       toggleLikeAd({ userId, adId: id });
     }
   };
+  function handleDeleteAd(e: MouseEvent<any>) {
+    // e.stopPropagation();
+    e.preventDefault();
+    if (confirm("Rostdan ham ushbu e'lonni  o'chirmoqchimisiz?")) {
+      deleteAd(_id);
+    }
+  }
+
+  useEffect(() => {
+    if (deleteData) console.log(deleteData);
+  }, [deleteData]);
 
   return (
     <CardStyle>
       <Link to={`${ADS}/${_id}`}>
         <div className="img__wrp">
           <LazyImage className="card__img" src={images[0]} alt={title} />
-          <div className="icon__wrp">
-            {isAdLiked ? (
-              <IoMdHeart
-                className="heart__icon icon"
-                onClick={(e: any) => handleLikeAd(_id, e)}
-              />
-            ) : (
-              <IoMdHeartEmpty
-                className="heart__icon icon"
-                onClick={(e: any) => handleLikeAd(_id, e)}
-              />
+          <div className="icons">
+            <div className="icon__wrp">
+              {isAdLiked ? (
+                <IoMdHeart
+                  className="heart__icon icon"
+                  onClick={(e: any) => handleLikeAd(_id, e)}
+                />
+              ) : (
+                <IoMdHeartEmpty
+                  className="heart__icon icon"
+                  onClick={(e: any) => handleLikeAd(_id, e)}
+                />
+              )}
+            </div>
+
+            {hasDelete && (
+              <div
+                className="icon__wrp"
+                onClick={(e: MouseEvent<any>) => handleDeleteAd(e)}
+              >
+                <FiTrash className="delete__icon icon" />
+              </div>
             )}
           </div>
         </div>

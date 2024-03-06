@@ -11,7 +11,7 @@ export interface IPostAd {
   location: string;
   images: string[];
   owner: string | IUser;
-  color: string;
+  color: string[];
   adType: string;
 }
 export interface IMotoAd extends IPostAd {

@@ -13,9 +13,14 @@ import { routes } from "constants/routes";
 const { POST_MOTO } = routes;
 const Ads = () => {
   const user = useAppSelector((state) => state.auth.user);
-  const [ads, setAds] = useState<IAdMoto[] | IMotoAd[] | IAdHelmetAndGear[]>([]);
-  const { currentData, currentPage, handlePagination, setCurrentData } = usePaginate(ads);
-  const { data, isLoading, error, refetch } = useGetAdsByUserQuery({ userId: user?._id ?? "" });
+  const [ads, setAds] = useState<IAdMoto[] | IMotoAd[] | IAdHelmetAndGear[]>(
+    []
+  );
+  const { currentData, currentPage, handlePagination, setCurrentData } =
+    usePaginate(ads);
+  const { data, isLoading, error, refetch } = useGetAdsByUserQuery({
+    userId: user?._id ?? "",
+  });
 
   useEffect(() => {
     if (data) setAds(data);
@@ -31,30 +36,38 @@ const Ads = () => {
     if (error) console.log(error);
   }, [error]);
   useEffect(() => {
-    refetch()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    refetch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  if (isLoading) return <div className="carousel__loaders">
-    <CardLoader isLoading={isLoading} />
-    <CardLoader isLoading={isLoading} />
-    <CardLoader isLoading={isLoading} />
-  </div>;
+  if (isLoading)
+    return (
+      <div className="carousel__loaders">
+        <CardLoader isLoading={isLoading} />
+        <CardLoader isLoading={isLoading} />
+        <CardLoader isLoading={isLoading} />
+      </div>
+    );
   return (
     <StyledTabs>
       {ads.length <= 0 ? (
-      <>
-        <Empty description="Hech qanday ma'lumot topilmadi" />
-        <br />
-        <Link to={POST_MOTO}  style={{ textAlign: "center", display: "block" }}>
-          <Button>E&apos;lon joylash</Button>
-        </Link>
-      </>
+        <>
+          <Empty description="Hech qanday ma'lumot topilmadi" />
+          <br />
+          <Link
+            to={POST_MOTO}
+            style={{ textAlign: "center", display: "block" }}
+          >
+            <Button>E&apos;lon joylash</Button>
+          </Link>
+        </>
       ) : (
         <>
           <div className="ads__wrp">
             {currentData.length > 0 &&
-              currentData?.map((props) => <Card key={props._id} {...props} />)}
+              currentData?.map((props) => (
+                <Card key={props._id} {...props} hasDelete />
+              ))}
           </div>
           <br />
 

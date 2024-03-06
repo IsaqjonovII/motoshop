@@ -46,7 +46,7 @@ const PostAd = () => {
     engineSize: "",
     mileage: "",
     manufacturedAt: "",
-    color: "",
+    color: [],
     size: "",
     brand: "",
     condition: "",
@@ -59,7 +59,9 @@ const PostAd = () => {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fileList]);
-  const onInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const onInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setAdForm({
       ...adForm,
@@ -67,6 +69,8 @@ const PostAd = () => {
     });
   };
   const onSelectChange = (fieldName: string, value: any) => {
+    console.log(value);
+
     setAdForm({
       ...adForm,
       [fieldName]: value,
