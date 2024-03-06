@@ -20,6 +20,7 @@ import Carousel from "components/Carousel";
 import { Spinner } from "components/Loader";
 import ImageGallery from "components/ImageGallery";
 import { useGetAdsByUserQuery } from "services/user";
+import LazyImage from "components/LazyImage";
 
 type TParams = {
   id: string;
@@ -71,6 +72,24 @@ const AdInfo = () => {
   }, [ownerAds]);
 
   if (isLoading) return <Spinner isLoading={isLoading} />;
+  if (!data)
+    return (
+      <div className="not__found">
+        <LazyImage
+          src="https://res.cloudinary.com/doswy0zdn/image/upload/v1709733643/motoshop-404.png"
+          alt="motocycle crash not found icon motoshop"
+        />
+        <Text center size="xxl" bold={800}>
+          404
+        </Text>
+        <Text center size="xl">
+          Biz siz qidiryotgan narsani topa olmadik
+        </Text>
+        <br />
+        <br />
+        <Link to={ADS}>Barcha e&apos;lonlarga o&apos;tish</Link>
+      </div>
+    );
   return (
     <StyledAdInfo>
       <div className="page__container">

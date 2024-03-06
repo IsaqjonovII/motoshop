@@ -15,14 +15,24 @@ import { CardLoader } from "components/Loader";
 const { ADS } = routes;
 
 const LikedAds = () => {
-  const [likedAds, setLikedAds] = useState<IAdMoto[] | IAdHelmetAndGear[] | IMotoAd[]>([]);
-  const { currentData, currentPage, handlePagination, setCurrentData } = usePaginate(likedAds);
+  const [likedAds, setLikedAds] = useState<
+    IAdMoto[] | IAdHelmetAndGear[] | IMotoAd[]
+  >([]);
+  const { currentData, currentPage, handlePagination, setCurrentData } =
+    usePaginate(likedAds);
   const userId = useAppSelector(({ auth }) => auth.user?._id);
   const { data, isLoading, error, refetch } = useGetLikedAdsQuery(userId ?? "");
 
   useEffect(() => {
     if (data) setLikedAds(data);
   }, [data]);
+
+  useEffect(() => {
+    if (likedAds.length > 0) {
+      setCurrentData(likedAds.slice(0, 8));
+    }
+  }, [likedAds, setCurrentData]);
+
   useEffect(() => {
     if (likedAds.length > 0) {
       setCurrentData(likedAds.slice(0, 8));
@@ -31,10 +41,8 @@ const LikedAds = () => {
 
   useEffect(() => {
     refetch();
-    if (likedAds.length > 0) {
-      setCurrentData(likedAds.slice(0, 8));
-    }
-  }, [likedAds, refetch, setCurrentData]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (error) {
@@ -55,11 +63,14 @@ const LikedAds = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (isLoading) return <div className="carousel__loaders">
-      <CardLoader isLoading={isLoading} />
-      <CardLoader isLoading={isLoading} />
-      <CardLoader isLoading={isLoading} />
-  </div>;
+  if (isLoading)
+    return (
+      <div className="carousel__loaders">
+        <CardLoader isLoading={isLoading} />
+        <CardLoader isLoading={isLoading} />
+        <CardLoader isLoading={isLoading} />
+      </div>
+    );
   return (
     <StyledTabs>
       {likedAds.length <= 0 || "message" in likedAds ? (

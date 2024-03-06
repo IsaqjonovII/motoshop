@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { layout } from "styles/mixin";
 import { pxToRem } from "utils";
 
-const { teal, borderGray, white, gray } = colors;
+const { teal, borderGray, white, gray, red } = colors;
 
 export default styled.div`
   border: ${pxToRem(1)} solid ${gray}30;
@@ -30,19 +30,30 @@ export default styled.div`
     background-image: linear-gradient(${white}, ${borderGray});
     background-position: 200% auto;
     animation: loading 1s infinite linear;
-    .icon__wrp {
+    .icons {
       position: absolute;
       top: .825rem;
       right: .5rem;
+      ${layout("center")}
+      row-gap: ${pxToRem(6)};
     }
-    .heart__icon {
+    .icon__wrp {
       width: ${pxToRem(35)};
       height: ${pxToRem(35)};
-      background-color: ${white};
+      ${layout("center")}
+    }
+    .heart__icon, .delete__icon {
+      width: 100%;
+      height: 100%;
+      padding: 0.15rem;
       border-radius: ${pxToRem(4)};
-      z-index: 999;
-      padding: .25rem;
+      background-color: ${white};
       color: ${teal};
+    }
+    .delete__icon {
+      background-color: ${red};
+      color: ${white};
+      padding: 0.2rem;
     }
     .card__img {
       width: 100%;
