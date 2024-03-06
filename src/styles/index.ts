@@ -140,6 +140,13 @@ export const GlobalStyle = createGlobalStyle`
         left: 0;
         z-index: 99;
     }
+    .page-spinner {
+        width: 100%;
+        height: 100vh;
+        height: 100svh;
+        background-color: ${bgGray}dd;
+        ${layout("center")}
+    }
     .not__found {
         min-height: 50svh;
         padding: 3rem 0;

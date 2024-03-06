@@ -150,7 +150,7 @@ const PostAd = () => {
   }
   return (
     <StyledPostAd>
-      {isLoading && <Spinner isLoading={isLoading} />}
+      {isLoading && <Spinner isLoading={isLoading} fixed />}
       <Text size="xl" bold={600} className="ad__title">
         E'lon joylashtirish
       </Text>
