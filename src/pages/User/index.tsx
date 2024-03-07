@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { Tabs, type TabsProps } from "antd";
+import { RiArrowGoBackFill } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
 import StyledProfile from "./style";
 import { routes } from "constants/routes";
@@ -34,7 +35,7 @@ const user_tabs: TabsProps["items"] = [
     children: <Settings />,
   },
 ];
-const { AUTH } = routes;
+const { AUTH, HOME } = routes;
 const UserProfile = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -57,6 +58,11 @@ const UserProfile = () => {
         </div>
       ) : (
         <Fragment>
+          <br />
+          <Link to={HOME} className="back__link">
+            Ortga qaytish 
+            <RiArrowGoBackFill className="icon" />
+          </Link>
           <div className="profile__user">
             <div className="user__avatar">
               <div>

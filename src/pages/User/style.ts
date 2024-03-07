@@ -6,7 +6,14 @@ import { colors } from "constants/styles";
 const { gray, teal, red, bgGray } = colors;
 
 export default styled.div`
-min-height: calc(100svh - 100px);
+  min-height: calc(100svh - 100px);
+  .back__link {
+    ${layout("flex")}
+    justify-content: start;
+    svg {
+      color: ${teal};
+    }
+  }
   .need__auth {
     width: 100%;
     padding: ${pxToRem(40)};
