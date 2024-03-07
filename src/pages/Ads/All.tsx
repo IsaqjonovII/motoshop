@@ -16,22 +16,12 @@ import { toast } from "react-toastify";
 const Ads = () => {
   const { data, refetch } = useGetRandomAdsQuery(10);
   const [searchParams] = useSearchParams();
-  const [searchedResults, setSearchedResults] = useState<
-    IAdMoto[] | IAdHelmetAndGear[] | IMotoAd[]
-  >([]);
-  const [randomAdsData, setRandomAdsData] = useState<
-    IAdMoto[] | IAdHelmetAndGear[] | IMotoAd[]
-  >([]);
+  const [searchedResults, setSearchedResults] = useState<IAdMoto[] | IAdHelmetAndGear[] | IMotoAd[]>([]);
+  const [randomAdsData, setRandomAdsData] = useState<IAdMoto[] | IAdHelmetAndGear[] | IMotoAd[]>([]);
 
   const query = searchParams.get("s_query");
-  const {
-    data: searchedData,
-    error,
-    isLoading,
-    refetch: searchRefetch,
-  } = useGetSearchedDataQuery(query ?? "", { skip: query?.length === 0 });
-  const { handlePagination, currentData, currentPage, setCurrentData } =
-    usePaginate(randomAdsData);
+  const { data: searchedData, error, isLoading, refetch: searchRefetch } = useGetSearchedDataQuery(query ?? "", { skip: query?.length === 0 });
+  const { handlePagination, currentData, currentPage, setCurrentData } = usePaginate(randomAdsData);
 
   useEffect(() => {
     searchRefetch();
@@ -52,6 +42,14 @@ const Ads = () => {
     refetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  //change window title
+  useEffect(() => {
+    if(searchParams.get("s_query")){
+      document.title = searchParams.get("s_query") + " bo'yicha natijalar";
+    } else {
+      document.title = "Barcha e'lonlar | MOTOSHOP"
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     if (error) {

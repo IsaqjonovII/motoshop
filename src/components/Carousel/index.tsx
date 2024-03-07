@@ -49,6 +49,8 @@ const Carousel = ({ items, title, isLoading }: props) => {
           </button>
         </div>
       </div>
+
+      <br />
       <Swiper
         navigation={true}
         modules={[Navigation]}

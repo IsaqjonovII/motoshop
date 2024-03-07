@@ -31,7 +31,7 @@ export const Search = ({
           type="text"
           minLength={3}
           required
-          placeholder="E'lon nomi yoki turi bilan qidiring..."
+          placeholder="Mototsikl nomi, turi, joylashuvi, rangi bilan qidiring..."
           onFocus={() => setIsInputActive(true)}
           onBlur={() => setIsInputActive(false)}
           value={searchedVal}
