@@ -48,6 +48,9 @@ const Home = () => {
     refetchHelmets();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  useEffect(() => {
+    document.title = "Asosiy sahifa | Motoshop.uz"
+  }, [])
 
   return (
     <StyledHome>

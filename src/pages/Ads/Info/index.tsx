@@ -70,6 +70,12 @@ const AdInfo = () => {
   useEffect(() => {
     if (ownerAds) setOwnerAdsData(ownerAds);
   }, [ownerAds]);
+  //changing window title
+  useEffect(() => {
+    if(adData){
+      document.title = adData.title + " | Motoshop.uz"
+    }
+  }, [adData])
 
   if (isLoading) return <Spinner isLoading={isLoading} />;
   if (!data)
@@ -234,6 +240,7 @@ const AdInfo = () => {
           isLoading={isOwnerAdsLoading}
         />
       ) : null}
+      <br /><br />
       {similarAds?.length ? (
         <Carousel
           title="O'xshash e'lonlar"
