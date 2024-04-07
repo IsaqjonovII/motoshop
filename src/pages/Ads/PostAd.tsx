@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { DatePicker, Form, Switch } from "antd";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { type ChangeEvent, useEffect, useState } from "react";
 import type { DatePickerProps, RadioChangeEvent } from "antd";

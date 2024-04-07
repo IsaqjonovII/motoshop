@@ -1,4 +1,4 @@
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { Empty, Pagination } from "antd";
 import { useEffect, useState } from "react";

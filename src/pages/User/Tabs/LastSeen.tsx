@@ -1,5 +1,5 @@
 import { Empty, Pagination } from "antd";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import { useEffect, useState } from "react";
 import { useAppSelector, usePaginate } from "hooks";
 import { IServerError } from "interfaces";

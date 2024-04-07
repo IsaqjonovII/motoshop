@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { AiOutlineLoading3Quarters, AiOutlineUserAdd } from "react-icons/ai";
 import { useAppDispatch } from "hooks";
