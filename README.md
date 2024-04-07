@@ -1,4 +1,6 @@
-# MOTOSHOP - Motorcycle Marketplace
+# MOTOSHOP - Motorcycle Marketplace 
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/a6bb855e-017a-4bbc-bac8-289bb146f6ce/deploy-status)](https://app.netlify.com/sites/motoshopuz/deploys)
 
 MOTOSHOP is a marketplace dedicated to enthusiasts and riders who want to buy or sell motorcycles. Whether you're looking for your dream ride or looking to give a new home to your trusted companion, MOTOSHOP is the place to be.
 
