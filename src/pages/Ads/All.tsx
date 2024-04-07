@@ -11,7 +11,7 @@ import Card from "components/Card";
 import { Text } from "components/Text";
 import { CardLoader } from "components/Loader";
 import { IServerError } from "interfaces";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 const Ads = () => {
   const { data, refetch } = useGetRandomAdsQuery(10);

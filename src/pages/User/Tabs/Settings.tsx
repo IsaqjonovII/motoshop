@@ -1,5 +1,5 @@
 import { Form } from "antd";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import { useEffect, useState } from "react";
 import type {ChangeEvent, Dispatch, SetStateAction } from "react";
 import { useAppSelector, useAppDispatch } from "hooks";
