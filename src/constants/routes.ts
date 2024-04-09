@@ -1,10 +1,10 @@
 export enum routes {
   HOME = "/",
-  AUTH = "/auth",
-  ADS = "/ads",
+  AUTH = "/hisob-yaratish",
+  ADS = "/elonlar",
   AD_INFO = ADS + "/:id",
   PROFILE = "/profile",
-  POST_MOTO = "/post-moto",
+  POST_MOTO = "/elon-joylash",
   NOT_FOUND = "*",
-  USER_INFO = PROFILE + "/user",
+  USER_INFO = PROFILE + "/foydalanuvchi-haqida",
 }

@@ -1,10 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+//* importing from libraries
 import { Breadcrumb } from "antd";
 import { FiEye } from "react-icons/fi";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { IoMdHeart, IoIosArrowBack } from "react-icons/io";
+//* helper functions
 import { formatNumbers } from "utils";
+//* 
 import {
   useGetAdByIdQuery,
   useGetSimilarAdsQuery,
@@ -22,12 +25,12 @@ import ImageGallery from "components/ImageGallery";
 import { useGetAdsByUserQuery } from "services/user";
 import LazyImage from "components/LazyImage";
 
-type TParams = {
-  id: string;
-};
 const { HOME, ADS } = routes;
+
+
 const AdInfo = () => {
-  const { id } = useParams<TParams>();
+  const [ searchParams ] = useSearchParams();
+  const id = searchParams.get("id");
   const user = useAppSelector(({ auth }) => auth.user);
   const [similarAdsData, setsimilarAdsData] = useState<
     IAdMoto[] | IAdHelmetAndGear[] | IMotoAd[]
@@ -38,18 +41,8 @@ const AdInfo = () => {
   const [adData, setAdData] = useState<IAdMoto | IAdHelmetAndGear | IMotoAd>();
   const [updateView, { data: viewData }] = useUpdateAdViewMutation();
   const { data, isLoading, refetch } = useGetAdByIdQuery(id!);
-  const { data: ownerAds, isLoading: isOwnerAdsLoading } = useGetAdsByUserQuery(
-    { userId: adData?.owner?._id ?? "", adId: adData?._id ?? "" },
-    { skip: adData?._id == null }
-  );
-  const { data: similarAds, isLoading: isSimilarAdsLoading } =
-    useGetSimilarAdsQuery(
-      {
-        type: adData?.adType ?? "moto",
-        id: adData?._id ?? "",
-      },
-      { skip: adData?._id == null }
-    );
+  const { data: ownerAds, isLoading: isOwnerAdsLoading } = useGetAdsByUserQuery({ userId: adData?.owner?._id ?? "", adId: adData?._id ?? "" }, { skip: adData?._id == null });
+  const { data: similarAds, isLoading: isSimilarAdsLoading } = useGetSimilarAdsQuery({ type: adData?.adType ?? "moto", id: adData?._id ?? "", }, { skip: adData?._id == null });
 
   useEffect(() => {
     if (similarAds) setsimilarAdsData(similarAds);
@@ -70,7 +63,7 @@ const AdInfo = () => {
   useEffect(() => {
     if (ownerAds) setOwnerAdsData(ownerAds);
   }, [ownerAds]);
-  //changing window title
+
   useEffect(() => {
     if(adData){
       document.title = adData.title + " | Motoshop.uz"
