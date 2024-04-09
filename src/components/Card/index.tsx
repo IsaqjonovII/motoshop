@@ -5,7 +5,7 @@ import { FiEye, FiTrash } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import CardStyle from "./style";
-import { formatNumbers } from "utils";
+import { formatNumbers, getFormattedLink } from "utils";
 import { IAdMoto } from "interfaces/responses";
 import { useAppSelector } from "hooks";
 import { useDeleteAdMutation, useToggleLikeAdMutation } from "services/ad";
@@ -28,7 +28,7 @@ const Card = (props: ICard) => {
     views,
     likes,
     hasDelete,
-  } = props;
+} = props;
   const date = moment(postedAt).format("HH:MM L");
   const navigate = useNavigate();
   const userId = useAppSelector(({ auth }) => auth.user?._id);
@@ -78,7 +78,7 @@ const Card = (props: ICard) => {
 
   return (
     <CardStyle>
-      <Link to={`${ADS}/${_id}`}>
+      <Link to={`${ADS}/${getFormattedLink(title)}?id=${_id}`}>
         <div className="img__wrp">
           <LazyImage className="card__img" src={images[0]} alt={title} />
           <div className="icons">

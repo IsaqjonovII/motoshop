@@ -18,3 +18,7 @@ export const getBase64 = (file: File): Promise<string> => {
     reader.onerror = (error) => reject(error);
   });
 };
+
+export function getFormattedLink(link: string): string {
+  return link.split(" ").join("-");
+}
